@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "fc2_editor_for_jishinkai",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -13,5 +13,11 @@
     "@astrojs/check": "^0.3.4",
     "astro": "^4.0.7",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-astro": "^0.31.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0"
   }
 }
