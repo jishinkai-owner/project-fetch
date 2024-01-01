@@ -1,0 +1,81 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="東北大学の登山サークルです" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="/favicon.ico" />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style is:global lang="scss">
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+	:root {
+		--background: 255, 255, 255;
+		--on-background: 0, 0, 0;
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+		@media screen and (prefers-color-scheme: dark) {
+			--background: 19, 21, 26;
+			--on-background: 221, 221, 221;
+			--accent: 136, 58, 234;
+			--accent-light: 224, 204, 250;
+			--accent-dark: 49, 10, 101;
+			--accent-gradient: linear-gradient(
+				45deg,
+				rgb(var(--accent)),
+				rgb(var(--accent-light)) 30%,
+				white 60%
+			);
+		}
+	}
+	html {
+		font-family:
+			"Helvetica Neue",
+			Arial,
+			"Hiragino Kaku Gothic ProN",
+			"Hiragino Sans",
+			Meiryo,
+			sans-serif;
+		/*background: #13151a;*/
+		background: rgb(var(--background));
+		background-size: 224px;
+		/*color: #ddd;*/
+		color: rgb(var(--on-background));
+	}
+	body {
+		margin: 0;
+	}
+	code {
+		font-family:
+			'HackGen',
+			'Ricty Diminished Discord with Fira Code',
+			"SFMono-Regular",
+			Consolas,
+			"Liberation Mono",
+			Menlo,
+			'Courier New',
+			Courier,
+			monospace;
+	}
+</style>

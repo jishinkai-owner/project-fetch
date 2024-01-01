@@ -1,0 +1,183 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from 'astro';
+
+import logo from "../assets/logo.gif";
+import line from "../assets/line.gif";
+import yama from "../assets/icon/yama.gif";
+import tsuri from "../assets/icon/tsuri.gif";
+import tabi from "../assets/icon/tabi.gif";
+import other from "../assets/icon/other.gif";
+import link from "../assets/icon/link.gif";
+import member from "../assets/icon/member.gif";
+import qa from "../assets/icon/qa.gif";
+import bear from "../assets/bear.gif";
+
+interface Props {
+    title: string;
+	type: string;
+    typeImg: string;
+    frontmatter?: {
+        title: string;
+        type: string;
+        typeImg: string;
+    };
+}
+
+const { title, type, typeImg } = Astro.props.frontmatter || Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/title/*.{jpeg,jpg,png,gif}');
+const imgPath = `/src/assets/title/${typeImg}`;
+if (!images[imgPath]) throw new Error(`"${typeImg}" does not exist in glob: "src/assets/title/*.{jpeg,jpg,png,gif}"`);
+---
+
+<BaseLayout title={title + " - 自然に親しむ会 | 東北大学"} />
+    <nav class="menu">
+        <h1>
+            <a href="/">
+                <Image src={logo} alt="東北大学-自然に親しむ会"/>
+            </a>
+        </h1>
+        <p><Image src={line} alt="" /></p>
+        <ul>
+            <li>
+                <a href="/yama/">
+                    <Image src={yama} alt="山行記録" />
+                </a>
+            </li>
+            <li>
+                <a href="/tsuri/">
+                    <Image src={tsuri} alt="釣果記録" />
+                </a>
+            </li>
+            <li>
+                <a href="/tabi/">
+                    <Image src={tabi} alt="旅行記" />
+                </a>
+            </li>
+            <li>
+                <a href="/other/">
+                    <Image src={other} alt="その他の活動" />
+                </a>
+            </li>
+            <li>
+                <a href="/link/">
+                    <Image src={link} alt="リンク" />
+                </a>
+            </li>
+            <li>
+                <a href="/member/">
+                    <Image src={member} alt="部員紹介" />
+                </a>
+            </li>
+            <li>
+                <a href="/qa/">
+                    <Image src={qa} alt="よくある質問" />
+                </a>
+            </li>
+        </ul>
+        <p><Image src={line} alt="" /></p>
+        <div class="bear"><Image src={bear} alt="" /></div>
+    </nav>
+    <header class="title">
+        <Image src={images[imgPath]()} alt={type} />
+    </header>
+    <main class="content">
+        <slot />
+    </main>
+</BaseLayout>
+
+<style lang="scss">
+    body {
+        display: grid;
+        grid-template-columns: 1fr 48px 3fr;
+        max-width: 1200px;
+        margin: auto;
+        border-left: 1px rgb(var(--on-background)) solid;
+        border-right: 1px rgb(var(--on-background)) solid;
+
+        nav.menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+            align-items: center;
+            border-right: 1px rgb(var(--on-background)) solid;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+
+            * {
+                flex-grow: 0;
+            }
+
+            img {
+                @media screen and (prefers-color-scheme: dark) {
+                    filter: invert(.8);
+                }
+            }
+
+            h1 {
+                width: 100%;
+                display: block;
+                
+                a{
+                    display: block;
+                }
+            }
+
+            > p {
+                margin: 1rem 0;
+                padding: 0;
+            }
+            
+            ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 200px;
+                margin: 0 auto;
+                padding: 0;
+                li {
+                    display: block;
+                }
+            }
+
+            .bear {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                align-items: center;
+            }
+        }
+
+        header.title {
+            height: 100dvh;
+            position: sticky;
+            top: 0;
+            border-right: 1px rgb(var(--on-background)) solid;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        main.content {
+            padding: 1rem;
+            overflow-x: scroll;
+            font-size: 0.8rem;
+
+            :global(h2) {
+                font-size: 1.2rem;
+                border-bottom: 1px rgb(var(--on-background)) solid;
+            }
+
+            :global(p) {
+                margin: 5px 0 0 2em;
+                padding: 0px;
+            }
+        }
+    }
+</style>

@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    img?: {
+        year: string;
+        name: string;
+        imgtype: string;
+    }
+    role: string | string[];
+    major: string;
+    nickname: string | string[];
+    profile: string | string[];
+}
+
+const {
+    img,
+    role,
+    major,
+    nickname,
+    profile,
+} = Astro.props;
+
+const params = {
+    "役職": role,
+    "学部": major,
+    "通称": nickname,
+    "プロフィール": profile,
+};
+
+let impoeted = await import('../assets/members/no_image.jpg');
+let image = impoeted.default;
+if (img) {
+    try {
+        let imported = await import(`../assets/members/${img?.year}/${img?.name}.${img?.imgtype || 'jpg'}`);
+        image = imported.default;
+    } catch (error) {
+        console.log("no supported img");
+    }
+}
+---
+
+<div class="card">
+    {img 
+        ? <Image src={image} alt="画像" />
+        : <slot><Image src={image} alt="画像" /></slot>
+    }
+    <dl>
+        {(Object.keys(params) as (keyof typeof params)[]).map(key => [
+            <dt>{key}</dt>,
+            typeof params[key] === 'string' ?
+            <dd set:html={params[key]}></dd> :
+            params[key].map((value) => 
+                <dd set:html={value}></dd>
+            )
+        ])}
+    </dl>
+</div>
+
+<style lang="scss">
+    .card {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: 16px;
+        align-items: start;
+        width: 100%;
+        border: 1px solid rgb(var(--on-background));
+        border-radius: 4px;
+        padding: 16px;
+        margin: 16px 0;
+
+        > :global(*):first-child {
+            width: 100%;
+            height: 15rem;
+            object-fit: contain;
+            overflow: hidden;
+
+            :global(img) {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        > dl {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            line-height: 2rem;
+            margin: 0;
+
+            dt {
+                grid-column: 1;
+                font-weight: bold;
+                border-bottom: dotted 1px #999999;
+            }
+
+            dd {
+                grid-column: 2;
+                margin: 0;
+                border-bottom: dotted 1px #999999;
+            }
+        }
+    }
+</style>
