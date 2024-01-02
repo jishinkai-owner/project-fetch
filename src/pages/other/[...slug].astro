@@ -16,7 +16,7 @@ const { Content } = await entry.render();
 
 <MainLayout title={entry.data.title} type={entry.data.type ?? 'その他の活動'}>
     {entry.data.typeImg
-        ? <Image slot='title' src={entry.data.typeImg!} alt={entry.data.title} />
+        ? <Image slot='title' src={entry.data.typeImg} alt={entry.data.title} />
         : <Fragment slot='notitle'></Fragment>
     }
     <div class="wrapper">

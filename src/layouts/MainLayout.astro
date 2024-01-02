@@ -176,8 +176,9 @@ const img = images[type] ?? images["yama"];
             top: 0;
             border-right: 1px rgb(var(--on-background)) solid;
 
-            img {
+            :global(img) {
                 width: 100%;
+                height: auto;
             }
         }
 

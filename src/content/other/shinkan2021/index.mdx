@@ -1,7 +1,9 @@
 ---
 title: 新歓情報2021
-typeImg: ./title-shinkan2021.jpg
 ---
+import { Image } from 'astro:assets'
+import openchat from '/src/assets/openchat21.jpeg'
+import location from '/src/assets/location.jpg'
 
 <p style="text-align: center;"><span style="font-size: 10pt;">　</span></p>
 <p style="text-align: center;"><span style="font-size: 26pt;"><strong><span style="color: #f08080;">～新歓情報2021～</span></strong></span></p>
@@ -13,7 +15,7 @@ typeImg: ./title-shinkan2021.jpg
 <p style="text-align: center;"><span style="font-size: 20pt;"><strong><span style="color: #f08080;">LINEのopenchat</span></strong></span></p>
 <p style="text-align: center;"><span style="font-size: 14pt;"> QRコードを読み込み，コード「shizen21」を入力すると，匿名で参加できます。</span></p>
 <p style="text-align: center;"><span style="font-size: 14pt;"><strong>入部希望の方もこちらから！</strong></span></p>
-<div align="center" style="font-size: 100%;"><img width="300" src="../../img/openchat21.jpeg" /></div>
+<div align="center" style="font-size: 100%;"><Image width="300" src={openchat} alt="QRコード" /></div>
 <p style="text-align: center;"><span style="font-size: 2pt;">　</span></p>
 <p style="text-align: center;"><span style="font-size: 20pt;"><strong><span style="color: #f08080;">連絡先</span></strong></span></p>
 <p style="text-align: center;"><span style="font-size: 14pt;">jishinkai2021☆gmail.com</span></p>
@@ -24,4 +26,4 @@ typeImg: ./title-shinkan2021.jpg
 <p style="text-align: center;"><span style="font-size: 2pt;">　</span></p>
 <p style="text-align: center;"><span style="font-size: 14pt;">部室の場所：東北大学川内キャンパス仮サークル棟G-3(コロナウイルスの影響で部室に人はいません。ご了承ください。）</span></p>
 <p style="text-align: center;"><span style="font-size: 10pt;">　</span></p>
-<div align="center" style="font-size: 100%;"><img width="300" src="../../img/location.jpg" /></div>
+<div align="center" style="font-size: 100%;"><Image width="300" src={location} alt="地図" /></div>

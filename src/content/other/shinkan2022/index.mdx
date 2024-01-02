@@ -2,6 +2,9 @@
 title: 新歓情報2022
 typeImg: ./title-shinkan2022.jpg
 ---
+import { Image } from 'astro:assets'
+import openchat from '/src/assets/openchat22.jpg'
+import location from '/src/assets/location.jpg'
 
 <p style="text-align: center;"><span style="font-size: 10pt;">　</span></p>
 <p style="text-align: center;"><span style="font-size: 26pt;"><strong><span style="color: #f08080;">～新歓情報2022～</span></strong></span></p>
@@ -22,7 +25,7 @@ typeImg: ./title-shinkan2022.jpg
 <p style="text-align: center;"><span style="font-size: 20pt;"><strong><span style="color: #f08080;">LINEのopenchat</span></strong></span></p>
 <p style="text-align: center;"><span style="font-size: 14pt;"> QRコードを読み込むと匿名で参加できます。</span></p>
 <p style="text-align: center;"><span style="font-size: 14pt;"><strong>入部希望の方もこちらから！</strong></span></p>
-<div align="center" style="font-size: 100%;"><img width="300" src="../../img/openchat22.jpg" /></div>
+<div align="center" style="font-size: 100%;"><Image width="300" src={openchat} alt="QRコード" /></div>
 <p style="text-align: center;"><span style="font-size: 2pt;">　</span></p>
 <p style="text-align: center;"></p>
 <p style="text-align: center;"><span style="font-size: 20pt;"><strong><span style="color: #f08080;">連絡先</span></strong></span></p>
@@ -34,4 +37,4 @@ typeImg: ./title-shinkan2022.jpg
 <p style="text-align: center;"><span style="font-size: 2pt;">　</span></p>
 <p style="text-align: center;"><span style="font-size: 14pt;">部室の場所：東北大学川内キャンパス仮サークル棟G-3</span></p>
 <p style="text-align: center;"><span style="font-size: 10pt;">　</span></p>
-<div align="center" style="font-size: 100%;"><img width="300" src="../../img/location.jpg" /></div>
+<div align="center" style="font-size: 100%;"><Image width="300" src={location} alt="地図" /></div>
