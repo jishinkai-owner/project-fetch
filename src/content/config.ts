@@ -10,11 +10,11 @@ const yamaCollection = defineCollection({
 
 const otherCollection = defineCollection({
     type: 'content',
-    schema: z.object({
+    schema: ({ image }) => z.object({
         title: z.string(),
         description: z.string().optional(),
         type: z.string().optional(),
-        typeImg: z.string().optional(),
+        typeImg: image().optional(),
     }),
 });
 

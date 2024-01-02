@@ -13,23 +13,38 @@ import link from "../assets/icon/link.gif";
 import member from "../assets/icon/member.gif";
 import qa from "../assets/icon/qa.gif";
 import bear from "../assets/bear.gif";
+import TitleLink from "../assets/title/title-link.jpg";
+import TitleMember from "../assets/title/title-member.jpg";
+import TitleOther from "../assets/title/title-other.jpg";
+import TitleQa from "../assets/title/title-qa.jpg";
+import TitleTabi from "../assets/title/title-tabi.jpg";
+import TitleTsuri from "../assets/title/title-tsuri.jpg";
+import TitleYama from "../assets/title/title-yama.jpg";
+import { Debug } from "astro:components";
+
 
 interface Props {
     title: string;
 	type: string;
-    typeImg: string;
     frontmatter?: {
         title: string;
         type: string;
-        typeImg: string;
     };
 }
 
-const { title, type, typeImg } = Astro.props.frontmatter || Astro.props;
+const { title, type } = Astro.props.frontmatter || Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/title/*.{jpeg,jpg,png,gif}');
-const imgPath = `/src/assets/title/${typeImg}`;
-if (!images[imgPath]) throw new Error(`"${typeImg}" does not exist in glob: "src/assets/title/*.{jpeg,jpg,png,gif}"`);
+const images: {[key: string]: ImageMetadata} = {
+    "リンク": TitleLink,
+    "部員紹介": TitleMember,
+    "その他の活動": TitleOther,
+    "よくある質問": TitleQa,
+    "旅行記": TitleTabi,
+    "釣果記録": TitleTsuri,
+    "山行記録": TitleYama,
+};
+
+const img = images[type] ?? images["yama"];
 ---
 
 <BaseLayout title={title + " - 自然に親しむ会 | 東北大学"} />
@@ -81,7 +96,9 @@ if (!images[imgPath]) throw new Error(`"${typeImg}" does not exist in glob: "src
         <div class="bear"><Image src={bear} alt="" /></div>
     </nav>
     <header class="title">
-        <Image src={images[imgPath]()} alt={type} />
+        <slot name="title">
+            <Image src={img} alt={type} />
+        </slot>
     </header>
     <main class="content">
         <slot />
