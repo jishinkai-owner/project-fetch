@@ -25,9 +25,9 @@ typeImg: title-other.jpg
 
 ## 2019年
 
-2019/12/7~8----:[ゆるキャン△](http://jishinkaihp.web.fc2.com/other/2019.yurucam/2019.yurucam.html)
+2019/12/7~8----:[ゆるキャン△](2019.yurucam/2019.yurucam.html)
 
-2019/11/2------:[紅葉サイクリング（二口林道）](http://jishinkaihp.web.fc2.com/other/2019.hutakuti_rindo/1.html)
+2019/11/2------:[紅葉サイクリング（二口林道）](2019.hutakuti_rindo/1.html)
 
 2019/03/31-----:化女沼観光
 

@@ -50,7 +50,7 @@ if (img) {
             <dt>{key}</dt>,
             typeof params[key] === 'string' ?
             <dd set:html={params[key]}></dd> :
-            params[key].map((value) => 
+            (params[key] as string[]).map((value: string) => 
                 <dd set:html={value}></dd>
             )
         ])}
