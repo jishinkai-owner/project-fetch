@@ -8,6 +8,14 @@ const yamaCollection = defineCollection({
     }),
 });
 
+const tabiCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+    }),
+});
+
 const otherCollection = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
@@ -20,5 +28,6 @@ const otherCollection = defineCollection({
 
 export const collections = {
     'yama': yamaCollection,
+    'tabi': tabiCollection,
     'other': otherCollection,
 };

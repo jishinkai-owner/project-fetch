@@ -8,12 +8,12 @@ export async function getStaticPaths() {
     params: { slug: entry.slug }, props: { entry },
   }));
 }
-// 2. テンプレートでは、プロパティからエントリーを直接取得できる
+
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<MainLayout title={entry.data.title} type="山行記録" typeImg='title-yama.jpg'>
+<MainLayout title={entry.data.title} type="山行記録">
     <div class="wrapper">
         <script async="" src="https://embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
         <Content />
