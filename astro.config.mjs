@@ -5,6 +5,6 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx()],
-  site: 'https://jishinkai.github.io',
-  base: '/fc2.github.io'
+  //site: 'https://jishinkai.github.io',
+  //base: '/fc2.github.io'
 });
