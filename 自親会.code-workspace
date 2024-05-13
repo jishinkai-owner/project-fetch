@@ -2,12 +2,16 @@
 	"folders": [
 		{
 			"path": ".."
+		},
+		{
+			"path": "H:/マイドライブ/Synced/自親会"
 		}
 	],
 	"settings": {
 		"cSpell.words": [
 			"jishinkai"
-		]
+		],
+		"latex-workshop.latex.autoBuild.run": "onSave"
 	},
 	"extensions": {
 		"recommendations": [

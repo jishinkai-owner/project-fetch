@@ -21,13 +21,13 @@ typeImg: title-tsuri.jpg
 
 2018/09----:仙台港
 
-2018/02/24----:[ワカサギ釣り](2018/wakasagi2018.html)
+2018/02/24----:[ワカサギ釣り](2018/wakasagi2018/)
 
 ## 2017年
 
-2017/07/02----:[作並](2017/07.02.sakunami/07.02.sakunami.html)
+2017/07/02----:[作並](2017/07.02.sakunami/07.02.sakunami/)
 
-2017/06/18----:[七ヶ浜](2017/06.18.shichigahama/06.18.shichigahama.html)
+2017/06/18----:[七ヶ浜](2017/06.18.shichigahama/06.18.shichigahama/)
 
 2017/03-------:ワカサギ釣り
 
@@ -37,17 +37,17 @@ typeImg: title-tsuri.jpg
 
 ## 2015年
 
-2015/11/22----:[塩釜港](2015/11.22.shiogama.html)
+2015/11/22----:[塩釜港](2015/11.22.shiogama/)
 
 2015/08/09----:仙台港
 
 ## 2014年
 
-2014/02/08----:[岩洞湖 ワカサギ釣り](2014/02.08.gandouko/wakasagi_gandouko.html)
+2014/02/08----:[岩洞湖 ワカサギ釣り](2014/02.08.gandouko/wakasagi_gandouko/)
 
 ## 2013年
 
-2013/11/30----:[塩釜港](2013/11.30.Shiogama/shiogama.html)
+2013/11/30----:[塩釜港](2013/11.30.Shiogama/shiogama/)
 
 ## 2012年
 
@@ -73,7 +73,7 @@ typeImg: title-tsuri.jpg
 
 ## 2009年
 
-2009/--/------:[釣り合宿（田代島）](http://outdoor.geocities.jp/jishinkaihp/turi/turigasshuku2009.html)
+2009/--/------:[釣り合宿（田代島）](http://outdoor.geocities.jp/jishinkaihp/turi/turigasshuku2009/)
 
 ## 2008年
 
@@ -83,6 +83,6 @@ typeImg: title-tsuri.jpg
 
 ## 2007年
 
-2007/08/29～31:[釣り合宿（網地島・田代島）](http://outdoor.geocities.jp/jishinkaihp/turi/2007ajisima.html)
+2007/08/29～31:[釣り合宿（網地島・田代島）](http://outdoor.geocities.jp/jishinkaihp/turi/2007ajisima/)
 
-2007/07/07----:[サビキ釣り大会](http://outdoor.geocities.jp/jishinkaihp/turi/20070707sabiki.html)
+2007/07/07----:[サビキ釣り大会](http://outdoor.geocities.jp/jishinkaihp/turi/20070707sabiki/)

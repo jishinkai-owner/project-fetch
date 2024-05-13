@@ -46,7 +46,7 @@ title: 長期山行 記録 -TEAM HARUKI-
 
 上高地は水場もあって適度に涼しかったのですが、そこから登山道の始まる横尾までが長い長い。
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/96951391@N03/53124661524/in/album-72177720310429092/" title="IMG20230810083024"><img src="https://live.staticflickr.com/65535/53124661524_01d8e314d1_n.jpg" width="320" height="240" alt="IMG20230810083024"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/96951391@N03/53124661524/in/album-72177720310429092" title="IMG20230810083024"><img src="https://live.staticflickr.com/65535/53124661524_01d8e314d1_n.jpg" width="320" height="240" alt="IMG20230810083024"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/30W72bWJ97" title="IMG20230810084313"><img src="https://live.staticflickr.com/65535/53124657269_fdc0984427_n.jpg" width="320" height="240" alt="IMG20230810084313"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/VJ050dFM60" title="Untitled"><img src="https://live.staticflickr.com/65535/53111359465_e975f2dfcc_z.jpg" width="480" height="640" alt="Untitled"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
@@ -122,7 +122,7 @@ title: 長期山行 記録 -TEAM HARUKI-
 
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/b9J47009wv" title="Untitled"><img src="https://live.staticflickr.com/65535/53111360700_a9fcef3640_w.jpg" width="300" height="400" alt="Untitled"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/E0W24r5LjH" title="IMG20230811094625"><img src="https://live.staticflickr.com/65535/53111372470_f8d1eb79fe_w.jpg" width="300" height="400" alt="IMG20230811094625"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/96951391@N03/53114938486/in/album-72177720310429092/" title="Untitled"><img src="https://live.staticflickr.com/65535/53114938486_1586e5da34_w.jpg" width="300" height="400" alt="Untitled"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/96951391@N03/53114938486/in/album-72177720310429092" title="Untitled"><img src="https://live.staticflickr.com/65535/53114938486_1586e5da34_w.jpg" width="300" height="400" alt="Untitled"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/6i317w7x0Z" title="IMG20230811095623"><img src="https://live.staticflickr.com/65535/53110376282_675e42d496_n.jpg" width="240" height="320" alt="IMG20230811095623"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/q99m782gre" title="IMG20230811100020"><img src="https://live.staticflickr.com/65535/53111363245_a58ca742ee_n.jpg" width="240" height="320" alt="IMG20230811100020"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
