@@ -1,6 +1,6 @@
 {
   "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "workspaceFolder": "/workspaces/src/content/yama",
+  "workspaceFolder": "/workspaces/jishinkaihp/src/content/yama",
   "features": {
   }
 }
