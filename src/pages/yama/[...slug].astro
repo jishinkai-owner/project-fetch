@@ -1,12 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
-import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+import "github-markdown-css/github-markdown.css";
+import "../../assets/markdown.scss";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('yama');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+    const blogEntries = await getCollection("yama");
+    return blogEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;
@@ -14,15 +17,11 @@ const { Content } = await entry.render();
 ---
 
 <MainLayout title={entry.data.title} type="山行記録">
-    <div class="wrapper">
-        <script async="" src="https://embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+    <div class="markdown-body">
+        <script
+            async=""
+            src="https://embedr.flickr.com/assets/client-code.js"
+            charset="utf-8"></script>
         <Content />
     </div>
 </MainLayout>
-
-<style lang="scss">
-    .wrapper {
-        text-align: center;
-        font-size: 1.5rem !important;
-    }
-</style>

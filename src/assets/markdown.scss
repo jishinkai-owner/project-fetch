@@ -1,0 +1,22 @@
+.markdown-body {
+    text-align: center;
+    font-size: 1.3rem !important;
+    line-height: 1.7;
+
+    background-color: transparent;
+
+    > ul, ol, table, blockquote, .markdown-alert {
+        text-align: initial;
+        width: fit-content;
+        margin: auto;
+    }
+
+    > * {
+        margin-bottom: 2rem !important;
+    }
+
+    img {
+        height: auto;
+    }
+
+}
