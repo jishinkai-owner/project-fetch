@@ -93,6 +93,5 @@ jobs:
           local-dir: ${{ env.BUILD_PATH }}/dist
           exclude: |
             *.html
-          fail-on-error: true
           security: strict
           dry-run: true
