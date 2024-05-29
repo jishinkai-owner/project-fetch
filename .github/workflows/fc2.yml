@@ -51,7 +51,7 @@ jobs:
           path: ./dist
       - name: Sync with FC2
         id: deployment
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
         with:
           server: ${{ vars.FC2_DOMAIN }}
           username: ${{ secrets.FC2_FTP_USERNAME }}
