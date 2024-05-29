@@ -64,6 +64,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          name: release
           path: ${{ env.BUILD_PATH }}/dist
 
   deploy:
@@ -77,6 +78,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
+          name: release
           path: ${{ env.BUILD_PATH }}/dist
       - name: Sync with FC2
         id: deployment
