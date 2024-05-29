@@ -63,4 +63,3 @@ jobs:
             .fc2*
             google*.html
           security: strict
-          dry-run: true
