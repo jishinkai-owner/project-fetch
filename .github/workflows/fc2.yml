@@ -51,13 +51,16 @@ jobs:
           path: ./dist
       - name: Sync with FC2
         id: deployment
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ vars.FC2_DOMAIN }}
           username: ${{ secrets.FC2_FTP_USERNAME }}
           password: ${{ secrets.FC2_FTP_PASSWORD }}
           local-dir: ./dist/
+          server-dir: ./
           exclude: |
-            *.html
+            .htaccess
+            .fc2*
+            google*.html
           security: strict
           dry-run: true
