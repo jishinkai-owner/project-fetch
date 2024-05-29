@@ -87,7 +87,7 @@ jobs:
         id: deployment
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ${{ secrets.FC2_DOMAIN }}
+          server: ${{ env.FC2_DOMAIN }}
           username: ${{ secrets.FC2_FTP_USERNAME }}
           password: ${{ secrets.FC2_FTP_PASSWORD }}
           local-dir: ${{ env.BUILD_PATH }}/dist
