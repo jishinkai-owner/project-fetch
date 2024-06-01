@@ -7,7 +7,7 @@ typeImg: title-yama.jpg
 
 ## 2023年
 
-2023/8/10-12:長期山行＠槍ヶ岳([YUSUKE編](2023/2023.08.yarigatake.Yusuke/2023.08.10-12.Yarigatake.Yusuke)・[KOSEI編](2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI)・[HARUKI編](2023/2023.08.yarigatake.Haruki/)・[SOUSKE編](2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke)・[TATSUYA編](2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA))
+2023/8/10-12:長期山行＠槍ヶ岳([YUSUKE編](2023/2023.08.yarigatake.Yusuke/)・[KOSEI編](2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI)・[HARUKI編](2023/2023.08.yarigatake.Haruki/)・[SOUSKE編](2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke)・[TATSUYA編](2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA))
 
 2023/7/22-23:朝日連峰([YUSUKE編](2023/2023.07.asahidake.YUSUKE/2023.07.asahidake.YUSUKE)・[KOSEI編](2023/2023.07.asahidake.KOSEI/2023.asahidake.KOSEI)・[TATSUYA編](2023/2023.07.asahidake.Tatsuya/2023.07.asahidake.Tatsuya)・[HARUKI編](2023/2023.07.asahidake.HARUKI/2023.07.asahidake.HARUKI))
 
