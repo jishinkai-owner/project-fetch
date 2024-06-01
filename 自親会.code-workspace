@@ -11,7 +11,10 @@
 		"cSpell.words": [
 			"jishinkai"
 		],
-		"latex-workshop.latex.autoBuild.run": "onSave"
+		"latex-workshop.latex.autoBuild.run": "onSave",
+		"markdownlint.config": {
+			"no-trailing-punctuation": false,
+		}
 	},
 	"extensions": {
 		"recommendations": [
