@@ -152,7 +152,7 @@ typeImg: title-yama.jpg
 
 2016/07/09～10:訓練登山in北蔵王 ([YUICHIRO編](2016/2016.07.kunren.yuichiro/2016.07.kunren.yuichiro)・[DAICHI編](2016/2016.07.kunren.daichi/2016.07.kunren.daichi)・[YASU編](2016/2016.07.kunren.yasu/2016.07.kunren.yasu_copy_1))
 
-2016/06/25～26:鳥海山 ([YUKI編](2016/2016.06.choukai.yuki/2016.06.chokai.yuki)・[DAiCHiii編](2016/2016.06.choukai.daichiii/chokaidaichi)・[YUICHIRO編](http://jishinkaihp.web.fc2.com/yama/2016/2016.06.choukai.yuichiro/team_yuichiro))
+2016/06/25～26:鳥海山 ([YUKI編](2016/2016.06.choukai.yuki/2016.06.chokai.yuki)・[DAiCHiii編](2016/2016.06.choukai.daichiii/chokaidaichi)・[YUICHIRO編](2016/2016.06.choukai.yuichiro/team_yuichiro))
 
 2016/06/25～26:早池峰山 ([YASU編](2016/2016.06.hayachine.yasu/hayachine.yasu)・[MASAKIYO編](2016/2016.06.hayachine.masakiyo/hayachine.masakiyo))
 
