@@ -20,7 +20,7 @@ const { Content } = await entry.render();
         : <Fragment slot='notitle'></Fragment>
     }
     <div class="wrapper">
-        <script async="" src="/src/assets/flickr-client-code.js" charset="utf-8"></script>
+        <script is:inline async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
         <Content />
     </div>
 </MainLayout>

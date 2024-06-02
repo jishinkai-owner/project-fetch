@@ -18,10 +18,7 @@ const { Content } = await entry.render();
 
 <MainLayout title={entry.data.title} type="山行記録">
     <div class="markdown-body">
-        <script
-            async=""
-            src="https://embedr.flickr.com/assets/client-code.js"
-            charset="utf-8"></script>
+        <script is:inline async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
         <Content />
     </div>
 </MainLayout>
