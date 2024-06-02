@@ -1,5 +1,5 @@
 {
-  "name": "fc2_editor_for_jishinkai",
+  "name": "jishinkaihp",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,9 +11,9 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.4",
-    "@astrojs/mdx": "^2.0.2",
-    "astro": "^4.0.7",
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.0.1",
+    "astro": "^4.9.2",
     "github-markdown-css": "^5.5.1",
     "rehype-katex": "^7.0.0",
     "remark-gfm": "^4.0.0",
@@ -21,8 +21,8 @@
     "remark-math": "^6.0.0",
     "remark-rehype": "^11.1.0",
     "remark-toc": "^9.0.0",
-    "sass": "^1.69.5",
-    "typescript": "^5.3.3"
+    "sass": "^1.77.4",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^6.15.0",
