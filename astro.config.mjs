@@ -1,3 +1,4 @@
+import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import remarkMath from "remark-math";
 import remarkToc from 'remark-toc';
@@ -6,7 +7,7 @@ import remarkRehype from 'remark-rehype';
 import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
-export default {
+export default defineConfig({
   integrations: [mdx()],
   markdown: {
     remarkPlugins: [
@@ -18,5 +19,8 @@ export default {
     rehypePlugins: [
       rehypeKatex,
     ]
-  }
-}
+  },
+  build: {
+    format: 'preserve',
+  },
+});
