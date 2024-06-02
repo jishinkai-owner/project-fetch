@@ -5,7 +5,13 @@ type: 山行記録
 typeImg: title-yama.jpg
 ---
 
+## 2024年
+
+2024/4/21:新歓登山@泉ヶ岳([KOKI編](2024/2024_shinkan_KOKI)・[NAOYA編](2024/2024_shinkan_NAOYA))
+
 ## 2023年
+
+2023/10/14:秋山山行@月山(([WATARU編](2023/2023.10.gassan.WATARU/2023.gassan.WATARU)・[SHOTA編](2023/2023.10.gassan.SHOTA/2023_gassan_SHOTA))
 
 2023/8/10-12:長期山行＠槍ヶ岳([YUSUKE編](2023/2023.08.yarigatake.Yusuke/2023.08.yarigatake.Yusuke)・[KOSEI編](2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI)・[HARUKI編](2023/2023.08.yarigatake.Haruki)・[SOUSKE編](2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke)・[TATSUYA編](2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA))
 
