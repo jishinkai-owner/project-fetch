@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 import remarkMath from "remark-math";
 import remarkToc from 'remark-toc';
 import { remarkAlert } from "remark-github-blockquote-alert";
@@ -8,7 +9,10 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  integrations: [
+    mdx(),
+    sitemap(),
+  ],
   markdown: {
     remarkPlugins: [
       [remarkToc, { heading: '目次|もくじ|Contents|TOC' }],
@@ -23,4 +27,5 @@ export default defineConfig({
   build: {
     format: 'preserve',
   },
+  site: 'https://jishinkaihp.web.fc2.com',
 });
