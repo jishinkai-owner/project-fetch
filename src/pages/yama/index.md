@@ -7,6 +7,10 @@ typeImg: title-yama.jpg
 
 ## 2024年
 
+2024/5/25-26:男体山([NAOHIRO編](2024/2024_nanntai_NAOHIRO))
+
+2024/5/11-12:磐梯山()
+
 2024/4/21:新歓登山@泉ヶ岳([KOKI編](2024/2024_shinkan_KOKI)・[NAOYA編](2024/2024_shinkan_NAOYA))
 
 ## 2023年
