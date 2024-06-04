@@ -31,11 +31,10 @@ import other from "../assets/other.jpg";
 	</main>
 </BaseLayout>
 
-<style>
+<style lang="scss">
 	main {
 		margin: auto;
-		padding: 1rem;
-		max-width: calc(100% - 2rem);
+		max-width: calc(235px * 4);
 		color: white;
 		font-size: 20px;
 		line-height: 1.6;
@@ -44,6 +43,17 @@ import other from "../assets/other.jpg";
 		display: flex;
 		flex-wrap: no-wrap;
 		justify-content: center;
+
+		a {
+			width: 25%;
+			max-width: 235px;
+			height: auto;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
 	}
 	.links {
 		font-size: 1.5rem;

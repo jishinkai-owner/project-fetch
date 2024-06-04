@@ -47,6 +47,8 @@ const img = images[type] ?? images["yama"];
 ---
 
 <BaseLayout title={title + " - 自然に親しむ会 | 東北大学"} />
+    <input type="checkbox" class="menu-btn-check" id="menu-btn-check">
+    <label for="menu-btn-check" class="menu-btn-bg" />
     <nav class="menu">
         <h1>
             <a href="/">
@@ -95,19 +97,23 @@ const img = images[type] ?? images["yama"];
         <div class="bear"><Image src={bear} alt="" /></div>
     </nav>
     <header class="title">
+        <label for="menu-btn-check" class="menu-btn"><span></span></label>
         <slot name="title">
             <Image src={img} alt={type} />
         </slot>
     </header>
-    <main class="content">
+    <main class="content"
         <slot />
     </main>
 </BaseLayout>
 
 <style lang="scss">
+    $nav-width: 280px;
+    $header-width: 48px;
+
     body {
         display: grid;
-        grid-template-columns: 1fr 48px 3fr;
+        grid-template-columns: $nav-width $header-width 3fr;
         max-width: 1200px;
         margin: auto;
         border-left: 1px rgb(var(--on-background)) solid;
@@ -123,8 +129,10 @@ const img = images[type] ?? images["yama"];
             text-align: center;
             position: sticky;
             top: 0;
+            width: $nav-width;
             height: 100vh;
             overflow: hidden;
+            transition: 0.5s;
 
             * {
                 flex-grow: 0;
@@ -178,16 +186,55 @@ const img = images[type] ?? images["yama"];
             border-right: 1px rgb(var(--on-background)) solid;
             overflow: hidden;
 
+            .menu-btn {
+                display: none;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column;
+                row-gap: 5px;
+                width: 100%;
+                height: $header-width;
+                background-color: white;
+                cursor: pointer;
+
+                span, &::before, &::after {
+                    display: block;
+                    content: '';
+                    width: 30px;
+                    height: 3px;
+                    background-color: black;
+                    transition: 0.3s;
+                    position: relative;
+                }
+            }
+
             :global(img) {
                 width: 100%;
                 height: auto;
             }
         }
 
+        .menu-btn-check {
+            display: none;
+        }
+
+        .menu-btn-bg {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgb(var(--background));
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
         main.content {
             padding: 1rem;
             overflow-x: scroll;
             font-size: 0.8rem;
+            transition: filter 0.5s;
 
             :global(h2) {
                 font-size: 1.2rem;
@@ -197,6 +244,47 @@ const img = images[type] ?? images["yama"];
             :global(p) {
                 margin: 5px 0 0 2em;
                 padding: 0px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            grid-template-columns: $header-width 1fr;
+            nav.menu {
+                position: fixed;
+                left: -100%;
+            }
+            header.title {
+                position: sticky;
+
+                .menu-btn {
+                    display: flex;
+                }
+            }
+
+            .menu-btn-check:checked ~ {
+                .menu-btn-bg {
+                    width: 100%;
+                }
+                nav.menu {
+                    left: $header-width;
+                    background: rgb(var(--background) / 80%);
+                }
+                main {
+                    filter: blur(3px);
+                    z-index: -1;
+                }
+
+                header.title .menu-btn{
+                    &::before {
+                        transform: translateY(8px) rotate(45deg);
+                    }
+                    span {
+                        transform: translateX(-200%);
+                    }
+                    &::after {
+                        transform: translateY(-8px) rotate(-45deg);
+                    }
+                }
             }
         }
     }
