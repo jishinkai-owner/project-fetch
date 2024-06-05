@@ -1,12 +1,18 @@
 ---
 layout: '../../layouts/MainLayout.astro'
-title: 部員紹介 - 殿堂入り
+title: 殿堂入り
 type: 部員紹介
 typeImg: title-member.jpg
+breadcrumbs:
+    - {title: "部員紹介", href: "/member/"}
 ---
 import Member from '../../components/member.astro'
+import "github-markdown-css/github-markdown.css";
+import "../../assets/markdown.scss";
 
 # とあるレジェンドたちの記録
+
+## 目次
 
 ## C0
 
@@ -361,7 +367,7 @@ import Member from '../../components/member.astro'
     profile="残念なイケメン"
 />
 
-## B8世代
+## B8
 
 <Member
     img={{
@@ -534,7 +540,7 @@ import Member from '../../components/member.astro'
     profile="バブー！"
 />
 
-## B7世代
+## B7
 
 <Member
     img={{
@@ -734,7 +740,7 @@ import Member from '../../components/member.astro'
     profile="自親会発酵部部長"
 />
 
-## B6世代
+## B6
 
 <Member
     img={{
@@ -809,7 +815,7 @@ import Member from '../../components/member.astro'
     }}
     role="嘘つきインド人"
     major="工"
-    nickname='OGT<a href="hide" style="text-decoration: none; color: white; cursor: text">&#039;s room</a>'
+    nickname='OGT<a href="B6.hide/" style="text-decoration: none; color: rgb(var(--on-background)); cursor: text">&#039;s room</a>'
     profile="インドネシアに愛人がいる"
 />
 
@@ -879,7 +885,7 @@ import Member from '../../components/member.astro'
     profile="料理ができる（確信）"
 />
 
-## B5世代
+## B5
 
 <Member
     img={{
@@ -1042,7 +1048,7 @@ import Member from '../../components/member.astro'
     profile="Jazzと方言には一家言を持つ"
 />
 
-## B4世代
+## B4
 
 <Member
     img={{
@@ -1243,7 +1249,7 @@ import Member from '../../components/member.astro'
     profile="ささささささささささささささささささささささささささ"
 />
 
-## B3世代
+## B3
 
 <Member
     img={{
@@ -1473,7 +1479,7 @@ import Member from '../../components/member.astro'
     profile="「おいもう酒ねえのかよ！」"
 />
 
-## B2世代
+## B2
 
 <Member
     img={{
@@ -1625,7 +1631,7 @@ import Member from '../../components/member.astro'
     ]}
 />
 
-## B1世代
+## B1
 
 <Member
     img={{
@@ -1774,7 +1780,7 @@ import Member from '../../components/member.astro'
     profile="おなかいたい"
 />
 
-## B0世代
+## B0
 
 <Member
     img={{
@@ -1907,7 +1913,7 @@ import Member from '../../components/member.astro'
     profile="こう見えて肉食系"
 />
 
-## A9世代
+## A9
 
 <Member
     img={{
@@ -2036,7 +2042,7 @@ import Member from '../../components/member.astro'
     profile="リアルにリア充"
 />
 
-## A8世代
+## A8
 
 <Member
     img={{
