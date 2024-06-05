@@ -52,57 +52,57 @@ const img = images[type] ?? images["yama"];
     <nav class="menu">
         <h1>
             <a href="/">
-                <Image src={logo} alt="東北大学-自然に親しむ会"/>
+                <Image src={logo} alt="東北大学-自然に親しむ会" loading="eager" />
             </a>
         </h1>
-        <p><Image src={line} alt="" /></p>
+        <p><Image src={line} alt="" loading="eager" /></p>
         <ul>
             <li>
                 <a href="/yama/">
-                    <Image src={yama} alt="山行記録" />
+                    <Image src={yama} alt="山行記録" loading="eager" />
                 </a>
             </li>
             <li>
                 <a href="/tsuri/">
-                    <Image src={tsuri} alt="釣果記録" />
+                    <Image src={tsuri} alt="釣果記録" loading="eager" />
                 </a>
             </li>
             <li>
                 <a href="/tabi/">
-                    <Image src={tabi} alt="旅行記" />
+                    <Image src={tabi} alt="旅行記" loading="eager" />
                 </a>
             </li>
             <li>
                 <a href="/other/">
-                    <Image src={other} alt="その他の活動" />
+                    <Image src={other} alt="その他の活動" loading="eager" />
                 </a>
             </li>
             <li>
                 <a href="/link/">
-                    <Image src={link} alt="リンク" />
+                    <Image src={link} alt="リンク" loading="eager" />
                 </a>
             </li>
             <li>
                 <a href="/member/">
-                    <Image src={member} alt="部員紹介" />
+                    <Image src={member} alt="部員紹介" loading="eager" />
                 </a>
             </li>
             <li>
                 <a href="/qa/">
-                    <Image src={qa} alt="よくある質問" />
+                    <Image src={qa} alt="よくある質問" loading="eager" />
                 </a>
             </li>
         </ul>
-        <p><Image src={line} alt="" /></p>
-        <div class="bear"><Image src={bear} alt="" /></div>
+        <p><Image src={line} alt="" loading="eager" /></p>
+        <div class="bear"><Image src={bear} alt="" loading="eager" /></div>
     </nav>
     <header class="title">
         <label for="menu-btn-check" class="menu-btn"><span></span></label>
         <slot name="title">
-            <Image src={img} alt={type} />
+            <Image src={img} alt={type} loading="eager" />
         </slot>
     </header>
-    <main class="content"
+    <main class="content">
         <slot />
     </main>
 </BaseLayout>
