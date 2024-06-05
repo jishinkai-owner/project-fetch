@@ -23,15 +23,23 @@ import TitleYama from "../assets/title/title-yama.jpg";
 
 
 interface Props {
-    title: string;
-	type: string;
+    title: string; // ページのタイトル
+	type: string; // ページの種類(タイトルバーの画像が切り替わる)
+    breadcrumbs?: { // パンくずリスト(トップページと現在のページは不要)
+        title: string;
+        href?: string;
+    }[];
     frontmatter?: {
         title: string;
         type: string;
+        breadcrumbs?: {
+            title: string;
+            href?: string;
+        }[];
     };
 }
 
-const { title, type } = Astro.props.frontmatter || Astro.props;
+const { title, type, breadcrumbs = [] } = Astro.props.frontmatter || Astro.props;
 
 const images: {[key: string]: ImageMetadata} = {
     "リンク": TitleLink,
@@ -46,7 +54,7 @@ const images: {[key: string]: ImageMetadata} = {
 const img = images[type] ?? images["yama"];
 ---
 
-<BaseLayout title={title + " - 自然に親しむ会 | 東北大学"} />
+<BaseLayout title={title + " - 自然に親しむ会 | 東北大学"} breadcrumbs={[{title: "Top", href: "/"}, ...breadcrumbs, {title: title}]} />
     <input type="checkbox" class="menu-btn-check" id="menu-btn-check">
     <label for="menu-btn-check" class="menu-btn-bg" />
     <nav class="menu">
@@ -102,7 +110,17 @@ const img = images[type] ?? images["yama"];
             <Image src={img} alt={type} loading="eager" />
         </slot>
     </header>
-    <main class="content">
+    <main class="content" transition:animate="slide">
+        <nav class="breadcrumb" aria-label="breadcrumb">
+            <ol>
+                <li><a href="/">Top</a></li>
+                {breadcrumbs.map(item => (
+                    <li><a href={item.href}>{item.title}</a></li>
+                ))}
+                <li aria-current="page">{title}</li>
+            </ol>
+            <hr>
+        </nav>
         <slot />
     </main>
 </BaseLayout>
@@ -232,9 +250,26 @@ const img = images[type] ?? images["yama"];
 
         main.content {
             padding: 1rem;
-            overflow-x: scroll;
             font-size: 0.8rem;
             transition: filter 0.5s;
+
+            .breadcrumb{
+                ol {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    padding: 0;
+                    list-style: none;
+                    margin: 0;
+                    li {
+                        display: inline;
+                        &:not(:first-child)::before {
+                            content: '>';
+                            margin: 0 0.5em;
+                        }
+                    }
+                }
+            }
 
             :global(h2) {
                 font-size: 1.2rem;
@@ -255,6 +290,7 @@ const img = images[type] ?? images["yama"];
             }
             header.title {
                 position: sticky;
+                grid-column: 1;
 
                 .menu-btn {
                     display: flex;

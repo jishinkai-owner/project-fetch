@@ -16,7 +16,14 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<MainLayout title={entry.data.title} type="山行記録">
+<MainLayout
+    title={entry.data.title}
+    type="山行記録"
+    breadcrumbs={[
+        {title: "山行記録", href: "/yama/"},
+        ...entry.data.breadcrumbs.map((b) => ({title: b.title, href: "/yama"+b.href})),
+    ]}
+>
     <div class="markdown-body">
         <script is:inline async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
         <Content />

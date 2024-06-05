@@ -1,34 +1,33 @@
 import { z, defineCollection } from 'astro:content';
 
+const common = {
+    title: z.string(),
+    description: z.string().optional(),
+    breadcrumbs: z.array(z.object({
+        title: z.string(),
+        href: z.string().regex(/^\/[A-Za-z0-9.-_/]+$/),
+    })).default([]),
+}
+
 const yamaCollection = defineCollection({
     type: 'content',
-    schema: z.object({
-        title: z.string(),
-        description: z.string().optional(),
-    }),
+    schema: z.object(common),
 });
 
 const tabiCollection = defineCollection({
     type: 'content',
-    schema: z.object({
-        title: z.string(),
-        description: z.string().optional(),
-    }),
+    schema: z.object(common),
 });
 
 const tsuriCollection = defineCollection({
     type: 'content',
-    schema: z.object({
-        title: z.string(),
-        description: z.string().optional(),
-    }),
+    schema: z.object(common),
 });
 
 const otherCollection = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
-        title: z.string(),
-        description: z.string().optional(),
+        ...common,
         type: z.string().optional(),
         typeImg: image().optional(),
     }),
