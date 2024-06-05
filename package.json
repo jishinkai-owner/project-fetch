@@ -8,7 +8,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "deploy": "env-cmd -x ftp-deploy --server $FTP_SERVER --username $FTP_USER --password $FTP_PASSWORD --local-dir ./dist/ --timeout 240000"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -27,7 +28,9 @@
   },
   "devDependencies": {
     "@astrojs/partytown": "^2.1.0",
+    "@samkirkland/ftp-deploy": "^1.2.4",
     "@typescript-eslint/parser": "^6.15.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-astro": "^0.31.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
