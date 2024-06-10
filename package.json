@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "postinstall": "patch-package",
-    "deploy": "env-cmd -x ftp-deploy --server $FTP_SERVER --username $FTP_USER --password $FTP_PASSWORD --local-dir ./dist/ --timeout 240000"
+    "deploy": "env-cmd -x ftp-deploy --server $FTP_SERVER --username $FTP_USER --password $FTP_PASSWORD --local-dir ./dist/ --timeout 960000"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
