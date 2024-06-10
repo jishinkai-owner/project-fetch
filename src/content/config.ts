@@ -7,6 +7,8 @@ const common = {
         title: z.string(),
         href: z.string().regex(/^\/[A-Za-z0-9.-_/]+$/),
     })).default([]),
+    datePublished: z.date().optional(),
+    dateModified: z.date().optional(),
 }
 
 const yamaCollection = defineCollection({

@@ -1,6 +1,7 @@
 ---
 layout: '../../layouts/MainLayout.astro'
 title: 釣果記録
+description: サークルで行った釣りの記録です。
 type: 釣果記録
 typeImg: title-tsuri.jpg
 ---

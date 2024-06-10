@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { Image } from "astro:assets";
-import type { ImageMetadata } from 'astro';
+import type { ImageMetadata } from "astro";
 
 import logo from "../assets/logo.gif";
 import line from "../assets/line.gif";
@@ -21,109 +21,149 @@ import TitleTabi from "../assets/title/title-tabi.jpg";
 import TitleTsuri from "../assets/title/title-tsuri.jpg";
 import TitleYama from "../assets/title/title-yama.jpg";
 
-
 interface Props {
     title: string; // ページのタイトル
-	type: string; // ページの種類(タイトルバーの画像が切り替わる)
-    breadcrumbs?: { // パンくずリスト(トップページと現在のページは不要)
+    description?: string; // ページの説明
+    type: string; // ページの種類(タイトルバーの画像が切り替わる)
+    breadcrumbs?: {
+        // パンくずリスト(トップページと現在のページは不要)
         title: string;
         href?: string;
     }[];
+    datePublished?: Date; // 記事の公開日
+    dateModified?: Date; // 記事の更新日
     frontmatter?: {
         title: string;
+        description?: string;
         type: string;
         breadcrumbs?: {
             title: string;
             href?: string;
         }[];
+        datePublished?: Date;
+        dateModified?: Date;
     };
 }
 
-const { title, type, breadcrumbs = [] } = Astro.props.frontmatter || Astro.props;
+const {
+    title,
+    description,
+    type,
+    breadcrumbs = [],
+    datePublished,
+    dateModified,
+} = Astro.props.frontmatter || Astro.props;
 
-const images: {[key: string]: ImageMetadata} = {
-    "リンク": TitleLink,
-    "部員紹介": TitleMember,
-    "その他の活動": TitleOther,
-    "よくある質問": TitleQa,
-    "旅行記": TitleTabi,
-    "釣果記録": TitleTsuri,
-    "山行記録": TitleYama,
+const images: { [key: string]: ImageMetadata } = {
+    リンク: TitleLink,
+    部員紹介: TitleMember,
+    その他の活動: TitleOther,
+    よくある質問: TitleQa,
+    旅行記: TitleTabi,
+    釣果記録: TitleTsuri,
+    山行記録: TitleYama,
 };
 
 const img = images[type] ?? images["yama"];
 ---
 
-<BaseLayout title={title + " - 自然に親しむ会 | 東北大学"} breadcrumbs={[{title: "Top", href: "/"}, ...breadcrumbs, {title: title}]} />
-    <input type="checkbox" class="menu-btn-check" id="menu-btn-check">
-    <label for="menu-btn-check" class="menu-btn-bg" />
-    <nav class="menu">
-        <h1>
-            <a href="/">
-                <Image src={logo} alt="東北大学-自然に親しむ会" loading="eager" />
+<BaseLayout
+    title={title + " - 自然に親しむ会 | 東北大学"}
+    description={description}
+    breadcrumbs={[
+        { title: "Top", href: "/" },
+        ...breadcrumbs,
+        { title: title },
+    ]}
+    rich_result={datePublished || dateModified
+        ? [
+              {
+                  "@context": "https://schema.org",
+                  "@type": "Article",
+                  headline: title,
+                  datePublished: datePublished?.toISOString() ?? undefined,
+                  dateModified: dateModified?.toISOString() ?? undefined,
+              },
+          ]
+        : []}
+/>
+<input
+    type="checkbox"
+    class="menu-btn-check"
+    id="menu-btn-check"
+    aria-hidden="true"
+/>
+<label for="menu-btn-check" class="menu-btn-bg" aria-hidden="true" />
+<nav class="menu">
+    <h1>
+        <a href="/">
+            <Image src={logo} alt="東北大学-自然に親しむ会" loading="eager" />
+        </a>
+    </h1>
+    <p><Image src={line} alt="" loading="eager" /></p>
+    <ul>
+        <li>
+            <a href="/yama/">
+                <Image src={yama} alt="山行記録" loading="eager" />
             </a>
-        </h1>
-        <p><Image src={line} alt="" loading="eager" /></p>
-        <ul>
-            <li>
-                <a href="/yama/">
-                    <Image src={yama} alt="山行記録" loading="eager" />
-                </a>
-            </li>
-            <li>
-                <a href="/tsuri/">
-                    <Image src={tsuri} alt="釣果記録" loading="eager" />
-                </a>
-            </li>
-            <li>
-                <a href="/tabi/">
-                    <Image src={tabi} alt="旅行記" loading="eager" />
-                </a>
-            </li>
-            <li>
-                <a href="/other/">
-                    <Image src={other} alt="その他の活動" loading="eager" />
-                </a>
-            </li>
-            <li>
-                <a href="/link/">
-                    <Image src={link} alt="リンク" loading="eager" />
-                </a>
-            </li>
-            <li>
-                <a href="/member/">
-                    <Image src={member} alt="部員紹介" loading="eager" />
-                </a>
-            </li>
-            <li>
-                <a href="/qa/">
-                    <Image src={qa} alt="よくある質問" loading="eager" />
-                </a>
-            </li>
-        </ul>
-        <p><Image src={line} alt="" loading="eager" /></p>
-        <div class="bear"><Image src={bear} alt="" loading="eager" /></div>
+        </li>
+        <li>
+            <a href="/tsuri/">
+                <Image src={tsuri} alt="釣果記録" loading="eager" />
+            </a>
+        </li>
+        <li>
+            <a href="/tabi/">
+                <Image src={tabi} alt="旅行記" loading="eager" />
+            </a>
+        </li>
+        <li>
+            <a href="/other/">
+                <Image src={other} alt="その他の活動" loading="eager" />
+            </a>
+        </li>
+        <li>
+            <a href="/link/">
+                <Image src={link} alt="リンク" loading="eager" />
+            </a>
+        </li>
+        <li>
+            <a href="/member/">
+                <Image src={member} alt="部員紹介" loading="eager" />
+            </a>
+        </li>
+        <li>
+            <a href="/qa/">
+                <Image src={qa} alt="よくある質問" loading="eager" />
+            </a>
+        </li>
+    </ul>
+    <p><Image src={line} alt="" loading="eager" /></p>
+    <div class="bear"><Image src={bear} alt="" loading="eager" /></div>
+</nav>
+<header class="title">
+    <label for="menu-btn-check" class="menu-btn"><span></span></label>
+    <slot name="title">
+        <Image src={img} alt={type} loading="eager" />
+    </slot>
+</header>
+<main class="content" transition:animate="slide">
+    <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol>
+            <li><a href="/">Top</a></li>
+            {
+                breadcrumbs.map((item) => (
+                    <li>
+                        <a href={item.href}>{item.title}</a>
+                    </li>
+                ))
+            }
+            <li aria-current="page">{title}</li>
+        </ol>
+        <hr />
     </nav>
-    <header class="title">
-        <label for="menu-btn-check" class="menu-btn"><span></span></label>
-        <slot name="title">
-            <Image src={img} alt={type} loading="eager" />
-        </slot>
-    </header>
-    <main class="content" transition:animate="slide">
-        <nav class="breadcrumb" aria-label="breadcrumb">
-            <ol>
-                <li><a href="/">Top</a></li>
-                {breadcrumbs.map(item => (
-                    <li><a href={item.href}>{item.title}</a></li>
-                ))}
-                <li aria-current="page">{title}</li>
-            </ol>
-            <hr>
-        </nav>
-        <slot />
-    </main>
-</BaseLayout>
+    <slot />
+</main>
 
 <style lang="scss">
     $nav-width: 280px;
@@ -133,7 +173,6 @@ const img = images[type] ?? images["yama"];
         display: grid;
         grid-template-columns: $nav-width $header-width 3fr;
         max-width: 1200px;
-        margin: auto;
         border-left: 1px rgb(var(--on-background)) solid;
         border-right: 1px rgb(var(--on-background)) solid;
 
@@ -158,15 +197,15 @@ const img = images[type] ?? images["yama"];
 
             img {
                 @media screen and (prefers-color-scheme: dark) {
-                    filter: invert(.8);
+                    filter: invert(0.8);
                 }
             }
 
             h1 {
                 width: 100%;
                 display: block;
-                
-                a{
+
+                a {
                     display: block;
                 }
             }
@@ -175,7 +214,7 @@ const img = images[type] ?? images["yama"];
                 margin: 1rem 0;
                 padding: 0;
             }
-            
+
             ul {
                 display: flex;
                 flex-direction: row;
@@ -215,9 +254,11 @@ const img = images[type] ?? images["yama"];
                 background-color: white;
                 cursor: pointer;
 
-                span, &::before, &::after {
+                span,
+                &::before,
+                &::after {
                     display: block;
-                    content: '';
+                    content: "";
                     width: 30px;
                     height: 3px;
                     background-color: black;
@@ -253,7 +294,7 @@ const img = images[type] ?? images["yama"];
             font-size: 0.8rem;
             transition: filter 0.5s;
 
-            .breadcrumb{
+            .breadcrumb {
                 ol {
                     display: flex;
                     justify-content: start;
@@ -264,7 +305,7 @@ const img = images[type] ?? images["yama"];
                     li {
                         display: inline;
                         &:not(:first-child)::before {
-                            content: '>';
+                            content: ">";
                             margin: 0 0.5em;
                         }
                     }
@@ -280,6 +321,10 @@ const img = images[type] ?? images["yama"];
                 margin: 5px 0 0 2em;
                 padding: 0px;
             }
+        }
+
+        #fc2_footer {
+            grid-column: 1;
         }
 
         @media screen and (max-width: 1000px) {
@@ -310,7 +355,7 @@ const img = images[type] ?? images["yama"];
                     z-index: -1;
                 }
 
-                header.title .menu-btn{
+                header.title .menu-btn {
                     &::before {
                         transform: translateY(8px) rotate(45deg);
                     }

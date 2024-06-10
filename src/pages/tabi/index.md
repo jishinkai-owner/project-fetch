@@ -1,6 +1,7 @@
 ---
 layout: '../../layouts/MainLayout.astro'
 title: 旅行記
+description: サークルで行った旅行の記録です。
 type: 旅行記
 typeImg: title-tabi.jpg
 ---

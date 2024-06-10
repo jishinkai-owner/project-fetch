@@ -1,6 +1,7 @@
 ---
 layout: '../../layouts/MainLayout.astro'
 title: 山行記録
+description: サークルで行った山行記録の一覧
 type: 山行記録
 typeImg: title-yama.jpg
 ---

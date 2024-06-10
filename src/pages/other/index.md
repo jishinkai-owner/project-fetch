@@ -1,6 +1,7 @@
 ---
 layout: '../../layouts/MainLayout.astro'
 title: その他の活動
+description: サークルで行ったその他の活動の記録です。
 type: その他の活動
 typeImg: title-other.jpg
 ---
