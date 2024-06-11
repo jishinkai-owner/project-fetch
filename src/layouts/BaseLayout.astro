@@ -41,11 +41,34 @@ const jsonLD = [
 <!doctype html>
 <html lang="ja">
     <head>
+        <!-- Rendering settings -->
         <meta charset="UTF-8" />
-        <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width" />
+        <meta name="darkreader-lock">
+
+        <!-- Page information -->
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="theme-color" color="#000000">
+        <meta property="og:title" content={title}>
+        <meta property="og:description" content={description}>
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="東北大学 自然に親しむ会">
+        <meta property="og:image" content="/ogp.png">
+        <meta property="og:url" content={Astro.url.href}>
+        <meta property="og:locale" content="ja_JP">
+        <meta name="twitter:card" content="summary"></meta>
+        <meta name="twitter:site" content="@jishinkai"></meta>
+
+        <!-- Rich result -->
         <link rel="icon" href="/favicon.ico" />
         <link rel="sitemap" href="/sitemap-index.xml" />
+        <script
+            is:inline
+            type="application/ld+json"
+            set:html={JSON.stringify(jsonLD)}
+        />
+
         <!-- Google tag (gtag.js) -->
         <script src="https://www.googletagmanager.com/gtag/js?id=G-N150PRFQKB"
         ></script>
@@ -58,13 +81,6 @@ const jsonLD = [
             gtag("config", "G-N150PRFQKB");
         </script>
 
-        <script
-            is:inline
-            type="application/ld+json"
-            set:html={JSON.stringify(jsonLD)}
-        />
-
-        <title>{title}</title>
         <ViewTransitions />
     </head>
     <body>
