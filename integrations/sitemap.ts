@@ -56,8 +56,8 @@ const fs2sitemap = (
                     .map((f) => {
                         let url = new URL(relative(destinationDir, f), site)
                             .href;
-                        if (url.endsWith("index.html")) {
-                            url = url.replace("index.html", "");
+                        if (url.endsWith("/index.html")) {
+                            url = url.replace("/index.html", "/");
                         } else if (url.endsWith(".html")) {
                             url = url.replace(".html", "");
                         }
