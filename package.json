@@ -9,13 +9,13 @@
     "preview": "astro preview",
     "astro": "astro",
     "postinstall": "patch-package",
-    "deploy": "env-cmd -x ftp-deploy --server $FTP_SERVER --username $FTP_USER --password $FTP_PASSWORD --local-dir ./dist/ --timeout 960000"
+    "deploy": "env-cmd -x retry -- ftp-deploy --server $FTP_SERVER --username $FTP_USER --password $FTP_PASSWORD --local-dir ./dist/ --timeout 960000"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/mdx": "^3.0.1",
     "@astrojs/sitemap": "^3.1.5",
-    "astro": "^4.9.2",
+    "astro": "^4.10.2",
     "github-markdown-css": "^5.5.1",
     "rehype-katex": "^7.0.0",
     "remark-gfm": "^4.0.0",
@@ -34,6 +34,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-astro": "^0.31.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "patch-package": "^8.0.0"
+    "patch-package": "^8.0.0",
+    "retry-cli": "github:jishinkai/retry-cli"
   }
 }
