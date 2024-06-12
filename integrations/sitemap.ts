@@ -38,10 +38,9 @@ const fs2sitemap = (
                 const ignoreFolders = options?.ignoreFolders ?? [];
 
                 const _getDirectories = (srcpath: string): string[] => {
-                    srcpath = srcpath.endsWith("\\") ? srcpath : srcpath + "\\";
                     return readdirSync(srcpath)
                         .filter((path) => !ignoreFolders.includes(path))
-                        .map((file) => normalize(srcpath + file))
+                        .map((file) => resolve(srcpath, file))
                         .map((path) => {
                             return statSync(path).isDirectory()
                                 ? _getDirectories(path)
@@ -56,8 +55,7 @@ const fs2sitemap = (
                     .map((f) => {
                         let url = new URL(relative(destinationDir, f), site)
                             .pathname;
-                        url = new URL(site.pathname + url, site).href;
-                        url = normalize(url);
+                        url = new URL(site.pathname.slice(1) + url, site.href).href;
                         url = url
                             .replace(/\/index\.html$/, "/")
                             .replace(/\.html$/, "");

@@ -16,6 +16,7 @@ export default defineConfig({
                 "_astro",
                 "robots.txt",
                 "favicon.ico",
+                "ogp.png",
             ],
         }),
     ],
