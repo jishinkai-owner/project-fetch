@@ -1,143 +1,17 @@
 ---
 layout: '../../layouts/MainLayout.astro'
 title: 部員紹介
+description: 自親会の部員を紹介します。
 type: 部員紹介
 typeImg: title-member.jpg
 ---
 import Member from '../../components/member.astro'
+import "github-markdown-css/github-markdown.css";
+import "../../assets/markdown.scss";
+
+## 目次
 
 ## 4年生
-
-<Member
-    img={{
-        year: "C0",
-        name: "kota",
-    }}
-    role="絶起配車係"
-    major="法"
-    nickname="あさくら"
-    profile="不労所得しか勝たん"
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "akaru"
-    }}
-    role="最強ボウラー"
-    major="文"
-    nickname="アカル"
-    profile={[
-        "アベレージ70",
-        "食の罪を一身に背負う男"
-    ]}
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "shota"
-    }}
-    role="具なしパスタの巨匠"
-    major="工"
-    nickname="おぎはら"
-    profile={[
-        "～老い～",
-        "繰り上がりの足し算ができない"
-    ]}
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "teiho"
-    }}
-    role="迫真お嬢様アイドル部部長"
-    major="理"
-    nickname="カンザワ"
-    profile={[
-        "サンドイッチはね、",
-        "パンよりも中のきゅうりが一番おいしいの。",
-        "挟まれた方がいい味出すのよ。"
-    ]}
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "yuya"
-    }}
-    role="C0のアイドル、癒し"
-    major="工"
-    nickname="クスド_"
-    profile={[
-        "TKBがお好き",
-        "※酔うと脱ぎます"
-    ]}
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "takaki"
-    }}
-    role="おっさん"
-    major="工"
-    nickname="こっしー"
-    profile={[
-        "こう見えて現役",
-        "腰がね……"
-    ]}
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "goki"
-    }}
-    role="山梨の菅田将暉"
-    major="法"
-    nickname="ハギハラ"
-    profile={[
-        "趣味ダイエット",
-        "特技リバウンド"
-    ]}
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "yotaro"
-    }}
-    role="自炊マン、シェフ"
-    major="工"
-    nickname="ようたろう"
-    profile="自粛中にリュウジにどハマりして自炊に目覚めた"
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "shintaro"
-    }}
-    role="人頼み"
-    major="工"
-    nickname="シンタロー"
-    profile="寝てからもよくしゃべる．本当によくしゃべる"
-/>
-
-<Member
-    img={{
-        year: "C0",
-        name: "takahide"
-    }}
-    role="応物でよかった"
-    major="応物"
-    nickname="超絶イケメン"
-    profile="ミスター東北大最有力候補（自称）"
-/>
-
-## 3年生
 
 <Member
     img={{
@@ -268,6 +142,17 @@ import Member from '../../components/member.astro'
 <Member
     img={{
         year: "C1",
+        name: "nagata"
+    }}
+    role="だれ？"
+    major="工"
+    nickname="ながた"
+    profile="だれ？"
+/>
+
+<Member
+    img={{
+        year: "C1",
         name: "tamaki2",
         imgtype: "png"
     }}
@@ -310,7 +195,7 @@ import Member from '../../components/member.astro'
     profile="授業受けても一人。"
 />
 
-## 2年生
+## 3年生
 
 <Member
     img={{
@@ -436,6 +321,7 @@ import Member from '../../components/member.astro'
     profile="ゴマドレからレインボードレッシングに転向しました"
 />
 
+{/*
 <Member
     img={{
         year: "C2",
@@ -446,6 +332,7 @@ import Member from '../../components/member.astro'
     nickname="ゆうと"
     profile="自科総は計画的に"
 />
+*/}
 
 <Member
     img={{
@@ -512,3 +399,330 @@ import Member from '../../components/member.astro'
     nickname="なおひろ"
     profile="デニム登山はやめとけ！！"
 />
+
+## 2年生
+
+<Member
+    img={{
+        year: "C3",
+        name: "suzuki"
+    }}
+    role="逃げるは恥だが役に立つ"
+    major="マテ"
+    nickname="C3の方のゆうすけ"
+    profile="山登れるならおもりも背負います"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "tanahiro"
+    }}
+    role="レインコートで統べる者 / 冬山担当"
+    major="機知"
+    nickname="たなひろ・ザ・ワールド"
+    profile="アルプスを征した方向音痴"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "eishin"
+    }}
+    role="次期部長 / Dの継承者"
+    major="理球"
+    nickname="地雷踏み抜き"
+    profile="残念なイケメン"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53283901113_be293fc0b5_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53283901113_20f4d714cb_o.jpg"
+            }
+        }
+    }}
+    role="地学データベース"
+    major="理球"
+    nickname="たなあみ後期"
+    profile="エミリアは白髪じゃない！銀髪なんだ！👿"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53116248158_28c2013581_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53116248158_413c607171_o.jpg"
+            }
+        }
+    }}
+    role="C3の唯一の良心"
+    major="理球"
+    nickname="なぎっち"
+    profile="食事のお誘いは3ヶ月前までで"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53259392908_394515f559_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53259392908_969ec75bd0_o.jpg"
+            }
+        }
+    }}
+    role="Loser / 中高男子校"
+    major="理球"
+    nickname="きょうすけ"
+    profile="メンヘラ彼女?から頻繁に車を返すようTELされる男。ブラックリスト入り"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "masashige"
+    }}
+    role="GPA1.80"
+    major="機知"
+    nickname="かわいい"
+    profile="独り身になることを選んだ男"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "soma"
+    }}
+    role="属性もりもり / 中国人"
+    major="情物"
+    nickname="y.y.c / T・ペース大丈夫か・S"
+    profile="ぽん酢を手放さない者"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "araki"
+    }}
+    role="CEO"
+    major="経済"
+    nickname="#ゆっくり寝ろ荒木"
+    profile="出禁を言い渡された者"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53182532069_0bc4552f97_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53182532069_4c7f98263a_o.jpg"
+            }
+        }
+    }}
+    role="bot / テトリスを極めし者"
+    major="建築"
+    nickname="つじつじ"
+    profile="タンバリン永久機関"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53112244764_a7465848bd_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53112244764_ebdcd466ca_o.jpg"
+            }
+        }
+    }}
+    role="残飯処理係 / 中学のみ男子校"
+    major="情物"
+    nickname="ちばお"
+    profile="自科総最後に週に4つ残ってた"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53282755517_0ec1e321b7_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53282755517_36dc264001_o.jpg"
+            }
+        }
+    }}
+    role="腋フェチ / 漫画rawヘビーユーザー"
+    major="マテ"
+    nickname="すけべ"
+    profile="それはもうえろい"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53183192311_55240cfaf5_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53183192311_542a823b7c_o.jpg"
+            }
+        }
+    }}
+    role="やまけんの第一夫人 / 次期パン工場長 / 高校男子校"
+    major="情物"
+    nickname="フリー素材"
+    profile="英語劇"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53281431916_e69447d446_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53281431916_e63dc9b8c2_o.jpg"
+            }
+        }
+    }}
+    role="雀カス / PS2の守護神 / おじさん"
+    major="建築"
+    nickname="やまけん"
+    profile="マザコンステージ4←末期やん"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53280539917_b34a0740ba_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53280539917_4a699491b4_o.jpg"
+            }
+        }
+    }}
+    role="やまけんのキープ / 未亡人 / 次期料理長"
+    major="教育"
+    nickname="まいやん"
+    profile={[
+        "特技:公道ドリフト",
+        "槍ヶ岳山頂に2万の置き土産(ゴアテックス)",
+        "「車のキー無くしたわ」@ゲレンデ"
+    ]}
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "iwakura"
+    }}
+    role="危険運転手"
+    major="文"
+    nickname="たつき"
+    profile="Sブレーキって何？"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53067090837_679dc17768_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53067090837_c558d121a7_o.jpg"
+            }
+        }
+    }}
+    role="なか卯落ちスシロー"
+    major="文"
+    nickname="King Takeda Gnu"
+    profile="「俺、キャンプ嫌いだから」（長期山行参加）"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53259164539_4a1a043f64_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53259164539_e7c84fb3a5_o.jpg"
+            }
+        }
+    }}
+    role="ユニバーサル・スタジオ・アオバヤマ / Ado"
+    major="農"
+    nickname="しーちゃん"
+    profile="うたのお姉さんです"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "akiyama"
+    }}
+    role="ポケモントレーナー / 雪渓を半袖で歩む者"
+    major="機知"
+    nickname="半袖野郎"
+    profile="憧れのポケモンマスターに俺はなる！"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "fukuhara"
+    }}
+    role="くまざわ書店勤務 / クイズ部元部長"
+    major="教育"
+    nickname="永大ホーム"
+    profile={[
+        "30万のPCでマイクラ",
+        "5万のモニターでスイカゲーム",
+        "「寝袋重いし置いてくかー。」@槍ヶ岳"
+    ]}
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "aoto"
+    }}
+    role="オールラウンダー / スイカゲームの覇者"
+    major="建築"
+    nickname="あおとっち"
+    profile="建築最下位合格"
+/>
+
+<Member
+    img={{
+        src: {
+            src: "https://live.staticflickr.com/65535/53260804557_f23a44401b_b.jpg",
+            srcset: {
+                "2x": "https://live.staticflickr.com/65535/53260804557_1e2b8ce797_o.jpg"
+            }
+        }
+    }}
+    role="スルメ枠"
+    major="情物"
+    nickname="DAIKIN"
+    profile={[
+        "カラオケ歌わないで帰る",
+        "スキーセンス⚪︎"
+    ]}
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "kando"
+    }}
+    role="中高女子校 / サブカル万能"
+    major="農"
+    nickname="do"
+    profile="８サークル所属"
+/>
+
+<Member
+    img={{
+        year: "C3",
+        name: "co-duck"
+    }}
+    role="守り神"
+    major="水タイプ"
+    nickname="こだぴー"
+    profile="１００円で取れた"
+/>
+
+[または殿堂入り](legend)

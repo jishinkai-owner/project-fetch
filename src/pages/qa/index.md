@@ -1,6 +1,7 @@
 ---
 layout: '../../layouts/MainLayout.astro'
 title: よくある質問
+description: 自親会によく寄せられる質問とその回答です。
 type: よくある質問
 ---
 

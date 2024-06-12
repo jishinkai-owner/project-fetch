@@ -1,13 +1,24 @@
 ---
 layout: '../../layouts/MainLayout.astro'
 title: 山行記録
+description: サークルで行った山行記録の一覧
 type: 山行記録
 typeImg: title-yama.jpg
 ---
 
+## 2024年
+
+2024/5/25-26:男体山([NAOHIRO編](2024/2024_nanntai_NAOHIRO))
+
+2024/5/11-12:磐梯山()
+
+2024/4/21:新歓登山@泉ヶ岳([KOKI編](2024/2024_shinkan_KOKI)・[NAOYA編](2024/2024_shinkan_NAOYA))
+
 ## 2023年
 
-2023/8/10-12:長期山行＠槍ヶ岳([YUSUKE編](2023/2023.08.yarigatake.Yusuke/2023.08.10-12.Yarigatake.Yusuke)・[KOSEI編](2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI)・[HARUKI編](2023/2023.08.yarigatake.Haruki/)・[SOUSKE編](2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke)・[TATSUYA編](2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA))
+2023/10/14:秋山山行@月山(([SHOTA編](2023/2023.10.gassan.SHOTA/2023_gassan_SHOTA))
+
+2023/8/10-12:長期山行＠槍ヶ岳([YUSUKE編](2023/2023.08.yarigatake.Yusuke/2023.08.yarigatake.Yusuke)・[KOSEI編](2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI)・[HARUKI編](2023/2023.08.yarigatake.Haruki)・[SOUSKE編](2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke)・[TATSUYA編](2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA))
 
 2023/7/22-23:朝日連峰([YUSUKE編](2023/2023.07.asahidake.YUSUKE/2023.07.asahidake.YUSUKE)・[KOSEI編](2023/2023.07.asahidake.KOSEI/2023.asahidake.KOSEI)・[TATSUYA編](2023/2023.07.asahidake.Tatsuya/2023.07.asahidake.Tatsuya)・[HARUKI編](2023/2023.07.asahidake.HARUKI/2023.07.asahidake.HARUKI))
 

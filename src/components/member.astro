@@ -6,6 +6,10 @@ interface Props {
         year: string;
         name: string;
         imgtype: string;
+        src: string | {
+            src: string;
+            srcset: Map<string, string>;
+        }
     }
     role: string | string[];
     major: string;
@@ -28,11 +32,11 @@ const params = {
     "プロフィール": profile,
 };
 
-let impoeted = await import('../assets/members/no_image.jpg');
-let image = impoeted.default;
-if (img) {
+let imported = await import('../assets/members/no_image.jpg');
+let image = imported.default;
+if (img && !img.src) {
     try {
-        let imported = await import(`../assets/members/${img?.year}/${img?.name}.${img?.imgtype || 'jpg'}`);
+        imported = await import(`../assets/members/${img?.year}/${img?.name}.${img?.imgtype || 'jpg'}`);
         image = imported.default;
     } catch (error) {
         console.log("no supported img");
@@ -42,7 +46,15 @@ if (img) {
 
 <div class="card">
     {img 
-        ? <Image src={image} alt="画像" />
+        ? img.src
+            ? typeof img.src === 'string'
+                ? <img src={img.src} alt="画像" />
+                : <img
+                    src={img.src.src}
+                    srcset={Array.from(img.src.srcset).map(([src, size]) => `${src} ${size}`).join(', ')}
+                    alt="画像"
+                  />
+            : <Image src={image} alt="画像" />
         : <slot><Image src={image} alt="画像" /></slot>
     }
     <dl>

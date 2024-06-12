@@ -1,5 +1,5 @@
 {
-  "name": "fc2_editor_for_jishinkai",
+  "name": "jishinkaihp",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -8,12 +8,14 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "deploy": "env-cmd -x retry -- ftp-deploy --server $FTP_SERVER --username $FTP_USER --password $FTP_PASSWORD --local-dir ./dist/ --timeout 960000"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.4",
-    "@astrojs/mdx": "^2.0.2",
-    "astro": "^4.0.7",
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.0.1",
+    "@astrojs/sitemap": "^3.1.5",
+    "astro": "^4.10.2",
     "github-markdown-css": "^5.5.1",
     "rehype-katex": "^7.0.0",
     "remark-gfm": "^4.0.0",
@@ -21,14 +23,18 @@
     "remark-math": "^6.0.0",
     "remark-rehype": "^11.1.0",
     "remark-toc": "^9.0.0",
-    "sass": "^1.69.5",
-    "typescript": "^5.3.3"
+    "sass": "^1.77.4",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "@astrojs/partytown": "^2.1.0",
+    "@samkirkland/ftp-deploy": "^1.2.4",
     "@typescript-eslint/parser": "^6.15.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-astro": "^0.31.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "patch-package": "^8.0.0"
+    "patch-package": "^8.0.0",
+    "retry-cli": "github:jishinkai/retry-cli"
   }
 }

@@ -14,20 +14,23 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<MainLayout title={entry.data.title} type={entry.data.type ?? 'その他の活動'}>
+<MainLayout
+    title={entry.data.title}
+    description={entry.data.description}
+    type={entry.data.type ?? 'その他の活動'}
+    breadcrumbs={[
+        {title: "その他の活動", href: "/other/"},
+        ...entry.data.breadcrumbs.map((b) => ({title: b.title, href: "/other"+b.href})),
+    ]}
+    datePublished={entry.data.datePublished}
+    dateModified={entry.data.dateModified}
+>
     {entry.data.typeImg
         ? <Image slot='title' src={entry.data.typeImg} alt={entry.data.title} />
         : <Fragment slot='notitle'></Fragment>
     }
-    <div class="wrapper">
-        <script async="" src="/src/assets/flickr-client-code.js" charset="utf-8"></script>
+    <div class="markdown-body">
+        <script is:inline async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
         <Content />
     </div>
 </MainLayout>
-
-<style lang="scss">
-    .wrapper {
-        text-align: center;
-        font-size: 1.5rem !important;
-    }
-</style>

@@ -1,83 +1,147 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions } from "astro:transitions";
 interface Props {
-	title: string;
+    title: string;
+    description?: string;
+    breadcrumbs?: {
+        title: string;
+        href?: string;
+    }[];
+    rich_result?: {
+        "@context": string;
+        "@type": string;
+        [key: string]: any;
+    }[];
 }
 
-const { title } = Astro.props;
+const {
+    title,
+    description = "登山・旅行・釣り・バイクなどをメインに活動している、東北大学のアウトドアサークルです。通称「自親会」",
+    breadcrumbs = [],
+    rich_result = [],
+} = Astro.props;
+
+const jsonLD = [
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: breadcrumb.title,
+            item: breadcrumb.href
+                ? Astro.url.origin + breadcrumb.href
+                : undefined,
+        })),
+    },
+    ...rich_result,
+];
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="東北大学の登山サークルです" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" href="/favicon.ico" />
-		<title>{title}</title>
-		<ViewTransitions />
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <!-- Rendering settings -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="darkreader-lock">
+
+        <!-- Page information -->
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="theme-color" color="#000000">
+        <meta property="og:title" content={title}>
+        <meta property="og:description" content={description}>
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="東北大学 自然に親しむ会">
+        <meta property="og:image" content="/ogp.png">
+        <meta property="og:url" content={Astro.url.href}>
+        <meta property="og:locale" content="ja_JP">
+        <meta name="twitter:card" content="summary"></meta>
+        <meta name="twitter:site" content="@jishinkai"></meta>
+
+        <!-- Rich result -->
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <script
+            is:inline
+            type="application/ld+json"
+            set:html={JSON.stringify(jsonLD)}
+        />
+
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id=G-N150PRFQKB"
+        ></script>
+        <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-N150PRFQKB");
+        </script>
+
+        <ViewTransitions />
+    </head>
+    <body>
+        <slot />
+        <style is:global lang="scss">
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            :root {
+                --background: 255 255 255;
+                --on-background: 27 27 27;
+                --link: 0 103 194;
+                --accent: 136 58 234;
+                --accent-light: 224 204 250;
+                --accent-dark: 49 10 101;
+                --accent-gradient: linear-gradient(
+                    45deg,
+                    rgb(var(--accent)),
+                    rgb(var(--accent-light)) 30%,
+                    white 60%
+                );
+                @media screen and (prefers-color-scheme: dark) {
+                    --background: 27 27 27;
+                    --on-background: 255 255 255;
+                    --link: 140 180 255;
+                    --accent: 136 58 234;
+                    --accent-light: 224 204 250;
+                    --accent-dark: 49 10 101;
+                    --accent-gradient: linear-gradient(
+                        45deg,
+                        rgb(var(--accent)),
+                        rgb(var(--accent-light)) 30%,
+                        white 60%
+                    );
+                }
+            }
+            html {
+                font-family: "Helvetica Neue", Arial,
+                    "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
+                    sans-serif;
+                /*background: #13151a;*/
+                background: rgb(var(--background));
+                background-size: 224px;
+                /*color: #ddd;*/
+                color: rgb(var(--on-background));
+                scroll-behavior: smooth;
+            }
+            body {
+                margin: 0 auto;
+            }
+            code {
+                font-family: "HackGen",
+                    "Ricty Diminished Discord with Fira Code", "SFMono-Regular",
+                    Consolas, "Liberation Mono", Menlo, "Courier New", Courier,
+                    monospace;
+            }
+            a {
+                color: rgb(var(--link));
+            }
+        </style>
+    </body>
 </html>
-<style is:global lang="scss">
-	*, *::before, *::after {
-		box-sizing: border-box;
-	}
-	:root {
-		--background: 255, 255, 255;
-		--on-background: 0, 0, 0;
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-		@media screen and (prefers-color-scheme: dark) {
-			--background: 19, 21, 26;
-			--on-background: 221, 221, 221;
-			--accent: 136, 58, 234;
-			--accent-light: 224, 204, 250;
-			--accent-dark: 49, 10, 101;
-			--accent-gradient: linear-gradient(
-				45deg,
-				rgb(var(--accent)),
-				rgb(var(--accent-light)) 30%,
-				white 60%
-			);
-		}
-	}
-	html {
-		font-family:
-			"Helvetica Neue",
-			Arial,
-			"Hiragino Kaku Gothic ProN",
-			"Hiragino Sans",
-			Meiryo,
-			sans-serif;
-		/*background: #13151a;*/
-		background: rgb(var(--background));
-		background-size: 224px;
-		/*color: #ddd;*/
-		color: rgb(var(--on-background));
-	}
-	body {
-		margin: 0;
-	}
-	code {
-		font-family:
-			'HackGen',
-			'Ricty Diminished Discord with Fira Code',
-			"SFMono-Regular",
-			Consolas,
-			"Liberation Mono",
-			Menlo,
-			'Courier New',
-			Courier,
-			monospace;
-	}
-</style>
