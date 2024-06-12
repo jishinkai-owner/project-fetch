@@ -1,6 +1,6 @@
 import type { AstroIntegration } from "astro";
 import { writeFileSync, readdirSync, statSync } from "fs";
-import { normalize, resolve, relative } from "path";
+import { resolve, relative } from "path";
 import { fileURLToPath } from "url";
 
 const fs2sitemap = (
