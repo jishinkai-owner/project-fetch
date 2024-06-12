@@ -12,7 +12,7 @@ const fs2sitemap = (
           }
         | undefined
 ): AstroIntegration => {
-    let site: string;
+    let site: URL;
     let enabled = options?.enabled ?? true;
     return {
         name: "jishinkaihp/fs2sitemap",
@@ -26,7 +26,7 @@ const fs2sitemap = (
                     enabled = false;
                     return;
                 }
-                site = cfg_site.endsWith("/") ? cfg_site : cfg_site + "/";
+                site = new URL(config.base, cfg_site);
             },
             "astro:build:done": async ({ dir, logger }) => {
                 if (!enabled) return;
@@ -55,12 +55,12 @@ const fs2sitemap = (
                 const formatted = files
                     .map((f) => {
                         let url = new URL(relative(destinationDir, f), site)
-                            .href;
-                        if (url.endsWith("/index.html")) {
-                            url = url.replace("/index.html", "/");
-                        } else if (url.endsWith(".html")) {
-                            url = url.replace(".html", "");
-                        }
+                            .pathname;
+                        url = new URL(site.pathname + url, site).href;
+                        url = normalize(url);
+                        url = url
+                            .replace(/\/index\.html$/, "/")
+                            .replace(/\.html$/, "");
                         return `<url><loc>${url}</loc></url>`;
                     })
                     .join("");
