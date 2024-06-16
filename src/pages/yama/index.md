@@ -8,7 +8,7 @@ typeImg: title-yama.jpg
 
 ## 2024年
 
-2024/5/25-26:男体山([NAOHIRO編](2024/2024_nanntai_NAOHIRO))
+2024/5/25-26:男体山([NAOHIRO編](2024/2024_nanntai_NAOHIRO)・[SHOTA編](2024/2024_nanntai_SHOTA))
 
 2024/5/11-12:磐梯山()
 
