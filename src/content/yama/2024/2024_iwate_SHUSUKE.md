@@ -1,5 +1,5 @@
 ﻿---
-title:岩手山 Team Shusuke
+title: 岩手山 Team Shusuke
 ---
 
 2024/6/8 　第３回山行
