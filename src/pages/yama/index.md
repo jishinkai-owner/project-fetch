@@ -8,11 +8,13 @@ typeImg: title-yama.jpg
 
 ## 2024年
 
-2024/6/8-9:岩手山([SHUSUKE編](2024/2024_iwate_SHUSUKE))
+2024/6/22-23:鳥海山([SHUSUKE編](2024/2024_chokai_SHUSUKE))
+
+2024/6/8-9:岩手山([SHUSUKE編](2024/2024_iwate_SHUSUKE)・[NAOYA編](2024/2024_iwate_NAOYA))
 
 2024/5/25-26:男体山([NAOHIRO編](2024/2024_nanntai_NAOHIRO)・[TOSHIKI編](2024/2024_nanntai_TOSHIKI)・[SHOTA編](2024/2024_nanntai_SHOTA)・[NAOYA編](2024/2024_nanntai_NAOYA))
 
-2024/5/11-12:磐梯山([RIKUTO編](2024/2024_bandai_RIKUTO))
+2024/5/11-12:磐梯山([RIKUTO編](2024/2024_bandai_RIKUTO)・[NAOYA編](2024/2024_bandai_NAOYA))
 
 2024/4/21:新歓登山@泉ヶ岳([KOKI編](2024/2024_shinkan_KOKI)・[NAOYA編](2024/2024_shinkan_NAOYA))
 
