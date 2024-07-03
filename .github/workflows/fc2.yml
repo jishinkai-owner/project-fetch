@@ -50,6 +50,8 @@ jobs:
         with:
           name: release
           path: ./dist
+      - name: Install dependencies
+        run: npm ci
       - name: Sync with FC2
         id: deployment
         run: >
