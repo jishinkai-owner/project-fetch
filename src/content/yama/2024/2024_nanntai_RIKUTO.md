@@ -1,5 +1,5 @@
 ﻿---
-title: **男体山 Team RIKUTO**
+title: "**男体山 Team RIKUTO**"
 ---
 
 １日目は観光をしました。
