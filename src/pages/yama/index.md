@@ -20,7 +20,7 @@ typeImg: title-yama.jpg
 
 ## 2023年
 
-2023/10/14:秋山山行@月山(([SHOTA編](2023/2023.10.gassan.SHOTA/2023_gassan_SHOTA)・[WATARU編](2023/2023.10.gassan.WATARU/2023_gassan_WATARU))
+2023/10/14:秋山山行@月山(([SHOTA編](2023/2023.10.gassan/2023_gassan_SHOTA)・[WATARU編](2023/2023.10.gassan/2023_gassan_WATARU)・[SHUSUKE編](2023/2023.10.gassan/2023_gassan_SHUSUKE))
 
 2023/8/10-12:長期山行＠槍ヶ岳([YUSUKE編](2023/2023.08.yarigatake.Yusuke/2023.08.yarigatake.Yusuke)・[KOSEI編](2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI)・[HARUKI編](2023/2023.08.yarigatake.Haruki)・[SOUSKE編](2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke)・[TATSUYA編](2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA))
 
