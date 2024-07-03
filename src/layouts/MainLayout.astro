@@ -3,6 +3,8 @@ import BaseLayout from "./BaseLayout.astro";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
+import { siX, siInstagram, siGithub } from "simple-icons";
+
 import logo from "../assets/logo.gif";
 import line from "../assets/line.gif";
 import yama from "../assets/icon/yama.gif";
@@ -139,6 +141,11 @@ const img = images[type] ?? images["yama"];
         </li>
     </ul>
     <p><Image src={line} alt="" loading="eager" /></p>
+    <div class="social_links">
+        <a href="https://twitter.com/jishinkai" set:html={siX.svg} style={`fill: #${siX.hex}`}></a>
+        <a href="https://www.instagram.com/jishinkai_tohoku" set:html={siInstagram.svg} style={`fill: #${siInstagram.hex}`}></a>
+        <a href="https://github.com/jishinkai/jishinkaihp" set:html={siGithub.svg} style={`fill: #${siGithub.hex}`}></a>
+    </div>
     <div class="bear"><Image src={bear} alt="" loading="eager" /></div>
 </nav>
 <header class="title">
@@ -224,6 +231,30 @@ const img = images[type] ?? images["yama"];
                 padding: 0;
                 li {
                     display: block;
+                }
+            }
+
+            .social_links {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                margin: 1rem 0;
+
+                a {
+                    display: block;
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    padding: 0.5rem;
+                    border-radius: 50%;
+                    background-color: white;
+                    &:hover {
+                        background-color: rgb(var(--on-background));
+                    }
+
+                    :global(svg) {
+                        margin: auto;
+                    }
                 }
             }
 
