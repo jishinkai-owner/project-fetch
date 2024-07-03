@@ -14,13 +14,13 @@ typeImg: title-yama.jpg
 
 2024/5/25-26:男体山([NAOHIRO編](2024/2024_nanntai_NAOHIRO)・[TOSHIKI編](2024/2024_nanntai_TOSHIKI)・[SHOTA編](2024/2024_nanntai_SHOTA)・[NAOYA編](2024/2024_nanntai_NAOYA)・[HONOKA編](2024/2024_nanntai_HONOKA)・[KOKI編](2024/2024_nanntai_KOKI)・[RIKUTO編](2024/2024_nanntai_RIKUTO))
 
-2024/5/11-12:磐梯山([RIKUTO編](2024/2024_bandai_RIKUTO)・[NAOYA編](2024/2024_bandai_NAOYA))
+2024/5/11-12:磐梯山([RIKUTO編](2024/2024_bandai_RIKUTO)・[NAOYA編](2024/2024_bandai_NAOYA)・[SHOTA編](2024/2024_bandai_SHOTA))
 
-2024/4/21:新歓登山@泉ヶ岳([KOKI編](2024/2024_shinkan_KOKI)・[NAOYA編](2024/2024_shinkan_NAOYA)・[TOSHIKI編](2024/2024_shinkan_TOSHIKI))
+2024/4/21:新歓登山@泉ヶ岳([KOKI編](2024/2024_shinkan_KOKI)・[NAOYA編](2024/2024_shinkan_NAOYA)・[TOSHIKI編](2024/2024_shinkan_TOSHIKI)・[YUTO編](2024/2024_shinkan_YUTO))
 
 ## 2023年
 
-2023/10/14:秋山山行@月山(([SHOTA編](2023/2023.10.gassan.SHOTA/2023_gassan_SHOTA))
+2023/10/14:秋山山行@月山(([SHOTA編](2023/2023.10.gassan.SHOTA/2023_gassan_SHOTA)・[WATARU編](2023/2023.10.gassan.WATARU/2023_gassan_WATARU))
 
 2023/8/10-12:長期山行＠槍ヶ岳([YUSUKE編](2023/2023.08.yarigatake.Yusuke/2023.08.yarigatake.Yusuke)・[KOSEI編](2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI)・[HARUKI編](2023/2023.08.yarigatake.Haruki)・[SOUSKE編](2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke)・[TATSUYA編](2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA))
 
