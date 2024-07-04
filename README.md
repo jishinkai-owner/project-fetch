@@ -1,54 +1,178 @@
-# Astro Starter Kit: Basics
+# 自然に親しむ会
 
-```sh
-npm create astro@latest -- --template basics
-```
+東北大学のアウトドアサークルです。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## このページについて
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+公式ホームページのソースコードを管理するリポジトリです。
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+このリポジトリのmainブランチに行われた変更は、自動的にfc2に反映されます。
 
-## 🚀 Project Structure
+## 部員の方へ
 
-Inside of your Astro project, you'll see the following folders and files:
+記録の提出は、(メディア係が対応可能な場合)このリポジトリへのプルリクでも構いません。
+
+## メディア係の方へ
+
+### ホームページをいじるための準備
+
+#### 用意が必要なもの
+
+- git
+- Node.js
+- VSCode(推奨、他のエディタを使いたければそちらでも可)
+- GitHubのアカウント
+
+#### インストール方法(インストール済みなら飛ばしてOK)
+
+##### Git
+
+Windows
+
+1. 「ターミナル」を開く
+2. wingetを未インストールの場合、Microsoft Storeで[アプリ インストーラー](https://www.microsoft.com/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab)をインストール
+3. 以下のコマンドを実行: `winget install --id Git.Git -e --source winget`
+
+macOS
+
+1. 「ターミナル」を開く
+2. Homebrewを未インストールの場合、[このサイト](https://brew.sh/ja/)に従ってインストール
+3. 以下のコマンドを実行: `brew install git`
+
+インストールできたら、ターミナルを再起動して`git --version`するとインストールしたバージョンが見れるはず。
+
+うまく行ってたら、最後に以下のコマンドを実行して設定をちょいといじる: `git config --global core.autoCRLF input`
+
+##### Node.js
+
+公式ホームページの手順に従ってインストール:
+[https://nodejs.org/en/download/package-manager](https://nodejs.org/en/download/package-manager)
+
+
+##### VSCode
+
+以下のコマンドでインストール
+
+Windows: `winget install vscode`
+
+macOS: `brew install --cask visual-studio-code`
+
+#### Githubのアカウントについて
+
+[Github](https://github.com/signup)でアカウントを作る。もう持ってればそれでOK。
+
+先代のメディア係に、メンバーに追加してもらう。
+
+(先代のメディア係へ: [このページ](https://github.com/orgs/jishinkai/people)で追加できます。権限はOwnerにしてください。)
+
+#### ソースコードをPCにコピー
+
+1. ソースコードとかを置くためのフォルダを作る。
+2. フォルダの中で右クリックして「ターミナルを開く」
+3. コマンドを実行: `git clone https://github.com/jishinkai/jishinkaihp.git`
+4. リポジトリの中に移動: `cd jishinkaihp`
+5. 自分の名前を設定(公開されるので本名は非推奨): `git config user.name <名前>`
+6. メールアドレスを設定(基本的にはgithubアカウントのアドレスがいいと思う): `git config user.email <メールアドレス>`
+7. コンテンツ編集用のブランチに移動: `git checkout content`
+8. 必要なパッケージをインストール: `npm i`
+
+#### エディタで開く
+
+コピーしてきたファイルの中に[`自親会.code-workspace`](./自親会.code-workspace)というファイルがあるので開くと、VSCodeが立ち上がるはず。
+
+これまでターミナルでコマンドを実行していたが、これからはVSCodeの中で実行できるのでこっちでやろう。このサイトがシンプルでわかりやすい: [https://www.javadrive.jp/vscode/terminal/index1.html](https://www.javadrive.jp/vscode/terminal/index1.html)
+
+#### ファイル構成のざっくりした説明
 
 ```text
-/
-├── public/
-│   └── favicon.svg
+jishinkaihp/
+├── .github/ (自動でfc2に反映したりするGithub Actionsのスクリプトなど。)
+├── dist/ (`npm run build`をすると自動生成される。出来上がったwebサイトの出力先。)
+├── integrations/
+│   └── sitemap.ts (サイトマップを自動生成するスクリプト。)
+├── patches/ (Astroの気に入らない挙動を無理やり修正するためのパッチ。)
+├── public/ 
+│   │(このフォルダに置いたファイルはそのまま公開される。)
+│   │(最適化とかもされないので最低限しか置かないのが吉)
+│   ├── favicon.ico (ブラウザのタブのところに表示されるアイコン。)
+│   ├── ogp.png (SNSでリンクを貼ったときに表示される画像。)
+│   └── robots.txt (Googleとかに「検索結果に表示していいよ」と言うためのファイル)
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/ (画像とかちょっとしたスクリプトとか)
+│   ├── components/ (使い回すパーツを定義するファイルの置き場所)
+│   │   └── member.astro (部員紹介のパーツの定義)
+│   ├── content/ (【重要】山行記録とかが置かれる場所。)
+│   │   ├── other/ (「その他」のコンテンツ)
+│   │   ├── tabi/ (「旅行記」のコンテンツ)
+│   │   ├── tsuri/ (「釣果記録」のコンテンツ)
+│   │   ├── yama/ (「山行記録」のコンテンツ)
+│   │   └── config.ts (ファイルのタイトルとかの型の定義。)
+│   ├── layouts/ (ページレイアウトの定義。)
+│   │   ├── BaseLayout.astro (一番低層レイヤーのレイアウト。サイト名とか配色の定義とか)
+│   │   └── MainLayout.astro (トップページ以外のレイアウト。BaseLayoutの上に構築。)
+│   └── pages/ (公開されるページの定義。)
+│        ├── link/ (「リンク」っていうページの定義。以前のHPにあったから作ったけど意味は不明)
+│        ├── member/ (「部員紹介」)
+│        │   ├── index.mdx (部員紹介のページの内容。)
+│        │   └── legend.mdx (現役以外の人たち)
+│        ├── other/ (「その他」)
+│        │   ├── [...slug].astro (/src/content/other のファイルからページを生成)
+│        │   └── index.md (その他のページのトップ)
+│        ├── qa/ (「よくある質問」)
+│        ├── tabi/ (「旅行記」)
+│        │   ├── [...slug].astro (/src/content/tabi のファイルからページを生成)
+│        │   └── index.md (旅行記のページのトップ)
+│        ├── tsuri/ (「釣果記録」)
+│        │   ├── [...slug].astro (/src/content/tsuri のファイルからページを生成)
+│        │   └── index.md (釣果記録のページのトップ)
+│        ├── yama/ (「山行記録」)
+│        │   ├── [...slug].astro (/src/content/yama のファイルからページを生成)
+│        │   └── index.md (山行記録のページのトップ)
+│        └── index.astro (HPのトップページ)
+├── README.md (このファイル。いろんな解説。)
+└── package.json (必要なパッケージとか定義したコマンドとか。)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+#### 山行記録とかを追加する方法
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+山行記録の場合で解説します。
 
-Any static assets, like images, can be placed in the `public/` directory.
+1. `/src/content/yama`の中の適切なフォルダに、追加したいファイルを置く。ファイル形式は`.astro`,`.md`,`.mdx`のいずれか。
+2. `/src/pages/yama/index.md`に、追加したファイルへのリンクを追加する。
+3. コマンドで変更内容を選択: `git add .`
+4. 変更内容をgitに記録: `git commit -m "新歓_NAOYAの山行記録を追加"` (コメントは何を追加したかわかりやすいように書いておく)
+5. Githubに変更記録を送信: `git push` (はじめてのときは`git push -u origin content`)
+6. [Github](https://github.com/jishinkai/jishinkaihp/pulls)でプルリクエストを作成する。
+   1. 「Compare & pull request」というボタンがあればクリック
+   2. なければ「New pull request」をクリックして、compareの方を`content`にする。
+   3. 「Create pull request」をクリック
+   4. エラーがないかのチェックが走るので暫く待つ。
+   5. 「Merge pull request」が押せるようになったら、クリック。
+   6. 「Confirm merge」をクリック。
+7. しばらく待つと、fc2に反映される。
 
-## 🧞 Commands
+#### うまくいかない場合
 
-All commands are run from the root of the project, from a terminal:
+- インストールが上手くできない
+  - バージョンが新しくなったせいとかかもしれないので、インターネットで最新のインストール方法を調べて見てください。エラーメッセージで調べてみても色々わかると思います。
+- プルリクエストを作ったが、Mergeボタンが押せない
+  - [Actionsタブ](https://github.com/jishinkai/jishinkaihp/actions)を見て、失敗したときのエラーメッセージを見てみてください。ビルドに失敗しているようなら、エラーメッセージに原因が書いてあると思います。
+- Confirm mergeまでできたが、fc2に反映されない
+  - [Actionsタブ](https://github.com/jishinkai/jishinkaihp/actions)で進捗状況が見れます。Deploy to FC2で失敗しているようなら、再試行ボタンを押してみてください。
+- Deploy to FC2は成功しているが、ホームページを見ても反映されてない
+  - ブラウザのキャッシュが残ってるかもしれないです。Shiftを押しながら再読込すると反映されると思います。
 
-| Command                   | Action                                           |
+
+## コマンド
+
+| コマンド                  | 内容                                             |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm i`                   | 必要なパッケージをインストール                   |
+| `npm run dev`             | webサイトを手元で動かしてみる                    |
+| `npm run build`           | fc2に反映するためのファイルを生成                |
+| `npm run deploy`          | 生成したファイルを手元からfc2に反映(非推奨)      |
+| `npm run astro ...`       | Astroのコマンドを実行 `astro add`, `astro check` |
 
-## 👀 Want to learn more?
+## 関連ドキュメント
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Astro:  [https://docs.astro.build](https://docs.astro.build)
