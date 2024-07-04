@@ -71,6 +71,8 @@ jobs:
     name: Retry deploy
     if: failure() && github.run_attempt <= 5
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Retry deployment
         env:
           GH_TOKEN: ${{ github.token }}
