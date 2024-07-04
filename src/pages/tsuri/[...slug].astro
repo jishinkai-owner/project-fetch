@@ -15,7 +15,7 @@ const { Content } = await entry.render();
 ---
 
 <MainLayout
-    title={entry.data.title}
+    title={entry.data.title ?? entry.slug}
     description={entry.data.description}
     type="釣果記録"
     breadcrumbs={[
