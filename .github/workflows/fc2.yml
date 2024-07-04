@@ -67,13 +67,11 @@ jobs:
 
   retry-deploy:
     needs: deploy
-    runs-on: ubuntu-latest
     name: Retry deploy
-    if: failure() && github.run_attempt <= 5
+    if: failure() && fromJSON(github.run_attempt) < 3
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Retry deployment
-        env:
+      - env:
+          GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
-        run: gh run rerun ${{ github.run_id }} --failed
+        run: gh workflow run rerun.yml -F run_id=${{ github.run_id }}
