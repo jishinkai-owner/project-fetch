@@ -1,7 +1,7 @@
 import { z, defineCollection } from 'astro:content';
 
 const common = {
-    title: z.string(),
+    title: z.string().optional(),
     description: z.string().optional(),
     breadcrumbs: z.array(z.object({
         title: z.string(),

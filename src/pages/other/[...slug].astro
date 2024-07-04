@@ -15,7 +15,7 @@ const { Content } = await entry.render();
 ---
 
 <MainLayout
-    title={entry.data.title}
+    title={entry.data.title ?? entry.slug}
     description={entry.data.description}
     type={entry.data.type ?? 'その他の活動'}
     breadcrumbs={[
@@ -26,7 +26,7 @@ const { Content } = await entry.render();
     dateModified={entry.data.dateModified}
 >
     {entry.data.typeImg
-        ? <Image slot='title' src={entry.data.typeImg} alt={entry.data.title} />
+        ? <Image slot='title' src={entry.data.typeImg} alt={entry.data.title ?? "その他"} />
         : <Fragment slot='notitle'></Fragment>
     }
     <div class="markdown-body">
