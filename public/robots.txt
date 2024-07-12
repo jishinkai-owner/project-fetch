@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jishinkaihp.web.fc2.com/sitemap-index.xml
+Sitemap: https://jishinkaihp.web.fc2.com/sitemap.xml
