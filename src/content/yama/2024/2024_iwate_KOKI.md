@@ -1,6 +1,6 @@
-﻿***
-
-title:岩手山 team Koki
+﻿---
+title: 岩手山 team Koki
+---
 　
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/97vN12hjW9" title="240608081936076"><img src="https://live.staticflickr.com/65535/53849699394_6e22200a2f.jpg" width="500" height="371" alt="240608081936076"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 バックの岩手山を登ります。
