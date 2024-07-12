@@ -1,8 +1,5 @@
-﻿
-
-
 ﻿---
-title:岩手山 TEAM YUTO
+title: 岩手山 TEAM YUTO
 ---
 # 岩手山の思い出　
 ## 一日目

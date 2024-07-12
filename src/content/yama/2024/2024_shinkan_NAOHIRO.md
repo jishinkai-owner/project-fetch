@@ -1,5 +1,5 @@
 ﻿---
-新歓登山 泉ヶ岳 TEAM NAOHIRO
+title: 新歓登山 泉ヶ岳 TEAM NAOHIRO
 ---
 ## はじめに
 

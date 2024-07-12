@@ -1,6 +1,4 @@
-﻿# Welcome to StackEdit!
-
-1日目
+﻿1日目
 浄土平に行きました。まずは吾妻小富士に登りました。
 <a data-flickr-embed="true" href="https://www.flickr.com/gp/96951391@N03/3174Ue47XD" title="DSC_5464"><img src="https://live.staticflickr.com/65535/53840374167_36e7cb53d5.jpg" width="500" height="375" alt="DSC_5464"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 
