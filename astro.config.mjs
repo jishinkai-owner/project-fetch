@@ -15,6 +15,7 @@ export default defineConfig({
             ignoreFolders: [
                 "_astro",
                 "robots.txt",
+                "ads.txt",
                 "favicon.ico",
                 "ogp.png",
             ],
