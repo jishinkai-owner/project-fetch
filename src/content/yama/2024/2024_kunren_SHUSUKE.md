@@ -1,4 +1,4 @@
-﻿---
+---
 title: 訓練登山　Team SHUSUKE
 ---
 

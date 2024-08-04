@@ -8,7 +8,7 @@ typeImg: title-yama.jpg
 
 ## 2024年
 
-2024/7/13-14:訓練登山@蔵王([SHUSUKE編](2024/2024_kunren_SHUSUKE))
+2024/7/13-14:訓練登山@蔵王([NAOYA編](2024/2024_kunren_NAOYA)・[SHOTA編](2024/2024_kunren_SHOTA)・[SHUSUKE編](2024/2024_kunren_SHUSUKE))
 
 2024/6/22-23:鳥海山([SHUSUKE編](2024/2024_chokai_SHUSUKE)・[NAOHIRO編](2024/2024_chokai_NAOHIRO)・[HONOKA編](2024/2024_chokai_HONOKA))
 
