@@ -6,6 +6,10 @@ type: 釣果記録
 typeImg: title-tsuri.jpg
 ---
 
+## 2024年
+
+2024/5/17----:[C3釣り紀行 in SIOGAMA](2024/2024_shiogama)
+
 ## 2019年
 
 2019/03/31----:閖上
