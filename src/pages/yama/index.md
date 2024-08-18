@@ -8,6 +8,8 @@ typeImg: title-yama.jpg
 
 ## 2024年
 
+2024/8/8-10:長期山行@八ヶ岳 荒天中止
+
 2024/7/27:燧ヶ岳([SHUSUKE編](2024/2024_hiuchi_SHUSUKE)・[IROHA編](2024/2024_hiuchi_IROHA))
 
 2024/7/13-14:訓練登山@蔵王([NAOYA編](2024/2024_kunren_NAOYA)・[SHOTA編](2024/2024_kunren_SHOTA)・[SHUSUKE編](2024/2024_kunren_SHUSUKE)・[NAOHIRO編](2024/2024_kunren_NAOHIRO)・[RIKUTO編](2024/2024_kunren_RIKUTO)・[TOSHIKI編](2024/2024_kunren_TOSHIKI))
