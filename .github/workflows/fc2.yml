@@ -70,6 +70,8 @@ jobs:
     name: Retry deploy
     if: failure() && fromJSON(github.run_attempt) < 3
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
     steps:
       - env:
           GH_REPO: ${{ github.repository }}
