@@ -8,6 +8,8 @@ typeImg: title-yama.jpg
 
 ## 2024年
 
+2024/10/5:秋山山行@栗駒
+
 2024/8/8-10:長期山行@八ヶ岳 荒天中止
 
 2024/7/27:燧ヶ岳([SHUSUKE編](2024/2024_hiuchi_SHUSUKE)・[IROHA編](2024/2024_hiuchi_IROHA))
