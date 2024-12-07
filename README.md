@@ -2,6 +2,18 @@
 
 東北大学のアウトドアサークルです。
 
+ホームページ: [https://jishinkaihp.web.fc2.com/](https://jishinkaihp.web.fc2.com/)
+
+[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/jishinkai)](https://x.com/intent/follow?screen_name=jishinkai)
+
+
+[![GitHub repo size](https://img.shields.io/github/repo-size/jishinkai/jishinkaihp)](https://github.com/jishinkai/jishinkaihp/)
+[![GitHub top language](https://img.shields.io/github/languages/top/jishinkai/jishinkaihp)](https://github.com/jishinkai/jishinkaihp/)
+[![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/jishinkai/jishinkaihp/astro)](./package.json)
+
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jishinkai/jishinkaihp/fc2.yml)](https://github.com/jishinkai/jishinkaihp/actions/workflows/fc2.yml)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fjishinkaihp.web.fc2.com%2F)](https://jishinkaihp.web.fc2.com/)
+
 ## このページについて
 
 公式ホームページのソースコードを管理するリポジトリです。
