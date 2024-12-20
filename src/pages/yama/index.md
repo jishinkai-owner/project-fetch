@@ -8,7 +8,7 @@ typeImg: title-yama.jpg
 
 ## 2024年
 
-2024/10/5:秋山山行@栗駒
+2024/10/5:秋山山行@栗駒([RYUTA編](2024/2024_kurikoma_RYUTA)・[TATSUHIRO](2024/2024_kurikoma_TATSUHIRO))
 
 2024/8/8-10:長期山行@八ヶ岳 荒天中止
 
