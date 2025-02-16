@@ -9,7 +9,7 @@ interface MenuProps {
   onClick: (path: string) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ onClick }) => {
+const Menu: React.FC<MenuProps> = () => {
   const router = useRouter();
   const handleNavigate = (path: string) => {
     router.push(path);
