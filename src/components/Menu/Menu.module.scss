@@ -1,0 +1,78 @@
+.container {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    background-color: #F2D6A7;
+    padding: 10%;
+    z-index: 1;
+  }
+  
+  .imagecontainer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    z-index: 2;
+  }
+  
+  .Recordimage,
+  .Shinkanimage,
+  .Qaimage,
+  .Memberimage,
+  .Loginimage {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 90%;
+    max-height: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .Recordimage:hover,
+  .Shinkanimage:hover,
+  .Qaimage:hover,
+  .Memberimage:hover,
+  .Loginimage:hover {
+    transform: scale(1.05);
+  }
+  
+  .PinTopLeft,
+  .PinTopRight,
+  .PinBottomRight,
+  .PinBottomLeft {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      z-index: 3; 
+      box-sizing: border-box;
+      background: linear-gradient(313.78deg, #C9A928 0%, #9F851D 83.97%);
+      box-shadow: 1.69517px 1.69517px 3.39034px #BBBBBB, -1.69517px -1.69517px 3.39034px #E2D291;
+      border-radius: 50%;
+  }
+
+
+  
+  .PinTopLeft {
+      left: 6.66px;
+  }
+  
+  .PinTopRight {
+      right: 6.66px;
+  }
+  
+  .PinBottomRight {
+      right: 6.66px;
+  }
+  
+  .PinBottomLeft {
+      left: 6.66px;
+  }
