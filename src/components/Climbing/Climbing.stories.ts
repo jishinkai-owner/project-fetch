@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Mountain from "./Mountain";
+import Climbing from "./Climbing";
 
 const meta = {
-  title: "Components/Mountain",
-  component: Mountain,
+  title: "Components/Climbing",
+  component: Climbing,
   parameters: {
     nextjs: {
         appDirectory: true,
@@ -11,7 +11,7 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Mountain>;
+} satisfies Meta<typeof Climbing>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

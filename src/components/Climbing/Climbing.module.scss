@@ -1,5 +1,7 @@
 .container {
     margin-top: 10%;
+    width: 100%;
+    height: auto;
   }
   
   .container:hover {
@@ -17,7 +19,7 @@
   
   .Middleimagecontainer {
     width: 80%;
-    height: 80%;
+    height: auto;
     position: absolute;
     transform: rotate(-7deg);
     transition: transform 0.3s ease;
@@ -28,7 +30,7 @@
   
   .Backimagecontainer {
     width: 80%;
-    height: 80%;
+    height: auto;
     position: absolute;
     transform: rotate(4deg);
     transition: transform 0.3s ease;
@@ -48,12 +50,13 @@
 
   .sticker {
     position: absolute;
-    width: 130%;
     aspect-ratio: 1;
     transform: rotate(6.65deg);
     z-index: 3;
     left: 90%;
-    top: -10%;
+    top: 40%;
+    width: 130%;
+    height: auto;
   }
   
   .triangletop {
