@@ -1,8 +1,9 @@
 .container {
-  margin-top: 10%;
-  margin-left: 40%;
-  width: 30%;
+  width: 100%;
   height: auto;
+  margin-bottom: 5%;
+  display: flex;
+  justify-content: flex-end
 }
 
 .container:hover {
@@ -10,7 +11,7 @@
 } 
 
 .Frontimagecontainer {
-  width: 100%;
+  width: 47%;
   height: auto;
   position: relative;
   transform: rotate(6deg);
@@ -51,7 +52,6 @@
 
 .sticker {
   position: absolute;
-  width: 130%;
   aspect-ratio: 1;
   transform: rotate(-6deg);
   z-index: 3;
@@ -75,7 +75,7 @@
 
 .trianglebuttom {
   position: absolute;
-  right: -12%;
+  right: -2%;
   bottom: -4%;
   width: 20%;
   aspect-ratio: 1;

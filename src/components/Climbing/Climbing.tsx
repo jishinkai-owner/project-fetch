@@ -5,15 +5,16 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Climbing.module.scss';
 
-const Climbing: React.FC = () => {
+interface ClimbingProps {
+  className?: string;
+}
+const Climbing: React.FC<ClimbingProps> = () => {
   const router = useRouter(); // useRouterフックの使用
-
   const navigateToClimbing = (category: string) => {
     router.push(`/record?case=${category}`); // 遷移先のパスを指定
   };
 
   return (
-    <div>
       <div className={styles.container} onClick={() => navigateToClimbing("山行記録")}>
         <div className={styles.Frontimagecontainer}>
           <Image 
@@ -56,7 +57,6 @@ const Climbing: React.FC = () => {
           />
         </div>
     </div>
-  </div>
   );
 };
 

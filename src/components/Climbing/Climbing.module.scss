@@ -1,15 +1,15 @@
 .container {
-    margin-top: 10%;
-    width: 100%;
-    height: auto;
-  }
+  width: 100%;
+  height: auto;
+  margin-bottom: 5%;
+}
   
   .container:hover {
     transform: scale(1.05);
   } 
   
   .Frontimagecontainer {
-    width: 100%;
+    width: 47%;
     height: auto;
     position: relative;
     transform: rotate(-6.65deg);
@@ -72,7 +72,7 @@
   
   .trianglebuttom {
     position: absolute;
-    right: -12%;
+    right: -2%;
     top: -4%;
     width: 20%;
     aspect-ratio: 1;

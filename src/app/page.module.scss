@@ -1,0 +1,142 @@
+.container {
+  display: flex;
+  background-color: #f0e1c5; /* 背景色 */
+  color: #000;
+  min-height: 100vh;
+  height: auto; /* コンテンツに応じて伸びる */
+  position: relative;
+}
+
+/* ====== パソコンサイズのレイアウト ====== */
+.page {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.recordcontainer {
+  display: flex;
+  flex-direction: row; /* 横並び */
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  padding: 3%;
+  gap: 10%;
+}
+.Climbing,
+.Traveling,
+.Fishing,
+.board {
+  width: 40%; 
+  height: auto;
+  max-width: 400px;
+}
+
+.Climbing,
+.board {
+  margin-bottom: 10%;
+}
+
+.paperContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #e4c89b;
+  width: 25%;
+  max-width: 350px;
+  height: 100vh;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    
+
+    &.closed {
+        transform: translateX(100%); /* 右に隠す */
+        opacity: 0;
+        pointer-events: none; /* クリックを無効化 */
+    }
+
+    &.open {
+        transform: translateX(0); /* 表示する */
+        opacity: 1;
+        pointer-events: auto; /* クリックを有効化 */
+    }
+}
+
+/* ハンバーガーメニュー */
+.hamburgerButton {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 50px;
+  z-index: 1000;
+
+  &:hover {
+      background-color: #f0f0f0;
+  }
+}
+
+
+/* ====== スマホサイズのレイアウト ====== */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .recordcontainer {
+    flex-direction: column; /* 縦並び */
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .board,
+  .Climbing,
+  .Traveling,
+  .Fishing {
+    width: 100%;
+    margin-bottom: 10%;
+  }
+
+  /* メニューをハンバーガー化 */
+  .paperContainer {
+    width: 50%;
+    max-width: 80%;
+    height: 100%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    max-width: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .paperContainer.open {
+    transform: translateX(0);
+  }
+
+  .hamburgerButton {
+    display: block;
+  }
+}

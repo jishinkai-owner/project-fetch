@@ -5,7 +5,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Menu.module.scss';
 
-const Menu: React.FC = () => {
+interface MenuProps {
+  onClick: (path: string) => void;
+}
+
+const Menu: React.FC<MenuProps> = ({ onClick }) => {
   const router = useRouter();
   const handleNavigate = (path: string) => {
     router.push(path);
@@ -58,9 +62,11 @@ const Menu: React.FC = () => {
                 src="/login.webp" 
                 alt="ログイン" 
                 className={styles.Loginimage}
-                width={190}
-                height={190}
+                width={200}
+                height={200}
                 priority
+                onClick={() => handleNavigate('/shinkan')}
+                style={{ cursor: 'pointer' }}
             />
         </div>
     </div>

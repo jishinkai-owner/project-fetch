@@ -4,8 +4,11 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Fishing.module.scss';
+interface FishingProps {
+  className?: string;
+}
 
-const Fishing: React.FC = () => {
+const Fishing: React.FC<FishingProps> = () => {
   const router = useRouter();
 
   const navigateToFishing = (category: string) => {

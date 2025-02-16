@@ -5,7 +5,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Traveling.module.scss';
 
-const Traveling: React.FC = () => {
+interface TravelingProps {
+  className?: string;
+}
+
+
+const Traveling: React.FC<TravelingProps> = () => {
   const router = useRouter();
 
   const navigateToTraveling = (category: string) => {
@@ -13,7 +18,6 @@ const Traveling: React.FC = () => {
   };
 
   return (
-    <div>
       <div className={styles.container} onClick={() => navigateToTraveling("旅行記録")}>
         <div className={styles.Frontimagecontainer}>
           <Image 
@@ -56,7 +60,6 @@ const Traveling: React.FC = () => {
           />
         </div>
       </div>
-    </div>
   );
 };
 

@@ -18,7 +18,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    text: "Sample text",
-    info: "Additional information",
+    onClick: (path: string) => {
+      console.log(`Clicked path: ${path}`);
+    },
   },
 };
