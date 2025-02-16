@@ -1,0 +1,245 @@
+.pageWrapper {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    background-color: #eee2cc; /* 背景色 */
+    color: #000;
+    min-height: 100vh; /* ページ全体の高さ */
+    position: relative;
+  }
+  
+  .page {
+    flex: 3; /* メインコンテンツの幅を3割 */
+    background-color: #eee2cc;
+    color: #000;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .breadcrumb {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  
+    a {
+      color: #000;
+      text-decoration: none;
+      margin-right: 0.5rem;
+    }
+  
+    span {
+      color: #888;
+    }
+  }
+  .memberList {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+  }
+  
+  .memberCard {
+    display: flex;
+    height: 30vh;
+  }
+  .imageWrapper {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    height: 100%;
+    max-width: 30%;
+    justify-content: center;
+    margin-left: auto;
+    background-color: white;
+    padding: 1%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    transform: rotate(5deg); /* 少し斜めに回転 */
+    transition: transform 0.3s ease;
+  }
+  
+  .image {
+    display: block; 
+    height: 100%;
+    object-fit: cover; /* 縦横比を維持しながら切り抜き */
+  }
+  
+  .triangletop {
+    position: absolute;
+    left: -3%;
+    top: -3%;
+    width: 40px;
+    height: 40px;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    background-color: #C9BDA8;
+    z-index: 3;
+  }
+  
+  .trianglebuttom {
+    position: absolute;
+    right: -3%;
+    bottom: -3%;
+    width: 40px;
+    height: 40px;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    background-color: #C9BDA8;
+    z-index: 3;
+  }
+
+  .infoContainer {
+    padding: 1rem;
+    width: 60%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    background: linear-gradient(white 90%, #f2f1ef 100%); /* ノート風背景 */
+    background-size: 100% 2rem; /* 罫線の間隔 */
+    background-color: #f9f8f6; /* ノートの紙色 */
+    border-left: 8px solid #d9534f; /* 赤い綴じ目 */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  /* 罫線を入れる */
+  .infoContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: calc(100% - 16px);
+    height: 100%;
+    background-image: repeating-linear-gradient(to bottom, transparent, transparent 1.9rem, rgba(0, 0, 0, 0.1) 2rem);
+    pointer-events: none;
+  }
+  
+  /* 文章のスタイル */
+  .infoContainer p {
+    margin: 0;
+    padding-left: 10px;
+    line-height: 2rem; /* 罫線と揃える */
+  }
+  
+  .infoContainer strong {
+    font-weight: bold;
+    color: #d9534f;
+  }
+  
+.tabContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .tab {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: #000;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s ease;
+  
+    &:hover {
+      border-bottom: 2px solid #888;
+    }
+  }
+  
+  .activeTab {
+    border-bottom: 2px solid #000;
+    font-weight: bold;
+}
+  
+.paperContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #e4c89b;
+  width: 25%;
+  max-width: 350px;
+  height: 100vh;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    
+
+    &.closed {
+        transform: translateX(100%); /* 右に隠す */
+        opacity: 0;
+        pointer-events: none; /* クリックを無効化 */
+    }
+
+    &.open {
+        transform: translateX(0); /* 表示する */
+        opacity: 1;
+        pointer-events: auto; /* クリックを有効化 */
+    }
+}
+
+/* ハンバーガーメニュー */
+.hamburgerButton {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 50px;
+  z-index: 1000;
+
+  &:hover {
+      background-color: #f0f0f0;
+  }
+}
+
+.contentContainer {
+    width: 80%;
+    margin-top: 2rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+@media (max-width: 768px) {
+    .pageWrapper {
+        display: flex; /* ハンバーガーメニューを表示 */
+    }
+    .paperContainer {
+      width: 50%;
+      max-width: 80%;
+      height: 100%;
+      display: flex; 
+      justify-content: center;
+      align-items: center;
+      max-width: none;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 999;
+      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+  
+    .paperContainer.open {
+      transform: translateX(0);
+    }
+  
+    .hamburgerButton {
+      display: block;
+    }
+}

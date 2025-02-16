@@ -44,11 +44,9 @@ const Page: React.FC = () => {
       </button>
 
       <div className={`${styles.paperContainer} ${isMenuOpen ? styles.open : ""}`}>
-      <div className={styles.Menu}>
         <Menu
         onClick={handleNavigate} 
         />
-        </div>
       </div>
     </div>
   );
