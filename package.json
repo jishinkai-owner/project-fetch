@@ -1,6 +1,7 @@
 {
   "name": "jishinkaihp",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -11,8 +12,15 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@babel/core": "^7.26.9",
+    "@mdx-js/mdx": "^3.1.0",
     "@next/swc-win32-x64-msvc": "^15.1.7",
+    "@prisma/client": "^6.3.1",
+    "@supabase/supabase-js": "^2.48.1",
+    "dotenv": "^16.4.7",
+    "fs-extra": "^11.3.0",
     "next": "15.0.4",
+    "prisma": "^6.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -25,6 +33,7 @@
     "@storybook/nextjs": "^8.5.6",
     "@storybook/react": "^8.5.6",
     "@storybook/test": "^8.5.6",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -34,6 +43,7 @@
     "sass": "^1.85.0",
     "sass-loader": "^16.0.5",
     "storybook": "^8.5.6",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

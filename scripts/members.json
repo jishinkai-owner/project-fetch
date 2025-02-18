@@ -1,0 +1,632 @@
+[
+  {
+    "year": "C1",
+    "src": "",
+    "name": "tatsuya",
+    "profile": [
+      "オタク君さぁ..."
+    ],
+    "role": "線形代数A落単",
+    "major": "工",
+    "nickname": "あおき"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "oogi",
+    "profile": [
+      "結婚相談乗ります！"
+    ],
+    "role": "ロマンチスト大儀",
+    "major": "法",
+    "nickname": "おおぎ"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "ai",
+    "profile": [
+      "Re:いつでもおいで"
+    ],
+    "role": "包容力",
+    "major": "文",
+    "nickname": "かなざわ"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "kawanami2",
+    "profile": [
+      "うんこマン"
+    ],
+    "role": "トイレ",
+    "major": "理",
+    "nickname": "かわなみ"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "gotu",
+    "profile": [
+      "女の子と話すとき目が合わせられなかった(最近は何とか目を合わせることはできているらしい)"
+    ],
+    "role": "雑用",
+    "major": "工",
+    "nickname": "ごうつ"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "yuito",
+    "profile": [
+      "ぶりっ子酒野球無気力にゃんにゃんキャラ"
+    ],
+    "role": "無職",
+    "major": "理",
+    "nickname": "ゆいと"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "sinbo",
+    "profile": [
+      "牛が好きです！"
+    ],
+    "role": "嫁",
+    "major": "農",
+    "nickname": "しんぼ"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "takaoka3",
+    "profile": [
+      "前科持ちらしい"
+    ],
+    "role": "山口組",
+    "major": "工",
+    "nickname": "たかおか"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "yusuke3",
+    "profile": [
+      "キリトかなーやっぱりww自分は思わないんだけど周りにキリトに似てるってよく言われるwwwこないだDQNに絡まれた時も気が付いたら意識無くて周りに人が血だらけで倒れてたしなwwwちなみに彼女もアスナに似てる(聞いてないw)"
+    ],
+    "role": "煩悩",
+    "major": "工",
+    "nickname": "ゆうすけ"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "miyako",
+    "profile": [
+      "良い出汁出てます"
+    ],
+    "role": "昆布",
+    "major": "工",
+    "nickname": "みやこ"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "nakazima",
+    "profile": [
+      "スキーが好き～～(笑)"
+    ],
+    "role": "眼鏡に目がねぇ～～(笑)",
+    "major": "工",
+    "nickname": "なかじま"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "nagata",
+    "profile": [
+      "だれ？"
+    ],
+    "role": "だれ？",
+    "major": "工",
+    "nickname": "ながた"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "tamaki2",
+    "profile": [
+      "To:明日突っていい？"
+    ],
+    "role": "行動力",
+    "major": "文",
+    "nickname": "たまき"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "maeharu",
+    "profile": [
+      "全然殴るし蹴るしなんなら唾とかも吐く"
+    ],
+    "role": "好青年",
+    "major": "工",
+    "nickname": "まえはる"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "zeon2",
+    "profile": [
+      "通称「黒腕のゼファー」"
+    ],
+    "role": "元海軍本部大将",
+    "major": "理",
+    "nickname": "Z"
+  },
+  {
+    "year": "C1",
+    "src": "",
+    "name": "miyagi",
+    "profile": [
+      "授業受けても一人。"
+    ],
+    "role": "宮城の宮城",
+    "major": "経済",
+    "nickname": "みやぎ"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Toshiki",
+    "profile": [
+      "コミュ力お化け（自称）"
+    ],
+    "role": "解析A落単",
+    "major": "工",
+    "nickname": "としき"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Eri",
+    "profile": [
+      "明日から本気出す"
+    ],
+    "role": "ケセラセラ",
+    "major": "農",
+    "nickname": "いけださん"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Haruna",
+    "profile": [
+      "群馬県民の鑑\",",
+      "群馬愛No.1"
+    ],
+    "role": "純粋100%",
+    "major": "法",
+    "nickname": "えんぱる"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Iroha",
+    "profile": [
+      "4次元ポケット持ってます"
+    ],
+    "role": "母",
+    "major": "経済",
+    "nickname": "いろは"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Daichi",
+    "profile": [
+      "いつも黒い服"
+    ],
+    "role": "地蔵",
+    "major": "農",
+    "nickname": "かない"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Kouki",
+    "profile": [
+      "ボーっと、ボーっと"
+    ],
+    "role": "虫捕獲係",
+    "major": "工",
+    "nickname": "こうき"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Naoya",
+    "profile": [
+      "自然とは親しめる"
+    ],
+    "role": "周回",
+    "major": "農",
+    "nickname": "かんざき"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Kanta",
+    "profile": [
+      "記録書き忘れました。。。"
+    ],
+    "role": "記録",
+    "major": "理",
+    "nickname": "かんた"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Honoka",
+    "profile": [
+      "ザック下ろさない系女子"
+    ],
+    "role": "The 山ガール",
+    "major": "文",
+    "nickname": "さとほの"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Kazuki",
+    "profile": [
+      "ごく稀に顔を見せます"
+    ],
+    "role": "幽霊部員",
+    "major": "経済",
+    "nickname": "かずぽー"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Wataru",
+    "profile": [
+      "ゴマドレからレインボードレッシングに転向しました"
+    ],
+    "role": "おとなしい草食系男子",
+    "major": "法",
+    "nickname": "わたる"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Yuto",
+    "profile": [
+      "自科総は計画的に"
+    ],
+    "role": "消化不良",
+    "major": "工",
+    "nickname": "ゆうと"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Shusuke",
+    "profile": [
+      "いつもなんかうるさいww"
+    ],
+    "role": "魔女教大罪司教『ヤクザ』担当",
+    "major": "理",
+    "nickname": "名探偵ソナン"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Yousuke",
+    "profile": [
+      "土屋生"
+    ],
+    "role": "自然を通してみんなと仲良くしたいです！よろしくお願いします！",
+    "major": "スタンド使い",
+    "nickname": "文"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Taisei",
+    "profile": [
+      "サッカーがとっても大好き！！"
+    ],
+    "role": "サッカー少年",
+    "major": "経済",
+    "nickname": "たいちゃん"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Shota",
+    "profile": [
+      "今日も今日とて安全運転！"
+    ],
+    "role": "浮浪者",
+    "major": "理",
+    "nickname": "はせしょー"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Rikuto",
+    "profile": [
+      "Boys, be ambitious !"
+    ],
+    "role": "安定の絶起マン",
+    "major": "工",
+    "nickname": "クリークト博士"
+  },
+  {
+    "year": "C2",
+    "src": "",
+    "name": "Naohiro",
+    "profile": [
+      "デニム登山はやめとけ！！"
+    ],
+    "role": "部室開け係",
+    "major": "工",
+    "nickname": "なおひろ"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "suzuki",
+    "profile": [
+      "山登れるならおもりも背負います"
+    ],
+    "role": "逃げるは恥だが役に立つ",
+    "major": "マテ",
+    "nickname": "C3の方のゆうすけ"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "tanahiro",
+    "profile": [
+      "アルプスを征した方向音痴"
+    ],
+    "role": "レインコートで統べる者 / 冬山担当",
+    "major": "機知",
+    "nickname": "たなひろ・ザ・ワールド"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "eishin",
+    "profile": [
+      "残念なイケメン"
+    ],
+    "role": "次期部長 / Dの継承者",
+    "major": "理球",
+    "nickname": "地雷踏み抜き"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53283901113_be293fc0b5_b.jpg",
+    "profile": [
+      "エミリアは白髪じゃない！銀髪なんだ！👿"
+    ],
+    "role": "地学データベース",
+    "major": "理球",
+    "nickname": "たなあみ後期"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53116248158_28c2013581_b.jpg",
+    "profile": [
+      "食事のお誘いは3ヶ月前までで"
+    ],
+    "role": "C3の唯一の良心",
+    "major": "理球",
+    "nickname": "なぎっち"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53259392908_394515f559_b.jpg",
+    "profile": [
+      "メンヘラ彼女?から頻繁に車を返すようTELされる男。ブラックリスト入り"
+    ],
+    "role": "Loser / 中高男子校",
+    "major": "理球",
+    "nickname": "きょうすけ"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "masashige",
+    "profile": [
+      "独り身になることを選んだ男"
+    ],
+    "role": "GPA1.80",
+    "major": "機知",
+    "nickname": "かわいい"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "soma",
+    "profile": [
+      "ぽん酢を手放さない者"
+    ],
+    "role": "属性もりもり / 中国人",
+    "major": "情物",
+    "nickname": "y.y.c / T・ペース大丈夫か・S"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "araki",
+    "profile": [
+      "出禁を言い渡された者"
+    ],
+    "role": "CEO",
+    "major": "経済",
+    "nickname": "#ゆっくり寝ろ荒木"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53182532069_0bc4552f97_b.jpg",
+    "profile": [
+      "タンバリン永久機関"
+    ],
+    "role": "bot / テトリスを極めし者",
+    "major": "建築",
+    "nickname": "つじつじ"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53112244764_a7465848bd_b.jpg",
+    "profile": [
+      "自科総最後に週に4つ残ってた"
+    ],
+    "role": "残飯処理係 / 中学のみ男子校",
+    "major": "情物",
+    "nickname": "ちばお"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53282755517_0ec1e321b7_b.jpg",
+    "profile": [
+      "それはもうえろい"
+    ],
+    "role": "腋フェチ / 漫画rawヘビーユーザー",
+    "major": "マテ",
+    "nickname": "すけべ"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53183192311_55240cfaf5_b.jpg",
+    "profile": [
+      "英語劇"
+    ],
+    "role": "やまけんの第一夫人 / 次期パン工場長 / 高校男子校",
+    "major": "情物",
+    "nickname": "フリー素材"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53281431916_e69447d446_b.jpg",
+    "profile": [
+      "マザコンステージ4←末期やん"
+    ],
+    "role": "雀カス / PS2の守護神 / おじさん",
+    "major": "建築",
+    "nickname": "やまけん"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53280539917_b34a0740ba_b.jpg",
+    "profile": [
+      "特技:公道ドリフト\",",
+      "槍ヶ岳山頂に2万の置き土産(ゴアテックス)\",",
+      "「車のキー無くしたわ」@ゲレンデ"
+    ],
+    "role": "やまけんのキープ / 未亡人 / 次期料理長",
+    "major": "教育",
+    "nickname": "まいやん"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "iwakura",
+    "profile": [
+      "Sブレーキって何？"
+    ],
+    "role": "危険運転手",
+    "major": "文",
+    "nickname": "たつき"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53067090837_679dc17768_b.jpg",
+    "profile": [
+      "「俺、キャンプ嫌いだから」（長期山行参加）"
+    ],
+    "role": "なか卯落ちスシロー",
+    "major": "文",
+    "nickname": "King Takeda Gnu"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53259164539_4a1a043f64_b.jpg",
+    "profile": [
+      "うたのお姉さんです"
+    ],
+    "role": "ユニバーサル・スタジオ・アオバヤマ / Ado",
+    "major": "農",
+    "nickname": "しーちゃん"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "akiyama",
+    "profile": [
+      "憧れのポケモンマスターに俺はなる！"
+    ],
+    "role": "ポケモントレーナー / 雪渓を半袖で歩む者",
+    "major": "機知",
+    "nickname": "半袖野郎"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "fukuhara",
+    "profile": [
+      "30万のPCでマイクラ\",",
+      "5万のモニターでスイカゲーム\",",
+      "「寝袋重いし置いてくかー。」@槍ヶ岳"
+    ],
+    "role": "くまざわ書店勤務 / クイズ部元部長",
+    "major": "教育",
+    "nickname": "永大ホーム"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "aoto",
+    "profile": [
+      "建築最下位合格"
+    ],
+    "role": "オールラウンダー / スイカゲームの覇者",
+    "major": "建築",
+    "nickname": "あおとっち"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53260804557_f23a44401b_b.jpg",
+    "profile": [
+      "カラオケ歌わないで帰る\",",
+      "スキーセンス⚪︎"
+    ],
+    "role": "スルメ枠",
+    "major": "情物",
+    "nickname": "DAIKIN"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "kando",
+    "profile": [
+      "８サークル所属"
+    ],
+    "role": "中高女子校 / サブカル万能",
+    "major": "農",
+    "nickname": "do"
+  },
+  {
+    "year": "C3",
+    "src": "",
+    "name": "co-duck",
+    "profile": [
+      "１００円で取れた"
+    ],
+    "role": "守り神",
+    "major": "水タイプ",
+    "nickname": "こだぴー"
+  },
+  {
+    "src": "https://live.staticflickr.com/65535/53847981284_e0f41a5465_b.jpg",
+    "profile": [
+      "またしても100円で取れた\",",
+      "渋谷出身\","
+    ],
+    "role": "旅のおとも",
+    "major": "水タイプ",
+    "nickname": "コダックJr"
+  }
+]
