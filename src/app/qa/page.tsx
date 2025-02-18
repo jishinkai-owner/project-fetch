@@ -1,88 +1,72 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./QaPage.module.scss";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
+import { qaData, QaCategory } from "./qaData"; // 型も一緒にインポート
 
 const QaPage: React.FC = () => {
-
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
   const searchParams = useSearchParams();
-  const selectedCategoryFromQuery = searchParams.get("case");
+  const selectedCategoryFromQuery = searchParams.get("case") as QaCategory | null;
+  const [selectedCategory, setSelectedCategory] = useState<QaCategory>(selectedCategoryFromQuery || "登山編"); // 型を指定
 
   const router = useRouter();
   const handleNavigate = (path: string) => {
     router.push(path);
   };
 
-  // 初期値としてクエリパラメータを利用
-  useEffect(() => {
-    if (selectedCategoryFromQuery) {
-      setSelectedCategory(selectedCategoryFromQuery);
-    }
-  }, [selectedCategoryFromQuery]);
-
   const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev); // トグルで開閉を切り替え
+    setIsMenuOpen((prev) => !prev);
   };
 
   const renderContent = () => {
-    if (selectedCategory === "登山編") {
-      return <div>山の質問</div>;
-    } else if (selectedCategory === "釣り編") {
-      return <div>釣りの質問</div>;
-    } else if (selectedCategory === "旅行編") {
-      return <div>旅行の質問</div>;
-    } else if (selectedCategory === "その他編") {
-        return <div>他の質問</div>;
-    } else {
-      return <div>カテゴリを選択してください</div>;
-    }
+    if (!selectedCategory) return <div>カテゴリを選択してください。</div>;
+
+    const categoryData = qaData[selectedCategory]; // 型エラーがなくなる！
+    if (!categoryData) return <div>該当するQ&Aがありません。</div>;
+
+    return (
+      <div className={styles.qaList}>
+        {categoryData.map((qa, index) => (
+          <div key={index} className={styles.qaItem}>
+            <p className={styles.question}><strong>Q: {qa.question}</strong></p>
+            <p className={styles.answer}>
+              {qa.answer.split("\n").map((line, i) => <span key={i}>{line}<br/></span>)}
+            </p>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.page}>
-        {/* ナビゲーション */}
         <nav className={styles.breadcrumb}>
           <Link href="/">Home</Link> <span> &gt; </span> <span>よくある質問</span>
         </nav>
         <h1 className={styles.circleTitle}>よくある質問</h1>
 
-        {/* Tab選択カテゴリ */}
         <div className={styles.tabContainer}>
-          {["登山編", "釣り編", "旅行編","その他編"].map((category) => (
+          {Object.keys(qaData).map((category) => (
             <button
               key={category}
-              className={`${styles.tab} ${
-                selectedCategory === category ? styles.activeTab : ""
-              }`}
-              onClick={() => setSelectedCategory(category)}
+              className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
+              onClick={() => setSelectedCategory(category as QaCategory)} // 型をキャスト
             >
               {category}
             </button>
           ))}
         </div>
 
-        {/* 選択されたカテゴリの内容 */}
         <div className={styles.contentContainer}>{renderContent()}</div>
-
       </div>
 
-      {/* ハンバーガーボタン */}
-      <button className={styles.hamburgerButton} onClick={toggleMenu}>
-        ☰
-      </button>
-
-      {/* メニューコンテナ */}
-      <div 
-        className={`${styles.paperContainer} ${
-          isMenuOpen ? styles.open : styles.closed
-        }`}>
+      <button className={styles.hamburgerButton} onClick={toggleMenu}>☰</button>
+      <div className={`${styles.paperContainer} ${isMenuOpen ? styles.open : styles.closed}`}>
         <Menu onClick={handleNavigate} />
       </div>
     </div>
