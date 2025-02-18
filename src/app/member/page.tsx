@@ -10,11 +10,12 @@ import Image from "next/image";
 // メンバーの型定義
 type Member = {
   id: string;
-  roles: string[];
+  year: string;
+  role: string;
   major?: string;
   nickname: string;
   profile?: string;
-  profile_image_url?: string; // 画像URLは後回し
+  src?: string; // 画像URL
 };
 
 const MemberPage: React.FC = () => {
@@ -58,26 +59,42 @@ const MemberPage: React.FC = () => {
     fetchMembers();
   }, []);
 
+  // メニューの開閉
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  // 年度ごとのメンバーリストをフィルタ
+  const filterMembersByYear = (year: string) => {
+    return members.filter((member) => member.year === year);
+  };
+
+  // カテゴリごとのデータを表示
   const renderContent = () => {
     if (loading) {
       return <div>読み込み中...</div>;
     }
 
-    if (!members.length) {
+    let filteredMembers: Member[] = [];
+    if (selectedCategory === "2年生") {
+      filteredMembers = filterMembersByYear("C3");
+    } else if (selectedCategory === "3年生") {
+      filteredMembers = filterMembersByYear("C2");
+    } else if (selectedCategory === "4年生") {
+      filteredMembers = filterMembersByYear("C1");
+    }
+
+    if (!filteredMembers.length) {
       return <div>メンバー情報が見つかりません。</div>;
     }
 
     return (
       <div className={styles.memberList}>
-        {members.map((member) => (
+        {filteredMembers.map((member) => (
           <div key={member.id} className={styles.memberCard}>
             <div className={styles.infoContainer}>
               <p>
-                <strong>役職:</strong> {member.roles.join(", ")}
+                <strong>役職:</strong> {member.role}
               </p>
               <p>
                 <strong>学部:</strong> {member.major || "不明"}
@@ -88,36 +105,25 @@ const MemberPage: React.FC = () => {
               <p>
                 <strong>プロフィール:</strong> {member.profile || "なし"}
               </p>
-              </div>
-              {/* 左側の画像 */}
-              <div className={styles.imageWrapper}>
-                <Image 
-                  src={member.profile_image_url || "/default-image.png"}
-                  alt={member.nickname}
-                  width={1000}
-                  height={0} 
-                  style={{ height: "100%", width: "100%", objectFit: "cover" }}
-                  className={styles.memberImage}
-                />
-                <div className={styles.triangletop}></div>
-                <div className={styles.trianglebuttom}></div>
-              </div>
-              
             </div>
-          ))}
-        </div>
-      );
+            {/* 左側の画像 */}
+            <div className={styles.imageWrapper}>
+              <Image 
+                src={member.src || "/default-image.png"} // 画像URLを適用
+                alt={member.nickname}
+                width={1000}
+                height={0} 
+                style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                className={styles.memberImage}
+              />
+              <div className={styles.triangletop}></div>
+              <div className={styles.trianglebuttom}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   };
-
-  if (selectedCategory === "3年生") {
-    return <div>3年生のメンバー紹介</div>;
-  } else if (selectedCategory === "4年生") {
-    return <div>4年生のメンバー紹介</div>;
-  } else if (selectedCategory === "殿堂入り") {
-    return <div>殿堂入りのメンバー紹介</div>;
-  } else {
-    return <div>カテゴリを選択してください</div>;
-  }
 
   return (
     <div className={styles.pageWrapper}>
@@ -130,7 +136,7 @@ const MemberPage: React.FC = () => {
 
         {/* Tab選択カテゴリ */}
         <div className={styles.tabContainer}>
-          {["2年生", "3年生", "4年生","殿堂入り"].map((category) => (
+          {["2年生", "3年生", "4年生"].map((category) => (
             <button
               key={category}
               className={`${styles.tab} ${
@@ -145,7 +151,6 @@ const MemberPage: React.FC = () => {
 
         {/* 選択されたカテゴリの内容 */}
         <div className={styles.contentContainer}>{renderContent()}</div>
-
       </div>
 
       {/* ハンバーガーボタン */}
