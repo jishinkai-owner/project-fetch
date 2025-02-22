@@ -7,15 +7,16 @@ export const dynamic = "force-dynamic";
 const prisma = new PrismaClient();
 
 interface PageProps {
-  params: { filename: string };
+  params: Promise<{ filename: string }>;
 }
 
 export default async function RecordDetailPage({ params }: PageProps) {
-  if (!params || !params.filename) {
+  const resolvedParams = await params;
+  if (!resolvedParams || !resolvedParams.filename) {
     return notFound();
   }
 
-  const decodedFilename = decodeURIComponent(params.filename);
+  const decodedFilename = decodeURIComponent(resolvedParams.filename);
 
   const record = await prisma.recordContent.findFirst({
     where: { filename: decodedFilename },
