@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./RecordPage.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
 
-// ★ 1) ActivityRecord → RecordContentDTO に置き換える
+// ★ ActivityRecord → RecordContentDTO にリネーム
 interface RecordContentDTO {
   contentId: number;
   recordId: number;
@@ -21,37 +21,38 @@ interface RecordContentDTO {
 }
 
 // ★ カテゴリと DB の activityType を紐づけるマッピング
-const categoryMap: Record<string, string> = {
+const categoryMap = {
   "山行記録": "yama",
   "旅行記録": "travel",
   "釣行記録": "fishing",
-};
+} as const;
+
+// SearchParamsWrapper コンポーネント: URL のクエリパラメータからカテゴリを取得して更新
+function SearchParamsWrapper({ setCategory }: { setCategory: (category: keyof typeof categoryMap) => void }) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const categoryFromQuery = searchParams.get("case") as keyof typeof categoryMap | null;
+    if (categoryFromQuery && categoryMap[categoryFromQuery]) {
+      setCategory(categoryFromQuery);
+    }
+  }, [searchParams, setCategory]);
+
+  return null;
+}
 
 const RecordPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  // ★ 2) activityRecords → recordContents にリネーム
+  const [selectedCategory, setSelectedCategory] = useState<keyof typeof categoryMap | null>(null);
   const [recordContents, setRecordContents] = useState<RecordContentDTO[]>([]);
-
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
-  const searchParams = useSearchParams();
-  const selectedCategoryFromQuery = searchParams.get("case");
   const router = useRouter();
 
-  // 初回ロード時に URL クエリパラメータからカテゴリを設定
-  useEffect(() => {
-    if (selectedCategoryFromQuery) {
-      setSelectedCategory(selectedCategoryFromQuery);
-    }
-  }, [selectedCategoryFromQuery]);
-
-  // ★ 3) DB から全 RecordContentDTO を取得
+  // ★ DB から全 RecordContentDTO を取得
   useEffect(() => {
     const fetchRecordContents = async () => {
       try {
-        // "/api/recordContents" で、Record と Content を join した配列を返す
         const res = await fetch("/api/recordContents");
         if (!res.ok) throw new Error("Failed to fetch recordContents");
         const data: RecordContentDTO[] = await res.json();
@@ -63,7 +64,7 @@ const RecordPage: React.FC = () => {
     fetchRecordContents();
   }, []);
 
-  // カテゴリ変更時は年度選択をリセット
+  // カテゴリ変更時は年度をリセット
   useEffect(() => {
     setSelectedYear(null);
   }, [selectedCategory]);
@@ -71,8 +72,7 @@ const RecordPage: React.FC = () => {
   // 選択されたカテゴリに対応するレコードのみ抽出
   const filteredRecords = useMemo(() => {
     if (!selectedCategory) return [];
-    const activityType = categoryMap[selectedCategory] || "";
-    return recordContents.filter((r) => r.activityType === activityType);
+    return recordContents.filter((r) => r.activityType === categoryMap[selectedCategory]);
   }, [recordContents, selectedCategory]);
 
   // filteredRecords から有効な年度 (number) の一覧を生成
@@ -110,6 +110,11 @@ const RecordPage: React.FC = () => {
         </nav>
         <h1 className={styles.circleTitle}>活動記録</h1>
 
+        {/* Suspense でラップして useSearchParams を利用 */}
+        <Suspense fallback={<div>読み込み中...</div>}>
+          <SearchParamsWrapper setCategory={setSelectedCategory} />
+        </Suspense>
+
         {/* カテゴリ選択 */}
         <div className={styles.categoryContainer}>
           {Object.keys(categoryMap).map((category) => (
@@ -118,7 +123,7 @@ const RecordPage: React.FC = () => {
               className={`${styles.categoryCard} ${
                 selectedCategory === category ? styles.activeCard : styles.inactiveCard
               }`}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => setSelectedCategory(category as keyof typeof categoryMap)}
             >
               <Image
                 src={`/${category}.webp`}
@@ -169,7 +174,6 @@ const RecordPage: React.FC = () => {
                             className={styles.recordButton}
                             onClick={() => {
                               if (record.filename) {
-                                // filename をルーティングに使う場合の例:
                                 router.push(`/record/${encodeURIComponent(record.filename)}`);
                               }
                             }}
@@ -187,10 +191,7 @@ const RecordPage: React.FC = () => {
       </div>
 
       {/* ハンバーガーボタン */}
-      <button
-        className={styles.hamburgerButton}
-        onClick={() => setIsMenuOpen((prev) => !prev)}
-      >
+      <button className={styles.hamburgerButton} onClick={() => setIsMenuOpen((prev) => !prev)}>
         ☰
       </button>
 

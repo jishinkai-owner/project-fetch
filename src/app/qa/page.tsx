@@ -1,17 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./QaPage.module.scss";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
-import { qaData, QaCategory } from "./qaData"; // 型も一緒にインポート
+import { qaData, QaCategory } from "./qaData";
+
+// Suspense でラップするコンポーネント
+function SearchParamsWrapper({ setSelectedCategory }: { setSelectedCategory: (category: QaCategory) => void }) {
+  const searchParams = useSearchParams();
+  const selectedCategoryFromQuery = searchParams.get("case") as QaCategory | null;
+
+  React.useEffect(() => {
+    if (selectedCategoryFromQuery) {
+      setSelectedCategory(selectedCategoryFromQuery);
+    }
+  }, [selectedCategoryFromQuery, setSelectedCategory]);
+
+  return null;
+}
 
 const QaPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const searchParams = useSearchParams();
-  const selectedCategoryFromQuery = searchParams.get("case") as QaCategory | null;
-  const [selectedCategory, setSelectedCategory] = useState<QaCategory>(selectedCategoryFromQuery || "登山編"); // 型を指定
+  const [selectedCategory, setSelectedCategory] = useState<QaCategory>("登山編");
 
   const router = useRouter();
   const handleNavigate = (path: string) => {
@@ -25,7 +37,7 @@ const QaPage: React.FC = () => {
   const renderContent = () => {
     if (!selectedCategory) return <div>カテゴリを選択してください。</div>;
 
-    const categoryData = qaData[selectedCategory]; // 型エラーがなくなる！
+    const categoryData = qaData[selectedCategory];
     if (!categoryData) return <div>該当するQ&Aがありません。</div>;
 
     return (
@@ -50,12 +62,17 @@ const QaPage: React.FC = () => {
         </nav>
         <h1 className={styles.circleTitle}>よくある質問</h1>
 
+        {/* Suspense で useSearchParams をラップ */}
+        <Suspense>
+          <SearchParamsWrapper setSelectedCategory={setSelectedCategory} />
+        </Suspense>
+
         <div className={styles.tabContainer}>
           {Object.keys(qaData).map((category) => (
             <button
               key={category}
               className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
-              onClick={() => setSelectedCategory(category as QaCategory)} // 型をキャスト
+              onClick={() => setSelectedCategory(category as QaCategory)}
             >
               {category}
             </button>

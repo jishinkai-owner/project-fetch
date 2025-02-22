@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./MemberPage.module.scss";
 import Link from "next/link";
@@ -18,26 +18,30 @@ type Member = {
   src?: string; // 画像URL
 };
 
+// SearchParamsWrapper コンポーネント：URL のクエリパラメータからカテゴリを取得して更新
+function SearchParamsWrapper({ setCategory }: { setCategory: (category: string) => void }) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const categoryFromQuery = searchParams.get("case");
+    if (categoryFromQuery) {
+      setCategory(categoryFromQuery);
+    }
+  }, [searchParams, setCategory]);
+
+  return null;
+}
+
 const MemberPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [members, setMembers] = useState<Member[]>([]); // メンバー情報の状態管理
-  const [loading, setLoading] = useState(true); // ローディング状態
-
-  const searchParams = useSearchParams();
-  const selectedCategoryFromQuery = searchParams.get("case");
+  const [members, setMembers] = useState<Member[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
   const handleNavigate = (path: string) => {
     router.push(path);
   };
-
-  // 初期値としてクエリパラメータを利用
-  useEffect(() => {
-    if (selectedCategoryFromQuery) {
-      setSelectedCategory(selectedCategoryFromQuery);
-    }
-  }, [selectedCategoryFromQuery]);
 
   // APIからメンバー情報を取得
   useEffect(() => {
@@ -47,7 +51,7 @@ const MemberPage: React.FC = () => {
         if (!response.ok) {
           throw new Error("データの取得に失敗しました");
         }
-        const data = await response.json();
+        const data: Member[] = await response.json();
         setMembers(data);
       } catch (error) {
         console.error("メンバー情報の取得エラー:", error);
@@ -59,17 +63,12 @@ const MemberPage: React.FC = () => {
     fetchMembers();
   }, []);
 
-  // メニューの開閉
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
   // 年度ごとのメンバーリストをフィルタ
   const filterMembersByYear = (year: string) => {
     return members.filter((member) => member.year === year);
   };
 
-  // カテゴリごとのデータを表示
+  // カテゴリごとのデータを表示するレンダリング関数
   const renderContent = () => {
     if (loading) {
       return <div>読み込み中...</div>;
@@ -109,10 +108,10 @@ const MemberPage: React.FC = () => {
             {/* 左側の画像 */}
             <div className={styles.imageWrapper}>
               <Image 
-                src={member.src || "/default-image.png"} // 画像URLを適用
+                src={member.src || "/default-image.png"}
                 alt={member.nickname}
                 width={1000}
-                height={0} 
+                height={0}
                 style={{ height: "100%", width: "100%", objectFit: "cover" }}
                 className={styles.memberImage}
               />
@@ -134,14 +133,17 @@ const MemberPage: React.FC = () => {
         </nav>
         <h1 className={styles.circleTitle}>部員紹介</h1>
 
+        {/* Suspense でラップして useSearchParams を利用 */}
+        <Suspense fallback={<div>読み込み中...</div>}>
+          <SearchParamsWrapper setCategory={(cat) => setSelectedCategory(cat)} />
+        </Suspense>
+
         {/* Tab選択カテゴリ */}
         <div className={styles.tabContainer}>
           {["2年生", "3年生", "4年生"].map((category) => (
             <button
               key={category}
-              className={`${styles.tab} ${
-                selectedCategory === category ? styles.activeTab : ""
-              }`}
+              className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
               onClick={() => setSelectedCategory(category)}
             >
               {category}
@@ -154,15 +156,15 @@ const MemberPage: React.FC = () => {
       </div>
 
       {/* ハンバーガーボタン */}
-      <button className={styles.hamburgerButton} onClick={toggleMenu}>
+      <button
+        className={styles.hamburgerButton}
+        onClick={() => setIsMenuOpen((prev) => !prev)}
+      >
         ☰
       </button>
 
       {/* メニューコンテナ */}
-      <div 
-        className={`${styles.paperContainer} ${
-          isMenuOpen ? styles.open : styles.closed
-        }`}>
+      <div className={`${styles.paperContainer} ${isMenuOpen ? styles.open : styles.closed}`}>
         <Menu onClick={handleNavigate} />
       </div>
     </div>
