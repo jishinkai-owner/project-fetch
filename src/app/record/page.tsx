@@ -1,109 +1,105 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./RecordPage.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
 
+// ★ 1) ActivityRecord → RecordContentDTO に置き換える
+interface RecordContentDTO {
+  contentId: number;
+  recordId: number;
+  year: number | null;
+  place: string | null;
+  activityType: string | null;
+  date: string | null;
+  details: string | null;
+  title: string | null;
+  filename: string | null;
+}
+
+// ★ カテゴリと DB の activityType を紐づけるマッピング
+const categoryMap: Record<string, string> = {
+  "山行記録": "yama",
+  "旅行記録": "travel",
+  "釣行記録": "fishing",
+};
+
 const RecordPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
+  // ★ 2) activityRecords → recordContents にリネーム
+  const [recordContents, setRecordContents] = useState<RecordContentDTO[]>([]);
+
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+
   const searchParams = useSearchParams();
   const selectedCategoryFromQuery = searchParams.get("case");
-
   const router = useRouter();
-  const handleNavigate = (path: string) => {
-    router.push(path);
-  };
 
-  // 初期値としてクエリパラメータを利用
+  // 初回ロード時に URL クエリパラメータからカテゴリを設定
   useEffect(() => {
     if (selectedCategoryFromQuery) {
       setSelectedCategory(selectedCategoryFromQuery);
     }
   }, [selectedCategoryFromQuery]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev); // トグルで開閉を切り替え
-  };
+  // ★ 3) DB から全 RecordContentDTO を取得
+  useEffect(() => {
+    const fetchRecordContents = async () => {
+      try {
+        // "/api/recordContents" で、Record と Content を join した配列を返す
+        const res = await fetch("/api/recordContents");
+        if (!res.ok) throw new Error("Failed to fetch recordContents");
+        const data: RecordContentDTO[] = await res.json();
+        setRecordContents(data);
+      } catch (error) {
+        console.error("Error fetching recordContents:", error);
+      }
+    };
+    fetchRecordContents();
+  }, []);
 
-  const renderContent = () => {
-    switch (selectedCategory) {
-      case "山行記録":
-        return <div>
-          <p>山行記録の内容がここに表示されます。</p>
-            {/* 年度セレクター */}
-          <div className={styles.yearSelector}>
-            <select>
-              <option>2024年度</option>
-              <option>2023年度</option>
-              <option>2022年度</option>
-            </select>
-          </div>
+  // カテゴリ変更時は年度選択をリセット
+  useEffect(() => {
+    setSelectedYear(null);
+  }, [selectedCategory]);
 
-          {/* 記録ボタン */}
-          <div className={styles.recordContainer}>
-            <h3>第1回山行 磐梯山</h3>
-            <div className={styles.recordButtons}>
-              {["TATSUHIRO 編", "SOMA 編", "MORIO 編", "TAKEMINE 編"].map((text, index) => (
-                <button key={index} className={styles.recordButton}>
-                  {text}
-                </button>
-              ))}
-            </div>
-            <h3>第2回山行 男体山</h3>
-            <div className={styles.recordButtons}>
-              {["TATSUHIRO 編", "SOMA 編", "MORIO 編", "TAKEMINE 編"].map((text, index) => (
-                <button key={index} className={styles.recordButton}>
-                  {text}
-                </button>
-              ))}
-            </div>
-            <h3>第3回山行 岩手山</h3>
-            <div className={styles.recordButtons}>
-              {["TATSUHIRO 編", "SOMA 編", "MORIO 編", "TAKEMINE 編"].map((text, index) => (
-                <button key={index} className={styles.recordButton}>
-                  {text}
-                </button>
-              ))}
-            </div>
-            <h3>第4回山行 鳥海山</h3>
-            <div className={styles.recordButtons}>
-              {["TATSUHIRO 編", "SOMA 編", "MORIO 編", "TAKEMINE 編"].map((text, index) => (
-                <button key={index} className={styles.recordButton}>
-                  {text}
-                </button>
-              ))}
-            </div>
-            <h3>第5回山行 燧ヶ岳</h3>
-            <div className={styles.recordButtons}>
-              {["TATSUHIRO 編", "SOMA 編", "MORIO 編", "TAKEMINE 編"].map((text, index) => (
-                <button key={index} className={styles.recordButton}>
-                  {text}
-                </button>
-              ))}
-            </div>
-            <h3>長期山行 幻の八ヶ岳</h3>
-            <div className={styles.recordButtons}>
-              {["EISHIN CAR 組","C3 レンタカー組"].map((text, index) => (
-                <button key={index} className={styles.recordButton}>
-                  {text}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>;
-      case "旅行記録":
-        return <div>旅行記録の内容がここに表示されます。</div>;
-      case "釣行記録":
-        return <div>釣行記録の内容がここに表示されます。</div>;
-      default:
-        return <div>どの記録が見たいかな？選択してね！</div>;
-    }
-  };
+  // 選択されたカテゴリに対応するレコードのみ抽出
+  const filteredRecords = useMemo(() => {
+    if (!selectedCategory) return [];
+    const activityType = categoryMap[selectedCategory] || "";
+    return recordContents.filter((r) => r.activityType === activityType);
+  }, [recordContents, selectedCategory]);
+
+  // filteredRecords から有効な年度 (number) の一覧を生成
+  const years = useMemo(() => {
+    const uniqueYears = new Set<number>();
+    filteredRecords.forEach((r) => {
+      if (r.year !== null) {
+        uniqueYears.add(r.year);
+      }
+    });
+    return Array.from(uniqueYears).sort((a, b) => a - b);
+  }, [filteredRecords]);
+
+  // 選択された年度のレコードのみ抽出
+  const recordsThisYear = useMemo(() => {
+    if (!selectedYear) return [];
+    return filteredRecords.filter((r) => r.year === selectedYear);
+  }, [filteredRecords, selectedYear]);
+
+  // place ごとにまとめるため、ユニークな place を抽出
+  const placeList = useMemo(() => {
+    const uniquePlaces = new Set<string>();
+    recordsThisYear.forEach((r) => {
+      if (r.place) uniquePlaces.add(r.place);
+    });
+    return Array.from(uniquePlaces);
+  }, [recordsThisYear]);
 
   return (
     <div className={styles.pageWrapper}>
@@ -114,11 +110,11 @@ const RecordPage: React.FC = () => {
         </nav>
         <h1 className={styles.circleTitle}>活動記録</h1>
 
-        {/* 画像選択カテゴリ */}
+        {/* カテゴリ選択 */}
         <div className={styles.categoryContainer}>
-          {["山行記録", "旅行記録", "釣行記録"].map((category, index) => (
+          {Object.keys(categoryMap).map((category) => (
             <div
-              key={index}
+              key={category}
               className={`${styles.categoryCard} ${
                 selectedCategory === category ? styles.activeCard : styles.inactiveCard
               }`}
@@ -136,37 +132,71 @@ const RecordPage: React.FC = () => {
           ))}
         </div>
 
-        {/* Tab選択カテゴリ */}
-        <div className={styles.tabContainer}>
-          {["山行記録", "旅行記録", "釣行記録"].map((category) => (
-            <button
-              key={category}
-              className={`${styles.tab} ${
-                selectedCategory === category ? styles.activeTab : ""
-              }`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        {/* カテゴリが選択されている場合 */}
+        {selectedCategory && (
+          <div>
+            {/* 年度ドロップダウン */}
+            {years.length === 0 ? (
+              <p>まだ {selectedCategory} のデータがありません。</p>
+            ) : (
+              <div className={styles.yearSelector}>
+                <select
+                  onChange={(e) => setSelectedYear(Number(e.target.value) || null)}
+                  value={selectedYear ?? ""}
+                >
+                  <option value="">年度を選択</option>
+                  {years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}年度
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
 
-        {/* 選択されたカテゴリの内容 */}
-        <div className={styles.contentContainer}>{renderContent()}</div>
-
+            {/* 選択された年度があれば、場所ごとにボタンを並べる */}
+            {selectedYear && (
+              <div className={styles.recordContainer}>
+                {placeList.map((place) => (
+                  <div key={place}>
+                    <h3>{place}</h3>
+                    <div className={styles.recordButtons}>
+                      {recordsThisYear
+                        .filter((r) => r.place === place)
+                        .map((record) => (
+                          <button
+                            key={record.contentId}
+                            className={styles.recordButton}
+                            onClick={() => {
+                              if (record.filename) {
+                                // filename をルーティングに使う場合の例:
+                                router.push(`/record/${encodeURIComponent(record.filename)}`);
+                              }
+                            }}
+                          >
+                            {record.title || "No Title"}
+                          </button>
+                        ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ハンバーガーボタン */}
-      <button className={styles.hamburgerButton} onClick={toggleMenu}>
+      <button
+        className={styles.hamburgerButton}
+        onClick={() => setIsMenuOpen((prev) => !prev)}
+      >
         ☰
       </button>
 
       {/* メニューコンテナ */}
-      <div 
-        className={`${styles.paperContainer} ${
-          isMenuOpen ? styles.open : styles.closed
-        }`}>
-        <Menu onClick={handleNavigate} />
+      <div className={`${styles.paperContainer} ${isMenuOpen ? styles.open : styles.closed}`}>
+        <Menu onClick={router.push} />
       </div>
     </div>
   );

@@ -9,7 +9,7 @@
 
 /* ====== パソコンサイズのレイアウト ====== */
 .page {
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,9 +44,9 @@
   top: 0;
   right: 0;
   background-color: #e4c89b;
-  width: 25%;
-  max-width: 350px;
-  height: 100vh;
+  width: 30%;
+  max-width: 400px;
+  height: 100%;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -116,13 +116,12 @@
 
   /* メニューをハンバーガー化 */
   .paperContainer {
-    width: 50%;
-    max-width: 80%;
+    width: 80%;
+    max-width: 300px;
     height: 100%;
     display: flex; 
     justify-content: center;
     align-items: center;
-    max-width: none;
     position: fixed;
     right: 0;
     top: 0;

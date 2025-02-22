@@ -2,8 +2,23 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["live.staticflickr.com"], 
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "gfcvqixevbidquwttgow.supabase.co",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "live.staticflickr.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
 };
+
+
 
 export default nextConfig;
