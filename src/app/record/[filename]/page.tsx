@@ -1,57 +1,46 @@
 import { PrismaClient } from "@prisma/client";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import styles from "./page.module.scss";
 
 export const dynamic = "force-dynamic";
-export const dynamicParams = true;
 
 const prisma = new PrismaClient();
 
-export default async function RecordDetailPage({
-  params: { filename },
-}: {
+interface PageProps {
   params: { filename: string };
-}) {
-  // URL パラメータをデコード
-  const decodedFilename = decodeURIComponent(filename);
+}
 
-  // Content テーブルから filename が一致するレコードを取得
-  // 同時に Record テーブルも include して紐づく情報を参照
-  const content = await prisma.content.findFirst({
-    where: { filename: decodedFilename },
-    include: { Record: true },
-  });
-
-  if (!content) {
-    notFound();
+export default async function RecordDetailPage({ params }: PageProps) {
+  if (!params || !params.filename) {
+    return notFound();
   }
 
-  // images があれば、それらを有効な URL のみフィルタリング
-  const imageUrls: string[] = Array.isArray(content.images) ? content.images : [];
-  const validImageUrls = imageUrls.filter(
-    (url) => typeof url === "string" && (url.startsWith("http://") || url.startsWith("https://"))
-  );
+  const decodedFilename = decodeURIComponent(params.filename);
+
+  const record = await prisma.recordContent.findFirst({
+    where: { filename: decodedFilename },
+  });
+
+  if (!record) {
+    return notFound();
+  }
 
   return (
-    <div className={styles.container}>
-      {/* Record テーブルの情報を表示 (year, place など) */}
-      <h1 className={styles.heading}>
-        {content.Record?.year}年 {content.Record?.place} / {content.title}
-      </h1>
+    <div style={{ padding: "1rem" }}>
+      <h1>{record.filename}</h1>
 
-      {/* 本文 */}
+      {/* 記録本文 (HTMLを解釈) */}
       <div
-        className={styles.recordBody}
-        dangerouslySetInnerHTML={{ __html: content.content || "" }}
+        style={{ border: "1px solid #ccc", padding: "1rem", marginTop: "1rem" }}
+        dangerouslySetInnerHTML={{ __html: record.content || "" }}
       />
 
       {/* 画像一覧 */}
-      {validImageUrls.length > 0 && (
-        <div className={styles.imageGrid}>
-          <h2 className={styles.imageTitle}>画像一覧</h2>
-          <div className={styles.imagesWrapper}>
-            {validImageUrls.map((imgUrl, idx) => (
+      {record.images && record.images.length > 0 && (
+        <div style={{ marginTop: "2rem" }}>
+          <h2>画像一覧</h2>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            {record.images.map((imgUrl, idx) => (
               <Image
                 key={idx}
                 src={imgUrl}

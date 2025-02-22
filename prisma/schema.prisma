@@ -47,6 +47,7 @@ model Record {
   date         String?
   activityType String?
   details      String?
+  contents     Content[] @relation("RecordToContent") // 🔴 リレーション名を追加
 
   @@unique([year, place, activityType])
 }
@@ -58,7 +59,7 @@ model Content {
   images   String[]
   filename String?
   recordId Int
-  Record   Record   @relation(fields: [recordId], references: [id])
+  Record   Record   @relation(fields: [recordId], references: [id], name: "RecordToContent") // 🔴 リレーション名を追加
 
   @@unique([recordId, filename])
 }
