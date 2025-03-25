@@ -8,9 +8,15 @@ import Menu from "@/components/Menu/Menu";
 import { qaData, QaCategory } from "./qaData";
 
 // Suspense でラップするコンポーネント
-function SearchParamsWrapper({ setSelectedCategory }: { setSelectedCategory: (category: QaCategory) => void }) {
+function SearchParamsWrapper({
+  setSelectedCategory,
+}: {
+  setSelectedCategory: (category: QaCategory) => void;
+}) {
   const searchParams = useSearchParams();
-  const selectedCategoryFromQuery = searchParams.get("case") as QaCategory | null;
+  const selectedCategoryFromQuery = searchParams.get(
+    "case"
+  ) as QaCategory | null;
 
   React.useEffect(() => {
     if (selectedCategoryFromQuery) {
@@ -23,7 +29,8 @@ function SearchParamsWrapper({ setSelectedCategory }: { setSelectedCategory: (ca
 
 const QaPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<QaCategory>("登山編");
+  const [selectedCategory, setSelectedCategory] =
+    useState<QaCategory>("登山編");
 
   const router = useRouter();
   const handleNavigate = (path: string) => {
@@ -44,9 +51,16 @@ const QaPage: React.FC = () => {
       <div className={styles.qaList}>
         {categoryData.map((qa, index) => (
           <div key={index} className={styles.qaItem}>
-            <p className={styles.question}><strong>Q: {qa.question}</strong></p>
+            <p className={styles.question}>
+              <strong>Q: {qa.question}</strong>
+            </p>
             <p className={styles.answer}>
-              {qa.answer.split("\n").map((line, i) => <span key={i}>{line}<br/></span>)}
+              {qa.answer.split("\n").map((line, i) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
             </p>
           </div>
         ))}
@@ -58,7 +72,8 @@ const QaPage: React.FC = () => {
     <div className={styles.pageWrapper}>
       <div className={styles.page}>
         <nav className={styles.breadcrumb}>
-          <Link href="/">Home</Link> <span> &gt; </span> <span>よくある質問</span>
+          <Link href="/">Home</Link> <span> &gt; </span>{" "}
+          <span>よくある質問</span>
         </nav>
         <h1 className={styles.circleTitle}>よくある質問</h1>
 
@@ -71,7 +86,9 @@ const QaPage: React.FC = () => {
           {Object.keys(qaData).map((category) => (
             <button
               key={category}
-              className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
+              className={`${styles.tab} ${
+                selectedCategory === category ? styles.activeTab : ""
+              }`}
               onClick={() => setSelectedCategory(category as QaCategory)}
             >
               {category}
@@ -82,8 +99,14 @@ const QaPage: React.FC = () => {
         <div className={styles.contentContainer}>{renderContent()}</div>
       </div>
 
-      <button className={styles.hamburgerButton} onClick={toggleMenu}>☰</button>
-      <div className={`${styles.paperContainer} ${isMenuOpen ? styles.open : styles.closed}`}>
+      <button className={styles.hamburgerButton} onClick={toggleMenu}>
+        ☰
+      </button>
+      <div
+        className={`${styles.paperContainer} ${
+          isMenuOpen ? styles.open : styles.closed
+        }`}
+      >
         <Menu onClick={handleNavigate} />
       </div>
     </div>

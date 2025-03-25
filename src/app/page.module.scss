@@ -23,7 +23,11 @@
   width: 100%;
   height: auto;
   padding: 3%;
-  gap: 10%;
+  // gap: 10%;
+  justify-content: center;
+  align-items: center;
+  gap: 5% 10%;
+  justify-content: center;
 }
 .Climbing,
 .Traveling,
@@ -38,6 +42,62 @@
 .board {
   margin-bottom: 10%;
 }
+
+// .mascot {
+//   position: relative;
+//   width: 100%;
+//   max-width: 200px;
+//   margin: 20px auto;
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .character {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// /* Speech balloon text styling */
+// .speechBalloon {
+//   position: absolute;
+//   z-index: 3;
+//   top: 100px; /* Adjust this value to match mouth position */
+//   right: -50px; /* Adjust position relative to character */
+//   width: 150px;
+//   text-align: center;
+//   font-size: 14px;
+//   color: #000;
+// }
+
+// /* Speech balloon image styling */
+// .balloon {
+//   position: absolute;
+//   z-index: 2;
+//   top: 70px; /* Adjust this to align with the mouth */
+//   right: -80px; /* Adjust this to position the balloon */
+//   width: 200px;
+//   height: auto;
+// }
+
+// /* Responsive adjustments */
+// @media (max-width: 768px) {
+//   .mascot {
+//     margin: 10px auto;
+//   }
+  
+//   .speechBalloon {
+//     top: 80px; /* Adjust for mobile */
+//     right: -40px;
+//     width: 120px;
+//     font-size: 12px;
+//   }
+  
+//   .balloon {
+//     top: 60px;
+//     right: -60px;
+//     width: 150px;
+//   }
+// }
 
 .paperContainer {
   position: fixed;
