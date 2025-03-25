@@ -1,0 +1,23 @@
+.tiptap {
+  p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  
+}
+img {
+  display: block;
+  max-width: 90%;
+}
+}
+.ProseMirror {
+  height: 60vh;
+  border: none;
+  overflow-y: scroll;
+  padding: 2px 10px 2px 10px;
+  &:focus {
+    outline: none;
+  }
+}

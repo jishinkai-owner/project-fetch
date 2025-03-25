@@ -8,18 +8,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Member {
-  id        String   @id @default(uuid())
-  nickname  String
-  createdAt DateTime @default(now())
-  major     String?
-  profile   String?
-  name      String?
-  role      String?
-  year      String
-  src       String?
-}
-
 model ActivityRecord {
   title        String?
   year         Int?
@@ -31,6 +19,43 @@ model ActivityRecord {
   details      String?
 }
 
+model Content {
+  id       Int      @id @default(autoincrement())
+  title    String?
+  content  String?
+  images   String[]
+  filename String?  @unique
+  recordId Int
+  Record   Record   @relation(fields: [recordId], references: [id])
+
+  @@unique([recordId, filename])
+}
+
+model Member {
+  id        String   @id
+  nickname  String
+  createdAt DateTime @default(now())
+  major     String?
+  profile   String?
+  name      String?
+  role      String?
+  year      String
+  src       String?
+}
+
+model Record {
+  id               Int               @id @default(autoincrement())
+  year             Int?
+  place            String?
+  date             String?
+  activityType     String?
+  details          String?
+  Content          Content[]
+  PostHikeContents PostHikeContent[] @relation("RecordToPostHikeContent")
+
+  @@unique([year, place, activityType])
+}
+
 model RecordContent {
   year      Int?
   content   String?
@@ -40,26 +65,25 @@ model RecordContent {
   id        Int      @id @default(autoincrement())
 }
 
-model Record {
-  id           Int       @id @default(autoincrement())
-  year         Int?
-  place        String?
-  date         String?
-  activityType String?
-  details      String?
-  contents     Content[] @relation("RecordToContent") // 🔴 リレーション名を追加
-
-  @@unique([year, place, activityType])
+model User {
+  id    String   @id @default(uuid())
+  email String   @unique
+  role  String[]
 }
 
-model Content {
-  id       Int      @id @default(autoincrement())
-  title    String?
-  content  String?
-  images   String[]
-  filename String?
-  recordId Int
-  Record   Record   @relation(fields: [recordId], references: [id], name: "RecordToContent") // 🔴 リレーション名を追加
+model PostHikeContent {
+  id               Int      @id @default(autoincrement())
+  equipmentPerson  String[]
+  weatherPerson    String[]
+  mealPerson       String[]
+  sl               String?
+  equipmentComment String?
+  weatherComment   String?
+  mealComment      String?
+  slComemnt        String?
+  recordId         Int
+  clId             String
+  Record           Record   @relation(fields: [recordId], references: [id], name: "RecordToPostHikeContent")
 
-  @@unique([recordId, filename])
+  @@unique([recordId])
 }
