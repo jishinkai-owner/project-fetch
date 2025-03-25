@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Member {
+  id        String   @id @default(uuid())
+  nickname  String
+  createdAt DateTime @default(now())
+  major     String?
+  profile   String?
+  name      String?
+  role      String?
+  year      String
+  src       String?
+}
+
+model ActivityRecord {
+  title        String?
+  year         Int?
+  date         String?
+  filename     String?
+  place        String?
+  id           Int     @id @default(autoincrement())
+  activityType String?
+  details      String?
+}
+
+model RecordContent {
+  year      Int?
+  content   String?
+  images    String[]
+  createdAt DateTime @default(now())
+  filename  String?
+  id        Int      @id @default(autoincrement())
+}
+
+model Record {
+  id               Int               @id @default(autoincrement())
+  year             Int?
+  place            String?
+  date             String?
+  activityType     String?
+  details          String?
+  contents         Content[]         @relation("RecordToContent") // 🔴 リレーション名を追加
+  PostHikeContents PostHikeContent[] @relation("RecordToPostHikeContent")
+
+  @@unique([year, place, activityType])
+}
+
+model Content {
+  id       Int      @id @default(autoincrement())
+  title    String?
+  content  String?
+  images   String[]
+  filename String?
+  recordId Int
+  Record   Record   @relation(fields: [recordId], references: [id], name: "RecordToContent") // 🔴 リレーション名を追加
+
+  @@unique([recordId, filename])
+}
+
+model PostHikeContent {
+  id               Int     @id @default(autoincrement())
+  equipmentPerson  String?
+  weatherPerson    String?
+  mealPerson       String?
+  sl               String?
+  equipmentComment String?
+  weatherComment   String?
+  mealComment      String?
+  slComemnt        String?
+  recordId         Int
+  Record           Record  @relation(fields: [recordId], references: [id], name: "RecordToPostHikeContent")
+
+  @@unique([recordId])
+}
