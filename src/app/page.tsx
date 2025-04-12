@@ -83,7 +83,7 @@ const Page: React.FC = () => {
 
       <div 
         id="navigation-menu"
-        className={`${styles.paperContainer} ${isMenuOpen ? styles.open : styles.closed}`}
+        className={`${styles.paperContainer} ${styles.darkWood} ${isMenuOpen ? styles.open : styles.closed}`}
       >
         <Menu onClick={handleNavigate} />
       </div>
