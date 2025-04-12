@@ -67,11 +67,8 @@
 .recordcontainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1rem;
   width: 100%;
   max-width: 850px; /* 少し幅を狭めて集約感を高める */
-  padding: 0.5rem;
-  margin: 0 auto;
   position: relative;
   z-index: 2;
 }
@@ -222,29 +219,18 @@
 
   .recordcontainer {
     grid-template-columns: 1fr;
-    grid-gap: 0.5rem; /* 余白を半分に縮小 */
-    padding: 0.25rem; /* パディングも縮小 */
-    margin-top: calc(5rem - 3rem); /* マージンを調整 */
-    max-width: 95%; /* モバイルでの最大幅を調整 */
+    justify-items: center;
   }
 
   .Climbing,
   .Traveling,
   .Fishing {
     /* アスペクト比を使わず、高さを調整 */
-    min-height: 140px; /* スマホでの最小高さを小さく */
+    min-height: 100px; /* スマホでの最小高さを小さく */
     max-height: 180px; /* スマホでの最大高さを制限 */
-    padding: 0.25rem;
-    margin-bottom: calc(6rem - 3rem); /* マージンを調整 */
-    width: 90%;
-    /* 回転角度を小さく */
-    &:nth-child(odd) {
-      transform: rotate(0.5deg);
-    }
-    
-    &:nth-child(even) {
-      transform: rotate(-0.5deg);
-    }
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* メニューをハンバーガー化 */
