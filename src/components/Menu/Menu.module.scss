@@ -6,7 +6,7 @@
     overflow: hidden;
     width: auto;
     height: 100vh;
-    background-color: #F2D6A7;
+    background-color: #fff;
     padding: 10%;
     z-index: 1;
   }
@@ -26,13 +26,23 @@
   .Recordimage,
   .Shinkanimage,
   .Qaimage,
-  .Memberimage,
-  .Loginimage {
+  .Memberimage {
     display: block;
     width: 100%;
     height: auto;
     max-width: 90%;
     max-height: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .Loginimage {
+    display: block;
+    width: 75%;
+    height: auto;
+    max-width: 90%;
+    max-height: auto;
+    margin-top: 10%;
     position: relative;
     z-index: 1;
   }

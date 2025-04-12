@@ -1,51 +1,131 @@
 .container {
   display: flex;
-  background-color: #f0e1c5; /* 背景色 */
+  background-color: #f0e1c5;
   color: #000;
   min-height: 100vh;
-  height: auto; /* コンテンツに応じて伸びる */
+  height: auto;
   position: relative;
+  overflow-x: hidden;
 }
 
 /* ====== パソコンサイズのレイアウト ====== */
 .page {
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  padding: 0;
+  position: relative;
+  
+  /* ノートのグリッド模様の背景 */
+  background-color: #f9f5eb; /* クリーム色の背景 */
+  background-image: 
+    linear-gradient(to right, rgba(150, 150, 150, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 150, 150, 0.3) 1px, transparent 1px);
+  background-size: 20px 20px; /* グリッドのサイズ */
+  
+  /* ノートの罫線（左側の赤い線） */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 40px; /* 左からの距離 */
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background-color: rgba(220, 75, 75, 0.6); /* 薄い赤色 */
+    z-index: 1;
+  }
+}
+
+/* ヘッダーエリア全体をグレーの背景に - 全幅 */
+.headerArea {
+  width: 100%;
+  background-color: rgba(197, 226, 213, 0.7); /* より濃いグレー */
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem; /* 上下のパディングのみ設定して横は全幅に */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2; /* グリッド線より前面に */
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 1);
+
+}
+
+.boardContainer {
+  width: 100%;
+  max-width: 900px; /* コンテンツエリアと同じ最大幅 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem; /* 左右のパディングはコンテナ内に設定 */
+}
+
+.board {
+  max-width: 60%;
+  height: auto;
 }
 
 .recordcontainer {
-  display: flex;
-  flex-direction: row; /* 横並び */
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
   width: 100%;
-  height: auto;
-  padding: 3%;
-  gap: 10%;
-}
-.Climbing,
-.Traveling,
-.Fishing,
-.board {
-  width: 40%; 
-  height: auto;
-  max-width: 400px;
+  max-width: 900px;
+  padding: 0.5rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2; /* グリッド線より前面に */
+
 }
 
 .Climbing,
-.board {
-  margin-bottom: 10%;
+.Traveling,
+.Fishing {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s ease;
+
+  
+  /* 回転効果（自然な感じに） */
+  &:nth-child(odd) {
+    transform: rotate(1deg);
+    
+    &:hover {
+      transform: rotate(0deg);
+    }
+  }
+  
+  &:nth-child(even) {
+    transform: rotate(-1deg);
+    
+    &:hover {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+/* 下部に表示するフィッシングコンポーネントの調整 */
+.Fishing {
+  margin-bottom: 0;
 }
 
 .paperContainer {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: #e4c89b;
+  background-color: #756242;
   width: 30%;
-  max-width: 400px;
+  max-width: 350px;
+  min-width: 250px;
   height: 100%;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -53,19 +133,26 @@
   align-items: center;
   justify-content: space-evenly;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  z-index: 10;
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
     
+  &.closed {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
 
-    &.closed {
-        transform: translateX(100%); /* 右に隠す */
-        opacity: 0;
-        pointer-events: none; /* クリックを無効化 */
-    }
+  &.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
 
-    &.open {
-        transform: translateX(0); /* 表示する */
-        opacity: 1;
-        pointer-events: auto; /* クリックを有効化 */
-    }
+/* メニュー内のアイテム間の間隔を調整 */
+:global(.menu-item) {
+  margin-bottom: 0.75rem;
 }
 
 /* ハンバーガーメニュー */
@@ -84,12 +171,16 @@
   text-align: center;
   line-height: 50px;
   z-index: 1000;
+  cursor: pointer;
 
   &:hover {
-      background-color: #f0f0f0;
+    background-color: #f0f0f0;
+  }
+  
+  &:focus {
+    outline: 2px solid #007bff;
   }
 }
-
 
 /* ====== スマホサイズのレイアウト ====== */
 @media (max-width: 768px) {
@@ -99,19 +190,36 @@
     width: 100%;
   }
 
-  .recordcontainer {
-    flex-direction: column; /* 縦並び */
-    align-items: center;
-    gap: 20px;
+  .page {
     width: 100%;
+    padding: 0;
+    
+    &::before {
+      left: 20px; /* モバイルでは左の余白を小さく */
+    }
   }
 
-  .board,
+  .headerArea {
+    padding: 1.5rem 0;
+    margin-bottom: 1rem;
+  }
+
+  .board {
+    max-width: 75%;
+  }
+
+  .recordcontainer {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    padding: 0.5rem;
+  }
+
   .Climbing,
   .Traveling,
   .Fishing {
-    width: 100%;
-    margin-bottom: 10%;
+    aspect-ratio: 3/2;
+    padding: 0.25rem;
+    margin-bottom: 0.75rem;
   }
 
   /* メニューをハンバーガー化 */
@@ -120,8 +228,8 @@
     max-width: 300px;
     height: 100%;
     display: flex; 
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    padding-top: 4rem; 
     position: fixed;
     right: 0;
     top: 0;
@@ -137,5 +245,30 @@
 
   .hamburgerButton {
     display: block;
+  }
+}
+
+/* タブレットサイズのレイアウト調整 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .page {
+    width: 65%;
+    
+    &::before {
+      left: 30px; /* タブレットでは中間の位置に */
+    }
+  }
+  
+  .paperContainer {
+    width: 35%;
+  }
+}
+
+/* ===== アクセシビリティの改善 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .paperContainer,
+  .Climbing,
+  .Traveling,
+  .Fishing {
+    transition: none;
   }
 }
