@@ -80,12 +80,17 @@ const Page: React.FC = () => {
       >
         {isMenuOpen ? "×" : "☰"}
       </button>
-
-      <div 
-        id="navigation-menu"
-        className={`${styles.paperContainer} ${styles.darkWood} ${isMenuOpen ? styles.open : styles.closed}`}
-      >
-        <Menu onClick={handleNavigate} />
+      <div>
+        <div 
+          id="navigation-menu"
+          className={`${styles.WhiteContainer} ${isMenuOpen ? styles.open : styles.closed}`}
+        >
+          <div 
+            className={`${styles.PaperContainer} ${styles.darkWood}`}
+          >
+            <div className={styles.Menu}><Menu onClick={handleNavigate} /></div>
+          </div>
+        </div>
       </div>
     </div>
   );
