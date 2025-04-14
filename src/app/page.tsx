@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.scss";
 import Image from "next/image";
@@ -11,44 +11,59 @@ import Menu from "@/components/Menu/Menu";
 
 const Page: React.FC = () => {
   // デスクトップとモバイルでの挙動を区別するためのstate
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
-  // 画面サイズに応じてモバイルモードを検出
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
-      setIsMenuOpen(window.innerWidth > 768);
-    };
+  // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
+  const checkScreenSize = useCallback(() => {
+    const mobile = window.innerWidth <= 768;
+    setIsMobile(mobile);
     
-    // 初期チェック
-    checkScreenSize();
-    
-    // リサイズイベントにリスナーを追加
-    window.addEventListener('resize', checkScreenSize);
-    
-    // クリーンアップ関数
-    return () => {
-      window.removeEventListener('resize', checkScreenSize);
-    };
+    // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
+    setIsMenuOpen(!mobile);
   }, []);
+  
+  // 初期化とリサイズイベントの設定
+  useEffect(() => {
+    // ブラウザ環境のみで実行
+    if (typeof window !== 'undefined') {
+      // 初期チェック
+      checkScreenSize();
+      
+      // リサイズイベントにリスナーを追加
+      window.addEventListener('resize', checkScreenSize);
+      
+      // クリーンアップ関数
+      return () => {
+        window.removeEventListener('resize', checkScreenSize);
+      };
+    }
+  }, [checkScreenSize]);
 
-  const handleNavigate = (path: string) => {
+  // ナビゲーション処理
+  const handleNavigate = useCallback((path: string) => {
     router.push(path);
     // モバイルの場合はナビゲーション後にメニューを閉じる
     if (isMobile) {
       setIsMenuOpen(false);
     }
-  };
+  }, [isMobile, router]);
 
-  const toggleMenu = () => {
+  // メニュー開閉のトグル
+  const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
-  };
+  }, []);
+
+  // キーボードでのメニュー操作対応
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape' && isMenuOpen && isMobile) {
+      setIsMenuOpen(false);
+    }
+  }, [isMenuOpen, isMobile]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onKeyDown={handleKeyDown}>
       <div className={styles.page}>
         {/* ヘッダーエリア全体をグレーの背景に */}
         <div className={styles.headerArea}>
@@ -65,12 +80,13 @@ const Page: React.FC = () => {
         </div>
 
         <div className={styles.recordcontainer}>
-          <div className={styles.Climbing}><Climbing/></div>
-          <div className={styles.Traveling}><Traveling/></div>
-          <div className={styles.Fishing}><Fishing/></div>
+          <div className={styles.Climbing}><Climbing /></div>
+          <div className={styles.Traveling}><Traveling /></div>
+          <div className={styles.Fishing}><Fishing /></div>
         </div>
       </div>
 
+      {/* ハンバーガーメニューボタン - モバイル向け */}
       <button 
         className={styles.hamburgerButton} 
         onClick={toggleMenu}
@@ -80,15 +96,17 @@ const Page: React.FC = () => {
       >
         {isMenuOpen ? "×" : "☰"}
       </button>
-      <div>
-        <div 
-          id="navigation-menu"
-          className={`${styles.WhiteContainer} ${isMenuOpen ? styles.open : styles.closed}`}
-        >
-          <div 
-            className={`${styles.PaperContainer} ${styles.darkWood}`}
-          >
-            <div className={styles.Menu}><Menu onClick={handleNavigate} /></div>
+
+      {/* メニューコンテナ */}
+      <div
+        id="navigation-menu"
+        className={`${styles.WhiteContainer} ${isMenuOpen ? styles.open : styles.closed}`}
+        role="navigation"
+        aria-hidden={!isMenuOpen}
+      >
+        <div className={styles.PaperContainer}>
+          <div className={styles.Menu}>
+            <Menu onClick={handleNavigate} />
           </div>
         </div>
       </div>

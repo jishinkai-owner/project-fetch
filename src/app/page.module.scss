@@ -66,6 +66,7 @@
 
 .recordcontainer {
   display: grid;
+  margin-top: 2rem;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
   max-width: 850px; /* 少し幅を狭めて集約感を高める */
@@ -116,16 +117,16 @@
   background:
     linear-gradient(
       90deg,
-      rgba(208, 147, 82, 0.3),  /* 0.6から0.3に変更 */
-      rgba(192, 134, 70, 0.3) 60%,  /* 0.6から0.3に変更 */
-      rgba(208, 147, 82, 0.3)  /* 0.6から0.3に変更 */
+      rgba(208, 147, 82, 0.3),
+      rgba(192, 134, 70, 0.3) 60%,
+      rgba(208, 147, 82, 0.3)
     ),
     repeating-radial-gradient(
       ellipse at 60% 500%,
-      rgba(192, 134, 70, 0.5),  /* 不透明から半透明に変更 */
-      rgba(192, 134, 70, 0.5) 0.2%,  /* 不透明から半透明に変更 */
-      rgba(208, 147, 82, 0.5) 0.6%,  /* 不透明から半透明に変更 */
-      rgba(208, 147, 82, 0.5) 1%  /* 不透明から半透明に変更 */
+      rgba(192, 134, 70, 0.5),
+      rgba(192, 134, 70, 0.5) 0.2%,
+      rgba(208, 147, 82, 0.5) 0.6%,
+      rgba(208, 147, 82, 0.5) 1%
     );
 }
 
@@ -192,8 +193,93 @@
   }
 }
 
+/* ====== 1380px以下のレイアウト ====== */
+@media (max-width: 1380px) {
+  .page {
+    width: 100%;
+  }
+  
+  .hamburgerButton {
+    display: block;
+  }
+  
+  .WhiteContainer {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    
+    &.open {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+
+
+/* ====== 中間サイズ(478-769px)のレイアウト調整 ====== */
+@media (min-width: 471px) and (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .page {
+    width: 100%;
+    
+    &::before {
+      left: 25px;
+    }
+  }
+
+  .headerArea {
+    padding: 1rem 0;
+  }
+
+  .board {
+    max-width: 75%;
+  }
+
+  /* 重要な修正: 特定の幅の範囲でのみ適用される修正 */
+  .recordcontainer {
+    grid-template-columns: 1fr; /* 1列に変更 */
+    max-width: 600px; /* コンテナの幅を制限 */
+    padding: 0 1rem; /* 左右のパディングを確保 */
+  }
+
+  .Climbing,
+  .Traveling,
+  .Fishing {
+    min-height: 140px;
+    max-height: 200px;
+    padding: 5rem;
+    margin-bottom: 1rem; /* 間隔を調整 */
+    transform: rotate(0deg) !important; /* 回転効果を無効化 */
+  }
+
+  /* メニュー関連 */
+  .hamburgerButton {
+    display: block;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 45px;
+    height: 45px;
+  }
+
+  .WhiteContainer {
+    width: 65%;
+    max-width: 300px;
+  }
+
+  .Menu {
+    margin-top: 15%;
+  }
+}
+
 /* ====== スマホサイズのレイアウト ====== */
-@media (max-width: 768px) {
+@media (max-width: 470px) {
   .container {
     flex-direction: column;
     align-items: center;
@@ -214,12 +300,14 @@
   }
 
   .board {
-    max-width: 75%;
+    max-width: 85%;
   }
 
   .recordcontainer {
     grid-template-columns: 1fr;
     justify-items: center;
+    padding: 0 0.75rem;
+    max-width: 100%;
   }
 
   .Climbing,
@@ -231,12 +319,14 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    padding: 1.25rem;
+    transform: rotate(0deg) !important; /* 回転効果を無効化 */
   }
 
   /* メニューをハンバーガー化 */
   .WhiteContainer {
     width: 80%;
-    max-width: 300px;
+    max-width: 280px;
     height: 100%;
     display: flex; 
     justify-content: flex-start;
@@ -245,38 +335,16 @@
     top: 0;
     z-index: 999;
     box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
-    transform: translateX(100%);
   }
 
   .Menu{
     margin-top: 20%;
   }
-
-  .WhiteContainer.open {
-    transform: translateX(0);
-  }
-
+  
   .hamburgerButton {
-    display: block;
-  }
-}
-
-/* タブレットサイズのレイアウト調整 */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .page {
-    width: 65%;
-    
-    &::before {
-      left: 30px;
-    }
-  }
-  
-  .WhiteContainer {
-    width: 35%;
-  }
-  
-  .recordcontainer {
-    grid-gap: 0.75rem; /* タブレットでは中間サイズの余白 */
-    max-width: 700px; /* 幅を調整 */
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    line-height: 40px;
   }
 }
