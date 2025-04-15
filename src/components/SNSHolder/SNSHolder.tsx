@@ -12,8 +12,8 @@ interface SNSHolderProps {
 
 const SNSHolder: React.FC<SNSHolderProps> = ({ 
   className, 
-  twitterUrl = "https://twitter.com/your-account", 
-  instagramUrl = "https://instagram.com/your-account" 
+  twitterUrl = "https://x.com/jishinkai", 
+  instagramUrl = "https://www.instagram.com/jishinkai_tohoku" 
 }) => {
   
   const handleTwitterClick = () => {
@@ -32,45 +32,35 @@ const SNSHolder: React.FC<SNSHolderProps> = ({
       {/* 左下のピン */}
       <div className={styles.PinBottomLeft}></div>
       
-      {/* 大きなInstagramロゴ（背景） */}
-      
-      
-      {/* アイコンのラッパー - 左上に配置 */}
-      <div className={styles.iconWrapper}>
-        {/* Twitter(X)アイコン - 黒背景 */}
-        <div className={styles.iconContainer}>
-            <div 
-            className={styles.twitterContainer}
-            onClick={handleTwitterClick}
-            >
-                <Image 
-                    src="/x-icon.svg" 
-                    alt="Twitter/X" 
-                    className={styles.icon}
-                    width={44}
-                    height={44}
-                    priority
-                />
-            </div>
-            <div 
-            className={styles.instagramContainer} 
-            onClick={handleInstagramClick}
-            >
-                <Image 
-                    src="/instagram-icon.svg" 
-                    alt="Instagram" 
-                    className={styles.icon}
-                    width={60}
-                    height={60}
-                    priority
-                />
-            </div>
-          
-        </div>      
+      {/* SNSアイコンのコンテナ */}
+      <div className={styles.iconsContainer}>
+        {/* Twitter(X)アイコン */}
+        <div className={styles.twitterBox} onClick={handleTwitterClick}>
+          <Image 
+            src="/x-icon.svg" 
+            alt="Twitter/X" 
+            className={styles.xIcon}
+            width={80}
+            height={80}
+            priority
+          />
+        </div>
+        
+        {/* Instagramアイコン */}
+        <div className={styles.instagramBox} onClick={handleInstagramClick}>
+          <Image 
+            src="/instagram-icon.svg" 
+            alt="Instagram" 
+            className={styles.instagramIcon}
+            width={80}
+            height={80}
+            priority
+          />
+        </div>
       </div>
       
-      {/* くまの画像 - kuma.pngを使用 */}
-      <div className={styles.kumaWrapper}>
+      {/* くま画像 */}
+      <div className={styles.kumaContainer}>
         <Image 
           src="/kuma.png" 
           alt="くま" 

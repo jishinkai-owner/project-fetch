@@ -1,94 +1,81 @@
 .container {
-    width: 100%;
-    height: auto;
+    width: 400px;
+    height: 160px; /* 固定高さを設定 */
     position: relative;
     background-color: white;
-    padding: 8% 5%;
+    padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    transition: transform 0.3s ease;
     overflow: hidden;
   }
   
-  .container:hover {
-    transform: scale(1.05);
-  }
   
-  .iconWrapper {
+  /* SNSアイコンのレイアウト調整 */
+  .iconsContainer {
+    width: 60%;
+    margin-top: 10px;
+    justify-content: center;
+    position: absolute;
     display: flex;
-    gap: 20px;
-    align-items: center;
+    gap: 30px; /* アイコン間の間隔 */
+    
   }
   
-  .iconContainer {
+  /* Xアイコンのコンテナ */
+  .twitterBox {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: transform 0.2s ease;
-  }
-  
-  .iconContainer:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Xのアイコン用の黒背景ボタン */
-  .twitterContainer {
     background-color: black;
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    overflow: hidden;
   }
   
-  /* Instagramのアイコン */
-  .instagramContainer {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    overflow: hidden;
+  /* Instagramアイコンのコンテナ */
+  .instagramBox {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background-color: white;
   }
-  
-  .icon {
-    width: 100%;
-    height: auto;
+
+  .twitterBox
+  .instagramBox:hover {
+    transform: scale(1.05);
   }
+
+  .xIcon,
+  .instagramIcon {
+        width: 60px; /* アイコンのサイズ */
+        height: auto; /* アイコンのサイズ */
+        transition: transform 0.2s ease;
+}
   
-  /* くま画像のラッパー */
-  .kumaWrapper {
+  
+  /* くまの画像のコンテナ */
+  .kumaContainer {
     position: absolute;
-    right: 0;
-    bottom: 0;
-    /* 画像がはみ出ないようにオーバーフローを制御 */
-    overflow: hidden;
-    /* コンテンツがコンテナをはみ出さないように */
-    z-index: 2;
+    right: -20px;
+    bottom: -90px; /* 少し下にはみ出させる */
   }
   
   .kuma {
-    width: 150px;
-    height: auto;
-    /* 一部がカードの外に出ないよう位置調整 */
-    transform: translate(20px, 20px);
-    /* 画像の一部をカード内に収める */
-    margin-right: -20px;
-    margin-bottom: -20px;
+    width: auto;
+    height: 200px;
+    transform: rotate(-15deg);
   }
   
-  .mainInstagramLogo {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 70%;
-    height: auto;
-    z-index: 1;
-    opacity: 0.5;
-  }
-  
-  /* ピン要素 - Menuコンポーネントから取得 */
+  /* ピン要素 */
   .PinTopRight, 
   .PinBottomLeft {
     position: absolute;
@@ -111,25 +98,3 @@
     left: 6.66px;
   }
   
-  /* レスポンシブ対応 */
-  @media (max-width: 768px) {
-    .container {
-      padding: 15px;
-    }
-    
-    .iconContainer {
-      width: 50px;
-      height: 50px;
-    }
-    
-    .kumaWrapper {
-      /* スマホサイズでの調整 */
-      right: -5px;
-      bottom: -5px;
-    }
-    
-    .kuma {
-      width: 120px;
-      transform: translate(15px, 15px);
-    }
-  }

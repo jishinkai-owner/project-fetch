@@ -1,3 +1,10 @@
+//このスクリプトは部員リスト（MDXファイル）をJSON形式に変換するためのもので、主な機能は:
+//src/app/member/index.mdxから部員情報を抽出
+//MDXコンテンツから<Member /> コンポーネントの部員情報をパース
+//プロファイル、所属、役割などの詳細情報をJSON形式に変換
+//結果をscripts/members.jsonに保存
+//MDXファイル内の<Member />コンポーネントに含まれる属性（プロフィール、年次、所属など）を解析し、構造化されたJSONデータに変換します。
+
 import fs from "fs-extra";
 import path from "path";
 import { compile } from "@mdx-js/mdx";

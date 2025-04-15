@@ -8,6 +8,7 @@ import Climbing from "@/components/Climbing/Climbing";
 import Fishing from "@/components/Fishing/Fishing";
 import Traveling from "@/components/Traveling/Traveling";
 import Menu from "@/components/Menu/Menu";
+import SNSHolder from "@/components/SNSHolder/SNSHolder"; 
 
 const Page: React.FC = () => {
   // デスクトップとモバイルでの挙動を区別するためのstate
@@ -83,6 +84,12 @@ const Page: React.FC = () => {
           <div className={styles.Climbing}><Climbing /></div>
           <div className={styles.Traveling}><Traveling /></div>
           <div className={styles.Fishing}><Fishing /></div>
+          <div className={styles.SNSHolder}>
+            <SNSHolder 
+              twitterUrl = "https://x.com/jishinkai" 
+              instagramUrl = "https://www.instagram.com/jishinkai_tohoku" 
+            />
+          </div>
         </div>
       </div>
 

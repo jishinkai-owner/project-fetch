@@ -113,6 +113,19 @@
   margin-bottom: 0;
 }
 
+.SNSHolder {
+  width: 100%;
+  height: auto;
+  min-height: 180px; /* Climbingコンポーネントと同じ最小高さ */
+  max-height: 220px; /* Climbingコンポーネントと同じ最大高さ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin-bottom: 1.5rem; /* コンポーネント間の余白 */
+}
+
 .PaperContainer{
   background:
     linear-gradient(
