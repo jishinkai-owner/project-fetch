@@ -41,15 +41,14 @@ model RecordContent {
 }
 
 model Record {
-  id           Int       @id @default(autoincrement())
-  year         Int?
-  place        String?
-  date         String?
-  activityType String?
-  details      String?
-  contents     Content[] @relation("RecordToContent") // 🔴 リレーション名を追加
-
-  @@unique([year, place, activityType])
+  id              Int               @id @default(autoincrement())
+  year            Int?
+  place           String?
+  date            String?
+  activityType    String?
+  details         String?
+  contents        Content[]         @relation("RecordToContent")
+  PostHikeContent PostHikeContent[]
 }
 
 model Content {
@@ -57,9 +56,48 @@ model Content {
   title    String?
   content  String?
   images   String[]
-  filename String?
+  filename String?  @unique
   recordId Int
-  Record   Record   @relation(fields: [recordId], references: [id], name: "RecordToContent") // 🔴 リレーション名を追加
+  authorId String?  @db.Uuid
+  User     User?    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Record   Record   @relation("RecordToContent", fields: [recordId], references: [id])
 
   @@unique([recordId, filename])
+}
+
+model PostHikeContent {
+  id               Int      @id @default(autoincrement())
+  sl               String?
+  equipmentComment String?
+  weatherComment   String?
+  mealComment      String?
+  slComemnt        String?
+  clId             String
+  recordId         Int
+  equipmentPerson  String?
+  weatherPerson    String?
+  mealPerson       String?
+  clName           String?
+  impression       String[]
+  Record           Record   @relation(fields: [recordId], references: [id], onDelete: Cascade)
+}
+
+model Role {
+  isAdmin     Boolean
+  isCL        Boolean
+  isSL        Boolean
+  isMeal      Boolean
+  isEquipment Boolean
+  isWeather   Boolean
+  id          Int     @id @default(autoincrement())
+  userId      String  @unique @db.Uuid
+  User        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  email   String    @unique
+  name    String
+  id      String    @id @db.Uuid
+  Content Content[]
+  Role    Role?
 }
