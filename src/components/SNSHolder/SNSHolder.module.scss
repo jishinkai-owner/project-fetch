@@ -1,0 +1,135 @@
+.container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background-color: white;
+    padding: 8% 5%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .container:hover {
+    transform: scale(1.05);
+  }
+  
+  .iconWrapper {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .iconContainer:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Xのアイコン用の黒背景ボタン */
+  .twitterContainer {
+    background-color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  /* Instagramのアイコン */
+  .instagramContainer {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .icon {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* くま画像のラッパー */
+  .kumaWrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* 画像がはみ出ないようにオーバーフローを制御 */
+    overflow: hidden;
+    /* コンテンツがコンテナをはみ出さないように */
+    z-index: 2;
+  }
+  
+  .kuma {
+    width: 150px;
+    height: auto;
+    /* 一部がカードの外に出ないよう位置調整 */
+    transform: translate(20px, 20px);
+    /* 画像の一部をカード内に収める */
+    margin-right: -20px;
+    margin-bottom: -20px;
+  }
+  
+  .mainInstagramLogo {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 70%;
+    height: auto;
+    z-index: 1;
+    opacity: 0.5;
+  }
+  
+  /* ピン要素 - Menuコンポーネントから取得 */
+  .PinTopRight, 
+  .PinBottomLeft {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    z-index: 3;
+    box-sizing: border-box;
+    background: linear-gradient(313.78deg, #C9A928 0%, #9F851D 83.97%);
+    box-shadow: 1.69517px 1.69517px 3.39034px #BBBBBB, -1.69517px -1.69517px 3.39034px #E2D291;
+    border-radius: 50%;
+  }
+  
+  .PinTopRight {
+    top: 6.66px;
+    right: 6.66px;
+  }
+  
+  .PinBottomLeft {
+    bottom: 6.66px;
+    left: 6.66px;
+  }
+  
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+    
+    .iconContainer {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .kumaWrapper {
+      /* スマホサイズでの調整 */
+      right: -5px;
+      bottom: -5px;
+    }
+    
+    .kuma {
+      width: 120px;
+      transform: translate(15px, 15px);
+    }
+  }

@@ -69,7 +69,7 @@
   margin-top: 2rem;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
-  max-width: 850px; /* 少し幅を狭めて集約感を高める */
+  max-width: 900px; /* 少し幅を狭めて集約感を高める */
   position: relative;
   z-index: 2;
 }
@@ -87,7 +87,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 3rem;
   transition: transform 0.2s ease;
   
   /* 回転効果（自然な感じに） */
@@ -256,7 +256,6 @@
     max-height: 200px;
     padding: 5rem;
     margin-bottom: 1rem; /* 間隔を調整 */
-    transform: rotate(0deg) !important; /* 回転効果を無効化 */
   }
 
   /* メニュー関連 */
@@ -320,7 +319,6 @@
     margin-left: auto;
     margin-right: auto;
     padding: 1.25rem;
-    transform: rotate(0deg) !important; /* 回転効果を無効化 */
   }
 
   /* メニューをハンバーガー化 */
