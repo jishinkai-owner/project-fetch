@@ -1,3 +1,4 @@
+// /record/[type]/page.tsx
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
@@ -102,8 +103,8 @@ const RecordListPage: React.FC = () => {
     const fetchRecordContents = async () => {
       setLoading(true);
       try {
-        // 新しいAPIエンドポイントを使用
-        const res = await fetch(`/api/records/${recordType}`);
+        // 写真で確認したディレクトリ構造に合わせたAPI呼び出し
+        const res = await fetch(`/api/record/${recordType}`);
         if (!res.ok) throw new Error(`Failed to fetch ${recordType} records`);
         const data: RecordContentDTO[] = await res.json();
         setRecordContents(data);
