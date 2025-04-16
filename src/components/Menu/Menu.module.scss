@@ -54,34 +54,8 @@
     transform: scale(1.05);
   }
   
-  .PinTopLeft,
-  .PinTopRight,
-  .PinBottomRight,
-  .PinBottomLeft {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      z-index: 3; 
-      box-sizing: border-box;
-      background: linear-gradient(313.78deg, #C9A928 0%, #9F851D 83.97%);
-      box-shadow: 1.69517px 1.69517px 3.39034px #BBBBBB, -1.69517px -1.69517px 3.39034px #E2D291;
-      border-radius: 50%;
-  }
-
-
-  
-  .PinTopLeft {
-      left: 6.66px;
-  }
-  
-  .PinTopRight {
-      right: 6.66px;
-  }
-  
-  .PinBottomRight {
-      right: 6.66px;
-  }
-  
-  .PinBottomLeft {
-      left: 6.66px;
+  @media (min-width: 471px) and (max-width: 1024px) {
+    .container {
+      margin-top: 15%;
+    }
   }

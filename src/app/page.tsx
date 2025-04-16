@@ -66,18 +66,15 @@ const Page: React.FC = () => {
   return (
     <div className={styles.container} onKeyDown={handleKeyDown}>
       <div className={styles.page}>
-        {/* ヘッダーエリア全体をグレーの背景に */}
-        <div className={styles.headerArea}>
-          <div className={styles.boardContainer}>
-            <Image 
-              src="/jishinkaiboard.svg" 
-              alt="自親会の看板" 
-              className={styles.board}
-              width={500} 
-              height={160} 
-              priority 
-            />
-          </div>
+        <div className={styles.header}>
+          <Image 
+            src="/jishinkaiboard.svg" 
+            alt="自親会の看板" 
+            className={styles.board}
+            width={500} 
+            height={160} 
+            priority 
+          ></Image>
         </div>
 
         <div className={styles.recordcontainer}>
@@ -107,7 +104,7 @@ const Page: React.FC = () => {
       {/* メニューコンテナ */}
       <div
         id="navigation-menu"
-        className={`${styles.WhiteContainer} ${isMenuOpen ? styles.open : styles.closed}`}
+        className={`${styles.Sidebar} ${isMenuOpen ? styles.open : styles.closed}`}
         role="navigation"
         aria-hidden={!isMenuOpen}
       >
