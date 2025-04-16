@@ -1,88 +1,160 @@
 "use client";
 import MainCard from "../main-card";
 import TipTapEditor from "./editor";
-import { useMemo } from "react";
 import Grid from "@mui/material/Grid2";
 import {
   Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  Skeleton,
   Stack,
   TextField,
+  Accordion,
+  Typography,
+  AccordionSummary,
+  AccordionDetails,
+  AccordionActions,
 } from "@mui/material";
-import usePostHikes from "../post-hike/hook";
-import handleContentSubmit from "./hook";
-import { RecordProps } from "@/types/record";
-import { Loading, ErrorMessage } from "../load-status";
-import { useEditorState } from "./hook";
+import { usePostHikes } from "../post-hike/hook";
+import { ErrorMessage } from "../load-status";
+import { useEditorState, useAuthorRecord } from "./hook";
+import HikeSelect from "../post-hike/entry/hike-select";
+import { ExpandMore } from "@mui/icons-material";
+import RecordCard from "../shared/record-card";
+import { useRecordSubmit } from "./hook";
+import SubmitSnackbar from "../snackbar";
+import { useSnackbar } from "../snackbar/hook";
+import { useUserContext } from "@/providers/user";
 
 const EditorPage = () => {
+  const { userId } = useUserContext();
   const { postHikes, isLoading, isError } = usePostHikes();
+  const { authorRecord, isLoadingAuthor, isErrorAuthor } =
+    useAuthorRecord(userId);
+  // const { userId, authorRecord, isLoadingAuthor, isErrorAuthor } =
+  //   useAuthorRecord(userId);
+  // const { content, setContent, recordContent, setRecordContent } =
+  //   useEditorState();
   const { content, setContent, recordContent, setRecordContent } =
     useEditorState();
+  const { open, setOpen, message, setMessage, handleClose, status, setStatus } =
+    useSnackbar();
 
-  const menuItems = useMemo(() => {
-    return postHikes.map((e: RecordProps) => (
-      <MenuItem key={e.id} value={e.id}>
-        {e.place} - {e.date}, {e.year}
-      </MenuItem>
-    ));
-  }, [postHikes]);
+  const submitRecord = useRecordSubmit({
+    recordContent,
+    userId,
+    content,
+    setMessage,
+    setOpen,
+    setStatus,
+  });
 
-  if (isError) return <ErrorMessage />;
+  if (isError || isErrorAuthor) return <ErrorMessage />;
 
   return (
     <MainCard>
-      <Stack spacing={2}>
-        <FormControl fullWidth variant="standard">
-          <InputLabel id="select-mountain-label">山行を選択</InputLabel>
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <Select
-              labelId="select-mountain-label"
-              id="select-mountain-required"
-              value={recordContent.recordId ?? ""}
-              onChange={(e) =>
-                setRecordContent({
-                  ...recordContent,
-                  recordId: Number(e.target.value),
-                })
-              }
-            >
-              {menuItems}
-            </Select>
-          )}
-        </FormControl>
-        <TextField
-          id="title-required"
-          label="タイトル"
-          required
-          variant="standard"
-          onChange={(e) =>
-            setRecordContent({ ...recordContent, title: e.target.value })
-          }
-        />
-        <TipTapEditor setContent={setContent} />
-        <Grid container direction="row" justifyContent="flex-end">
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={() => handleContentSubmit(recordContent, content)}
-            disabled={
-              !content ||
-              !recordContent.title ||
-              !recordContent.recordId ||
-              isLoading
-            }
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography variant="body2" fontWeight={600}>
+            記録を編集する
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Grid
+            container
+            spacing={{ md: 4, sm: 2, xs: 1 }}
+            columns={{ md: 2, sm: 1 }}
+            sx={{
+              justifyContent: "center",
+            }}
           >
-            保存
-          </Button>
-        </Grid>
-      </Stack>
+            {isLoadingAuthor ? (
+              <Skeleton variant="rectangular" height={56} width="100%" />
+            ) : (
+              authorRecord.map((record) => (
+                <RecordCard
+                  key={record.id}
+                  buttonTitle={"反省を見る"}
+                  pushUrl={`/club-members/records/edit/${record.id}`}
+                  title={record.title}
+                  description={record.id}
+                />
+              ))
+            )}
+          </Grid>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion defaultExpanded>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography variant="body2" fontWeight={600}>
+            新しい記録を記入する
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Stack spacing={2}>
+            {isLoading ? (
+              <Skeleton variant="rectangular" height={56} width="100%" />
+            ) : (
+              <HikeSelect
+                records={postHikes}
+                handleChange={(e) =>
+                  setRecordContent((prev) => ({
+                    ...prev,
+                    recordId: Number(e.target.value),
+                  }))
+                }
+              />
+            )}
+            <TextField
+              id="title-required"
+              label="タイトル"
+              required
+              variant="outlined"
+              onChange={
+                (e) =>
+                  setRecordContent((prev) => ({
+                    ...prev,
+                    title: e.target.value,
+                  }))
+                // { ...recordContent, title: e.target.value })
+              }
+            />
+            <TipTapEditor setContent={setContent} />
+            <AccordionActions>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                onClick={
+                  () => submitRecord()
+                  // handleContentSubmit(recordContent, userId, content)
+                }
+                disabled={
+                  !content ||
+                  !recordContent.title ||
+                  !recordContent.recordId ||
+                  !userId ||
+                  isLoading
+                }
+              >
+                保存
+              </Button>
+            </AccordionActions>
+          </Stack>
+        </AccordionDetails>
+      </Accordion>
+      <SubmitSnackbar
+        open={open}
+        handleClose={handleClose}
+        message={message}
+        status={status}
+      />
     </MainCard>
   );
 };

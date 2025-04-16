@@ -1,11 +1,7 @@
 import PostHikeComp from "@/components/post-hike";
 
 const PostHikePage = () => {
-  return (
-    <>
-      <PostHikeComp />
-    </>
-  );
+  return <PostHikeComp />;
 };
 
 export default PostHikePage;

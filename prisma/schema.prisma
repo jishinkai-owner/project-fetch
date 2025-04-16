@@ -26,13 +26,15 @@ model Content {
   images   String[]
   filename String?  @unique
   recordId Int
+  authorId String?  @db.Uuid
   Record   Record   @relation(fields: [recordId], references: [id])
+  User     User?    @relation(fields: [authorId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   @@unique([recordId, filename])
 }
 
 model Member {
-  id        String   @id
+  id        String   @id @default(uuid())
   nickname  String
   createdAt DateTime @default(now())
   major     String?
@@ -53,7 +55,7 @@ model Record {
   Content          Content[]
   PostHikeContents PostHikeContent[] @relation("RecordToPostHikeContent")
 
-  @@unique([year, place, activityType])
+  // @@unique([year, place, activityType])
 }
 
 model RecordContent {
@@ -66,24 +68,43 @@ model RecordContent {
 }
 
 model User {
-  id    String   @id @default(uuid())
-  email String   @unique
-  role  String[]
+  id        String    @id @db.Uuid
+  name      String
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  grade     Int?
+  Role      Role?     @relation("UserToRole")
+  Content   Content[] //Contents that the User authored
+}
+
+model Role {
+  id          Int     @id @default(autoincrement())
+  userId      String  @db.Uuid
+  isAdmin     Boolean
+  isCL        Boolean
+  isSL        Boolean
+  isMeal      Boolean
+  isEquipment Boolean
+  isWeather   Boolean
+  User        User    @relation(fields: [userId], references: [id], name: "UserToRole", onUpdate: Cascade, onDelete: Cascade)
+
+  @@unique([userId])
 }
 
 model PostHikeContent {
   id               Int      @id @default(autoincrement())
-  equipmentPerson  String[]
-  weatherPerson    String[]
-  mealPerson       String[]
+  equipmentPerson  String?
+  weatherPerson    String?
+  mealPerson       String?
   sl               String?
   equipmentComment String?
   weatherComment   String?
   mealComment      String?
   slComemnt        String?
+  impression       String[]
   recordId         Int
   clId             String
-  Record           Record   @relation(fields: [recordId], references: [id], name: "RecordToPostHikeContent")
-
-  @@unique([recordId])
+  clName           String?
+  Record           Record   @relation(fields: [recordId], references: [id], name: "RecordToPostHikeContent", onDelete: Cascade)
 }

@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "PostHikeContent" ALTER COLUMN "equipmentPerson" DROP NOT NULL,
+ALTER COLUMN "equipmentPerson" SET DATA TYPE TEXT,
+ALTER COLUMN "weatherPerson" DROP NOT NULL,
+ALTER COLUMN "weatherPerson" SET DATA TYPE TEXT,
+ALTER COLUMN "mealPerson" DROP NOT NULL,
+ALTER COLUMN "mealPerson" SET DATA TYPE TEXT;

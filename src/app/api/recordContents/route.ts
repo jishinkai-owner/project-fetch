@@ -1,5 +1,5 @@
 // src/app/api/recordContents/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -34,49 +34,6 @@ export async function GET() {
     console.error(error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function POST(req: NextRequest) {
-  const { title, content, filename, recordId } = await req.json();
-
-  try {
-    console.log("posting new content...");
-    if (!title || !content || !recordId) {
-      return NextResponse.json(
-        { error: "title, content, filename, and recordId are all required" },
-        { status: 400 }
-      );
-    }
-
-    const newContent = await prisma.content.create({
-      data: {
-        title,
-        content,
-        filename,
-        recordId,
-      },
-    });
-
-    if (!newContent) {
-      return NextResponse.json(
-        { error: "Failed to post new content" },
-        { status: 500 }
-      );
-    }
-
-    console.log("new content successfully posted: ", newContent);
-    return NextResponse.json(
-      { success: true, data: newContent },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error("API Error: ", error);
-
-    return NextResponse.json(
-      { error: "Failed to post new content", details: error },
       { status: 500 }
     );
   }

@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { useEffect, useRef } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import "./styles.scss";
 import StarterKit from "@tiptap/starter-kit";
@@ -9,11 +10,15 @@ import Toolbar from "./toolbar/index";
 import FloatingBar from "./floating-menu";
 
 type SetContentProps = {
+  content?: string;
   setContent: Dispatch<SetStateAction<string>>;
 };
 
-const TipTapEditor = ({ setContent }: SetContentProps) => {
+const TipTapEditor = ({ content, setContent }: SetContentProps) => {
   // const [content, setContent] = useState("");
+  const isExternalUpdate = useRef(false);
+  const isFirstRender = useRef(true);
+
   const extensions = [
     StarterKit,
     Underline,
@@ -24,10 +29,32 @@ const TipTapEditor = ({ setContent }: SetContentProps) => {
   const editor = useEditor({
     immediatelyRender: false,
     extensions,
+    content: content || "",
     onUpdate: ({ editor }) => {
-      setContent(editor.getHTML());
+      if (!isExternalUpdate.current) {
+        setContent(editor.getHTML());
+      }
     },
   });
+
+  useEffect(() => {
+    if (editor && content && isFirstRender.current) {
+      // Mark that we're updating from an external source
+      isExternalUpdate.current = true;
+      isFirstRender.current = false; // Set to false after the first render
+      // Reset flag after update
+
+      const currentContent = editor.getHTML();
+      if (content !== currentContent) {
+        editor.commands.setContent(content);
+      }
+
+      // Reset flag after update
+      setTimeout(() => {
+        isExternalUpdate.current = false;
+      }, 0);
+    }
+  }, [editor, content]);
 
   if (!editor) {
     return null;

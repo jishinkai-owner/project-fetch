@@ -1,16 +1,13 @@
 [
     {
         "email": "terao.soma.p6@dc.tohoku.ac.jp",
-        "role": [
-            "meal",
-            "admin",
-            "sl"
-        ]
+        "name": "寺尾 聡真"
     },
     {
         "email": "jishinkaihp@gmail.com",
-        "role": [
-            "admin"
-        ]
+        "name": "自然に親しむ会"
+    },
+    {
+        "email": ""
     }
 ]

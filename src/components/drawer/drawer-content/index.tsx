@@ -12,7 +12,7 @@ import Image from "next/image";
 const drawerItem: { title: string; route: string }[] = [
   { title: "記録を記入する", route: "/club-members/records" },
   { title: "天気図", route: "/club-members/weather-chart" },
-  { title: "山行の反省", route: "/club-members/post-hike" },
+  { title: "山行の反省", route: "/club-members/post-hikes" },
   { title: "山行の登録", route: "/club-members/register-hikes" },
 ];
 
@@ -55,6 +55,7 @@ const DrawerContent = () => {
                     variant="body1"
                     color="textPrimary"
                     align="justify"
+                    fontWeight={600}
                   >
                     {item.title}
                   </Typography>

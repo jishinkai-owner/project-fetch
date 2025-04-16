@@ -1,7 +1,17 @@
-import { CircularProgress, Alert } from "@mui/material";
+import { Box, CircularProgress, Alert } from "@mui/material";
 
 export const Loading = () => {
-  return <CircularProgress color="primary" />;
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <CircularProgress color="primary" />
+    </Box>
+  );
 };
 
 export const ErrorMessage = () => {

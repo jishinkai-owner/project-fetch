@@ -1,14 +1,27 @@
 import PostHikeCard from "./card";
 import Grid from "@mui/material/Grid2";
-import usePostHikes from "../hook";
+import { usePostHikes } from "../hook";
 import { RecordProps } from "@/types/record";
 import { Loading, ErrorMessage } from "@/components/load-status";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
+import { Alert } from "@mui/material";
 
 const PostHikeCards = () => {
   const { postHikes, isLoading, isError } = usePostHikes();
 
   const Card = useMemo(() => {
+    if (postHikes.length === 0)
+      return (
+        <Alert
+          severity="info"
+          sx={{
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          記録がありません
+        </Alert>
+      );
     return postHikes.map((e: RecordProps) => (
       <PostHikeCard key={e.id} {...e} />
     ));

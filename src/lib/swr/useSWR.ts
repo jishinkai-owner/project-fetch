@@ -3,7 +3,8 @@ import useSWR from "swr";
 
 export default function useData(url: string) {
   const { data, error, isLoading } = useSWR(url, fetcher, {
-    revalidateOnFocus: false,
+    revalidateOnFocus: true,
+    revalidateOnMount: true,
   });
 
   return {

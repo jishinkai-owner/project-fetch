@@ -1,34 +1,16 @@
-import {
-  Card,
-  CardContent,
-  Typography,
-  Button,
-  Box,
-  CardActions,
-} from "@mui/material";
-import { Fragment } from "react";
 import { RecordProps } from "@/types/record";
+import RecordCard from "@/components/shared/record-card";
 
 const PostHikeCard = (postHike: RecordProps) => {
   return (
-    <Box sx={{ minWidth: 200 }}>
-      <Card variant="outlined">
-        <Fragment>
-          <CardContent>
-            <Typography variant="h5" component="div">
-              {postHike.place}
-            </Typography>
-            <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
-              {postHike.year}/{postHike.date}
-            </Typography>
-            <Typography variant="body2">well meaning and kindly.</Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">反省を見る</Button>
-          </CardActions>
-        </Fragment>
-      </Card>
-    </Box>
+    <RecordCard
+      key={postHike.id}
+      buttonTitle={"反省を見る"}
+      title={postHike.place || "山行"}
+      description={`${postHike.year}/${postHike.date}`}
+      pushUrl={`/club-members/post-hikes/view/${postHike.id}`}
+      // pushParams={postHike.id.toString()}
+    />
   );
 };
 

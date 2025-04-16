@@ -1,34 +1,11 @@
 "use client";
 
-import { Tab, Tabs, Box } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import MainCard from "@/components/main-card";
 import { useState, SyntheticEvent } from "react";
 import PostHikeCards from "@/components/post-hike/post-hike-cards";
 import PostHikeForm from "@/components/post-hike/entry";
-
-type TabPanelProps = {
-  children?: React.ReactNode;
-  dir?: string;
-  index: number;
-  value: number;
-};
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      // style={{ display: value !== index ? "none" : "block" }}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
+import TabPanel from "../tabs";
 
 function a11yProps(index: number) {
   return {
@@ -66,9 +43,6 @@ const PostHikeComp = () => {
       <TabPanel value={value} index={0}>
         <PostHikeCards />
       </TabPanel>
-      {/* <TabPanel value={value} index={0}>
-        <PostHikeCards />
-      </TabPanel> */}
       <TabPanel value={value} index={1}>
         <PostHikeForm />
       </TabPanel>

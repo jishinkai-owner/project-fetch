@@ -1,0 +1,16 @@
+[
+    {
+        "email": "terao.soma.p6@dc.tohoku.ac.jp",
+        "isAdmin": true,
+        "isMeal": true,
+        "isCL": true,
+        "isSL": true,
+        "isEquipment": true,
+        "isWeather": true
+    },
+    {
+        "email": "jishinkaihp@gmail.com",
+        "isAdmin": true,
+        "isCL": true
+    }
+]

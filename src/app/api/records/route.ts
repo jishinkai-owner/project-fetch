@@ -3,10 +3,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-//probably using this one.
-//probably delete posthike and posthikes api later.
-//post new hike info to the Record table
-//this will be used for both 山行の反省 and 活動記録
 export async function GET() {
   try {
     console.log("getting record data...");
@@ -15,11 +11,9 @@ export async function GET() {
 
     const records = await prisma.record.findMany({
       where: {
-        activityType: "yama",
+        // activityType: "yama",
         year: {
           gte: currentYear,
-          //this will be changed to the current year
-          //because only the current year's 反省 is shown
         },
       },
       select: {
@@ -54,8 +48,6 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    //will insert an if statement later for
-    //checking if session is valid
 
     const newRecord = await prisma.record.create({
       data: {

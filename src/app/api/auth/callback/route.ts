@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { PrismaClient } from "@prisma/client";
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -18,15 +18,20 @@ export async function GET(request: Request) {
     if (error || !data) {
       return NextResponse.redirect("/");
     }
-    // const user = prisma.user.findUnique({
-    //   where: { email: data.user.email },
-    // })
 
-    // if (!user) {
-    //   await supabase.auth.signOut();
-    //   //redirect to unauthorized page. change later
-    //   return NextResponse.redirect("/");
-    // }
+    if (data.user && data.user.email) {
+      await prisma.user.upsert({
+        where: {
+          id: data.user.id,
+        },
+        update: {},
+        create: {
+          id: data.user.id,
+          email: data.user.email,
+          name: data.user.user_metadata.name,
+        },
+      });
+    }
 
     const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
     const isLocalEnv = process.env.NODE_ENV === "development";

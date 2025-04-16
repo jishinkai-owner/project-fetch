@@ -16,8 +16,9 @@ const pathMap: pathMap = {
   "/club-members": "ホーム",
   "/club-members/records": "記録を記入する",
   "/club-members/weather-chart": "気象通報",
-  "/club-members/post-hike": "山行の反省",
+  "/club-members/post-hikes": "山行の反省",
   "/club-members/register-hikes": "山行の登録",
+  "/club-members/record": "記録を編集",
 };
 
 const MainLayout = ({ children }: MainLayoutProps) => {
