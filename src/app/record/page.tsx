@@ -1,6 +1,8 @@
+// src/app/record/page.tsx の修正
+
 "use client";
 
-import React, { useEffect, useState, useMemo, Suspense } from "react";
+import React, { useEffect, useState, useMemo, Suspense, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./RecordPage.module.scss";
 import Image from "next/image";
@@ -42,12 +44,60 @@ function SearchParamsWrapper({ setCategory }: { setCategory: (category: keyof ty
 }
 
 const RecordPage: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<keyof typeof categoryMap | null>(null);
   const [recordContents, setRecordContents] = useState<RecordContentDTO[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
   const router = useRouter();
+
+  // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
+  const checkScreenSize = useCallback(() => {
+    const mobile = window.innerWidth <= 900;
+    setIsMobile(mobile);
+    
+    // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
+    setIsMenuOpen(!mobile);
+  }, []);
+  
+  // 初期化とリサイズイベントの設定
+  useEffect(() => {
+    // ブラウザ環境のみで実行
+    if (typeof window !== 'undefined') {
+      // 初期チェック
+      checkScreenSize();
+      
+      // リサイズイベントにリスナーを追加
+      window.addEventListener('resize', checkScreenSize);
+      
+      // クリーンアップ関数
+      return () => {
+        window.removeEventListener('resize', checkScreenSize);
+      };
+    }
+  }, [checkScreenSize]);
+
+  // ナビゲーション処理
+  const handleNavigate = useCallback((path: string) => {
+    router.push(path);
+    // モバイルの場合はナビゲーション後にメニューを閉じる
+    if (isMobile) {
+      setIsMenuOpen(false);
+    }
+  }, [isMobile, router]);
+
+  // メニュー開閉のトグル
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
+
+  // キーボードでのメニュー操作対応
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape' && isMenuOpen && isMobile) {
+      setIsMenuOpen(false);
+    }
+  }, [isMenuOpen, isMobile]);
 
   // ★ DB から全 RecordContentDTO を取得
   useEffect(() => {
@@ -102,7 +152,7 @@ const RecordPage: React.FC = () => {
   }, [recordsThisYear]);
 
   return (
-    <div className={styles.pageWrapper}>
+    <div className={styles.container} onKeyDown={handleKeyDown}>
       <div className={styles.page}>
         {/* ナビゲーション */}
         <nav className={styles.breadcrumb}>
@@ -115,7 +165,7 @@ const RecordPage: React.FC = () => {
           <SearchParamsWrapper setCategory={setSelectedCategory} />
         </Suspense>
 
-        {/* カテゴリ選択 */}
+        {/* カテゴリ選択 - PCサイズ向け */}
         <div className={styles.categoryContainer}>
           {Object.keys(categoryMap).map((category) => (
             <div
@@ -134,6 +184,19 @@ const RecordPage: React.FC = () => {
               />
               <div className={styles.categoryText}>{category}</div>
             </div>
+          ))}
+        </div>
+
+        {/* タブ選択 - モバイルサイズ向け */}
+        <div className={styles.tabContainer}>
+          {Object.keys(categoryMap).map((category) => (
+            <button
+              key={category}
+              className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
+              onClick={() => setSelectedCategory(category as keyof typeof categoryMap)}
+            >
+              {category}
+            </button>
           ))}
         </div>
 
@@ -190,14 +253,29 @@ const RecordPage: React.FC = () => {
         )}
       </div>
 
-      {/* ハンバーガーボタン */}
-      <button className={styles.hamburgerButton} onClick={() => setIsMenuOpen((prev) => !prev)}>
-        ☰
+      {/* ハンバーガーメニューボタン - モバイル向け */}
+      <button 
+        className={styles.hamburgerButton} 
+        onClick={toggleMenu}
+        aria-expanded={isMenuOpen}
+        aria-controls="navigation-menu"
+        aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
+      >
+        {isMenuOpen ? "×" : "☰"}
       </button>
 
       {/* メニューコンテナ */}
-      <div className={`${styles.paperContainer} ${isMenuOpen ? styles.open : styles.closed}`}>
-        <Menu onClick={router.push} />
+      <div
+        id="navigation-menu"
+        className={`${styles.Sidebar} ${isMenuOpen ? styles.open : styles.closed}`}
+        role="navigation"
+        aria-hidden={!isMenuOpen}
+      >
+        <div className={styles.PaperContainer}>
+          <div className={styles.Menu}>
+            <Menu onClick={handleNavigate} />
+          </div>
+        </div>
       </div>
     </div>
   );

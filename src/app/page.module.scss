@@ -25,12 +25,11 @@
 /* ====== パソコンサイズのレイアウト ====== */
 .page {
   display: flex;
-  position: fixed; // fixedからrelativeに変更
+  position: fixed; 
   width: 100%;
-  max-width: calc(100% - 350px); // サイドバーの幅を考慮
+  max-width: calc(100% - 350px); /* サイドバーの幅を考慮 */
   flex-direction: column;
   align-items: center;
-  
 }
 
 .header {
@@ -54,12 +53,12 @@
 .recordcontainer {
   display: grid;
   margin-top: 2rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); // minmaxを使用
-  gap: 2rem; // グリッドアイテム間のギャップを追加
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* minmaxを使用 */
+  gap: 2rem; /* グリッドアイテム間のギャップを追加 */
   width: 100%;
-  max-width: 1000px; // 最大幅を設定
+  max-width: 1000px; /* 最大幅を設定 */
   position: relative;
-  padding: 0 4%; // 両側にパディングを追加
+  padding: 0 4%; /* 両側にパディングを追加 */
   z-index: 2;
 }
 
@@ -75,8 +74,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2%; // パディングを少し小さく
-  margin-bottom: 10%; // マージンも調整
+  padding: 2%; /* パディングを少し小さく */
+  margin-bottom: 10%; /* マージンも調整 */
   z-index: 3;
 }
 
@@ -181,21 +180,24 @@
   }
 }
 
-/* モバイル・タブレット対応 */
+/* スマホ・タブレット対応 (900px以下) */
 @media (max-width: 900px) {
   .page {
-    max-width: 100%; // サイドバーが閉じているときは全幅
-    padding-right: 0; // パディングも削除
+    position: relative;
+    max-width: 100%; /* サイドバーが閉じているときは全幅 */
+    
   }
   
   .hamburgerButton {
-    display: block;
+    display: block; /* ハンバーガーメニューを表示 */
   }
   
   .Sidebar {
-    transform: translateX(100%);
+    transform: translateX(100%); /* 標準で非表示 */
     opacity: 0;
     pointer-events: none;
+    width: 80%; /* 幅を調整 */
+    max-width: 400px;
     
     &.open {
       transform: translateX(0);
@@ -203,118 +205,53 @@
       pointer-events: auto;
     }
   }
-}
-/*@media (min-width: 471px) and (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .page {
-    width: 100%;
-    
-    &::before {
-      left: 25px;
-    }
-  }
-
-  .headerArea {
-    padding: 1rem 0;
-  }
-
-  .board {
-    max-width: 75%;
-  }
-
+  
   .recordcontainer {
-    grid-template-columns: 1fr; 
-    max-width: 600px; 
-    padding: 0 1rem; 
+    grid-template-columns: 1fr; /* 1列に変更 */
+    gap: 1.5rem; /* ギャップを調整 */
+    padding: 1 2rem; /* 両側にパディングを追加 */
+    margin-top: 5%; /* マージンを調整 */
   }
-
+  
   .Climbing,
   .Traveling,
-  .Fishing {
-    min-height: 140px;
-    max-height: 200px;
-    padding: 5rem;
-    margin-bottom: 1rem; 
+  .Fishing,
+  .SNSHolder {
+    min-height: 160px; /* 高さを調整 */
+    margin-bottom: 2rem; /* マージンも調整 */
   }
-  .hamburgerButton {
-    display: block;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 45px;
-    height: 45px;
+  
+  .container::before {
+    left: 20px; /* 罫線位置を調整 */
   }
+  
+  .board {
+    max-width: 80%; /* ボードサイズ調整 */
+  }
+}
 
+/* さらに小さい画面向け微調整 */
+@media (max-width: 480px) {
+  
   .Sidebar {
-    width: 65%;
     max-width: 300px;
   }
 
-  
-}
-
-@media (max-width: 470px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .page {
-    width: 100%;
-    
-    &::before {
-      left: 20px;
-    }
-  }
-
-  .headerArea {
-    padding: 1rem 0; 
-    margin-bottom: 0.5rem; 
-  }
-
-  .board {
-    max-width: 85%;
-  }
 
   .recordcontainer {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    padding: 0 0.75rem;
-    max-width: 100%;
+    grid-template-columns: 1fr; /* 1列に変更 */
+    gap: 1rem; /* ギャップを調整 */
+    padding: 0 2rem; /* 両側にパディングを追加 */
+    margin-top: 1.5rem; /* マージンを調整 */
   }
 
   .Climbing,
   .Traveling,
-  .Fishing {
-    
-    min-height: 100px; 
-    max-height: 180px; 
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1.25rem;
-  }
-
-  .Sidebar {
-    width: 80%;
-    max-width: 280px;
-    height: 100%;
-    display: flex; 
-    justify-content: flex-start;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 999;
-    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
-  }
-
-  .Menu{
-    margin-top: 20%;
+  .Fishing,
+  .SNSHolder {
+    min-height: 140px;
+    margin-bottom: 0.2rem;
+    padding: 5%; /* パディングを少し小さく */
   }
   
   .hamburgerButton {
@@ -324,4 +261,3 @@
     line-height: 40px;
   }
 }
-*/
