@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 // 活動タイプのマッピング
 const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
   yama: "yama",
-  tabi: "travel",
-  tsuri: "fishing"
+  tabi: "tabi",
+  tsuri: "tsuri"
 };
 
 export async function GET(

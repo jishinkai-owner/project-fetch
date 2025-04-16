@@ -79,7 +79,7 @@ export default function RecordDetailPage() {
       try {
         setIsLoading(true);
         // APIエンドポイントはプロジェクトに合わせて調整してください
-        const res = await fetch(`/api/records/${recordType}/${contentId}`);
+        const res = await fetch(`/api/record/${recordType}/${contentId}`);
         
         if (!res.ok) {
           if (res.status === 404) {

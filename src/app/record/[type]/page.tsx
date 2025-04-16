@@ -103,12 +103,12 @@ const RecordListPage: React.FC = () => {
       setLoading(true);
       try {
         // 新しいAPIエンドポイントを使用
-        const res = await fetch(`/api/records/${recordType}`);
-        if (!res.ok) throw new Error(`Failed to fetch ${recordType} records`);
+        const res = await fetch(`/api/record/${recordType}`);
+        if (!res.ok) throw new Error(`Failed to fetch ${recordType} record`);
         const data: RecordContentDTO[] = await res.json();
         setRecordContents(data);
       } catch (error) {
-        console.error(`Error fetching ${recordType} records:`, error);
+        console.error(`Error fetching ${recordType} record:`, error);
       } finally {
         setLoading(false);
       }
@@ -136,7 +136,7 @@ const RecordListPage: React.FC = () => {
   }, [years, selectedYear]);
   
   // 選択された年度のレコードを取得
-  const recordsThisYear = useMemo(() => {
+  const recordThisYear = useMemo(() => {
     if (!selectedYear) return [];
     return recordContents.filter((r) => r.year === selectedYear);
   }, [recordContents, selectedYear]);
@@ -144,11 +144,11 @@ const RecordListPage: React.FC = () => {
   // 場所リスト
   const placeList = useMemo(() => {
     const uniquePlaces = new Set<string>();
-    recordsThisYear.forEach((r) => {
+    recordThisYear.forEach((r) => {
       if (r.place) uniquePlaces.add(r.place);
     });
     return Array.from(uniquePlaces);
-  }, [recordsThisYear]);
+  }, [recordThisYear]);
   
   // 記録クリック処理 - contentIdを使って遷移
   const handleRecordClick = useCallback((contentId: number) => {
@@ -207,7 +207,7 @@ const RecordListPage: React.FC = () => {
               
               {/* 記録一覧表示部分 */}
               {selectedYear && (
-                <div className={styles.recordsWrapper}>
+                <div className={styles.recordWrapper}>
                   {placeList.length === 0 ? (
                     <div className={styles.noDataMessage}>
                       <p>{selectedYear}年度の{currentActivityType.name}記録はありません。</p>
@@ -220,7 +220,7 @@ const RecordListPage: React.FC = () => {
                           {place}
                         </h3>
                         <div className={styles.recordCardList}>
-                          {recordsThisYear
+                          {recordThisYear
                             .filter((r) => r.place === place)
                             .map((record) => (
                               <div 

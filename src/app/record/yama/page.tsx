@@ -87,7 +87,7 @@ const YamaRecordPage: React.FC = () => {
       setLoading(true);
       try {
         // 新しいAPIエンドポイントを使用
-        const res = await fetch("/api/record/content/yama");
+        const res = await fetch("/api/record/yama");
         if (!res.ok) throw new Error("Failed to fetch yama records");
         const data: RecordContentDTO[] = await res.json();
         setRecordContents(data);
