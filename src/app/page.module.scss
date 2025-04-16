@@ -25,11 +25,12 @@
 /* ====== パソコンサイズのレイアウト ====== */
 .page {
   display: flex;
-  position: fixed;
-  width: auto;
-  margin-right: 350px; 
+  position: fixed; // fixedからrelativeに変更
+  width: 100%;
+  max-width: calc(100% - 350px); // サイドバーの幅を考慮
   flex-direction: column;
   align-items: center;
+  
 }
 
 .header {
@@ -52,11 +53,13 @@
 
 .recordcontainer {
   display: grid;
-  margin-top: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); // minmaxを使用
+  gap: 2rem; // グリッドアイテム間のギャップを追加
   width: 100%;
+  max-width: 1000px; // 最大幅を設定
   position: relative;
-  padding: 0 4rem;
+  padding: 0 4%; // 両側にパディングを追加
   z-index: 2;
 }
 
@@ -66,15 +69,14 @@
 .SNSHolder {
   width: 100%;
   height: auto;
-  
-  min-height: 180px; /* 最小の高さを設定 */
-  max-height: 220px; /* 最大の高さを制限 */
+  min-height: 180px;
+  max-height: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  margin-bottom: 3rem;
+  padding: 2%; // パディングを少し小さく
+  margin-bottom: 10%; // マージンも調整
   z-index: 3;
 }
 
@@ -100,7 +102,6 @@
     }
   }
 }
-
 
 .PaperContainer{
   background:
@@ -180,7 +181,12 @@
   }
 }
 
+/* モバイル・タブレット対応 */
 @media (max-width: 900px) {
+  .page {
+    max-width: 100%; // サイドバーが閉じているときは全幅
+    padding-right: 0; // パディングも削除
+  }
   
   .hamburgerButton {
     display: block;
@@ -198,10 +204,6 @@
     }
   }
 }
-
-
-
-/* ====== 中間サイズ(478-769px)のレイアウト調整 ====== 
 /*@media (min-width: 471px) and (max-width: 1024px) {
   .container {
     flex-direction: column;
