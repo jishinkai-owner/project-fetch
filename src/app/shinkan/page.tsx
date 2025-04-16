@@ -136,7 +136,7 @@ const NewcomerPage: React.FC = () => {
             
             <div className={styles.qrCodeWrapper}>
               <Image 
-                src="/qr.jpg" 
+                src="/qr.webp" 
                 alt="LINEオープンチャットのQRコード" 
                 width={200} 
                 height={200} 
@@ -163,10 +163,10 @@ const NewcomerPage: React.FC = () => {
             <h2 className={styles.sectionTitle}>部室の場所</h2>
             <div className={styles.mapWrapper}>
               <Image 
-                src="/map.jpg" 
+                src="/map.webp" 
                 alt="部室の場所の地図" 
                 width={400} 
-                height={300} 
+                height={400} 
                 className={styles.mapImage}
               />
               <p className={styles.locationText}>
