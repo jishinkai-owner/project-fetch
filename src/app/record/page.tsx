@@ -1,4 +1,4 @@
-// src/app/record/page.tsx の修正
+// src/app/record/page.tsx
 
 "use client";
 
@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
 
-// ★ ActivityRecord → RecordContentDTO にリネーム
+// RecordContentDTO 定義
 interface RecordContentDTO {
   contentId: number;
   recordId: number;
@@ -22,12 +22,19 @@ interface RecordContentDTO {
   filename: string | null;
 }
 
-// ★ カテゴリと DB の activityType を紐づけるマッピング
+// カテゴリと DB の activityType を紐づけるマッピング
 const categoryMap = {
   "山行記録": "yama",
-  "旅行記録": "travel",
-  "釣行記録": "fishing",
+  "旅行記録": "tabi",
+  "釣行記録": "tsuri",
 } as const;
+
+// カテゴリごとのアイコン
+const categoryIcons = {
+  "山行記録": "🏔️",
+  "旅行記録": "✈️",
+  "釣行記録": "🎣",
+};
 
 // SearchParamsWrapper コンポーネント: URL のクエリパラメータからカテゴリを取得して更新
 function SearchParamsWrapper({ setCategory }: { setCategory: (category: keyof typeof categoryMap) => void }) {
@@ -42,6 +49,13 @@ function SearchParamsWrapper({ setCategory }: { setCategory: (category: keyof ty
 
   return null;
 }
+
+// 日付をフォーマットする関数
+const formatDate = (dateString: string | null): string => {
+  if (!dateString) return "-";
+  const date = new Date(dateString);
+  return `${date.getMonth() + 1}月${date.getDate()}日`;
+};
 
 const RecordPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -99,7 +113,7 @@ const RecordPage: React.FC = () => {
     }
   }, [isMenuOpen, isMobile]);
 
-  // ★ DB から全 RecordContentDTO を取得
+  // DB から全 RecordContentDTO を取得
   useEffect(() => {
     const fetchRecordContents = async () => {
       try {
@@ -126,15 +140,29 @@ const RecordPage: React.FC = () => {
   }, [recordContents, selectedCategory]);
 
   // filteredRecords から有効な年度 (number) の一覧を生成
-  const years = useMemo(() => {
-    const uniqueYears = new Set<number>();
-    filteredRecords.forEach((r) => {
-      if (r.year !== null) {
-        uniqueYears.add(r.year);
-      }
-    });
-    return Array.from(uniqueYears).sort((a, b) => a - b);
-  }, [filteredRecords]);
+  // 年度のソートと初期選択を設定する部分
+const years = useMemo(() => {
+  const uniqueYears = new Set<number>();
+  filteredRecords.forEach((r) => {
+    if (r.year !== null) {
+      uniqueYears.add(r.year);
+    }
+  });
+  // 降順ソート（新しい年が上）
+  return Array.from(uniqueYears).sort((a, b) => b - a);
+}, [filteredRecords]);
+
+// カテゴリ選択時に最新年度を自動選択する
+useEffect(() => {
+  if (selectedCategory && years.length > 0) {
+    // 最新年度（配列の先頭）を自動選択
+    setSelectedYear(years[0]);
+  } else {
+    setSelectedYear(null);
+  }
+}, [selectedCategory, years]);
+
+
 
   // 選択された年度のレコードのみ抽出
   const recordsThisYear = useMemo(() => {
@@ -150,6 +178,13 @@ const RecordPage: React.FC = () => {
     });
     return Array.from(uniquePlaces);
   }, [recordsThisYear]);
+
+  // 記録をクリックしたときの処理
+  const handleRecordClick = useCallback((filename: string | null) => {
+    if (filename) {
+      router.push(`/record/${encodeURIComponent(filename)}`);
+    }
+  }, [router]);
 
   return (
     <div className={styles.container} onKeyDown={handleKeyDown}>
@@ -202,10 +237,12 @@ const RecordPage: React.FC = () => {
 
         {/* カテゴリが選択されている場合 */}
         {selectedCategory && (
-          <div>
+          <div className={styles.contentWrapper}>
             {/* 年度ドロップダウン */}
             {years.length === 0 ? (
-              <p>まだ {selectedCategory} のデータがありません。</p>
+              <div className={styles.noDataMessage}>
+                <p>まだ {selectedCategory} のデータがありません。</p>
+              </div>
             ) : (
               <div className={styles.yearSelector}>
                 <select
@@ -222,27 +259,39 @@ const RecordPage: React.FC = () => {
               </div>
             )}
 
-            {/* 選択された年度があれば、場所ごとにボタンを並べる */}
+            {/* 選択された年度があれば、場所ごとにグループ化して表示 */}
             {selectedYear && (
-              <div className={styles.recordContainer}>
+              <div className={styles.recordsWrapper}>
                 {placeList.map((place) => (
-                  <div key={place}>
-                    <h3>{place}</h3>
-                    <div className={styles.recordButtons}>
+                  <div key={place} className={styles.placeSection}>
+                    <h3 className={styles.placeTitle}>
+                      <span className={styles.placeIcon}>{categoryIcons[selectedCategory]}</span>
+                      {place}
+                    </h3>
+                    <div className={styles.recordCardList}>
                       {recordsThisYear
                         .filter((r) => r.place === place)
                         .map((record) => (
-                          <button
+                          <div 
                             key={record.contentId}
-                            className={styles.recordButton}
-                            onClick={() => {
-                              if (record.filename) {
-                                router.push(`/record/${encodeURIComponent(record.filename)}`);
-                              }
-                            }}
+                            className={styles.recordCard}
+                            onClick={() => handleRecordClick(record.filename)}
                           >
-                            {record.title || "No Title"}
-                          </button>
+                            <div className={styles.recordCardHeader}>
+                              <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
+                              <span className={styles.recordDate}>{formatDate(record.date)}</span>
+                            </div>
+                            {record.details && (
+                              <p className={styles.recordPreview}>
+                                {record.details.length > 60 
+                                  ? `${record.details.substring(0, 60)}...` 
+                                  : record.details}
+                              </p>
+                            )}
+                            <div className={styles.cardFooter}>
+                              <span className={styles.readMore}>詳細を見る</span>
+                            </div>
+                          </div>
                         ))}
                     </div>
                   </div>
