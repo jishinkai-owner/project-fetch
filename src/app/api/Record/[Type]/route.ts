@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
   yama: "yama",
   tabi: "tabi",
-  tsuri: "tsuri"
+  tsuri: "tsur"
 };
 
 export async function GET(

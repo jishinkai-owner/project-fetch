@@ -47,8 +47,8 @@ export async function GET(
     // 指定されたタイプに合致するかチェック
     const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
       yama: "yama",
-      tabi: "travel",
-      tsuri: "fishing"
+      tabi: "tabi",
+      tsuri: "tsuri"
     };
     
     const requestedType = ACTIVITY_TYPE_MAP[type];
