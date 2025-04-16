@@ -8,18 +8,6 @@
     linear-gradient(to right, rgba(150, 150, 150, 0.3) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(150, 150, 150, 0.3) 1px, transparent 1px);
   background-size: 20px 20px;
-  
-  /* ノートの罫線（左側の赤い線） */
-  &::before {
-    content: '';
-    position: absolute;
-    left: 40px;
-    top: 0;
-    height: 100%;
-    width: 1px;
-    background-color: rgba(220, 75, 75, 0.6);
-    z-index: 1;
-  }
 }
 
 /* ====== パソコンサイズのレイアウト ====== */
