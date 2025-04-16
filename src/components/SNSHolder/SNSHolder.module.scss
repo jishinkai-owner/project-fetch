@@ -1,100 +1,102 @@
+/* コンテナの基本設定はそのまま */
 .container {
-    width: 400px;
-    height: 160px; /* 固定高さを設定 */
-    position: relative;
-    background-color: white;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    overflow: hidden;
-  }
-  
-  
-  /* SNSアイコンのレイアウト調整 */
-  .iconsContainer {
-    width: 60%;
-    margin-top: 10px;
-    justify-content: center;
-    position: absolute;
-    display: flex;
-    gap: 30px; /* アイコン間の間隔 */
-    
-  }
-  
-  /* Xアイコンのコンテナ */
-  .twitterBox {
-    width: 100px;
-    height: 100px;
-    border-radius: 15px;
-    border: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    background-color: black;
-  }
-  
-  /* Instagramアイコンのコンテナ */
-  .instagramBox {
-    width: 100px;
-    height: 100px;
-    border-radius: 15px;
-    border: 1px solid #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    background-color: white;
-  }
-
-  .twitterBox
-  .instagramBox:hover {
-    transform: scale(1.05);
-  }
-
-  .xIcon,
-  .instagramIcon {
-        width: 60px; /* アイコンのサイズ */
-        height: auto; /* アイコンのサイズ */
-        transition: transform 0.2s ease;
+  width: 100%;
+  aspect-ratio: 5 / 2; /* 幅:高さの比率を維持 */
+  max-width: 450px; /* 最大幅を設定 */
+  position: relative;
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  overflow: hidden;
 }
+
+/* SNSアイコンのレイアウト調整 */
+.iconsContainer {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  gap: 10%; /* コンテナの幅に対する相対的な間隔 */
+  top: 12%; /* 上下中央に配置 */
+  left: 3%; /* 左右の位置調整 */
+}
+
+/* Xアイコンのコンテナ */
+.twitterBox,
+.instagramBox {
+  width: 40%; /* コンテナ幅に対する相対サイズ */
+  aspect-ratio: 1 / 1; /* 正方形を維持 */
+  max-width: 100px; /* 最大サイズを制限 */
+  border-radius: 15%;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
   
-  
-  /* くまの画像のコンテナ */
-  .kumaContainer {
-    position: absolute;
-    right: -20px;
-    bottom: -90px; /* 少し下にはみ出させる */
-  }
-  
-  .kuma {
-    width: auto;
-    height: 200px;
-    transform: rotate(-15deg);
-  }
-  
-  /* ピン要素 */
-  .PinTopRight, 
-  .PinBottomLeft {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    z-index: 3;
-    box-sizing: border-box;
-    background: linear-gradient(313.78deg, #C9A928 0%, #9F851D 83.97%);
-    box-shadow: 1.69517px 1.69517px 3.39034px #BBBBBB, -1.69517px -1.69517px 3.39034px #E2D291;
-    border-radius: 50%;
-  }
-  
-  .PinTopRight {
-    top: 6.66px;
-    right: 6.66px;
-  }
-  
-  .PinBottomLeft {
-    bottom: 6.66px;
-    left: 6.66px;
-  }
-  
+}
+
+.twitterBox{
+  background-color: black;
+}
+
+/* Instagramアイコンのコンテナ */
+.instagramBox {
+  border: 1px solid #000;
+  background-color: white;
+}
+
+.twitterBox:hover,
+.instagramBox:hover {
+  transform: scale(1.05);
+}
+
+.xIcon,
+.instagramIcon {
+  width: 60%; /* 親要素に対する相対サイズ */
+  height: auto; /* アスペクト比を維持 */
+  max-width: 60px; /* 最大サイズを制限 */
+  transition: transform 0.2s ease;
+}
+
+/* くまの画像のコンテナ */
+.kumaContainer {
+  position: absolute;
+  right: -5%;
+  bottom: -60%;
+  width: 40%; /* コンテナ幅に対する相対サイズ */
+  height: auto;
+}
+
+.kuma {
+  width: 100%; /* 親要素に対する相対サイズ */
+  height: auto; /* アスペクト比を維持 */
+  transform: rotate(-15deg);
+}
+
+/* ピン要素 */
+.PinTopRight, 
+.PinBottomLeft {
+  position: absolute;
+  width: 4%; /* コンテナ幅に対する相対サイズ */
+  min-width: 10px; /* 最小サイズを確保 */
+  max-width: 15px; /* 最大サイズを制限 */
+  aspect-ratio: 1 / 1; /* 正方形を維持 */
+  z-index: 3;
+  box-sizing: border-box;
+  background: linear-gradient(313.78deg, #C9A928 0%, #9F851D 83.97%);
+  box-shadow: 1.69517px 1.69517px 3.39034px #BBBBBB, -1.69517px -1.69517px 3.39034px #E2D291;
+  border-radius: 50%;
+}
+
+.PinTopRight {
+  top: 5%;
+  right: 3%;
+}
+
+.PinBottomLeft {
+  bottom: 5%;
+  left: 3%;
+}

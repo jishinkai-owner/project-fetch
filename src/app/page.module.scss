@@ -26,6 +26,7 @@
 .page {
   display: flex;
   position: fixed;
+  width: auto;
   margin-right: 350px; 
   flex-direction: column;
   align-items: center;
@@ -51,18 +52,21 @@
 
 .recordcontainer {
   display: grid;
-  margin-top: 2rem;
-  grid-template-columns: repeat(2, auto);
+  margin-top: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
   position: relative;
+  padding: 0 4rem;
   z-index: 2;
 }
 
 .Climbing,
 .Traveling,
-.Fishing {
+.Fishing,
+.SNSHolder {
   width: 100%;
   height: auto;
+  
   min-height: 180px; /* 最小の高さを設定 */
   max-height: 220px; /* 最大の高さを制限 */
   display: flex;
@@ -71,6 +75,12 @@
   justify-content: center;
   padding: 2rem;
   margin-bottom: 3rem;
+  z-index: 3;
+}
+
+.Climbing,
+.Traveling,
+.Fishing {
   transition: transform 0.2s ease;
   
   /* 回転効果（自然な感じに） */
@@ -91,23 +101,6 @@
   }
 }
 
-/* 下部に表示するフィッシングコンポーネントの調整 */
-.Fishing {
-  margin-bottom: 0;
-}
-
-.SNSHolder {
-  width: 100%;
-  height: auto;
-  min-height: 180px; /* Climbingコンポーネントと同じ最小高さ */
-  max-height: 220px; /* Climbingコンポーネントと同じ最大高さ */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  margin-bottom: 1.5rem; /* コンポーネント間の余白 */
-}
 
 .PaperContainer{
   background:
