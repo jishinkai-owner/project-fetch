@@ -6,7 +6,6 @@ import {
   Box,
   CardActions,
 } from "@mui/material";
-import { Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 
@@ -34,11 +33,9 @@ const RecordCard = ({
       <Card variant="outlined">
         <CardContent>
           <Typography variant="h5" component="div">
-            {/* {record.place} */}
             {title}
           </Typography>
           <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
-            {/* {record.year}/{record.date} */}
             {description}
           </Typography>
           <Typography variant="body2">well meaning and kindly.</Typography>
@@ -49,7 +46,7 @@ const RecordCard = ({
               size="small"
               onClick={(e: MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation();
-                onDelete && onDelete();
+                if (onDelete !== undefined) onDelete();
               }}
             >
               削除
@@ -59,9 +56,7 @@ const RecordCard = ({
             size="small"
             onClick={(e: MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              // router.push(`/${pushUrl}/${pushParams}`);
               router.push(`${pushUrl}`);
-              // router.push(`/${pushUrl}?id=${pushParams}`);
             }}
           >
             {buttonTitle}

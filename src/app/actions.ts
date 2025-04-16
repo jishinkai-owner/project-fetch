@@ -8,6 +8,7 @@ export async function login() {
   const nextUrl = "/club-members";
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
+    // provider: "discord",
     options: {
       redirectTo: `http://localhost:3000/api/auth/callback?next=${encodeURIComponent(
         nextUrl
@@ -50,6 +51,7 @@ export async function linkDiscord() {
   if (error) {
     console.error("Error linking Discord: ", error);
   }
+  console.log("linking discord: ", data);
   if (data.url) {
     console.log("Redirecting to: ", data.url);
     redirect(data.url);
@@ -85,12 +87,18 @@ export async function getDiscordInfo() {
     (identity) => identity.provider === "discord"
   );
 
-  if (!discordIdentity) {
-    console.error("Discord identity not found");
-    return null;
-  }
+  // if (!discordIdentity) {
+  //   console.error("Discord identity not found");
+  //   return null;
+  // }
 
-  const userIdentity = discordIdentity.identity_data;
+  // const userIdentity = discordIdentity.identity_data;
+  const userIdentity = discordIdentity;
+  // const accessToken = userIdentity?.access_token;
+
+  console.log("userIdentity: ", userIdentity);
+  // console.log("access token: ", accessToken);
+  // const
 
   // const userId = userIdentity?.id;
   // const userName = userIdentity?.username;
@@ -99,3 +107,18 @@ export async function getDiscordInfo() {
     userIdentity,
   };
 }
+
+// export async function getUserRoles() {
+//   const supabase = await createClient();
+//   const {data, error} = await supabase.auth.getUser();
+
+//   if (error) {
+//     console.error("Error getting user: ", error);
+//     return null;
+//   }
+//   if (!data.user) {
+//     console.error("User not found");
+//     return null;
+//   }
+
+// }

@@ -1,13 +1,18 @@
 import EditPastRecord from "@/components/tiptap/edit-past";
 import { ErrorMessage } from "@/components/load-status";
 
-const EditRecordPage = async ({ params }: { params: { id: number } }) => {
+type EditRecordPageProps = {
+  params: Promise<{
+    id: number;
+  }>;
+};
+
+const EditRecordPage = async ({ params }: EditRecordPageProps) => {
   const { id } = await params;
 
   if (!id) {
     return <ErrorMessage />;
   }
-
   return <EditPastRecord id={Number(id)} />;
 };
 

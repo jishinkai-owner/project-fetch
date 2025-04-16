@@ -23,16 +23,13 @@ import { useRecordSubmit } from "./hook";
 import SubmitSnackbar from "../snackbar";
 import { useSnackbar } from "../snackbar/hook";
 import { useUserContext } from "@/providers/user";
+import { Content, Record } from "@prisma/client";
 
 const EditorPage = () => {
   const { userId } = useUserContext();
   const { postHikes, isLoading, isError } = usePostHikes();
   const { authorRecord, isLoadingAuthor, isErrorAuthor } =
     useAuthorRecord(userId);
-  // const { userId, authorRecord, isLoadingAuthor, isErrorAuthor } =
-  //   useAuthorRecord(userId);
-  // const { content, setContent, recordContent, setRecordContent } =
-  //   useEditorState();
   const { content, setContent, recordContent, setRecordContent } =
     useEditorState();
   const { open, setOpen, message, setMessage, handleClose, status, setStatus } =
@@ -73,15 +70,21 @@ const EditorPage = () => {
             {isLoadingAuthor ? (
               <Skeleton variant="rectangular" height={56} width="100%" />
             ) : (
-              authorRecord.map((record) => (
-                <RecordCard
-                  key={record.id}
-                  buttonTitle={"反省を見る"}
-                  pushUrl={`/club-members/records/edit/${record.id}`}
-                  title={record.title}
-                  description={record.id}
-                />
-              ))
+              authorRecord.map(
+                (
+                  content: Content & {
+                    Record: Record;
+                  }
+                ) => (
+                  <RecordCard
+                    key={content.id}
+                    buttonTitle={"反省を見る"}
+                    pushUrl={`/club-members/records/edit/${content.id}`}
+                    title={content.title ?? ""}
+                    description={content.Record.place ?? ""}
+                  />
+                )
+              )
             )}
           </Grid>
         </AccordionDetails>
@@ -116,13 +119,11 @@ const EditorPage = () => {
               label="タイトル"
               required
               variant="outlined"
-              onChange={
-                (e) =>
-                  setRecordContent((prev) => ({
-                    ...prev,
-                    title: e.target.value,
-                  }))
-                // { ...recordContent, title: e.target.value })
+              onChange={(e) =>
+                setRecordContent((prev) => ({
+                  ...prev,
+                  title: e.target.value,
+                }))
               }
             />
             <TipTapEditor setContent={setContent} />

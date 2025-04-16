@@ -80,8 +80,8 @@ const EditPastRecord = ({ id }: EditPastRecordProps) => {
             color="primary"
             size="large"
             onClick={(e) => {
-              e.preventDefault;
-              updateRecord(e);
+              e.preventDefault();
+              updateRecord();
             }}
             disabled={!content || !title || isLoadingPastRecord}
           >

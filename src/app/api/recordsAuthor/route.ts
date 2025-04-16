@@ -26,6 +26,7 @@ export async function GET(req: NextRequest) {
         id: true,
         title: true,
         content: true,
+        Record: true,
       },
     });
 

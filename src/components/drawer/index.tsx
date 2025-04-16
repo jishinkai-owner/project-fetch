@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import useDrawerLayout from "./hook";
 
 const MenuDrawer = () => {
-  const { isTemporary, open, handleDrawerOpen } = useDrawerLayout();
+  const { open, handleDrawerOpen } = useDrawerLayout();
   return (
     <>
       <AppBar

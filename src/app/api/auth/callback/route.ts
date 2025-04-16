@@ -12,42 +12,42 @@ export async function GET(request: Request) {
   if (!code) {
     return NextResponse.redirect("/");
   }
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-    if (error || !data) {
-      return NextResponse.redirect("/");
-    }
-
-    if (data.user && data.user.email) {
-      await prisma.user.upsert({
-        where: {
-          id: data.user.id,
-        },
-        update: {},
-        create: {
-          id: data.user.id,
-          email: data.user.email,
-          name: data.user.user_metadata.name,
-        },
-      });
-    }
-
-    const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
-    const isLocalEnv = process.env.NODE_ENV === "development";
-    if (isLocalEnv) {
-      // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
-      return NextResponse.redirect(`${origin}${next}`);
-    } else if (forwardedHost) {
-      return NextResponse.redirect(`https://${forwardedHost}${next}`);
-    } else {
-      return NextResponse.redirect(`${origin}${next}`);
-    }
-
-    // return the user to an error page with instructions
-    // return NextResponse.redirect(`${origin}/auth/auth-code-error`);
-  } catch (error) {
-    console.error("unexpected error during callback", error);
+  // try {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+  if (error || !data) {
     return NextResponse.redirect("/");
   }
+
+  if (data.user && data.user.email) {
+    await prisma.user.upsert({
+      where: {
+        id: data.user.id,
+      },
+      update: {},
+      create: {
+        id: data.user.id,
+        email: data.user.email,
+        name: data.user.user_metadata.name,
+      },
+    });
+  }
+
+  const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
+  const isLocalEnv = process.env.NODE_ENV === "development";
+  if (isLocalEnv) {
+    // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
+    return NextResponse.redirect(`${origin}${next}`);
+  } else if (forwardedHost) {
+    return NextResponse.redirect(`https://${forwardedHost}${next}`);
+  } else {
+    return NextResponse.redirect(`${origin}${next}`);
+  }
+
+  // return the user to an error page with instructions
+  // return NextResponse.redirect(`${origin}/auth/auth-code-error`);
 }
+// } catch (error) {
+//   console.error("unexpected error during callback", error);
+//   return NextResponse.redirect("/");
+// }

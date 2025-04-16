@@ -78,7 +78,7 @@ export const useFormSubmit = (
     setStatus("error");
   };
 
-  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async () => {
     try {
       const res = await handleSubmit(entry);
 
@@ -98,10 +98,6 @@ export const useFormSubmit = (
   };
 
   return submitForm;
-};
-
-type UseFormDeleteProps = {
-  id: number;
 };
 
 export const useFormDelete = ({
@@ -207,7 +203,7 @@ export const useFormUpdate = (
     setStatus("error");
   };
 
-  const updateForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const updateForm = async () => {
     try {
       const res = await handleUpdate(entry);
 

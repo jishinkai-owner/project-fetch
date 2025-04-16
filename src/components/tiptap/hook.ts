@@ -203,7 +203,7 @@ export const useRecordUpdate = ({
   setOpen,
   setStatus,
 }: RecordUpdateProps) => {
-  const updateRecord = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const updateRecord = async () => {
     try {
       await handleContentUpdate(id, content, title);
       setMessage("記録が更新されました！");

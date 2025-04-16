@@ -30,6 +30,7 @@ const uploadUser = async () => {
       console.log(`Registering user: ${name} (${email})`);
       await prisma.user.create({
         data: {
+          id: "hello",
           email: email,
           name: name,
         },

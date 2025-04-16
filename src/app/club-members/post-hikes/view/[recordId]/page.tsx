@@ -2,7 +2,11 @@
 import PostHikeViewComp from "@/components/post-hike/view";
 import { ErrorMessage } from "@/components/load-status";
 
-const PostHikeView = async ({ params }: { params: { recordId: string } }) => {
+const PostHikeView = async ({
+  params,
+}: {
+  params: Promise<{ recordId: string }>;
+}) => {
   const { recordId } = await params;
 
   if (!recordId) {

@@ -104,7 +104,7 @@ export const handleSubmit = async (entries: PostHikeContentProps) => {
 
     return { success: false, error: "failed to put retrospective data" };
   } catch (error) {
-    return { success: false, error: "failed to put retrospective data" };
+    return { success: false, error: error };
   }
 };
 

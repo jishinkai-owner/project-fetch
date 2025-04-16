@@ -1,5 +1,4 @@
 import { Snackbar, Alert } from "@mui/material";
-import { useSnackbar } from "./hook";
 
 type SubmitSnackbarProps = {
   message: string;
@@ -14,8 +13,6 @@ const SubmitSnackbar = ({
   message,
   status,
 }: SubmitSnackbarProps) => {
-  // const { open, message, status, handleClose } = useSnackbar();
-  // const { open, handleClose, message, status } = useSnackbar();
   return (
     <Snackbar
       open={open}

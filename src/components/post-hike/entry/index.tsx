@@ -30,8 +30,8 @@ const PostHikeForm = () => {
     setStatus,
   });
 
-  // if (isLoading) return <Loading />;
-  // if (isError) return <ErrorMessage />;
+  if (isLoading) return <Loading />;
+  if (isError) return <ErrorMessage />;
 
   return (
     <Box component="form" id="post-hike-form">

@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Stack } from "@mui/material";
+import { Card, Typography, Stack } from "@mui/material";
 import MainCard from "@/components/main-card";
 import Link from "next/link";
 import Image from "next/image";

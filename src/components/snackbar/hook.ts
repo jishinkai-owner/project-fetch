@@ -13,22 +13,17 @@ export const useSnackbar = () => {
     setOpen(false);
   };
 
-  const handleOpen = (message: string) => {
-    setOpen(true);
-    setMessage(message);
-  };
+  // const handleSuccess = (message: string) => {
+  //   setMessage(message);
+  //   setOpen(true);
+  //   setStatus("success");
+  // };
 
-  const handleSuccess = (message: string) => {
-    setMessage(message);
-    setOpen(true);
-    setStatus("success");
-  };
-
-  const handleError = (message: string) => {
-    setMessage(message);
-    setOpen(true);
-    setStatus("error");
-  };
+  // const handleError = (message: string) => {
+  //   setMessage(message);
+  //   setOpen(true);
+  //   setStatus("error");
+  // };
 
   return {
     open,

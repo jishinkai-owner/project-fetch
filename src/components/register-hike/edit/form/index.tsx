@@ -2,7 +2,6 @@ import { Button, Box, Stack, TextField, MenuItem } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HikeInfoEntryProps } from "@/types/hike";
-import { useHikeInfo } from "../../hook";
 import SubmitSnackbar from "@/components/snackbar";
 import Grid from "@mui/material/Grid2";
 import dayjs from "dayjs";
@@ -46,7 +45,6 @@ const RegisterForm = ({
   submitForm,
   handleYearChange,
 }: RegisterFormProps) => {
-  //   const { handleYearChange } = useHikeInfo();
   return (
     <Box
       component="form"
@@ -61,7 +59,6 @@ const RegisterForm = ({
             <DatePicker
               label="年"
               value={entry.year ? dayjs().year(entry.year) : null}
-              //   onChange={(e) => setYear(e.year())}
               onChange={handleYearChange}
               views={["year"]}
             />
@@ -100,7 +97,6 @@ const RegisterForm = ({
             variant="contained"
             type="submit"
             color="primary"
-            // onClick={() => submitForm}
             disabled={
               !entry.year || !entry.date || !entry.place || !entry.activityType
             }
