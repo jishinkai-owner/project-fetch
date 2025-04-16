@@ -1,8 +1,7 @@
-// /record/[type]/[id]/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, notFound } from "next/navigation";
 import Link from "next/link";
 import styles from "../../RecordPage.module.scss";
 import Menu from "@/components/Menu/Menu";
@@ -23,8 +22,8 @@ interface ContentDetail {
 // 活動タイプの日本語名マッピング
 const activityTypeNames: { [key: string]: string } = {
   yama: "山行",
-  tabi: "旅行",
-  tsuri: "釣り"
+  travel: "旅行",
+  fishing: "釣り"
 };
 
 export default function RecordDetailPage() {
@@ -79,35 +78,18 @@ export default function RecordDetailPage() {
       
       try {
         setIsLoading(true);
-        // 写真で確認したディレクトリ構造に合わせたAPI呼び出し
-        const res = await fetch(`/api/record/content/${recordType}/${contentId}`);
+        // APIエンドポイントはプロジェクトに合わせて調整してください
+        const res = await fetch(`/api/records/${recordType}/${contentId}`);
         
         if (!res.ok) {
+          if (res.status === 404) {
+            return notFound();
+          }
           throw new Error('Failed to fetch content');
         }
         
         const data: ContentDetail = await res.json();
         setContent(data);
-        
-        // ここで活動タイプのチェックを行う
-        // URLのタイプとコンテンツの活動タイプが一致しない場合は正しいタイプにリダイレクト
-        const activityTypeMap: { [key: string]: string } = {
-          yama: "yama",
-          tabi: "travel",
-          tsuri: "fishing"
-        };
-        
-        const reverseMap: { [key: string]: string } = {
-          yama: "yama",
-          travel: "tabi",
-          fishing: "tsuri"
-        };
-        
-        if (data.activityType && reverseMap[data.activityType] !== recordType) {
-          const correctType = reverseMap[data.activityType] || "yama";
-          router.replace(`/record/${correctType}/${contentId}`);
-        }
-        
       } catch (error) {
         console.error('Error fetching content:', error);
       } finally {
@@ -116,7 +98,7 @@ export default function RecordDetailPage() {
     };
 
     fetchContent();
-  }, [contentId, recordType, router]);
+  }, [contentId, recordType]);
 
   // 日付フォーマット
   const formatDate = (dateString: string | null | undefined) => {
@@ -148,7 +130,7 @@ export default function RecordDetailPage() {
         {/* サイドバーメニュー */}
         <div 
           id="navigation-menu"
-          className={`${styles.Sidebar} ${isMenuOpen ? styles.open : styles.closed}`} 
+          className={`${styles.Sidebar} ${isMenuOpen ? styles.open : ''}`} 
           aria-hidden={!isMenuOpen}
         >
           <div className={styles.PaperContainer}>
@@ -163,18 +145,7 @@ export default function RecordDetailPage() {
 
   // データが見つからない場合
   if (!content) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.page}>
-          <div className={styles.noDataMessage}>
-            <p>コンテンツが見つかりませんでした</p>
-            <Link href={`/record/${recordType}`} className={styles.backButton}>
-              ← 一覧に戻る
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
+    return notFound();
   }
 
   const activityName = activityTypeNames[recordType] || recordType;
@@ -184,9 +155,9 @@ export default function RecordDetailPage() {
       <div className={styles.page}>
         {/* パンくずリスト */}
         <nav className={styles.breadcrumb}>
-          <Link href="/">Home</Link> <span> &gt; </span> 
-          <Link href="/record">活動記録</Link> <span> &gt; </span> 
-          <Link href={`/record/${recordType}`}>{activityName}記録</Link> <span> &gt; </span> 
+          <Link href="/">Home</Link> {' > '} 
+          <Link href="/record">活動記録</Link> {' > '} 
+          <Link href={`/record/${recordType}`}>{activityName}記録</Link> {' > '} 
           <span>{content.title || '無題'}</span>
         </nav>
 
@@ -259,7 +230,7 @@ export default function RecordDetailPage() {
       {/* サイドバーメニュー */}
       <div 
         id="navigation-menu"
-        className={`${styles.Sidebar} ${isMenuOpen ? styles.open : styles.closed}`} 
+        className={`${styles.Sidebar} ${isMenuOpen ? styles.open : ''}`} 
         aria-hidden={!isMenuOpen}
       >
         <div className={styles.PaperContainer}>

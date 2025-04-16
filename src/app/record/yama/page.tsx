@@ -16,7 +16,6 @@ interface RecordContentDTO {
   date: string | null;
   details: string | null;
   title: string | null;
-  filename: string | null;
 }
 
 // 日付をフォーマットする関数
@@ -87,14 +86,13 @@ const YamaRecordPage: React.FC = () => {
     const fetchRecordContents = async () => {
       setLoading(true);
       try {
-        const res = await fetch("/api/recordContents");
-        if (!res.ok) throw new Error("Failed to fetch recordContents");
+        // 新しいAPIエンドポイントを使用
+        const res = await fetch("/api/record/content/yama");
+        if (!res.ok) throw new Error("Failed to fetch yama records");
         const data: RecordContentDTO[] = await res.json();
-        // 山行記録のみをフィルタリング
-        const yamaRecords = data.filter(r => r.activityType === "yama");
-        setRecordContents(yamaRecords);
+        setRecordContents(data);
       } catch (error) {
-        console.error("Error fetching recordContents:", error);
+        console.error("Error fetching yama records:", error);
       } finally {
         setLoading(false);
       }
@@ -135,11 +133,9 @@ const YamaRecordPage: React.FC = () => {
     return Array.from(uniquePlaces);
   }, [recordsThisYear]);
   
-  // 記録クリック処理
-  const handleRecordClick = useCallback((filename: string | null) => {
-    if (filename) {
-      router.push(`/record/${encodeURIComponent(filename)}`);
-    }
+  // 記録クリック処理 - contentIdを使用
+  const handleRecordClick = useCallback((contentId: number) => {
+    router.push(`/record/yama/${contentId}`);
   }, [router]);
   
   return (
@@ -213,7 +209,7 @@ const YamaRecordPage: React.FC = () => {
                               <div 
                                 key={record.contentId}
                                 className={styles.recordCard}
-                                onClick={() => handleRecordClick(record.filename)}
+                                onClick={() => handleRecordClick(record.contentId)}
                               >
                                 <div className={styles.recordCardHeader}>
                                   <h4 className={styles.recordTitle}>{record.title || "無題の記録"}</h4>

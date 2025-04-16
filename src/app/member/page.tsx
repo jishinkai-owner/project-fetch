@@ -103,7 +103,7 @@ const MemberPage: React.FC = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch("/api/members");
+        const response = await fetch("/api/Member");
         if (!response.ok) {
           throw new Error("データの取得に失敗しました");
         }
