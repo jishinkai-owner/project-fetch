@@ -1,4 +1,4 @@
-// MemberPage.module.scss の改善部分
+
 
 .container {
   display: flex;
@@ -304,11 +304,6 @@
   &:focus {
       outline: 2px solid #007bff;
   }
-}
-
-/* メニュー内のアイテム間の間隔を調整 */
-:global(.menu-item) {
-  margin-bottom: 0.75rem;
 }
 
 /* スマホ・タブレット対応 (900px以下) */
