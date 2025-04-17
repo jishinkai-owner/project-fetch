@@ -12,11 +12,11 @@ const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { Type: string } }
+  { params }: { params: { type: string } }
 ) {
   try {
-    const { Type } = params;
-    const activityType = ACTIVITY_TYPE_MAP[Type];
+    const { type } = params;
+    const activityType = ACTIVITY_TYPE_MAP[type];
 
     if (!activityType) {
       return NextResponse.json(

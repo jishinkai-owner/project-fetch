@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { Type: string; id: string } }
+  { params }: { params: { type: string; id: string } }
 ) {
   try {
-    const { Type, id } = params;
+    const { type, id } = params;
     const contentId = parseInt(id);
 
     if (isNaN(contentId)) {
@@ -51,7 +51,7 @@ export async function GET(
       tsuri: "tsuri"
     };
     
-    const requestedType = ACTIVITY_TYPE_MAP[Type];
+    const requestedType = ACTIVITY_TYPE_MAP[type];
     
     if (requestedType && content.Record.activityType !== requestedType) {
       return NextResponse.json(
