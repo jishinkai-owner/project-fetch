@@ -7,16 +7,16 @@ const prisma = new PrismaClient();
 const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
   yama: "yama",
   tabi: "tabi",
-  tsuri: "tsur"
+  tsuri: "tsuri"
 };
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { type: string } }
+  { params }: { params: { Type: string } }
 ) {
   try {
-    const { type } = params;
-    const activityType = ACTIVITY_TYPE_MAP[type];
+    const { Type } = params;
+    const activityType = ACTIVITY_TYPE_MAP[Type];
 
     if (!activityType) {
       return NextResponse.json(
