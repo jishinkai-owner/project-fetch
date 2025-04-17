@@ -10,12 +10,13 @@ const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
   tsuri: "tsuri"
 };
 
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { type: string } }
+  { params }: { params: Promise<{ type: string }> }
 ) {
   try {
-    const { type } = params;
+    const type = (await params).type;
     const activityType = ACTIVITY_TYPE_MAP[type];
 
     if (!activityType) {
