@@ -1,6 +1,7 @@
 .container {
   display: flex;
   min-height: 100vh;
+  height: auto;
   position: relative;
   
   background-color: #f9f5eb;
@@ -25,15 +26,21 @@
 /* ====== パソコンサイズのレイアウト ====== */
 .page {
   display: flex;
-  position: fixed; 
+  position: relative; 
   width: 100%;
-  max-width: calc(100% - 350px); /* サイドバーの幅を考慮 */
+  /* 通常の場合のサイドバー幅 */
+  max-width: calc(100% - 350px);
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  height: auto;
+  /* サイドバーのサイズ変更に応じて滑らかに調整する */
+  transition: max-width 0.3s ease-in-out;
 }
 
 .header {
   width: 100%;
+  height: 25%;
   background-color: rgba(197, 226, 213, 0.7);
   padding-top: 0.5rem;
   padding-bottom: 1.5rem;
@@ -46,20 +53,21 @@
 }
 
 .board {
-  max-width: 60%;
-  height: auto;
+  max-width: 100%;
+  height: 100%;
 }
 
 .recordcontainer {
   display: grid;
   margin-top: 2rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* minmaxを使用 */
-  gap: 2rem; /* グリッドアイテム間のギャップを追加 */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
   width: 100%;
-  max-width: 1000px; /* 最大幅を設定 */
+  max-width: 1000px;
   position: relative;
-  padding: 0 4%; /* 両側にパディングを追加 */
+  padding: 0 4%;
   z-index: 2;
+  margin-bottom: 2rem;
 }
 
 .Climbing,
@@ -74,8 +82,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2%; /* パディングを少し小さく */
-  margin-bottom: 10%; /* マージンも調整 */
+  padding: 4%;
+  margin-bottom: 10%;
   z-index: 3;
 }
 
@@ -124,14 +132,14 @@
   top: 0;
   right: 0;
   background-color: #fff;
-  width: 350px;
-  height: 100%;
+  width: 350px; /* デフォルトの幅 */
+  height: 100%; /* デフォルトの高さ */
   box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   z-index: 10;
   overflow-y: auto;
     
@@ -147,8 +155,6 @@
     pointer-events: auto;
   }
 }
-
-
 
 /* ハンバーガーメニュー */
 .hamburgerButton {
@@ -177,12 +183,84 @@
   }
 }
 
+/* 高さに応じたサイドバーのアスペクト比調整 */
+/* 高さが700px以下の場合 */
+@media (min-width: 900px) and (max-height: 700px) {
+  .page {
+    position: relative;
+    /* サイドバーのアスペクト比に応じた幅に合わせる */
+    max-width: calc(100% - 250px); /* アスペクト比で小さくなったサイドバーの幅 */
+  }
+  
+  .Sidebar {
+    transform: translateX(0); /* デフォルトで表示 */
+    opacity: 1;
+    pointer-events: auto;
+    aspect-ratio: 7.5/16; /* アスペクト比を設定 */
+    width: 250px; /* 幅を明示的に設定 - アスペクト比から計算された値 */
+    min-width: 200px; /* 最小値も設定 */
+  }
+  
+  .recordcontainer {
+    gap: 1rem; /* ギャップを調整 */
+    padding: 0 8%; /* 両側にパディングを追加 */
+    margin-top: 2%; /* マージンを調整 */
+  }
+  
+  .Climbing,
+  .Traveling,
+  .Fishing,
+  .SNSHolder {
+    min-height: 160px; /* 高さを調整 */
+    margin-bottom: 5%; /* マージンも調整 */
+    padding: 7%; /* パディングを少し小さく */
+  }
+}
+
+@media (min-width: 900px) and (max-height: 550px) {
+  .page {
+    position: relative;
+    /* サイドバーのアスペクト比に応じた幅に合わせる */
+    max-width: calc(100% - 200px); /* アスペクト比で小さくなったサイドバーの幅 */
+  }
+
+  .header {
+    height: 20%; /* ヘッダーの高さを調整 */
+  }
+  
+  .Sidebar {
+    transform: translateX(0); /* デフォルトで表示 */
+    opacity: 1;
+    pointer-events: auto;
+    aspect-ratio: 7.5/16; /* アスペクト比を設定 */
+    width: 200px; /* 幅を明示的に設定 - アスペクト比から計算された値 */
+    min-width: 150px; /* 最小値も設定 */
+  }
+  
+  .recordcontainer {
+    gap: 0rem; /* ギャップを調整 */
+    padding: 0 8%; /* 両側にパディングを追加 */
+    margin-top: 1%; /* マージンを調整 */
+  }
+  
+  .Climbing,
+  .Traveling,
+  .Fishing,
+  .SNSHolder {
+    min-height: 1px; /* 高さを調整 */
+    margin-bottom: 0%; /* マージンも調整 */
+    padding: 10%; /* パディングを少し小さく */
+  }
+}
+
+
 /* スマホ・タブレット対応 (900px以下) */
 @media (max-width: 900px) {
   .page {
     position: relative;
     max-width: 100%; /* サイドバーが閉じているときは全幅 */
-    
+    overflow-y: auto;
+    height: auto;
   }
   
   .hamburgerButton {
@@ -195,6 +273,7 @@
     pointer-events: none;
     width: 80%; /* 幅を調整 */
     max-width: 400px;
+    aspect-ratio: auto; /* アスペクト比をリセット */
     
     &.open {
       transform: translateX(0);
@@ -203,11 +282,16 @@
     }
   }
   
+  .board {
+    max-width: 70%;
+    height: 100%;
+  }
   .recordcontainer {
     grid-template-columns: 1fr; /* 1列に変更 */
     gap: 1.5rem; /* ギャップを調整 */
-    padding: 1 2rem; /* 両側にパディングを追加 */
+    padding: 0 2rem; /* 両側にパディングを追加 */
     margin-top: 5%; /* マージンを調整 */
+    margin-bottom: 4rem;
   }
   
   .Climbing,
@@ -222,18 +306,13 @@
     left: 20px; /* 罫線位置を調整 */
   }
   
-  .board {
-    max-width: 80%; /* ボードサイズ調整 */
-  }
 }
 
 /* さらに小さい画面向け微調整 */
 @media (max-width: 480px) {
-  
   .Sidebar {
     max-width: 300px;
   }
-
 
   .recordcontainer {
     grid-template-columns: 1fr; /* 1列に変更 */

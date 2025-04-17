@@ -24,6 +24,79 @@ const Page: React.FC = () => {
     // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
     setIsMenuOpen(!mobile);
   }, []);
+
+  // page.tsxのuseEffectに追加するコード
+
+const calculateSidebarWidth = () => {
+  // ビューポートの高さと幅を取得
+  const viewportHeight = window.innerHeight;
+  const viewportWidth = window.innerWidth;
+  
+  // サイドバーの要素を取得 - 型アサーションを使用
+  const sidebar = document.querySelector(`.${styles.Sidebar}`) as HTMLElement | null;
+  const page = document.querySelector(`.${styles.page}`) as HTMLElement | null;
+  
+  // PCサイズでのみ計算する（900px以上）
+  if (viewportWidth >= 900) {
+    let sidebarWidth = 350; // デフォルト値
+    
+    // 高さに応じてアスペクト比からサイドバー幅を計算
+    if (viewportHeight <= 700 && viewportHeight > 600) {
+      // アスペクト比 7.5/16 で計算
+      sidebarWidth = Math.max(200, Math.min(350, Math.floor(viewportHeight * (7.5/16))));
+    } else if (viewportHeight <= 600 && viewportHeight > 500) {
+      // さらに小さい画面用の計算
+      sidebarWidth = Math.max(180, Math.min(250, Math.floor(viewportHeight * (7/16))));
+    } else if (viewportHeight <= 500) {
+      // 極端に小さい画面用の計算
+      sidebarWidth = Math.max(150, Math.min(200, Math.floor(viewportHeight * (6.5/16))));
+    }
+    
+    // サイドバーにスタイルを適用
+    if (sidebar) {
+      sidebar.style.width = `${sidebarWidth}px`;
+    }
+    
+    // メインページの幅も調整
+    if (page) {
+      page.style.maxWidth = `calc(100% - ${sidebarWidth}px)`;
+    }
+  } else {
+    // モバイルサイズの場合はリセット
+    if (sidebar) {
+      sidebar.style.width = '';
+    }
+    if (page) {
+      page.style.maxWidth = '';
+    }
+  }
+};
+
+// setViewHeightメソッドを定義
+const setViewHeight = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
+useEffect(() => {
+  // 初期化
+  setViewHeight();
+  calculateSidebarWidth();
+  
+  // イベントリスナーを追加
+  window.addEventListener('resize', setViewHeight);
+  window.addEventListener('resize', calculateSidebarWidth);
+  window.addEventListener('orientationchange', setViewHeight);
+  window.addEventListener('orientationchange', calculateSidebarWidth);
+  
+  // クリーンアップ関数
+  return () => {
+    window.removeEventListener('resize', setViewHeight);
+    window.removeEventListener('resize', calculateSidebarWidth);
+    window.removeEventListener('orientationchange', setViewHeight);
+    window.removeEventListener('orientationchange', calculateSidebarWidth);
+  };
+}, []);
   
   // 初期化とリサイズイベントの設定
   useEffect(() => {
