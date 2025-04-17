@@ -130,7 +130,7 @@ const MemberPage: React.FC = () => {
       return <div className={styles.loadingContainer}>読み込み中...</div>;
     }
 
-    let yearMapping = {
+    const yearMapping = {
       "2年生": "C3",
       "3年生": "C2",
       "4年生": "C1"

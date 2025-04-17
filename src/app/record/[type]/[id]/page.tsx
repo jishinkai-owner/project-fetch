@@ -5,6 +5,7 @@ import { useParams, useRouter, notFound } from "next/navigation";
 import Link from "next/link";
 import styles from "../../RecordPage.module.scss";
 import Menu from "@/components/Menu/Menu";
+import Image from "next/image"; 
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -193,10 +194,12 @@ export default function RecordDetailPage() {
               <div className={styles.imageGrid}>
                 {content.images.map((src, index) => (
                   <div key={index} className={styles.imageWrapper}>
-                    <img 
-                      src={src} 
+                    <Image
+                      src={src}
                       alt={`${content.title || '記録'} - 画像 ${index + 1}`}
                       className={styles.contentImage}
+                      width={800}
+                      height={600}
                       loading="lazy"
                     />
                   </div>
