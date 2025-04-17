@@ -12,11 +12,12 @@ const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
 
 
 export async function GET(
-  request: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ type: string }> }
 ) {
   try {
-    const type = (await params).type;
+    const resolvedParams = await params; 
+    const type = resolvedParams.type;
     const activityType = ACTIVITY_TYPE_MAP[type];
 
     if (!activityType) {
