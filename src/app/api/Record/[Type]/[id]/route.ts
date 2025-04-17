@@ -5,8 +5,9 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { type: string; id: string } }
+  props: { params: Promise<{ type: string; id: string }> }
 ) {
+  const params = await props.params;
   try {
     const { type, id } = params;
     const contentId = parseInt(id);
