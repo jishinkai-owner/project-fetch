@@ -1,0 +1,1434 @@
+[
+  {
+    "year": "C0",
+    "src": "",
+    "name": "kota",
+    "profile": [
+      "不労所得しか勝たん"
+    ],
+    "role": "絶起配車係",
+    "major": "法",
+    "nickname": "あさくら"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "akaru",
+    "profile": [
+      "アベレージ70\",",
+      "食の罪を一身に背負う男"
+    ],
+    "role": "最強ボウラー",
+    "major": "文",
+    "nickname": "アカル"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "shota",
+    "profile": [
+      "～老い～\",",
+      "繰り上がりの足し算ができない"
+    ],
+    "role": "具なしパスタの巨匠",
+    "major": "工",
+    "nickname": "おぎはら"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "teiho",
+    "profile": [
+      "サンドイッチはね、\",",
+      "パンよりも中のきゅうりが一番おいしいの。\",",
+      "挟まれた方がいい味出すのよ。"
+    ],
+    "role": "迫真お嬢様アイドル部部長",
+    "major": "理",
+    "nickname": "カンザワ"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "yuya",
+    "profile": [
+      "TKBがお好き\",",
+      "※酔うと脱ぎます"
+    ],
+    "role": "C0のアイドル、癒し",
+    "major": "工",
+    "nickname": "クスド_"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "takaki",
+    "profile": [
+      "こう見えて現役\",",
+      "腰がね……"
+    ],
+    "role": "おっさん",
+    "major": "工",
+    "nickname": "こっしー"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "goki",
+    "profile": [
+      "趣味ダイエット\",",
+      "特技リバウンド"
+    ],
+    "role": "山梨の菅田将暉",
+    "major": "法",
+    "nickname": "ハギハラ"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "yotaro",
+    "profile": [
+      "自粛中にリュウジにどハマりして自炊に目覚めた"
+    ],
+    "role": "自炊マン、シェフ",
+    "major": "工",
+    "nickname": "ようたろう"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "shintaro",
+    "profile": [
+      "寝てからもよくしゃべる．本当によくしゃべる"
+    ],
+    "role": "人頼み",
+    "major": "工",
+    "nickname": "シンタロー"
+  },
+  {
+    "year": "C0",
+    "src": "",
+    "name": "takahide",
+    "profile": [
+      "ミスター東北大最有力候補（自称）"
+    ],
+    "role": "応物でよかった",
+    "major": "応物",
+    "nickname": "超絶イケメン"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "ueda",
+    "profile": [
+      "正論を言うのが生きがい"
+    ],
+    "role": "正論気取りマン",
+    "major": "工",
+    "nickname": "うえだ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "miyagi",
+    "profile": [
+      "スマブラ狂"
+    ],
+    "role": "ステラおばさん",
+    "major": "文",
+    "nickname": "みやぎ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "tonii",
+    "profile": [
+      "マジックマッシュルームを使っているらしい"
+    ],
+    "role": "スマブラ大好き留学生",
+    "major": "文",
+    "nickname": "トニー"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "niitsu",
+    "profile": [
+      "自転車に乗れるようになった"
+    ],
+    "role": "よく寝る子",
+    "major": "農",
+    "nickname": "にいつ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "yashiro",
+    "profile": [
+      "言葉に感情がない　育ちがいい"
+    ],
+    "role": "ロック・バランサー",
+    "major": "文",
+    "nickname": "やしろ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "koshiba",
+    "profile": [
+      "字が下手　マッドサイエンティスト"
+    ],
+    "role": "コック",
+    "major": "理",
+    "nickname": "こっしー"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "hori",
+    "profile": [
+      "グリフィンドール"
+    ],
+    "role": "マグル",
+    "major": "理",
+    "nickname": "ホーリー"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "tanasyu",
+    "profile": [
+      "ド変態ココアシガレットジャンキージャックニコルソン"
+    ],
+    "role": "狂人",
+    "major": "経",
+    "nickname": "たなしゅん"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "keisuke",
+    "profile": [
+      "B9のまとめやく(うるさい、ハブられてる)"
+    ],
+    "role": "ファッションリーダー",
+    "major": "理",
+    "nickname": "ケイスケ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "shintani",
+    "profile": [
+      "実はアホの子"
+    ],
+    "role": "女帝",
+    "major": "農",
+    "nickname": "サヤ様"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "koyama",
+    "profile": [
+      "推しのライブは冠婚葬祭"
+    ],
+    "role": "声豚",
+    "major": "経",
+    "nickname": "こーやまん"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "kawasaki",
+    "profile": [
+      "シラフでも酔ってる"
+    ],
+    "role": "汚水採取係",
+    "major": "農",
+    "nickname": "かわさき"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "iwaki",
+    "profile": [
+      "時刻表を覚えている変態"
+    ],
+    "role": "カメラマン",
+    "major": "工",
+    "nickname": "いわき"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "matsuura",
+    "profile": [
+      "いつもホーリーと一緒"
+    ],
+    "role": "癒し系",
+    "major": "理",
+    "nickname": "まつうら"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "tsunashima",
+    "profile": [
+      "いつもtwitterをしてるんだが？"
+    ],
+    "role": "ムードメーカー",
+    "major": "工",
+    "nickname": "ツナちゃん"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "abe",
+    "profile": [
+      "あべ"
+    ],
+    "role": "あべ",
+    "major": "あべ",
+    "nickname": "あべ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "yamataku",
+    "profile": [
+      "新歓寝ブッチ"
+    ],
+    "role": "汚物部部長",
+    "major": "工",
+    "nickname": "やまたく"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "nurupoga",
+    "profile": [
+      "た来てっやらか星?????????"
+    ],
+    "role": "太鼓の達人",
+    "major": "文",
+    "nickname": "ぬるぽが"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "momoko",
+    "profile": [
+      "髪の色がよく変わる"
+    ],
+    "role": "お昼ご飯を食べにくる女",
+    "major": "工",
+    "nickname": "ももこ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "kondo",
+    "profile": [
+      "残念なイケメン"
+    ],
+    "role": "ダークフォース",
+    "major": "法",
+    "nickname": "こんどう"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "VV",
+    "profile": [
+      "B8の良心、元部長\",",
+      "下半身に疾患が多い"
+    ],
+    "role": "アイドル",
+    "major": "文",
+    "nickname": "ビバ"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "HRT",
+    "profile": [
+      "二重人格"
+    ],
+    "role": "ドマゾ",
+    "major": "工",
+    "nickname": "ヒロト"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "NSMT",
+    "profile": [
+      "心の怪盗団"
+    ],
+    "role": "寝ブッチ",
+    "major": "工",
+    "nickname": "ナシモト"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "ISTM",
+    "profile": [
+      "酒カスおじさん"
+    ],
+    "role": "ご飯に詳しいおじさん",
+    "major": "工",
+    "nickname": "イシトモ"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "NSTM",
+    "profile": [
+      "煙"
+    ],
+    "role": "給仕係",
+    "major": "教育",
+    "nickname": "YK"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "TISI",
+    "profile": [
+      "ふーん、えっちじゃん"
+    ],
+    "role": "広島のヤンキー",
+    "major": "工",
+    "nickname": "たいせいいいい"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "BNB",
+    "profile": [
+      "あーい"
+    ],
+    "role": "プリン",
+    "major": "工",
+    "nickname": "バンバ"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "A",
+    "profile": [
+      "機械と斜面に強い"
+    ],
+    "role": "ヨツンヴァイン",
+    "major": "工",
+    "nickname": "あ"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "DN",
+    "profile": [
+      "毎月電気と水道が止まる"
+    ],
+    "role": "アホ",
+    "major": "工",
+    "nickname": "だんだだーん"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "MTKN",
+    "profile": [
+      "カボチャ農家\",",
+      "女装したみが深い"
+    ],
+    "role": "退部",
+    "major": "経済",
+    "nickname": "マツケン"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "mti",
+    "profile": [
+      "存在に感謝"
+    ],
+    "role": "かわいい",
+    "major": "工",
+    "nickname": "みつい"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "tkdr",
+    "profile": [
+      "ツッコミがキレてる"
+    ],
+    "role": "笑い顔が好き",
+    "major": "工",
+    "nickname": "高寺"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "kbys",
+    "profile": [
+      "酔ってからが本番"
+    ],
+    "role": "酒弱い部",
+    "major": "工",
+    "nickname": "キバヤシ"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "mrwk",
+    "profile": [
+      "落単芸人"
+    ],
+    "role": "絵描き",
+    "major": "工",
+    "nickname": "森脇"
+  },
+  {
+    "year": "B8",
+    "src": "",
+    "name": "skt",
+    "profile": [
+      "バブー！"
+    ],
+    "role": "キモオタ",
+    "major": "工",
+    "nickname": "かみ"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "mrk",
+    "profile": [
+      "奇術師(トリッカー)\",",
+      "煽りに定評がある"
+    ],
+    "role": "ポイデビルマン",
+    "major": "工",
+    "nickname": "マルコ"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "ND",
+    "profile": [
+      "食に関わるネジが全部飛んでいる\",",
+      "他のネジも飛んでいる"
+    ],
+    "role": "じろうのねーちゃん",
+    "major": "文",
+    "nickname": "のだ"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "KGY",
+    "profile": [
+      "スマブラでは現役会員最強"
+    ],
+    "role": "熱血スマブラ部",
+    "major": "農",
+    "nickname": "かがや"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "HR",
+    "profile": [
+      "休学マン"
+    ],
+    "role": "クロックス",
+    "major": "理",
+    "nickname": "原くん"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "N_WTNB",
+    "profile": [
+      "歌ってます"
+    ],
+    "role": "歌う人",
+    "major": "農",
+    "nickname": "N.わたなべ"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "INB",
+    "profile": [
+      "いちばんえらいひと\",",
+      "自親会ゆるキャン創始者"
+    ],
+    "role": "ボス",
+    "major": "工",
+    "nickname": "INB"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "NKMR",
+    "profile": [
+      "茶飲もうぜ茶"
+    ],
+    "role": "電気グルー部",
+    "major": "理",
+    "nickname": "マキヒト"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "UCD",
+    "profile": [
+      "いつもニヤつきおじさん"
+    ],
+    "role": "不審者",
+    "major": "法",
+    "nickname": "ウチダ"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "TJ",
+    "profile": [
+      "チクチクすんねんな"
+    ],
+    "role": "剃毛ウロボロス",
+    "major": "工",
+    "nickname": "ジーツー"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "GNJ",
+    "profile": [
+      "実は単位が、、、"
+    ],
+    "role": "マシンガントーク",
+    "major": "文",
+    "nickname": "ぐんちゃん"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "K_WTNB",
+    "profile": [
+      "限りなく理系"
+    ],
+    "role": "Villager",
+    "major": "経",
+    "nickname": "K.ワタナベ"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "KTNM",
+    "profile": [
+      "モフモフ\",",
+      "グンマー唯一の美点"
+    ],
+    "role": "妖精",
+    "major": "法",
+    "nickname": "勝沼"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "KIK",
+    "profile": [
+      "連れションし太郎\",",
+      "特撮に造詣が深い"
+    ],
+    "role": "ともきくん係",
+    "major": "工",
+    "nickname": "こいけ"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "ONZT",
+    "profile": [
+      "B7のご意見番\",",
+      "発酵部幹部"
+    ],
+    "role": "インチキ中国人",
+    "major": "農",
+    "nickname": "ざと"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "TKD",
+    "profile": [
+      "アンチソーシャリスト\",",
+      "実は多趣味"
+    ],
+    "role": "アウトロー",
+    "major": "文",
+    "nickname": "高田"
+  },
+  {
+    "year": "B7",
+    "src": "",
+    "name": "TMR",
+    "profile": [
+      "自親会発酵部部長"
+    ],
+    "role": "小麦粉の魔術師",
+    "major": "工",
+    "nickname": "たむら"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "komuro2",
+    "profile": [
+      "反主流派"
+    ],
+    "role": "元部長・DUSKIN(ダイソン)",
+    "major": "文",
+    "nickname": "S.KOMURO"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "ishi",
+    "profile": [
+      "ジェネレーションギャップを感じる"
+    ],
+    "role": "三日坊主バイカー",
+    "major": "工",
+    "nickname": "ICI"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "kuse",
+    "profile": [
+      "シルク・ドゥ・ソレイユ"
+    ],
+    "role": "100均女(自称)",
+    "major": "工",
+    "nickname": "KUSE"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "goto",
+    "profile": [
+      "勤労学生"
+    ],
+    "role": "ラーメン乞食",
+    "major": "工",
+    "nickname": "GTO"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "kazuho",
+    "profile": [
+      "冷静なツッコミに定評がある"
+    ],
+    "role": "学祭マン",
+    "major": "工",
+    "nickname": "マイケルらしい"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "ootawara",
+    "profile": [
+      "アクティブ"
+    ],
+    "role": "自親会の良心",
+    "major": "農",
+    "nickname": "OOTWR"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "ogata",
+    "profile": [
+      "インドネシアに愛人がいる"
+    ],
+    "role": "嘘つきインド人",
+    "major": "工",
+    "href": "B6.hide/",
+    "style": "text-decoration: none; color: rgb(var(--on-background)); cursor: text"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "nonomura",
+    "profile": [
+      "脳筋馬鹿野郎"
+    ],
+    "role": "イケメン",
+    "major": "経",
+    "nickname": "NNMR"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "katada",
+    "profile": [
+      "君の名は。"
+    ],
+    "role": "プロゲーマー",
+    "major": "理",
+    "nickname": "KTD"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "shimotsuma",
+    "profile": [
+      "覇気の使い手"
+    ],
+    "role": "クレイジー僧侶",
+    "major": "工",
+    "nickname": "SMTM"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "kawakubo",
+    "profile": [
+      "MT大好き"
+    ],
+    "role": "サッカー少年",
+    "major": "理",
+    "nickname": "KWKB"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "ryota",
+    "profile": [
+      "コミュ力モンスター"
+    ],
+    "role": "茶道家",
+    "major": "農",
+    "nickname": "りょーた"
+  },
+  {
+    "year": "B6",
+    "src": "",
+    "name": "suwa",
+    "profile": [
+      "料理ができる（確信）"
+    ],
+    "role": "オリエンテーリング",
+    "major": "農",
+    "nickname": "SW"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "new_tsukahara",
+    "profile": [
+      "不世出の指導者\",",
+      "敬愛する首領様"
+    ],
+    "role": "元部長",
+    "major": "工",
+    "nickname": "塚原大元帥閣下"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "egasira",
+    "profile": [
+      "良く言えばただのバカ\",",
+      "悪く言えばバカ"
+    ],
+    "role": "伊達メガネ",
+    "major": "文",
+    "nickname": "江頭"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "takahashi2",
+    "profile": [
+      "虫と写真が嫌い"
+    ],
+    "role": "マジレス",
+    "major": "工",
+    "nickname": "高橋"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "nakatsuka",
+    "profile": [
+      "チェストハーネスが締まりません"
+    ],
+    "role": "NINJA",
+    "major": "工",
+    "nickname": "中塚"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "kadoguchi2 // マウスホバーでkadoguchi3.jpg",
+    "profile": [
+      "バカと天才は紙一重\",",
+      "これでも総代"
+    ],
+    "role": "超人",
+    "major": "理",
+    "nickname": "門口"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "tomomin",
+    "profile": [
+      "ブランド厨\",",
+      "DB(コーラゴクー"
+    ],
+    "role": "ドラえもん",
+    "major": "工",
+    "nickname": "ともみん"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "kato",
+    "profile": [
+      "「金珠爆弾強いんですよ」\",",
+      "アーバンミュージックに精通している"
+    ],
+    "role": "悪代官",
+    "major": "工",
+    "nickname": "加藤"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "minamin",
+    "profile": [
+      "「のぐちのザックはずたぶくろ」"
+    ],
+    "role": "アンチまさきよ",
+    "major": "理",
+    "nickname": "みなみん"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "sumichan",
+    "profile": [
+      "ラーメン二郎青葉山店"
+    ],
+    "role": "ほほえみ",
+    "major": "理",
+    "nickname": "すみちゃん"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "ito",
+    "profile": [
+      "英国密航\",",
+      "カフェバイト志望"
+    ],
+    "role": "賑やかし",
+    "major": "エセ経",
+    "nickname": "伊東ライフ"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "nakajo",
+    "profile": [
+      "最近少食"
+    ],
+    "role": "ジャージ",
+    "major": "理",
+    "nickname": "ももち"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "yamazaki",
+    "profile": [
+      "ともみんの宿敵らしい"
+    ],
+    "role": "お父つぁん",
+    "major": "工",
+    "nickname": "山埼"
+  },
+  {
+    "year": "B5",
+    "src": "",
+    "name": "ishizawa",
+    "profile": [
+      "Jazzと方言には一家言を持つ"
+    ],
+    "role": "お洒落番長",
+    "major": "農",
+    "nickname": "石澤"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "tanai",
+    "profile": [
+      "おう俺が部長だ\",",
+      "俺の名を語るな\",",
+      "お前らぶち殺すぞ"
+    ],
+    "role": "OLD HEAD",
+    "major": "工",
+    "nickname": "TNI"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "daichi // マウスホバーでdaichi3.jpg",
+    "profile": [
+      "止まらないロマンティック\",",
+      "出ない昇竜"
+    ],
+    "role": "店長",
+    "major": "工",
+    "nickname": "だいち"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "masakiyo",
+    "profile": [
+      "アンチ文化過激派\",",
+      "もっと人間のポテンシャルを信じよう"
+    ],
+    "role": "青果業者",
+    "major": "工",
+    "nickname": "まさきよ"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "yoshino",
+    "profile": [
+      "新入生の前でスピーチした（すごい）\",",
+      "最近コンタクトにした"
+    ],
+    "role": "よしの",
+    "major": "工",
+    "nickname": "よすぃの"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "say_yes",
+    "profile": [
+      "学祭おつかれ"
+    ],
+    "role": "祭りの長",
+    "major": "経",
+    "nickname": "Say-Yeah"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "kinoshita2",
+    "profile": [
+      "こぼれ落ちた単位たち"
+    ],
+    "role": "金欠",
+    "major": "工",
+    "nickname": "きのした"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "yasuo3",
+    "profile": [
+      "そこに詰まっているのはゴミか浪漫か"
+    ],
+    "role": "アホザックおじさん",
+    "major": "文",
+    "nickname": "ヤス"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "hata2",
+    "profile": [
+      "うぇぇーーあぁーくぁｗせｔ\",",
+      "屋久島の妖精\",",
+      "インテリヤクザ予備軍"
+    ],
+    "role": "ボクの夏休み",
+    "major": "理",
+    "nickname": "ハタ"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "oyake",
+    "profile": [
+      "『呼ぶときは「さん」をつけろ』\",",
+      "人の話を聞かない"
+    ],
+    "role": "女帝",
+    "major": "農",
+    "nickname": "OYK"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "shimada4",
+    "profile": [
+      "アメ車を操る\",",
+      "果たして日本車を運転する日は来るのか"
+    ],
+    "role": "大臣",
+    "major": "経",
+    "nickname": "シマダ"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "takafumi3",
+    "profile": [
+      "バイク部部長"
+    ],
+    "role": "スイーツ部部長",
+    "major": "工",
+    "nickname": "タカフミ"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "hatta3",
+    "profile": [
+      "自親会スマブラ部最高戦力\",",
+      "写真写りがよい"
+    ],
+    "role": "尺八",
+    "major": "工",
+    "nickname": "はったさん"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "sakai",
+    "profile": [
+      "「俺やっぱ芋煮行かんわ&hellip;」\",",
+      "今年は来た"
+    ],
+    "role": "アンチ小宅",
+    "major": "理",
+    "nickname": "坂井"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "ogane3",
+    "profile": [
+      "笑顔がステキ\",",
+      "雑になっていく扱い"
+    ],
+    "role": "ポンコツ",
+    "major": "理",
+    "nickname": "アジメ"
+  },
+  {
+    "year": "B4",
+    "src": "",
+    "name": "sasa2",
+    "profile": [
+      "ささささささささささささささささささささささささささ"
+    ],
+    "role": "さささささささささ",
+    "major": "農（ささささ）",
+    "nickname": "ささ"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "gussan",
+    "profile": [
+      "風格は出なかった\",",
+      "(他部員)「もうデカイ顔はさせない」\",",
+      "そういえばさ、ホームページ親が見てるんだよね"
+    ],
+    "role": "そういえば俺もう部長じゃないんだった&hellip;",
+    "major": "工",
+    "nickname": "GOD FATHER"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "sugawara",
+    "profile": [
+      "平成27-28:自親会アメリカ支部総司令\",",
+      "既に三人をヤッた"
+    ],
+    "role": "原付&larr;15000kmで故障 2015.8.10",
+    "major": "工",
+    "nickname": "チャカワラさん"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "kiyono3",
+    "profile": [
+      "かなりすごい\",",
+      "とてもすごい"
+    ],
+    "major": "工",
+    "nickname": "きよの"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "saito",
+    "profile": [
+      "よく走るむすび丸"
+    ],
+    "role": "おにぎりの方のおにぎり",
+    "major": "農",
+    "nickname": "おにぎり"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "kamiya",
+    "profile": [
+      "美形\",",
+      "イカトンを超越したなにか"
+    ],
+    "role": "アルティメットパソ部",
+    "major": "経",
+    "nickname": "かみや"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "ryoki",
+    "profile": [
+      "脱イカトンのパイオニア"
+    ],
+    "role": "迷走",
+    "major": "経",
+    "nickname": "りょーき"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "takahashi",
+    "profile": [
+      "ネタの宝庫"
+    ],
+    "role": "洗剤変えた？",
+    "major": "法",
+    "nickname": "名人"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "matsuo2",
+    "profile": [
+      "ええ、彼がウチの瑛太ですよ\",",
+      "ああああああ！ぶっ○す！"
+    ],
+    "role": "学食のエース",
+    "major": "経",
+    "nickname": "オイマツオォ!"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "chiyoda",
+    "profile": [
+      "しばらく見ていません"
+    ],
+    "role": "リア充(真)",
+    "major": "工",
+    "nickname": "チヨケン"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "sahho2",
+    "profile": [
+      "山ガールルック"
+    ],
+    "role": "やっほお",
+    "major": "農",
+    "nickname": "さっほー"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "satoeri",
+    "profile": [
+      "川渡支部に異動が決まりました"
+    ],
+    "role": "ダバダ",
+    "major": "農",
+    "nickname": "さとえり"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "akariso",
+    "profile": [
+      "眠りん\",",
+      "移動手段はダッシュ"
+    ],
+    "role": "山の子",
+    "major": "工",
+    "nickname": "あかりん、宮川先生"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "hrp // マウスホバーでhrp2.jpg",
+    "profile": [
+      "無限のパw&hellip;異動が決まりました"
+    ],
+    "role": "最高議長",
+    "major": "農",
+    "nickname": "HRP"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "shiho2",
+    "profile": [
+      "スターウォーズ観よう"
+    ],
+    "role": "しほしほ",
+    "major": "農",
+    "nickname": "しほ氏"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "matsunami",
+    "profile": [
+      "最近何してんの？"
+    ],
+    "role": "ゴシップ",
+    "major": "文",
+    "nickname": "マッツ"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "sakimaru",
+    "profile": [
+      "タイ&uarr;ワン&darr;"
+    ],
+    "role": "開幕",
+    "major": "工",
+    "nickname": "さき丸"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "harada2 // マウスホバーでhrd.jpg",
+    "profile": [
+      "靴下を脱ぐな\",",
+      "すぐ寝るな\",",
+      "すっかり山の人\",",
+      "　　　ッッア゛ア゛ーーッッ！！"
+    ],
+    "role": "ディソ",
+    "major": "工",
+    "nickname": "HRD"
+  },
+  {
+    "year": "B3",
+    "src": "",
+    "name": "matsumoto",
+    "profile": [
+      "「おいもう酒ねえのかよ！」"
+    ],
+    "role": "プラチナゴールデンシェフ",
+    "major": "工"
+  },
+  {
+    "year": "B2",
+    "src": "",
+    "name": "Kaneta",
+    "profile": [
+      "ちゃっかりしてるの好き\",",
+      "暗躍するソロオプレイヤーKA-NE-TA"
+    ],
+    "role": "かつての部長",
+    "major": "工",
+    "nickname": "かねた"
+  },
+  {
+    "year": "B2",
+    "src": "",
+    "name": "Kakuta",
+    "profile": [
+      "自転車っぽいってか自転車だったわ"
+    ],
+    "role": "自転車っぽい",
+    "major": "経",
+    "nickname": "かくた"
+  },
+  {
+    "year": "B2",
+    "src": "",
+    "name": "Ozawa",
+    "profile": [
+      "アラスカ土産はアザラシの肉がいいです"
+    ],
+    "role": "メガネ",
+    "major": "文",
+    "nickname": "ざーわー"
+  },
+  {
+    "year": "B2",
+    "src": "",
+    "name": "saito",
+    "profile": [
+      "落ち着きを見せてきた\",",
+      "葛藤の人生"
+    ],
+    "role": "なんJ語を操る",
+    "major": "経",
+    "nickname": "3110"
+  },
+  {
+    "year": "B2",
+    "src": "",
+    "name": "watanabe2",
+    "profile": [
+      "「豚骨ラーメンしか認めない」\",",
+      "バイクいいよお&hellip;"
+    ],
+    "role": "九州",
+    "major": "法",
+    "nickname": "ナベ"
+  },
+  {
+    "year": "B2",
+    "src": "",
+    "name": "Soutome",
+    "profile": [
+      "妹にしたい\",",
+      "ペンシルバニア土産は&hellip;アザラシの肉&hellip;？"
+    ],
+    "role": "マイハートエンジェル",
+    "major": "法"
+  }
+]

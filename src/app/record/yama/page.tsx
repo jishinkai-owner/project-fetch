@@ -165,11 +165,11 @@ const YamaRecordPage: React.FC = () => {
         <div className={styles.contentWrapper}>
           {loading ? (
             <div className={styles.noDataMessage}>
-              <p>読み込み中...</p>
+              <p>がんばって読み込み中 。。。</p>
             </div>
           ) : years.length === 0 ? (
             <div className={styles.noDataMessage}>
-              <p>山行記録のデータがありません。</p>
+              <p>あれれ..山行記録のデータが見つからない...</p>
             </div>
           ) : (
             <>
@@ -212,7 +212,7 @@ const YamaRecordPage: React.FC = () => {
                                 onClick={() => handleRecordClick(record.contentId)}
                               >
                                 <div className={styles.recordCardHeader}>
-                                  <h4 className={styles.recordTitle}>{record.title || "無題の記録"}</h4>
+                                  <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
                                   <span className={styles.recordDate}>{formatDate(record.date)}</span>
                                 </div>
                                 {record.details && (

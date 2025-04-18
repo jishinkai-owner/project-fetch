@@ -127,7 +127,7 @@ const MemberPage: React.FC = () => {
   // カテゴリごとのデータを表示するレンダリング関数
   const renderContent = () => {
     if (loading) {
-      return <div className={styles.loadingContainer}>読み込み中...</div>;
+      return <div className={styles.loadingContainer}>がんばって読み込み中 。。。</div>;
     }
 
     const yearMapping = {

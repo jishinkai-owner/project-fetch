@@ -10,7 +10,7 @@ import path from "path";
 import { compile } from "@mdx-js/mdx";
 
 // JSON ファイルの保存先を `scripts/` フォルダに明示的に設定
-const jsonFilePath = path.join(process.cwd(), "scripts", "members.json");
+const jsonFilePath = path.join(process.cwd(), "scripts", "legend.json");
 
 // 確認用のログ
 console.log(`📌 JSON ファイルの出力先: ${jsonFilePath}`);
@@ -19,7 +19,7 @@ const extractMembersFromMDX = async () => {
   try {
     console.log("📌 MDX ファイルを読み込み中...");
 
-    const mdxFilePath = path.join(process.cwd(), "src", "app", "member", "index.mdx");
+    const mdxFilePath = path.join(process.cwd(), "src", "app", "member", "legend.mdx");
 
     if (!fs.existsSync(mdxFilePath)) {
       console.error(`❌ ファイルが見つかりません: ${mdxFilePath}`);
