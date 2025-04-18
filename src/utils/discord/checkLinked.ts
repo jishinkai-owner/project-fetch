@@ -1,20 +1,28 @@
 import { createClient } from "@/utils/supabase/client";
+import { getUserfromSession } from "@/app/actions";
 
 export async function checkLinked() {
-  const supabase = createClient();
+  // const supabase = createClient();
   try {
-    const { data: userData, error: userError } = await supabase.auth.getUser();
-    if (userError) {
-      console.error("Error fetching user data: ", userError);
-      return false;
-    }
-
-    if (!userData.user) {
+    const user = await getUserfromSession();
+    // const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (!user) {
       console.error("User not found");
       return false;
     }
+    // if (userError) {
+    //   console.error("Error fetching user data: ", userError);
+    //   return false;
+    // }
+    // if (!userData.user) {
+    //   console.error("User not found");
+    //   return false;
+    // }
 
-    const isDiscordLinked = userData.user.identities?.some(
+    // const isDiscordLinked = userData.user.identities?.some(
+    //   (identity) => identity.provider === "discord"
+    // );
+    const isDiscordLinked = user.identities?.some(
       (identity) => identity.provider === "discord"
     );
     if (isDiscordLinked) {

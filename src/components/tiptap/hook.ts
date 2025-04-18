@@ -3,11 +3,16 @@ import axios from "axios";
 import { useState, useMemo } from "react";
 import useData from "@/lib/swr/useSWR";
 import { Dispatch, SetStateAction } from "react";
+import {
+  RecordAuthorRes,
+  RecordsAuthorRes,
+  ContentRes,
+} from "@/types/apiResponse";
 // import { useUserContext } from "@/providers/user";
 
 export const useEditorState = () => {
   // const { userId } = useUserContext();
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState<string | null>("");
   const [recordContent, setRecordContent] = useState<RecordContentProps>({
     title: null,
     filename: null,
@@ -29,10 +34,10 @@ export const useImage = () => {
   return { url, setUrl, open, handleOpen };
 };
 
-export const useAuthorRecord = (userId: string | null) => {
+export const useAuthorRecord = (userId?: string | null) => {
   // const { userId } = useUserContext();
-  const { data, isLoading, isError } = useData(
-    `/api/recordsAuthor?authorId=${userId}`
+  const { data, isLoading, isError } = useData<RecordsAuthorRes[]>(
+    userId ? `/api/recordsAuthor?authorId=${userId}` : ""
   );
 
   const authorRecord = useMemo(() => {
@@ -43,9 +48,11 @@ export const useAuthorRecord = (userId: string | null) => {
 };
 
 export const usePastRecord = (recordId: number) => {
-  const { data, isLoading, isError } = useData(`/api/content?id=${recordId}`);
+  const { data, isLoading, isError } = useData<ContentRes>(
+    `/api/content?id=${recordId}`
+  );
   const pastRecord = useMemo(() => {
-    if (!data) return [];
+    if (!data) return null;
     return data.data;
   }, [data]);
   return {
@@ -56,7 +63,9 @@ export const usePastRecord = (recordId: number) => {
 };
 
 export const useRecordContent = (id: number) => {
-  const { data, isLoading, isError } = useData(`/api/content?id=${id}`);
+  const { data, isLoading, isError } = useData<ContentRes>(
+    `/api/content?id=${id}`
+  );
 
   const recordContent = useMemo(() => {
     if (!data) return [];
@@ -71,11 +80,9 @@ export const useRecordContent = (id: number) => {
 
 export const handleContentUpdate = async (
   id: number,
-  content: string,
-  title: string
+  content: string | null,
+  title: string | null
 ) => {
-  console.log("updating content...", id, content, title);
-
   const data = {
     id: id,
     content: content,
@@ -88,9 +95,7 @@ export const handleContentUpdate = async (
         "Content-Type": "application/json",
       },
     });
-    console.log("response from server: ", res);
     if (res.status === 200) {
-      console.log("content updated successfully");
       return { success: true, data: res.data };
     }
     return { success: false, error: "Failed to update content" };
@@ -101,17 +106,9 @@ export const handleContentUpdate = async (
 
 const handleContentSubmit = async (
   recordContent: RecordContentProps,
-  userId: string | null,
-  content: string
+  userId: string | null | undefined,
+  content: string | null
 ) => {
-  console.log(
-    "submitting content...",
-    userId,
-    recordContent.title,
-    content,
-    recordContent.recordId
-  );
-
   const data = {
     authorId: userId,
     title: recordContent.title,
@@ -127,7 +124,6 @@ const handleContentSubmit = async (
       },
     });
 
-    console.log("response from server: ", res);
     if (res.status === 201) {
       console.log("content submitted successfully");
       return { success: true };
@@ -144,8 +140,8 @@ const handleContentSubmit = async (
 
 type RecordUpdateProps = {
   id: number;
-  title: string;
-  content: string;
+  title: string | null;
+  content: string | null;
   setMessage: Dispatch<SetStateAction<string>>;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setStatus: Dispatch<SetStateAction<"success" | "error">>;
@@ -153,8 +149,8 @@ type RecordUpdateProps = {
 
 type RecordSubmitProps = {
   recordContent: RecordContentProps;
-  userId: string | null;
-  content: string;
+  userId: string | null | undefined;
+  content: string | null;
   setMessage: Dispatch<SetStateAction<string>>;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setStatus: Dispatch<SetStateAction<"success" | "error">>;

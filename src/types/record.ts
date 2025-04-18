@@ -1,8 +1,8 @@
 export type RecordProps = {
   id: number;
-  year?: number;
-  place?: string;
-  date?: string;
+  year: number | null;
+  place: string | null;
+  date: string | null;
 };
 
 export type RecordContentProps = {

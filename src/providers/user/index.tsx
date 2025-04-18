@@ -3,15 +3,15 @@ import { ReactNode, createContext, useContext } from "react";
 import { useUser } from "./hook";
 
 type UserContextType = {
-  userId: string | null;
-  isAdmin: boolean;
-  isCL: boolean;
-  isSL: boolean;
-  isMeal: boolean;
-  isEquipment: boolean;
-  isWeather: boolean;
-  isLoading: boolean;
-  isError: boolean;
+  userId?: string | null;
+  isAdmin?: boolean;
+  isCL?: boolean;
+  isSL?: boolean;
+  isMeal?: boolean;
+  isEquipment?: boolean;
+  isWeather?: boolean;
+  isLoading?: boolean;
+  isError?: boolean;
 };
 type UserContextProviderProps = {
   children: ReactNode;
@@ -31,10 +31,6 @@ const UserContext = createContext<UserContextType>({
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const { userInfo, isLoading, isError } = useUser();
 
-  console.log("UserContextProvider", {
-    userInfo,
-  });
-
   const userId = userInfo?.id;
   const isAdmin = userInfo?.isAdmin;
   const isCL = userInfo?.isCL;
@@ -42,10 +38,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const isMeal = userInfo?.isMeal;
   const isEquipment = userInfo?.isEquipment;
   const isWeather = userInfo?.isWeather;
-
-  console.log("UserContextProvider", {
-    userId,
-  });
 
   return (
     <UserContext.Provider

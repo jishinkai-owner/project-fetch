@@ -2,9 +2,15 @@ import useData from "@/lib/swr/useSWR";
 import { useMemo, useState } from "react";
 import axios from "axios";
 import { PostHikeContentProps } from "@/types/hike";
+import {
+  RecordRes,
+  CLRes,
+  PostHikeContentRes,
+  PostHikeContentResWithRecord,
+} from "@/types/apiResponse";
 
 export const usePostHikes = () => {
-  const { data, isLoading, isError } = useData("/api/records");
+  const { data, isLoading, isError } = useData<RecordRes[]>("/api/records");
 
   const postHikes = useMemo(() => {
     if (!data) return [];
@@ -14,10 +20,11 @@ export const usePostHikes = () => {
 };
 
 export const useCL = () => {
-  const { data, isLoading, isError } = useData("/api/cl");
+  const { data, isLoading, isError } = useData<CLRes[]>("/api/cl");
   const cl = useMemo(() => {
     if (!data) return [];
     return data.data;
+    // return data;
   }, [data]);
   return { cl, isLoadingCL: isLoading, isErrorCL: isError };
 };
@@ -26,7 +33,7 @@ export const usePastPostHike = (
   recordId: number | null,
   clId: string | null
 ) => {
-  const { data, isLoading, isError } = useData(
+  const { data, isLoading, isError } = useData<PostHikeContentRes[]>(
     `/api/postHike?recordId=${recordId}&clId=${clId}`
   );
 
@@ -42,13 +49,14 @@ export const usePastPostHike = (
 };
 
 export const usePostPostHikesWithRecordId = (recordId: number) => {
-  const { data, isLoading, isError } = useData(
+  const { data, isLoading, isError } = useData<PostHikeContentResWithRecord>(
     `/api/postHikes?recordId=${recordId}`
   );
 
   const postHikes = useMemo(() => {
-    if (!data) return [];
+    if (!data) return null;
     return data.data;
+    // return data;
   }, [data]);
   return { postHikes, isLoading, isError };
 };
@@ -73,8 +81,6 @@ export const useEntriesState = () => {
 };
 
 export const handleSubmit = async (entries: PostHikeContentProps) => {
-  console.log("submitting entries...", entries);
-
   const data = {
     clId: entries.clId,
     clName: entries.clName?.split(" ")[0],
@@ -98,7 +104,6 @@ export const handleSubmit = async (entries: PostHikeContentProps) => {
     });
 
     if (res.status === 201) {
-      console.log("retrospectice data put successfully");
       return { success: true };
     }
 

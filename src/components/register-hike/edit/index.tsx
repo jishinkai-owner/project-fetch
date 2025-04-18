@@ -35,7 +35,7 @@ const RegisterHikeEdit = () => {
           記録がありません
         </Alert>
       );
-    return activities.map((e: RecordProps) => (
+    return activities.map((e) => (
       <RecordCard
         key={e.id}
         buttonTitle={"編集する"}

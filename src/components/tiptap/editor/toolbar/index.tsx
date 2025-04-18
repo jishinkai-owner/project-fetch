@@ -40,7 +40,7 @@ const Toolbar = ({ editor }: ToolbarProps) => {
       <Button
         variant="outlined"
         onClick={() => editor.chain().focus().undo().run()}
-        disabled={editorState.redoDisabled}
+        disabled={editorState.undoDisabled}
       >
         <UndoIcon />
       </Button>

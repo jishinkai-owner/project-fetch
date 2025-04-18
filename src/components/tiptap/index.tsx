@@ -70,21 +70,15 @@ const EditorPage = () => {
             {isLoadingAuthor ? (
               <Skeleton variant="rectangular" height={56} width="100%" />
             ) : (
-              authorRecord.map(
-                (
-                  content: Content & {
-                    Record: Record;
-                  }
-                ) => (
-                  <RecordCard
-                    key={content.id}
-                    buttonTitle={"反省を見る"}
-                    pushUrl={`/club-members/records/edit/${content.id}`}
-                    title={content.title ?? ""}
-                    description={content.Record.place ?? ""}
-                  />
-                )
-              )
+              authorRecord.map((content) => (
+                <RecordCard
+                  key={content.id}
+                  buttonTitle={"反省を見る"}
+                  pushUrl={`/club-members/records/edit/${content.id}`}
+                  title={content.title ?? ""}
+                  description={content.Record.place ?? ""}
+                />
+              ))
             )}
           </Grid>
         </AccordionDetails>
@@ -126,7 +120,7 @@ const EditorPage = () => {
                 }))
               }
             />
-            <TipTapEditor setContent={setContent} />
+            <TipTapEditor content={null} setContent={setContent} />
             <AccordionActions>
               <Button
                 variant="contained"

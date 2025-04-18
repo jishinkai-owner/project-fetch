@@ -4,6 +4,7 @@ import { HikeInfoEntryProps } from "@/types/hike";
 import { Dayjs } from "dayjs";
 import { SnackbarStateProps } from "@/types/snackbar";
 import useData from "@/lib/swr/useSWR";
+import { ActivitiesRes, ActivityRes } from "@/types/apiResponse";
 
 export const useHikeInfo = () => {
   const [entry, setEntry] = useState<HikeInfoEntryProps>({
@@ -222,7 +223,10 @@ export const useFormUpdate = (
 };
 
 export const useActivities = () => {
-  const { data, isLoading, isError } = useData("/api/activities");
+  const { data, isLoading, isError } =
+    useData<ActivitiesRes[]>("/api/activities");
+  // useData<ActivitiesRes>("/api/activities");
+  // useData("api/activities");
 
   const activities = useMemo(() => {
     if (!data) return [];
@@ -237,6 +241,9 @@ export const useActivities = () => {
 };
 
 export const useActivity = (id: number | null) => {
+  // const { data, isLoading, isError } = useData<ActivityRes>(
+  //   `/api/activity?id=${id}`
+  // );
   const { data, isLoading, isError } = useData(`/api/activity?id=${id}`);
 
   const activity = useMemo(() => {

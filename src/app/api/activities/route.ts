@@ -9,6 +9,8 @@ export async function GET() {
 
     const currentYear = new Date().getFullYear();
 
+    console.log("current year: ", currentYear);
+
     const records = await prisma.record.findMany({
       where: {
         year: {

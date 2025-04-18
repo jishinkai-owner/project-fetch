@@ -10,8 +10,8 @@ import Toolbar from "./toolbar/index";
 import FloatingBar from "./floating-menu";
 
 type SetContentProps = {
-  content?: string;
-  setContent: Dispatch<SetStateAction<string>>;
+  content: string | null;
+  setContent: Dispatch<SetStateAction<string | null>>;
 };
 
 const TipTapEditor = ({ content, setContent }: SetContentProps) => {
@@ -39,10 +39,8 @@ const TipTapEditor = ({ content, setContent }: SetContentProps) => {
 
   useEffect(() => {
     if (editor && content && isFirstRender.current) {
-      // Mark that we're updating from an external source
       isExternalUpdate.current = true;
-      isFirstRender.current = false; // Set to false after the first render
-      // Reset flag after update
+      isFirstRender.current = false;
 
       const currentContent = editor.getHTML();
       if (content !== currentContent) {

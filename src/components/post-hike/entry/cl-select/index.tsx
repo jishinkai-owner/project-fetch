@@ -3,7 +3,9 @@ import { ChangeEvent } from "react";
 
 type CLMember = {
   userId: string;
-  name: string;
+  User: {
+    name: string;
+  };
 };
 
 type CLSelectProps = {
@@ -24,9 +26,9 @@ const CLSelect = ({ clMembers, handleChange }: CLSelectProps) => {
         <MenuItem
           // id={option.userId}
           key={option.userId}
-          value={`${option.userId}|${option.name}`}
+          value={`${option.userId}|${option.User.name}`}
         >
-          {option.name}
+          {option.User.name}
         </MenuItem>
       ))}
     </TextField>

@@ -19,7 +19,7 @@ const EditPastRecord = ({ id }: EditPastRecordProps) => {
   const { pastRecord, isLoadingPastRecord, isErrorPastRecord } =
     usePastRecord(id);
   const { content, setContent } = useEditorState();
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string | null>("");
   const { open, setOpen, message, setMessage, handleClose, status, setStatus } =
     useSnackbar();
 

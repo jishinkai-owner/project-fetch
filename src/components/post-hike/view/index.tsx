@@ -54,7 +54,7 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
         <Typography variant="h3">
           {postHikes.place} - {postHikes.date}/{postHikes.year}
         </Typography>
-        {postHikes.PostHikeContents.map((e: PostHikeContentGetProps) => (
+        {postHikes.PostHikeContents.map((e) => (
           <Stack spacing={1} key={e.clId}>
             <Typography
               variant="body1"
@@ -130,7 +130,7 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                     <>
                       {e.sl}
                       <br />
-                      CLからのコメント：{e.slComment}
+                      CLからのコメント：{e.slComemnt}
                     </>
                   }
                 />

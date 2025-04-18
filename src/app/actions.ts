@@ -3,12 +3,28 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
+export async function getUserfromSession() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error("Error getting user: ", error);
+    return null;
+  }
+  if (!data.user) {
+    console.error("User not found");
+    return null;
+  }
+
+  const user = data.user;
+
+  return user;
+}
+
 export async function login() {
   const supabase = await createClient();
   const nextUrl = "/club-members";
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
-    // provider: "discord",
     options: {
       redirectTo: `http://localhost:3000/api/auth/callback?next=${encodeURIComponent(
         nextUrl
@@ -59,66 +75,55 @@ export async function linkDiscord() {
 }
 
 export async function getUser() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error) {
-    console.error("Error getting user: ", error);
-    return null;
-  }
-
-  return data.user.id;
-}
-
-export async function getDiscordInfo() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error) {
-    console.error("Error getting user: ", error);
-    return null;
-  }
-  if (!data.user) {
+  // const supabase = await createClient();
+  // const { data, error } = await supabase.auth.getUser();
+  const user = await getUserfromSession();
+  if (!user) {
     console.error("User not found");
     return null;
   }
 
-  const discordIdentity = data.user.identities?.find(
-    (identity) => identity.provider === "discord"
-  );
-
-  // if (!discordIdentity) {
-  //   console.error("Discord identity not found");
+  // if (error) {
+  //   console.error("Error getting user: ", error);
   //   return null;
   // }
 
-  // const userIdentity = discordIdentity.identity_data;
+  // return data.user.id;
+  return user.id;
+}
+
+export async function getDiscordInfo() {
+  // const supabase = await createClient();
+  // const { data, error } = await supabase.auth.getUser();
+
+  const user = await getUserfromSession();
+
+  if (!user) {
+    console.error("User not found");
+    return null;
+  }
+
+  // if (error) {
+  //   console.error("Error getting user: ", error);
+  //   return null;
+  // }
+  // if (!data.user) {
+  //   console.error("User not found");
+  //   return null;
+  // }
+
+  // const discordIdentity = data.user.identities?.find(
+  //   (identity) => identity.provider === "discord"
+  // );
+  const discordIdentity = user.identities?.find(
+    (identity) => identity.provider === "discord"
+  );
+
   const userIdentity = discordIdentity;
-  // const accessToken = userIdentity?.access_token;
 
   console.log("userIdentity: ", userIdentity);
-  // console.log("access token: ", accessToken);
-  // const
-
-  // const userId = userIdentity?.id;
-  // const userName = userIdentity?.username;
 
   return {
     userIdentity,
   };
 }
-
-// export async function getUserRoles() {
-//   const supabase = await createClient();
-//   const {data, error} = await supabase.auth.getUser();
-
-//   if (error) {
-//     console.error("Error getting user: ", error);
-//     return null;
-//   }
-//   if (!data.user) {
-//     console.error("User not found");
-//     return null;
-//   }
-
-// }
