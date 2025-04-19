@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
 import styles from "../RecordPage.module.scss";
 import Link from "next/link";
-import Menu from "@/components/Menu/Menu";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 
 

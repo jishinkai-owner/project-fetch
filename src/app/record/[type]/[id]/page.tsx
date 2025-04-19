@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter, notFound } from "next/navigation";
 import Link from "next/link";
 import styles from "../../RecordPage.module.scss";
-import Menu from "@/components/Menu/Menu";
 import Image from "next/image";
 
 // APIからのレスポンス型定義

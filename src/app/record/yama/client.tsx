@@ -1,12 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback, useTransition, memo, lazy, Suspense } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useTransition, memo } from "react";
 import styles from "../RecordPage.module.scss";
 import Link from "next/link";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
-
-// メニューコンポーネントを遅延ロード
-const Menu = lazy(() => import("@/components/Menu/Menu"));
 
 interface YamaRecordClientProps {
   initialRecords: RecordContentDTO[];
@@ -58,59 +55,9 @@ const YamaRecordClient: React.FC<YamaRecordClientProps> = ({
   // React Transitionを使用してUIのブロックを防止
   const [isPending, startTransition] = useTransition();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [selectedYear, setSelectedYear] = useState<number | null>(initialYear);
   const [recordsToShow, setRecordsToShow] = useState<RecordContentDTO[]>(initialRecords);
   const [loading, setLoading] = useState(false);
-
-  // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
-  const checkScreenSize = useCallback(() => {
-    if (typeof window === 'undefined') return;
-
-    const mobile = window.innerWidth <= 900;
-    setIsMobile(mobile);
-
-    // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
-    setIsMenuOpen(!mobile);
-  }, []);
-
-  // 初期化とリサイズイベントの設定（デバウンス対応）
-  useEffect(() => {
-    // ブラウザ環境のみで実行
-    if (typeof window !== 'undefined') {
-      // 初期チェック
-      checkScreenSize();
-
-      // デバウンス処理（パフォーマンス向上）
-      let timeoutId: NodeJS.Timeout;
-      const handleResize = () => {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(checkScreenSize, 100);
-      };
-
-      // リサイズイベントにリスナーを追加
-      window.addEventListener('resize', handleResize);
-
-      // クリーンアップ関数
-      return () => {
-        clearTimeout(timeoutId);
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-  }, [checkScreenSize]);
-
-  // メニュー開閉のトグル
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => !prev);
-  }, []);
-
-  // キーボードでのメニュー操作対応
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape' && isMenuOpen && isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMenuOpen, isMobile]);
 
   // 年度変更時の処理
   const handleYearChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -155,15 +102,6 @@ const YamaRecordClient: React.FC<YamaRecordClientProps> = ({
     });
     return Array.from(uniquePlaces);
   }, [recordsToShow]);
-
-  // 遅延ロードするメニューコンポーネント用のフォールバック
-  const menuFallback = useMemo(() => (
-    <div className={styles.Menu}>
-      <div style={{ padding: "20px", textAlign: "center" }}>
-        読み込み中...
-      </div>
-    </div>
-  ), []);
 
   return (
     <>
