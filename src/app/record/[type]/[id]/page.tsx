@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter, notFound } from "next/navigation";
-import Link from "next/link";
 import styles from "../../RecordPage.module.scss";
 import Image from "next/image";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -90,12 +90,12 @@ export default function RecordDetailPage() {
   return (
     <>
       {/* パンくずリスト */}
-      <nav className={styles.breadcrumb}>
-        <Link href="/">Home</Link> {' > '}
-        <Link href="/record">活動記録</Link> {' > '}
-        <Link href={`/record/${recordType}`}>{activityName}記録</Link> {' > '}
-        <span>{content.title || '無題'}</span>
-      </nav>
+      <BreadCrumbs breadcrumb={[
+        { title: 'Home', url: '/' },
+        { title: '活動記録', url: '/record' },
+        { title: `${activityName}記録`, url: `/record/${recordType}` },
+        { title: content.title || '無題' }
+      ]} />
 
       <div className={styles.recordDetail}>
         {/* 記事ヘッダー */}

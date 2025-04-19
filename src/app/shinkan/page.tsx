@@ -1,9 +1,7 @@
-"use client";
-
 import React from "react";
 import styles from "./ShinkanPage.module.scss";
-import Link from "next/link";
 import Image from "next/image";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 
 // SNSボタンのプロパティ
 interface SnsButtonProps {
@@ -33,9 +31,10 @@ const NewcomerPage: React.FC = () => {
   return (
     <>
       {/* ナビゲーション */}
-      <nav className={styles.breadcrumb}>
-        <Link href="/">Home</Link> <span> &gt; </span> <span>新歓情報</span>
-      </nav>
+      <BreadCrumbs breadcrumb={[
+        { title: "HOME", url: "/" },
+        { title: "新歓情報" }
+      ]} />
 
       {/* メインコンテンツ */}
       <div className={styles.newcomerContent}>

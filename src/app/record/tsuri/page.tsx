@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "../RecordPage.module.scss";
-import Link from "next/link";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
-import MainHeader from "@/components/MainHeader/MainHeader";
 import TabBar from "@/components/TabBar/TabBar";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import Title from "@/components/Title/Title";
 
 const TsuriRecordPage: React.FC = () => {
   const [recordContents, setRecordContents] = useState<RecordContentDTO[]>([]);
@@ -68,11 +68,13 @@ const TsuriRecordPage: React.FC = () => {
   return (
     <>
       {/* ナビゲーション */}
-      <MainHeader breadcrumb={[
+      <BreadCrumbs breadcrumb={[
         { title: "Home", url: "/" },
         { title: "活動記録", url: "/record" },
         { title: "釣行記録" }
-      ]} title="釣行記録" />
+      ]} />
+
+      <Title title="釣行記録" />
 
       {/* カテゴリ選択タブ */}
       <TabBar tabs={[

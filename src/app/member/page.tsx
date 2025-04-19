@@ -3,8 +3,10 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import styles from "./MemberPage.module.scss";
-import Link from "next/link";
 import Image from "next/image";
+import TabBar from "@/components/TabBar/TabBar";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import Title from "@/components/Title/Title";
 
 // メンバーの型定義
 type Member = {
@@ -141,10 +143,14 @@ const MemberPage: React.FC = () => {
   return (
     <>
       {/* ナビゲーション */}
-      <nav className={styles.breadcrumb}>
-        <Link href="/">Home</Link> <span> &gt; </span> <span>部員紹介</span>
-      </nav>
-      <h1 className={styles.circleTitle}>部員紹介</h1>
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "部員紹介" }
+        ]}
+      />
+
+      <Title title="部員紹介" />
 
       {/* Suspense でラップして useSearchParams を利用 */}
       <Suspense fallback={<div>読み込み中...</div>}>
@@ -152,17 +158,14 @@ const MemberPage: React.FC = () => {
       </Suspense>
 
       {/* Tab選択カテゴリ */}
-      <div className={styles.tabContainer}>
-        {(Object.keys(yearIcons) as Array<keyof typeof yearIcons>).map((category) => (
-          <button
-            key={category}
-            className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
-            onClick={() => setSelectedCategory(category)}
-          >
-            <span className={styles.tabIcon}>{yearIcons[category]}</span> {category}
-          </button>
-        ))}
-      </div>
+      <TabBar
+        tabs={(Object.entries(yearIcons) as [YearCategory, string][]).map(([key, icon]) => ({
+          title: key,
+          icon: icon,
+          url: () => setSelectedCategory(key),
+          isCurrent: selectedCategory === key
+        }))}
+      />
 
       {/* 選択されたカテゴリの内容 */}
       <div className={styles.contentWrapper}>{renderContent()}</div>

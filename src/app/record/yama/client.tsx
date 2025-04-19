@@ -2,10 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback, useTransition, memo } from "react";
 import styles from "../RecordPage.module.scss";
-import Link from "next/link";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
-import MainHeader from "@/components/MainHeader/MainHeader";
-import TabBar from "@/components/TabBar/TabBar";
 
 interface YamaRecordClientProps {
   initialRecords: RecordContentDTO[];
@@ -106,70 +103,54 @@ const YamaRecordClient: React.FC<YamaRecordClientProps> = ({
   }, [recordsToShow]);
 
   return (
-    <>
-      {/* ナビゲーション */}
-      <MainHeader breadcrumb={[
-        { title: "Home", url: "/" },
-        { title: "活動記録", url: "/record" },
-        { title: "山行記録" }
-      ]} title="山行記録" />
-
-      {/* カテゴリ選択タブ */}
-      <TabBar tabs={[
-        { title: "山行記録", icon: "🏔️", url: "/record/yama", isCurrent: true },
-        { title: "旅行記録", icon: "✈️", url: "/record/tabi" },
-        { title: "釣行記録", icon: "🎣", url: "/record/tsuri" }
-      ]} />
-
-      <div className={styles.contentWrapper}>
-        {isPending || loading ? (
-          <div className={styles.noDataMessage}>
-            <p>読み込み中...</p>
+    <div className={styles.contentWrapper}>
+      {isPending || loading ? (
+        <div className={styles.noDataMessage}>
+          <p>読み込み中...</p>
+        </div>
+      ) : years.length === 0 ? (
+        <div className={styles.noDataMessage}>
+          <p>山行記録のデータがありません。</p>
+        </div>
+      ) : (
+        <>
+          {/* 年度セレクタ */}
+          <div className={styles.yearSelector}>
+            <select
+              onChange={handleYearChange}
+              value={selectedYear ?? ""}
+              disabled={isPending}
+            >
+              <option value="">年度を選択</option>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}年度
+                </option>
+              ))}
+            </select>
           </div>
-        ) : years.length === 0 ? (
-          <div className={styles.noDataMessage}>
-            <p>山行記録のデータがありません。</p>
-          </div>
-        ) : (
-          <>
-            {/* 年度セレクタ */}
-            <div className={styles.yearSelector}>
-              <select
-                onChange={handleYearChange}
-                value={selectedYear ?? ""}
-                disabled={isPending}
-              >
-                <option value="">年度を選択</option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}年度
-                  </option>
-                ))}
-              </select>
+
+          {/* 記録一覧表示部分 */}
+          {selectedYear && (
+            <div className={styles.recordsWrapper}>
+              {placeList.length === 0 ? (
+                <div className={styles.noDataMessage}>
+                  <p>{selectedYear}年度の山行記録はありません。</p>
+                </div>
+              ) : (
+                placeList.map((place) => (
+                  <PlaceSection
+                    key={place}
+                    place={place}
+                    records={recordsToShow}
+                  />
+                ))
+              )}
             </div>
-
-            {/* 記録一覧表示部分 */}
-            {selectedYear && (
-              <div className={styles.recordsWrapper}>
-                {placeList.length === 0 ? (
-                  <div className={styles.noDataMessage}>
-                    <p>{selectedYear}年度の山行記録はありません。</p>
-                  </div>
-                ) : (
-                  placeList.map((place) => (
-                    <PlaceSection
-                      key={place}
-                      place={place}
-                      records={recordsToShow}
-                    />
-                  ))
-                )}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 

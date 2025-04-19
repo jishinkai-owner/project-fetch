@@ -1,26 +1,3 @@
-// パンくずリスト
-.breadcrumb {
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  align-self: flex-start;
-  margin-top: 1rem;
-  padding: 0 3rem;
-
-  a {
-    color: #000;
-    text-decoration: none;
-    margin-right: 0.5rem;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  span {
-    color: #888;
-  }
-}
-
 // ページタイトル
 .circleTitle {
   font-size: 2rem;

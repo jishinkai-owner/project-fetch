@@ -3,22 +3,13 @@ import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import YamaRecordClient from "./client";
 import LoadingPlaceholder from "./loading";
+import TabBar from "@/components/TabBar/TabBar";
+import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
+import Title from "@/components/Title/Title";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 
 // ISR設定（30分ごとに再生成、秒数で指定）
 export const revalidate = 1800;
-
-// RecordContentDTO 定義（クライアント用）
-interface RecordContentDTO {
-  contentId: number;
-  recordId: number;
-  year: number | null;
-  place: string | null;
-  activityType: string | null;
-  date: string | null;
-  details: string | null;
-  title: string | null;
-  filename: string | null;
-}
 
 // 年度リスト取得（降順）
 function getUniqueYears(recordContents: RecordContentDTO[]): number[] {
@@ -43,7 +34,7 @@ async function getRecordData() {
       },
     },
   });
-  
+
   try {
     // 山行記録のデータを取得（activityTypeを使用）
     const yamaRecords = await prisma.record.findMany({
@@ -54,10 +45,10 @@ async function getRecordData() {
         contents: true // 関連するContentを取得
       }
     });
-    
+
     // 取得したデータをRecordContentDTO形式に変換
     const recordContents: RecordContentDTO[] = [];
-    
+
     yamaRecords.forEach(record => {
       // 関連コンテンツがない場合は、レコード自体の情報だけで1レコード作成
       if (record.contents.length === 0) {
@@ -89,29 +80,29 @@ async function getRecordData() {
         });
       }
     });
-    
+
     // 年度リストを取得
     const years = getUniqueYears(recordContents);
-    
+
     // 最新年度を取得
     const latestYear = years.length > 0 ? years[0] : null;
-    
+
     // 最新年度のレコードを取得
-    const initialRecords = latestYear 
-      ? recordContents.filter(r => r.year === latestYear) 
+    const initialRecords = latestYear
+      ? recordContents.filter(r => r.year === latestYear)
       : [];
-    
+
     return {
       initialRecords,
       // 全データは必要最小限のみをクライアントに渡す（最適化）
-      allRecords: recordContents.map(({contentId, recordId, year, place, activityType, date, title, filename}) => ({
-        contentId, 
-        recordId, 
-        year, 
+      allRecords: recordContents.map(({ contentId, recordId, year, place, activityType, date, title, filename }) => ({
+        contentId,
+        recordId,
+        year,
         place,
         activityType,
-        date, 
-        title, 
+        date,
+        title,
         filename,
         // detailsは一覧表示に必要な分だけ切り出す（データ量削減）
         details: recordContents.find(r => r.contentId === contentId)?.details?.substring(0, 100) || null
@@ -137,15 +128,35 @@ async function getRecordData() {
 export default async function YamaRecordPage() {
   // データ取得を待ちつつ、Suspenseでラップして表示を最適化
   const recordData = await getRecordData();
-  
+
   return (
-    <Suspense fallback={<LoadingPlaceholder />}>
-      <YamaRecordClient
-        initialRecords={recordData.initialRecords}
-        allRecords={recordData.allRecords}
-        years={recordData.years}
-        initialYear={recordData.initialYear}
+    <>
+      {/* ナビゲーション */}
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "活動記録", url: "/record" },
+          { title: "山行記録" }
+        ]}
       />
-    </Suspense>
+
+      <Title title="山行記録" />
+
+      {/* カテゴリ選択タブ */}
+      <TabBar tabs={[
+        { title: "山行記録", icon: "🏔️", url: "/record/yama", isCurrent: true },
+        { title: "旅行記録", icon: "✈️", url: "/record/tabi" },
+        { title: "釣行記録", icon: "🎣", url: "/record/tsuri" }
+      ]} />
+
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <YamaRecordClient
+          initialRecords={recordData.initialRecords}
+          allRecords={recordData.allRecords}
+          years={recordData.years}
+          initialYear={recordData.initialYear}
+        />
+      </Suspense>
+    </>
   );
 }

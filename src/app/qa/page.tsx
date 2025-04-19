@@ -3,8 +3,10 @@
 import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import styles from "./QaPage.module.scss";
-import Link from "next/link";
 import { qaData, QaCategory } from "./qaData";
+import TabBar from "@/components/TabBar/TabBar";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import Title from "@/components/Title/Title";
 
 // Suspense でラップするコンポーネント
 function SearchParamsWrapper({ setSelectedCategory }: { setSelectedCategory: (category: QaCategory) => void }) {
@@ -63,29 +65,29 @@ const QaPage: React.FC = () => {
   return (
     <>
       {/* ナビゲーション */}
-      <nav className={styles.breadcrumb}>
-        <Link href="/">Home</Link> <span> &gt; </span> <span>よくある質問</span>
-      </nav>
-      <h1 className={styles.circleTitle}>よくある質問</h1>
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "よくある質問" }
+        ]}
+      />
 
-      {/* Suspense で useSearchParams をラップ */}
+      <Title title="よくある質問" />
+
+      {/* Suspense でラップして useSearchParams を利用 */}
       <Suspense fallback={<div>読み込み中...</div>}>
         <SearchParamsWrapper setSelectedCategory={setSelectedCategory} />
       </Suspense>
 
-      {/* タブ選択カテゴリ */}
-      <div className={styles.tabContainer}>
-        {Object.keys(qaData).map((category) => (
-          <button
-            key={category}
-            className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
-            onClick={() => setSelectedCategory(category as QaCategory)}
-          >
-            <span className={styles.tabIcon}>{categoryIcons[category as QaCategory]}</span>
-            {category}
-          </button>
-        ))}
-      </div>
+      {/* Tab選択カテゴリ */}
+      <TabBar
+        tabs={(Object.entries(categoryIcons) as [QaCategory, string][]).map(([key, icon]) => ({
+          title: key,
+          icon: icon,
+          url: () => setSelectedCategory(key),
+          isCurrent: selectedCategory === key
+        }))}
+      />
 
       {/* Q&Aリスト表示エリア */}
       <div className={styles.contentWrapper}>{renderContent()}</div>

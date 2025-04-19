@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './MainHeader.module.scss';
+import styles from './BreadCrumbs.module.scss';
 import Link from 'next/link';
 
 interface Props {
@@ -7,9 +7,9 @@ interface Props {
     title: string;
     url?: string;
   }[];
-  title: string;
 }
-const MainHeader: React.FC<Props> = ({ breadcrumb, title }) => {
+
+const BreadCrumbs: React.FC<Props> = ({ breadcrumb }) => {
   return (
     <>
       {/* ナビゲーション */}
@@ -27,9 +27,8 @@ const MainHeader: React.FC<Props> = ({ breadcrumb, title }) => {
           </span>
         ))}
       </nav>
-      <h1 className={styles.circleTitle}>{title}</h1>
     </>
   );
 };
 
-export default MainHeader;
+export default BreadCrumbs;

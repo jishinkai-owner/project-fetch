@@ -3,8 +3,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
 import styles from "../RecordPage.module.scss";
-import Link from "next/link";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import Title from "@/components/Title/Title";
+import TabBar from "@/components/TabBar/TabBar";
 
 
 // 活動タイプとそのアイコン・名前のマッピング
@@ -84,25 +86,21 @@ const RecordListPage: React.FC = () => {
   return (
     <>
       {/* ナビゲーション */}
-      <nav className={styles.breadcrumb}>
-        <Link href="/">Home</Link> <span> &gt; </span>
-        <Link href="/record">活動記録</Link> <span> &gt; </span>
-        <span>{currentActivityType.name}記録</span>
-      </nav>
-      <h1 className={styles.circleTitle}>{currentActivityType.name}記録</h1>
+      <BreadCrumbs breadcrumb={[
+        { title: "Home", url: "/" },
+        { title: "活動記録", url: "/record" },
+        { title: `${currentActivityType.name}記録` }
+      ]} />
+
+      <Title title={`${currentActivityType.name}記録`} />
 
       {/* カテゴリ選択タブ */}
-      <div className={styles.tabContainer}>
-        {Object.entries(ACTIVITY_TYPES).map(([type, { icon, name }]) => (
-          <Link
-            key={type}
-            href={`/record/${type}`}
-            className={`${styles.tab} ${type === recordType ? styles.activeTab : ''}`}
-          >
-            <span className={styles.placeIcon}>{icon}</span> {name}記録
-          </Link>
-        ))}
-      </div>
+      <TabBar tabs={Object.entries(ACTIVITY_TYPES).map(([type, { name }]) => ({
+        title: `${name}記録`,
+        icon: ACTIVITY_TYPES[type].icon,
+        url: `/record/${type}`,
+        isCurrent: type === recordType
+      }))} />
 
       <div className={styles.contentWrapper}>
         {loading ? (
