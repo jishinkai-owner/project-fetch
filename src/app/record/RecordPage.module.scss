@@ -1,91 +1,7 @@
-.container {
-  display: flex;
-  min-height: 100vh;
-  position: relative;
-  
-  background-color: #f9f5eb;
-  background-image: 
-    linear-gradient(to right, rgba(150, 150, 150, 0.3) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(150, 150, 150, 0.3) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
+// src/app/record/RecordPage.module.scss
+@import '../styles/global.scss';
 
-/* ====== パソコンサイズのレイアウト ====== */
-.page {
-  display: flex;
-  position: fixed; 
-  width: 100%;
-  max-width: calc(100% - 350px); /* サイドバーの幅を考慮 */
-  flex-direction: column;
-  align-items: center;
-  overflow-y: auto;
-  height: 100vh;
-  padding: 0 2rem; /* 両側に余白を追加 */
-}
-
-.breadcrumb {
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  align-self: flex-start;
-  margin-top: 1rem;
-
-  a {
-    color: #000;
-    text-decoration: none;
-    margin-right: 0.5rem;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  span {
-    color: #888;
-  }
-}
-
-.circleTitle {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  border-bottom: 2px dashed rgba(220, 75, 75, 0.6);
-  padding-bottom: 0.5rem;
-  width: auto;
-  display: inline-block;
-}
-
-// メンバーページと同じデザインのタブに変更
-.tabContainer {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #ccc;
-  width: 100%;
-  max-width: 600px;
-}
-
-.tab {
-  background: none;
-  border: none;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  color: #000;
-  border-bottom: 2px solid transparent;
-  transition: border-bottom 0.2s ease;
-
-  &:hover {
-    border-bottom: 2px solid #888;
-  }
-}
-
-.activeTab {
-  border-bottom: 2px solid rgba(220, 75, 75, 0.6);
-  font-weight: bold;
-}
-
-// カテゴリーコンテナは残しますが、モバイル時非表示
+// カテゴリー関連
 .categoryContainer {
   display: flex;
   width: 100%;
@@ -159,28 +75,12 @@
   }
 }
 
-// 新しいスタイル - 記録一覧コンテンツ
+// コンテンツ関連
 .contentWrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.noDataMessage {
-  padding: 2rem;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 8px;
-  margin: 2rem 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
-  
-  p {
-    font-size: 1.1rem;
-    color: #666;
-  }
 }
 
 .yearSelector {
@@ -252,164 +152,6 @@
   width: 100%;
 }
 
-.Sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: #fff;
-  width: 350px;
-  height: 100%;
-  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  z-index: 10;
-  overflow-y: auto;
-  
-  &.closed {
-      transform: translateX(100%);
-      opacity: 0;
-      pointer-events: none;
-  }
-
-  &.open {
-      transform: translateX(0);
-      opacity: 1;
-      pointer-events: auto;
-  }
-}
-
-.PaperContainer {
-  background:
-      linear-gradient(
-      90deg,
-      rgba(208, 147, 82, 0.3),
-      rgba(192, 134, 70, 0.3) 60%,
-      rgba(208, 147, 82, 0.3)
-      ),
-      repeating-radial-gradient(
-      ellipse at 60% 500%,
-      rgba(192, 134, 70, 0.5),
-      rgba(192, 134, 70, 0.5) 0.2%,
-      rgba(208, 147, 82, 0.5) 0.6%,
-      rgba(208, 147, 82, 0.5) 1%
-      );
-}
-
-/* ハンバーガーメニュー */
-.hamburgerButton {
-  display: none;
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background-color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  font-size: 1.5rem;
-  text-align: center;
-  line-height: 50px;
-  z-index: 1000;
-  cursor: pointer;
-
-  &:hover {
-      background-color: #f0f0f0;
-  }
-  
-  &:focus {
-      outline: 2px solid #007bff;
-  }
-}
-
-
-/* スマホ・タブレット対応 (900px以下) */
-@media (max-width: 900px) {
-  .page {
-    position: relative;
-    max-width: 100%; /* サイドバーが閉じているときは全幅 */
-    padding: 0 1rem; /* 余白を縮小 */
-  }
-  
-  .hamburgerButton {
-    display: block; /* ハンバーガーメニューを表示 */
-  }
-  
-  .Sidebar {
-    transform: translateX(100%); /* 標準で非表示 */
-    opacity: 0;
-    pointer-events: none;
-    width: 80%; /* 幅を調整 */
-    max-width: 400px;
-    
-    &.open {
-      transform: translateX(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
-  
-  .categoryContainer {
-    display: none; /* PCサイズのカテゴリビューを非表示 */
-  }
-  
-  .recordCardList {
-    grid-template-columns: 1fr; /* 1列に変更 */
-  }
-  
-  .container::before {
-    left: 20px; /* 罫線位置を調整 */
-  }
-  
-  .recordCard {
-    min-height: 150px; /* カードの高さを調整 */
-  }
-}
-
-/* さらに小さい画面向け微調整 */
-@media (max-width: 480px) {
-  .page {
-    padding: 0 0.75rem; /* さらに余白を縮小 */
-  }
-  
-  .Sidebar {
-    max-width: 300px;
-  }
-
-  .circleTitle {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .tabContainer {
-    gap: 0.5rem;
-  }
-  
-  .tab {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.9rem;
-  }
-  
-  .yearSelector select {
-    width: 180px;
-    padding: 0.6rem 1.5rem;
-  }
-  
-  .placeTitle {
-    font-size: 1.2rem;
-  }
-  
-  .hamburgerButton {
-    width: 40px;
-    height: 40px;
-    font-size: 1.25rem;
-    line-height: 40px;
-  }
-}
-/* 記録詳細ページのスタイル */
 .recordDetail {
   width: 100%;
   max-width: 800px;
@@ -455,10 +197,6 @@
   color: #555;
   display: flex;
   align-items: center;
-}
-
-.placeIcon {
-  margin-right: 0.5rem;
 }
 
 .detailDate {
@@ -565,22 +303,20 @@
   }
 }
 
-/* ローディング表示用 */
-.loadingContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
-  width: 100%;
-}
-
-.loadingText {
-  font-size: 1.2rem;
-  color: #777;
-}
-
-/* モバイル対応 */
+// モバイル対応
 @media (max-width: 900px) {
+  .categoryContainer {
+    display: none; // PCサイズのカテゴリビューを非表示
+  }
+  
+  .recordCardList {
+    grid-template-columns: 1fr; // 1列に変更
+  }
+  
+  .recordCard {
+    min-height: 150px; // カードの高さを調整
+  }
+  
   .recordDetail {
     padding: 1.5rem;
   }
@@ -596,5 +332,16 @@
   
   .imageGrid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .yearSelector select {
+    width: 180px;
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .placeTitle {
+    font-size: 1.2rem;
   }
 }
