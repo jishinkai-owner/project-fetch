@@ -96,23 +96,12 @@
 // モバイル対応
 @media (max-width: 900px) {
   .container {
-    margin-top: 15%;
-    height: auto;
-    padding: 5% 10% 15%;
+    margin-top: 10%;
+    height: 100vh;
+    padding: 5%;
   }
   
-  .Recordimage,
-  .Shinkanimage,
-  .Qaimage,
-  .Memberimage,
-  .Loginimage {
-    margin-bottom: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    margin-top: 10%;
-    padding: 5% 5% 10%;
+  .imagecontainer{
+    padding: 5%;
   }
 }
