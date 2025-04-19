@@ -1,5 +1,3 @@
-// src/app/member/page.tsx の改善部分
-
 "use client";
 
 import React, { useEffect, useState, Suspense, useCallback } from "react";
@@ -20,6 +18,9 @@ type Member = {
   src?: string; // 画像URL
 };
 
+// YearCategoryに殿堂入りを追加
+type YearCategory = "2年生" | "3年生" | "4年生" | "殿堂入り";
+
 // SearchParamsWrapper コンポーネント：URL のクエリパラメータからカテゴリを取得して更新
 function SearchParamsWrapper({ setCategory }: { setCategory: (category: YearCategory) => void }) {
   const searchParams = useSearchParams();
@@ -27,7 +28,7 @@ function SearchParamsWrapper({ setCategory }: { setCategory: (category: YearCate
   useEffect(() => {
     const categoryFromQuery = searchParams.get("case");
     if (categoryFromQuery) {
-      if (["2年生", "3年生", "4年生"].includes(categoryFromQuery)) {
+      if (["2年生", "3年生", "4年生", "殿堂入り"].includes(categoryFromQuery)) {
         setCategory(categoryFromQuery as YearCategory);
       }
     }
@@ -36,12 +37,12 @@ function SearchParamsWrapper({ setCategory }: { setCategory: (category: YearCate
   return null;
 }
 
-type YearCategory = "2年生" | "3年生" | "4年生";
-
+// アイコンマッピングに殿堂入りを追加
 const yearIcons: Record<YearCategory, string> = {
   "2年生": "🌱",
   "3年生": "🌿",
   "4年生": "🌳",
+  "殿堂入り": "🏆" // 殿堂入り用のアイコン
 };
 
 const MemberPage: React.FC = () => {
@@ -120,8 +121,8 @@ const MemberPage: React.FC = () => {
   }, []);
 
   // 年度ごとのメンバーリストをフィルタ
-  const filterMembersByYear = (year: string) => {
-    return members.filter((member) => member.year === year);
+  const filterMembersByYear = (years: string[]) => {
+    return members.filter((member) => years.includes(member.year));
   };
 
   // カテゴリごとのデータを表示するレンダリング関数
@@ -130,10 +131,12 @@ const MemberPage: React.FC = () => {
       return <div className={styles.loadingContainer}>がんばって読み込み中 。。。</div>;
     }
 
-    const yearMapping = {
-      "2年生": "C3",
-      "3年生": "C2",
-      "4年生": "C1"
+    // 学年とyearのマッピングを更新（殿堂入りを追加）
+    const yearMapping: Record<YearCategory, string[]> = {
+      "2年生": ["C3"],
+      "3年生": ["C2"],
+      "4年生": ["C1"],
+      "殿堂入り": ["C0", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "B2", "B1", "B0", "A9", "A8"]
     };
 
     let filteredMembers: Member[] = [];
@@ -154,9 +157,9 @@ const MemberPage: React.FC = () => {
                 <Image 
                   src={member.src || "/default-image.png"}
                   alt={member.nickname}
-                  width={1000}
-                  height={0}
-                  style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                  width={120}
+                  height={120}
+                  style={{ objectFit: "cover" }}
                   className={styles.memberImage}
                 />
                 <div className={styles.triangletop}></div>
@@ -201,17 +204,17 @@ const MemberPage: React.FC = () => {
         </Suspense>
 
         {/* Tab選択カテゴリ */}
-      <div className={styles.tabContainer}>
-        {(Object.keys(yearIcons) as Array<keyof typeof yearIcons>).map((category) => (
-          <button
-            key={category}
-            className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
-            onClick={() => setSelectedCategory(category)}
-          >
-            <span className={styles.tabIcon}>{yearIcons[category]}</span> {category}
-          </button>
-        ))}
-      </div>
+        <div className={styles.tabContainer}>
+          {(Object.keys(yearIcons) as Array<keyof typeof yearIcons>).map((category) => (
+            <button
+              key={category}
+              className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              <span className={styles.tabIcon}>{yearIcons[category]}</span> {category}
+            </button>
+          ))}
+        </div>
 
         {/* 選択されたカテゴリの内容 */}
         <div className={styles.contentWrapper}>{renderContent()}</div>

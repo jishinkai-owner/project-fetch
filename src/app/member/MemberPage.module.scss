@@ -61,8 +61,9 @@
   margin-bottom: 2rem;
   border-bottom: 2px solid #ccc;
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   padding-bottom: 0.5rem;
+  flex-wrap: wrap; /* タブが多くなったときに折り返す */
 }
 
 .tab {
@@ -98,6 +99,7 @@
 .contentWrapper {
   width: 100%;
   max-width: 1200px;
+  padding: 1rem 0 3rem 0;
 }
 
 .loadingContainer, .noDataMessage {
@@ -115,7 +117,7 @@
 
 .memberCardList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
   width: 100%;
 }
@@ -123,27 +125,32 @@
 // メンバーカードのコンテナ - 画像とカード情報をまとめる
 .memberCoutainer {
   position: relative;
-  padding-top: 120px; // 画像を上に出すためのスペース
+  margin-top: 80px; /* 画像が上にはみ出るスペース */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .imageWrapper {
-  position: relative;
-  top: -60px;         // 上に突き出す量
-  left: 50%;          // 中央配置の起点
-  transform: translateX(-50%) rotate(5deg); // 中央に配置し回転
-  width: 60%;        // 画像の幅を固定
-  height: auto;       // 画像の幅を固定
+  position: absolute;
+  top: -60px;
+  width: 200px;
+  height: 200px;
+  padding: 5px;
   background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: rotate(5deg);
   transition: transform 0.3s ease;
+  z-index: 2;
   
   &:hover {
-    transform: translateX(-50%) rotate(0deg) scale(1.05); // ホバー時の効果
+    transform: rotate(0deg) scale(1.05);
   }
 }
 
 .memberImage {
-  width: 98%;
-  height: 98%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -151,8 +158,8 @@
   position: absolute;
   left: -3%;
   top: -3%;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   clip-path: polygon(0 0, 100% 0, 0 100%);
   background-color: #C9BDA8;
   z-index: 3;
@@ -162,8 +169,8 @@
   position: absolute;
   right: -3%;
   bottom: -3%;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   clip-path: polygon(100% 0, 0 100%, 100% 100%);
   background-color: #C9BDA8;
   z-index: 3;
@@ -177,9 +184,10 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  height: auto;
+  width: 100%;
+  min-height: 250px;
   border-left: 4px solid rgba(220, 75, 75, 0.6);
-  position: relative;
+  padding-top: 170px; /* 画像用の余白 */
   
   // ノートのような紙の質感
   background-image: 
@@ -190,20 +198,15 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
-  &:nth-child(odd) {
-    transform: rotate(1deg);
-    
-    &:hover {
-      transform: rotate(0deg) translateY(-5px);
-    }
-  }
+  /* カードの回転スタイルは memberCard に適用する */
+  transform: rotate(1deg);
   
   &:nth-child(even) {
     transform: rotate(-1deg);
-    
-    &:hover {
-      transform: rotate(0deg) translateY(-5px);
-    }
+  }
+  
+  &:hover {
+    transform: rotate(0deg) translateY(-5px);
   }
 }
 
@@ -361,7 +364,44 @@
   }
   
   
+  
   .container::before {
     left: 20px; /* 罫線位置を調整 */
+  }
+}
+
+/* さらに小さい画面向け微調整 */
+@media (max-width: 480px) {
+  .page {
+    padding: 0 0.75rem; /* さらに余白を縮小 */
+  }
+  
+  .Sidebar {
+    max-width: 300px;
+  }
+
+  .circleTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tabContainer {
+    gap: 0.5rem;
+  }
+  
+  .tab {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .memberCardList {
+    grid-template-columns: 1fr;
+  }
+  
+  .hamburgerButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    line-height: 40px;
   }
 }
