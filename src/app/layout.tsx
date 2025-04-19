@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import styles from "./layout.module.scss";
 import "./globals.css";
+import Menu from "@/components/Menu/Menu";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,9 +26,43 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <div className={styles.container}>
+          {/* チェックボックスによるメニュー制御（非表示） */}
+          <input 
+            type="checkbox" 
+            id="menu-toggle" 
+            className={styles.menuCheckbox} 
+            defaultChecked={true}
+          />
+
+          <div className={styles.page}>
+            {children}
+          </div>
+
+          {/* ハンバーガーメニューボタン - モバイル向け */}
+          <label 
+            htmlFor="menu-toggle" 
+            className={styles.hamburgerButton}
+            aria-label="メニューを開閉する"
+          >
+            ☰
+          </label>
+
+          {/* メニューコンテナ */}
+          <div
+            id="navigation-menu"
+            className={styles.Sidebar}
+            role="navigation"
+          >
+            <div className={styles.PaperContainer}>
+              <div className={styles.Menu}>
+                <Menu />
+              </div>
+            </div>
+          </div>
+        </div>
       </body>
     </html>
   );

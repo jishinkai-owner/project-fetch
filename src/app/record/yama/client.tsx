@@ -166,107 +166,77 @@ const YamaRecordClient: React.FC<YamaRecordClientProps> = ({
   ), []);
 
   return (
-    <div className={styles.container} onKeyDown={handleKeyDown}>
-      <div className={styles.page}>
-        {/* ナビゲーション */}
-        <nav className={styles.breadcrumb}>
-          <Link href="/">Home</Link> <span> &gt; </span>
-          <Link href="/record">活動記録</Link> <span> &gt; </span>
-          <span>山行記録</span>
-        </nav>
-        <h1 className={styles.circleTitle}>山行記録</h1>
+    <>
+      {/* ナビゲーション */}
+      <nav className={styles.breadcrumb}>
+        <Link href="/">Home</Link> <span> &gt; </span>
+        <Link href="/record">活動記録</Link> <span> &gt; </span>
+        <span>山行記録</span>
+      </nav>
+      <h1 className={styles.circleTitle}>山行記録</h1>
 
-        {/* カテゴリ選択タブ */}
-        <div className={styles.tabContainer}>
-          <Link href="/record/yama" className={`${styles.tab} ${styles.activeTab}`}>
-            <span className={styles.placeIcon}>🏔️</span> 山行記録
-          </Link>
-          <Link href="/record/tabi" className={styles.tab}>
-            <span className={styles.placeIcon}>✈️</span> 旅行記録
-          </Link>
-          <Link href="/record/tsuri" className={styles.tab}>
-            <span className={styles.placeIcon}>🎣</span> 釣行記録
-          </Link>
-        </div>
+      {/* カテゴリ選択タブ */}
+      <div className={styles.tabContainer}>
+        <Link href="/record/yama" className={`${styles.tab} ${styles.activeTab}`}>
+          <span className={styles.placeIcon}>🏔️</span> 山行記録
+        </Link>
+        <Link href="/record/tabi" className={styles.tab}>
+          <span className={styles.placeIcon}>✈️</span> 旅行記録
+        </Link>
+        <Link href="/record/tsuri" className={styles.tab}>
+          <span className={styles.placeIcon}>🎣</span> 釣行記録
+        </Link>
+      </div>
 
-        <div className={styles.contentWrapper}>
-          {isPending || loading ? (
-            <div className={styles.noDataMessage}>
-              <p>読み込み中...</p>
+      <div className={styles.contentWrapper}>
+        {isPending || loading ? (
+          <div className={styles.noDataMessage}>
+            <p>読み込み中...</p>
+          </div>
+        ) : years.length === 0 ? (
+          <div className={styles.noDataMessage}>
+            <p>山行記録のデータがありません。</p>
+          </div>
+        ) : (
+          <>
+            {/* 年度セレクタ */}
+            <div className={styles.yearSelector}>
+              <select
+                onChange={handleYearChange}
+                value={selectedYear ?? ""}
+                disabled={isPending}
+              >
+                <option value="">年度を選択</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}年度
+                  </option>
+                ))}
+              </select>
             </div>
-          ) : years.length === 0 ? (
-            <div className={styles.noDataMessage}>
-              <p>山行記録のデータがありません。</p>
-            </div>
-          ) : (
-            <>
-              {/* 年度セレクタ */}
-              <div className={styles.yearSelector}>
-                <select
-                  onChange={handleYearChange}
-                  value={selectedYear ?? ""}
-                  disabled={isPending}
-                >
-                  <option value="">年度を選択</option>
-                  {years.map((year) => (
-                    <option key={year} value={year}>
-                      {year}年度
-                    </option>
-                  ))}
-                </select>
+
+            {/* 記録一覧表示部分 */}
+            {selectedYear && (
+              <div className={styles.recordsWrapper}>
+                {placeList.length === 0 ? (
+                  <div className={styles.noDataMessage}>
+                    <p>{selectedYear}年度の山行記録はありません。</p>
+                  </div>
+                ) : (
+                  placeList.map((place) => (
+                    <PlaceSection
+                      key={place}
+                      place={place}
+                      records={recordsToShow}
+                    />
+                  ))
+                )}
               </div>
-
-              {/* 記録一覧表示部分 */}
-              {selectedYear && (
-                <div className={styles.recordsWrapper}>
-                  {placeList.length === 0 ? (
-                    <div className={styles.noDataMessage}>
-                      <p>{selectedYear}年度の山行記録はありません。</p>
-                    </div>
-                  ) : (
-                    placeList.map((place) => (
-                      <PlaceSection
-                        key={place}
-                        place={place}
-                        records={recordsToShow}
-                      />
-                    ))
-                  )}
-                </div>
-              )}
-            </>
-          )}
-        </div>
+            )}
+          </>
+        )}
       </div>
-
-      {/* ハンバーガーメニューボタン - モバイル向け */}
-      <button
-        className={styles.hamburgerButton}
-        onClick={toggleMenu}
-        aria-expanded={isMenuOpen}
-        aria-controls="navigation-menu"
-        aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
-        disabled={isPending}
-      >
-        {isMenuOpen ? "×" : "☰"}
-      </button>
-
-      {/* メニューコンテナ */}
-      <div
-        id="navigation-menu"
-        className={`${styles.Sidebar} ${isMenuOpen ? styles.open : styles.closed}`}
-        role="navigation"
-        aria-hidden={!isMenuOpen}
-      >
-        <div className={styles.PaperContainer}>
-          <Suspense fallback={menuFallback}>
-            <div className={styles.Menu}>
-              <Menu />
-            </div>
-          </Suspense>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
