@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, Suspense, useCallback } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import styles from "./MemberPage.module.scss";
 import Link from "next/link";
-import Menu from "@/components/Menu/Menu";
 import Image from "next/image";
 
 // メンバーの型定義
@@ -46,49 +45,9 @@ const yearIcons: Record<YearCategory, string> = {
 };
 
 const MemberPage: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<YearCategory>("2年生");
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
-  const checkScreenSize = useCallback(() => {
-    const mobile = window.innerWidth <= 900;
-    setIsMobile(mobile);
-    
-    // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
-    setIsMenuOpen(!mobile);
-  }, []);
-  
-  // 初期化とリサイズイベントの設定
-  useEffect(() => {
-    // ブラウザ環境のみで実行
-    if (typeof window !== 'undefined') {
-      // 初期チェック
-      checkScreenSize();
-      
-      // リサイズイベントにリスナーを追加
-      window.addEventListener('resize', checkScreenSize);
-      
-      // クリーンアップ関数
-      return () => {
-        window.removeEventListener('resize', checkScreenSize);
-      };
-    }
-  }, [checkScreenSize]);
-
-  // メニュー開閉のトグル
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => !prev);
-  }, []);
-
-  // キーボードでのメニュー操作対応
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape' && isMenuOpen && isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMenuOpen, isMobile]);
 
   // APIからメンバー情報を取得
   useEffect(() => {
@@ -144,7 +103,7 @@ const MemberPage: React.FC = () => {
           {filteredMembers.map((member) => (
             <div key={member.id} className={styles.memberCoutainer}>
               <div className={styles.imageWrapper}>
-                <Image 
+                <Image
                   src={member.src || "/default-image.png"}
                   alt={member.nickname}
                   width={120}
@@ -180,61 +139,34 @@ const MemberPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.container} onKeyDown={handleKeyDown}>
-      <div className={styles.page}>
-        {/* ナビゲーション */}
-        <nav className={styles.breadcrumb}>
-          <Link href="/">Home</Link> <span> &gt; </span> <span>部員紹介</span>
-        </nav>
-        <h1 className={styles.circleTitle}>部員紹介</h1>
+    <>
+      {/* ナビゲーション */}
+      <nav className={styles.breadcrumb}>
+        <Link href="/">Home</Link> <span> &gt; </span> <span>部員紹介</span>
+      </nav>
+      <h1 className={styles.circleTitle}>部員紹介</h1>
 
-        {/* Suspense でラップして useSearchParams を利用 */}
-        <Suspense fallback={<div>読み込み中...</div>}>
-          <SearchParamsWrapper setCategory={(cat) => setSelectedCategory(cat)} />
-        </Suspense>
+      {/* Suspense でラップして useSearchParams を利用 */}
+      <Suspense fallback={<div>読み込み中...</div>}>
+        <SearchParamsWrapper setCategory={(cat) => setSelectedCategory(cat)} />
+      </Suspense>
 
-        {/* Tab選択カテゴリ */}
-        <div className={styles.tabContainer}>
-          {(Object.keys(yearIcons) as Array<keyof typeof yearIcons>).map((category) => (
-            <button
-              key={category}
-              className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              <span className={styles.tabIcon}>{yearIcons[category]}</span> {category}
-            </button>
-          ))}
-        </div>
-
-        {/* 選択されたカテゴリの内容 */}
-        <div className={styles.contentWrapper}>{renderContent()}</div>
+      {/* Tab選択カテゴリ */}
+      <div className={styles.tabContainer}>
+        {(Object.keys(yearIcons) as Array<keyof typeof yearIcons>).map((category) => (
+          <button
+            key={category}
+            className={`${styles.tab} ${selectedCategory === category ? styles.activeTab : ""}`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            <span className={styles.tabIcon}>{yearIcons[category]}</span> {category}
+          </button>
+        ))}
       </div>
 
-      {/* ハンバーガーメニューボタン - モバイル向け */}
-      <button 
-        className={styles.hamburgerButton} 
-        onClick={toggleMenu}
-        aria-expanded={isMenuOpen}
-        aria-controls="navigation-menu"
-        aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
-      >
-        {isMenuOpen ? "×" : "☰"}
-      </button>
-
-      {/* メニューコンテナ */}
-      <div
-        id="navigation-menu"
-        className={`${styles.Sidebar} ${isMenuOpen ? styles.open : styles.closed}`}
-        role="navigation"
-        aria-hidden={!isMenuOpen}
-      >
-        <div className={styles.PaperContainer}>
-          <div className={styles.Menu}>
-            <Menu />
-          </div>
-        </div>
-      </div>
-    </div>
+      {/* 選択されたカテゴリの内容 */}
+      <div className={styles.contentWrapper}>{renderContent()}</div>
+    </>
   );
 };
 
