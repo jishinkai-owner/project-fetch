@@ -1,12 +1,13 @@
-"use client";
+// src/app/record/yama/page.tsx
+import { PrismaClient } from "@prisma/client";
+import { Suspense } from "react";
+import YamaRecordClient from "./client";
+import LoadingPlaceholder from "./loading";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import styles from "../RecordPage.module.scss";
-import Link from "next/link";
-import Menu from "@/components/Menu/Menu";
+// ISR設定（30分ごとに再生成、秒数で指定）
+export const revalidate = 1800;
 
-// RecordContentDTO 定義
+// RecordContentDTO 定義（クライアント用）
 interface RecordContentDTO {
   contentId: number;
   recordId: number;
@@ -16,254 +17,135 @@ interface RecordContentDTO {
   date: string | null;
   details: string | null;
   title: string | null;
+  filename: string | null;
 }
 
-// 日付をフォーマットする関数
-const formatDate = (dateString: string | null): string => {
-  if (!dateString) return "-";
-  const date = new Date(dateString);
-  return `${date.getMonth() + 1}月${date.getDate()}日`;
-};
+// 年度リスト取得（降順）
+function getUniqueYears(recordContents: RecordContentDTO[]): number[] {
+  const uniqueYears = new Set<number>();
+  recordContents.forEach((r) => {
+    if (r.year !== null) {
+      uniqueYears.add(r.year);
+    }
+  });
+  return Array.from(uniqueYears).sort((a, b) => b - a); // 降順
+}
 
-const YamaRecordPage: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [recordContents, setRecordContents] = useState<RecordContentDTO[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+// プリロードを行うための非同期関数
+async function getRecordData() {
+  // シングルトンインスタンスを使用（パフォーマンス向上）
+  const prisma = new PrismaClient({
+    // コネクションプールの最適化
+    log: ['error'],
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
+  });
   
-  const router = useRouter();
-  
-  // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
-  const checkScreenSize = useCallback(() => {
-    const mobile = window.innerWidth <= 900;
-    setIsMobile(mobile);
+  try {
+    // 山行記録のデータを取得（activityTypeを使用）
+    const yamaRecords = await prisma.record.findMany({
+      where: {
+        activityType: "yama" // RecordテーブルにactivityTypeがある
+      },
+      include: {
+        contents: true // 関連するContentを取得
+      }
+    });
     
-    // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
-    setIsMenuOpen(!mobile);
-  }, []);
-  
-  // 初期化とリサイズイベントの設定
-  useEffect(() => {
-    // ブラウザ環境のみで実行
-    if (typeof window !== 'undefined') {
-      // 初期チェック
-      checkScreenSize();
-      
-      // リサイズイベントにリスナーを追加
-      window.addEventListener('resize', checkScreenSize);
-      
-      // クリーンアップ関数
-      return () => {
-        window.removeEventListener('resize', checkScreenSize);
-      };
-    }
-  }, [checkScreenSize]);
-
-  // ナビゲーション処理
-  const handleNavigate = useCallback((path: string) => {
-    router.push(path);
-    // モバイルの場合はナビゲーション後にメニューを閉じる
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMobile, router]);
-
-  // メニュー開閉のトグル
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => !prev);
-  }, []);
-
-  // キーボードでのメニュー操作対応
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape' && isMenuOpen && isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMenuOpen, isMobile]);
-
-  // データ取得
-  useEffect(() => {
-    const fetchRecordContents = async () => {
-      setLoading(true);
-      try {
-        // 新しいAPIエンドポイントを使用
-        const res = await fetch("/api/record/yama");
-        if (!res.ok) throw new Error("Failed to fetch yama records");
-        const data: RecordContentDTO[] = await res.json();
-        setRecordContents(data);
-      } catch (error) {
-        console.error("Error fetching yama records:", error);
-      } finally {
-        setLoading(false);
+    // 取得したデータをRecordContentDTO形式に変換
+    const recordContents: RecordContentDTO[] = [];
+    
+    yamaRecords.forEach(record => {
+      // 関連コンテンツがない場合は、レコード自体の情報だけで1レコード作成
+      if (record.contents.length === 0) {
+        recordContents.push({
+          contentId: record.id,
+          recordId: record.id,
+          year: record.year,
+          place: record.place,
+          activityType: record.activityType,
+          date: record.date || null,
+          details: record.details,
+          title: null, // Contentから取得するフィールドなのでnull
+          filename: null // Contentから取得するフィールドなのでnull
+        });
+      } else {
+        // 各コンテンツごとに変換
+        record.contents.forEach(content => {
+          recordContents.push({
+            contentId: content.id,
+            recordId: record.id,
+            year: record.year,
+            place: record.place,
+            activityType: record.activityType,
+            date: record.date || null,
+            details: content.content || record.details,
+            title: content.title || null,
+            filename: content.filename || null
+          });
+        });
       }
+    });
+    
+    // 年度リストを取得
+    const years = getUniqueYears(recordContents);
+    
+    // 最新年度を取得
+    const latestYear = years.length > 0 ? years[0] : null;
+    
+    // 最新年度のレコードを取得
+    const initialRecords = latestYear 
+      ? recordContents.filter(r => r.year === latestYear) 
+      : [];
+    
+    return {
+      initialRecords,
+      // 全データは必要最小限のみをクライアントに渡す（最適化）
+      allRecords: recordContents.map(({contentId, recordId, year, place, activityType, date, title, filename}) => ({
+        contentId, 
+        recordId, 
+        year, 
+        place,
+        activityType,
+        date, 
+        title, 
+        filename,
+        // detailsは一覧表示に必要な分だけ切り出す（データ量削減）
+        details: recordContents.find(r => r.contentId === contentId)?.details?.substring(0, 100) || null
+      })),
+      years,
+      initialYear: latestYear
     };
-    fetchRecordContents();
-  }, []);
-  
-  // 年度リスト取得（降順）
-  const years = useMemo(() => {
-    const uniqueYears = new Set<number>();
-    recordContents.forEach((r) => {
-      if (r.year !== null) {
-        uniqueYears.add(r.year);
-      }
-    });
-    return Array.from(uniqueYears).sort((a, b) => b - a); // 降順
-  }, [recordContents]);
-  
-  // 初期表示で最新年度を選択
-  useEffect(() => {
-    if (years.length > 0 && selectedYear === null) {
-      setSelectedYear(years[0]);
-    }
-  }, [years, selectedYear]);
-  
-  // 選択された年度のレコードを取得
-  const recordsThisYear = useMemo(() => {
-    if (!selectedYear) return [];
-    return recordContents.filter((r) => r.year === selectedYear);
-  }, [recordContents, selectedYear]);
-  
-  // 場所リスト
-  const placeList = useMemo(() => {
-    const uniquePlaces = new Set<string>();
-    recordsThisYear.forEach((r) => {
-      if (r.place) uniquePlaces.add(r.place);
-    });
-    return Array.from(uniquePlaces);
-  }, [recordsThisYear]);
-  
-  // 記録クリック処理 - contentIdを使用
-  const handleRecordClick = useCallback((contentId: number) => {
-    router.push(`/record/yama/${contentId}`);
-  }, [router]);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // エラー時のフォールバック
+    return {
+      initialRecords: [],
+      allRecords: [],
+      years: [],
+      initialYear: null
+    };
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+// サーバーサイドでデータを取得
+export default async function YamaRecordPage() {
+  // データ取得を待ちつつ、Suspenseでラップして表示を最適化
+  const recordData = await getRecordData();
   
   return (
-    <div className={styles.container} onKeyDown={handleKeyDown}>
-      <div className={styles.page}>
-        {/* ナビゲーション */}
-        <nav className={styles.breadcrumb}>
-          <Link href="/">Home</Link> <span> &gt; </span> 
-          <Link href="/record">活動記録</Link> <span> &gt; </span> 
-          <span>山行記録</span>
-        </nav>
-        <h1 className={styles.circleTitle}>山行記録</h1>
-        
-        {/* カテゴリ選択タブ */}
-        <div className={styles.tabContainer}>
-          <Link href="/record/yama" className={`${styles.tab} ${styles.activeTab}`}>
-            <span className={styles.placeIcon}>🏔️</span> 山行記録
-          </Link>
-          <Link href="/record/tabi" className={styles.tab}>
-            <span className={styles.placeIcon}>✈️</span> 旅行記録
-          </Link>
-          <Link href="/record/tsuri" className={styles.tab}>
-            <span className={styles.placeIcon}>🎣</span> 釣行記録
-          </Link>
-        </div>
-        
-        <div className={styles.contentWrapper}>
-          {loading ? (
-            <div className={styles.noDataMessage}>
-              <p>がんばって読み込み中 。。。</p>
-            </div>
-          ) : years.length === 0 ? (
-            <div className={styles.noDataMessage}>
-              <p>あれれ..山行記録のデータが見つからない...</p>
-            </div>
-          ) : (
-            <>
-              {/* 年度セレクタ */}
-              <div className={styles.yearSelector}>
-                <select
-                  onChange={(e) => setSelectedYear(Number(e.target.value) || null)}
-                  value={selectedYear ?? ""}
-                >
-                  <option value="">年度を選択</option>
-                  {years.map((year) => (
-                    <option key={year} value={year}>
-                      {year}年度
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              {/* 記録一覧表示部分 */}
-              {selectedYear && (
-                <div className={styles.recordsWrapper}>
-                  {placeList.length === 0 ? (
-                    <div className={styles.noDataMessage}>
-                      <p>{selectedYear}年度の山行記録はありません。</p>
-                    </div>
-                  ) : (
-                    placeList.map((place) => (
-                      <div key={place} className={styles.placeSection}>
-                        <h3 className={styles.placeTitle}>
-                          <span className={styles.placeIcon}>🏔️</span>
-                          {place}
-                        </h3>
-                        <div className={styles.recordCardList}>
-                          {recordsThisYear
-                            .filter((r) => r.place === place)
-                            .map((record) => (
-                              <div 
-                                key={record.contentId}
-                                className={styles.recordCard}
-                                onClick={() => handleRecordClick(record.contentId)}
-                              >
-                                <div className={styles.recordCardHeader}>
-                                  <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
-                                  <span className={styles.recordDate}>{formatDate(record.date)}</span>
-                                </div>
-                                {record.details && (
-                                  <p className={styles.recordPreview}>
-                                    {record.details.length > 60 
-                                      ? `${record.details.substring(0, 60)}...` 
-                                      : record.details}
-                                  </p>
-                                )}
-                                <div className={styles.cardFooter}>
-                                  <span className={styles.readMore}>詳細を見る</span>
-                                </div>
-                              </div>
-                            ))}
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* ハンバーガーメニューボタン - モバイル向け */}
-      <button 
-        className={styles.hamburgerButton} 
-        onClick={toggleMenu}
-        aria-expanded={isMenuOpen}
-        aria-controls="navigation-menu"
-        aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
-      >
-        {isMenuOpen ? "×" : "☰"}
-      </button>
-
-      {/* メニューコンテナ */}
-      <div
-        id="navigation-menu"
-        className={`${styles.Sidebar} ${isMenuOpen ? styles.open : styles.closed}`}
-        role="navigation"
-        aria-hidden={!isMenuOpen}
-      >
-        <div className={styles.PaperContainer}>
-          <div className={styles.Menu}>
-            <Menu onClick={handleNavigate} />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Suspense fallback={<LoadingPlaceholder />}>
+      <YamaRecordClient
+        initialRecords={recordData.initialRecords}
+        allRecords={recordData.allRecords}
+        years={recordData.years}
+        initialYear={recordData.initialYear}
+      />
+    </Suspense>
   );
-};
-
-export default YamaRecordPage;
+}
