@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import styles from "./ShinkanPage.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -35,8 +34,6 @@ const NewcomerPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
-  const router = useRouter();
-  
   // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
   const checkScreenSize = useCallback(() => {
     const mobile = window.innerWidth <= 900;
@@ -62,15 +59,6 @@ const NewcomerPage: React.FC = () => {
       };
     }
   }, [checkScreenSize]);
-
-  // ナビゲーション処理
-  const handleNavigate = useCallback((path: string) => {
-    router.push(path);
-    // モバイルの場合はナビゲーション後にメニューを閉じる
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMobile, router]);
 
   // メニュー開閉のトグル
   const toggleMenu = useCallback(() => {
@@ -206,7 +194,7 @@ const NewcomerPage: React.FC = () => {
       >
         <div className={styles.PaperContainer}>
           <div className={styles.Menu}>
-            <Menu onClick={handleNavigate} />
+            <Menu />
           </div>
         </div>
       </div>

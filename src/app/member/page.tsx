@@ -3,7 +3,7 @@
 "use client";
 
 import React, { useEffect, useState, Suspense, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import styles from "./MemberPage.module.scss";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
@@ -50,8 +50,6 @@ const MemberPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<YearCategory>("2年生");
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const router = useRouter();
   
   // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
   const checkScreenSize = useCallback(() => {
@@ -90,14 +88,6 @@ const MemberPage: React.FC = () => {
       setIsMenuOpen(false);
     }
   }, [isMenuOpen, isMobile]);
-
-  const handleNavigate = useCallback((path: string) => {
-    router.push(path);
-    // モバイルの場合はナビゲーション後にメニューを閉じる
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMobile, router]);
 
   // APIからメンバー情報を取得
   useEffect(() => {
@@ -234,7 +224,7 @@ const MemberPage: React.FC = () => {
       >
         <div className={styles.PaperContainer}>
           <div className={styles.Menu}>
-            <Menu onClick={handleNavigate} />
+            <Menu />
           </div>
         </div>
       </div>

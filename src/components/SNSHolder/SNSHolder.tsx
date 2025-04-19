@@ -1,8 +1,7 @@
-"use client";
-
 import React from 'react';
 import Image from 'next/image';
 import styles from './SNSHolder.module.scss';
+import Link from 'next/link';
 
 interface SNSHolderProps {
   className?: string;
@@ -10,67 +9,66 @@ interface SNSHolderProps {
   instagramUrl?: string;
 }
 
-const SNSHolder: React.FC<SNSHolderProps> = ({ 
-  className, 
-  twitterUrl = "https://x.com/jishinkai", 
-  instagramUrl = "https://www.instagram.com/jishinkai_tohoku" 
+const SNSHolder: React.FC<SNSHolderProps> = ({
+  className,
+  twitterUrl = "https://x.com/jishinkai",
+  instagramUrl = "https://www.instagram.com/jishinkai_tohoku"
 }) => {
-  
-  const handleTwitterClick = () => {
-    window.open(twitterUrl, '_blank');
-  };
-
-  const handleInstagramClick = () => {
-    window.open(instagramUrl, '_blank');
-  };
-
   return (
     <div className={`${styles.container} ${className || ''}`}>
       {/* 右上のピン */}
       <div className={styles.PinTopRight}></div>
-      
+
       {/* 左下のピン */}
       <div className={styles.PinBottomLeft}></div>
-      
+
       {/* SNSアイコンのコンテナ */}
       <div className={styles.iconsContainer}>
         {/* Twitter(X)アイコン */}
-        <div className={styles.twitterBox} onClick={handleTwitterClick}>
-          <Image 
-            src="/x-icon.svg" 
-            alt="Twitter/X" 
+        <Link
+          href={twitterUrl}
+          target="_blank"
+          className={styles.twitterBox}
+        >
+          <Image
+            src="/x-icon.svg"
+            alt="Twitter/X"
             className={styles.xIcon}
             width={80}
             height={80}
             priority
           />
-        </div>
-        
+        </Link>
+
         {/* Instagramアイコン */}
-        <div className={styles.instagramBox} onClick={handleInstagramClick}>
-          <Image 
-            src="/instagram-icon.svg" 
-            alt="Instagram" 
+        <Link
+          href={instagramUrl}
+          target="_blank"
+          className={styles.instagramBox}
+        >
+          <Image
+            src="/instagram-icon.webp"
+            alt="Instagram"
             className={styles.instagramIcon}
             width={80}
             height={80}
             priority
           />
-        </div>
+        </Link>
       </div>
-      
+
       {/* くま画像 */}
       <div className={styles.kumaContainer}>
-        <Image 
-          src="/kuma.png" 
-          alt="くま" 
+        <Image
+          src="/kuma.png"
+          alt="くま"
           className={styles.kuma}
           width={150}
           height={150}
           priority
         />
       </div>
-    </div>
+    </div >
   );
 };
 

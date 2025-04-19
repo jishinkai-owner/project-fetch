@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import styles from "./QaPage.module.scss";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
@@ -34,8 +34,6 @@ const QaPage: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   // デフォルトで「登山編」を表示
   const [selectedCategory, setSelectedCategory] = useState<QaCategory>("登山編");
-
-  const router = useRouter();
   
   // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
   const checkScreenSize = useCallback(() => {
@@ -62,15 +60,6 @@ const QaPage: React.FC = () => {
       };
     }
   }, [checkScreenSize]);
-
-  // ナビゲーション処理
-  const handleNavigate = useCallback((path: string) => {
-    router.push(path);
-    // モバイルの場合はナビゲーション後にメニューを閉じる
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMobile, router]);
 
   // メニュー開閉のトグル
   const toggleMenu = useCallback(() => {
@@ -164,7 +153,7 @@ const QaPage: React.FC = () => {
       >
         <div className={styles.PaperContainer}>
           <div className={styles.Menu}>
-            <Menu onClick={handleNavigate} />
+            <Menu />
           </div>
         </div>
       </div>

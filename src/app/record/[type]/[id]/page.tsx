@@ -64,14 +64,6 @@ export default function RecordDetailPage() {
     }
   };
 
-  // ナビゲーション処理
-  const handleNavigation = (path: string) => {
-    router.push(path);
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
-  };
-
   // データ取得
   useEffect(() => {
     const fetchContent = async () => {
@@ -136,7 +128,7 @@ export default function RecordDetailPage() {
         >
           <div className={styles.PaperContainer}>
             <div className={styles.Menu}>
-              <Menu onClick={handleNavigation} />
+              <Menu />
             </div>
           </div>
         </div>
@@ -238,7 +230,7 @@ export default function RecordDetailPage() {
       >
         <div className={styles.PaperContainer}>
           <div className={styles.Menu}>
-            <Menu onClick={handleNavigation} />
+            <Menu />
           </div>
         </div>
       </div>

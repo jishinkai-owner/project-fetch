@@ -1,29 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import styles from "../RecordPage.module.scss";
 import Link from "next/link";
 import Menu from "@/components/Menu/Menu";
+import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 
-// APIレスポンス型定義
-interface RecordContentDTO {
-  contentId: number;
-  recordId: number;
-  year: number | null;
-  place: string | null;
-  activityType: string | null;
-  date: string | null;
-  details: string | null;
-  title: string | null;
-}
-
-// 日付をフォーマットする関数
-const formatDate = (dateString: string | null): string => {
-  if (!dateString) return "-";
-  const date = new Date(dateString);
-  return `${date.getMonth() + 1}月${date.getDate()}日`;
-};
 
 // 活動タイプとそのアイコン・名前のマッピング
 const ACTIVITY_TYPES: { [key: string]: { icon: string, name: string } } = {
@@ -35,55 +18,44 @@ const ACTIVITY_TYPES: { [key: string]: { icon: string, name: string } } = {
 const RecordListPage: React.FC = () => {
   const params = useParams();
   const recordType = params.type as string;
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [recordContents, setRecordContents] = useState<RecordContentDTO[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
-  
-  const router = useRouter();
-  
+
   // 現在の活動タイプ情報
   const currentActivityType = ACTIVITY_TYPES[recordType] || {
-    icon: "📝", 
+    icon: "📝",
     name: "活動"
   };
-  
+
   // 画面サイズに応じてモバイルモードを検出するためのメモ化されたコールバック
   const checkScreenSize = useCallback(() => {
     const mobile = window.innerWidth <= 900;
     setIsMobile(mobile);
-    
+
     // モバイルの場合はメニューを閉じた状態、PCの場合は開いた状態に
     setIsMenuOpen(!mobile);
   }, []);
-  
+
   // 初期化とリサイズイベントの設定
   useEffect(() => {
     // ブラウザ環境のみで実行
     if (typeof window !== 'undefined') {
       // 初期チェック
       checkScreenSize();
-      
+
       // リサイズイベントにリスナーを追加
       window.addEventListener('resize', checkScreenSize);
-      
+
       // クリーンアップ関数
       return () => {
         window.removeEventListener('resize', checkScreenSize);
       };
     }
   }, [checkScreenSize]);
-
-  // ナビゲーション処理
-  const handleNavigate = useCallback((path: string) => {
-    router.push(path);
-    // モバイルの場合はナビゲーション後にメニューを閉じる
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
-  }, [isMobile, router]);
 
   // メニュー開閉のトグル
   const toggleMenu = useCallback(() => {
@@ -113,10 +85,10 @@ const RecordListPage: React.FC = () => {
         setLoading(false);
       }
     };
-    
+
     fetchRecordContents();
   }, [recordType]);
-  
+
   // 年度リスト取得（降順）
   const years = useMemo(() => {
     const uniqueYears = new Set<number>();
@@ -127,20 +99,20 @@ const RecordListPage: React.FC = () => {
     });
     return Array.from(uniqueYears).sort((a, b) => b - a); // 降順
   }, [recordContents]);
-  
+
   // 初期表示で最新年度を選択
   useEffect(() => {
     if (years.length > 0 && selectedYear === null) {
       setSelectedYear(years[0]);
     }
   }, [years, selectedYear]);
-  
+
   // 選択された年度のレコードを取得
   const recordThisYear = useMemo(() => {
     if (!selectedYear) return [];
     return recordContents.filter((r) => r.year === selectedYear);
   }, [recordContents, selectedYear]);
-  
+
   // 場所リスト
   const placeList = useMemo(() => {
     const uniquePlaces = new Set<string>();
@@ -149,36 +121,31 @@ const RecordListPage: React.FC = () => {
     });
     return Array.from(uniquePlaces);
   }, [recordThisYear]);
-  
-  // 記録クリック処理 - contentIdを使って遷移
-  const handleRecordClick = useCallback((contentId: number) => {
-    router.push(`/record/${recordType}/${contentId}`);
-  }, [router, recordType]);
-  
+
   return (
     <div className={styles.container} onKeyDown={handleKeyDown}>
       <div className={styles.page}>
         {/* ナビゲーション */}
         <nav className={styles.breadcrumb}>
-          <Link href="/">Home</Link> <span> &gt; </span> 
-          <Link href="/record">活動記録</Link> <span> &gt; </span> 
+          <Link href="/">Home</Link> <span> &gt; </span>
+          <Link href="/record">活動記録</Link> <span> &gt; </span>
           <span>{currentActivityType.name}記録</span>
         </nav>
         <h1 className={styles.circleTitle}>{currentActivityType.name}記録</h1>
-        
+
         {/* カテゴリ選択タブ */}
         <div className={styles.tabContainer}>
           {Object.entries(ACTIVITY_TYPES).map(([type, { icon, name }]) => (
-            <Link 
+            <Link
               key={type}
-              href={`/record/${type}`} 
+              href={`/record/${type}`}
               className={`${styles.tab} ${type === recordType ? styles.activeTab : ''}`}
             >
               <span className={styles.placeIcon}>{icon}</span> {name}記録
             </Link>
           ))}
         </div>
-        
+
         <div className={styles.contentWrapper}>
           {loading ? (
             <div className={styles.noDataMessage}>
@@ -204,7 +171,7 @@ const RecordListPage: React.FC = () => {
                   ))}
                 </select>
               </div>
-              
+
               {/* 記録一覧表示部分 */}
               {selectedYear && (
                 <div className={styles.recordWrapper}>
@@ -223,26 +190,7 @@ const RecordListPage: React.FC = () => {
                           {recordThisYear
                             .filter((r) => r.place === place)
                             .map((record) => (
-                              <div 
-                                key={record.contentId}
-                                className={styles.recordCard}
-                                onClick={() => handleRecordClick(record.contentId)}
-                              >
-                                <div className={styles.recordCardHeader}>
-                                  <h4 className={styles.recordTitle}>{record.title || "無題の記録"}</h4>
-                                  <span className={styles.recordDate}>{formatDate(record.date)}</span>
-                                </div>
-                                {record.details && (
-                                  <p className={styles.recordPreview}>
-                                    {record.details.length > 60 
-                                      ? `${record.details.substring(0, 60)}...` 
-                                      : record.details}
-                                  </p>
-                                )}
-                                <div className={styles.cardFooter}>
-                                  <span className={styles.readMore}>詳細を見る</span>
-                                </div>
-                              </div>
+                              <RecordCard record={record} key={record.contentId} />
                             ))}
                         </div>
                       </div>
@@ -256,8 +204,8 @@ const RecordListPage: React.FC = () => {
       </div>
 
       {/* ハンバーガーメニューボタン - モバイル向け */}
-      <button 
-        className={styles.hamburgerButton} 
+      <button
+        className={styles.hamburgerButton}
         onClick={toggleMenu}
         aria-expanded={isMenuOpen}
         aria-controls="navigation-menu"
@@ -275,7 +223,7 @@ const RecordListPage: React.FC = () => {
       >
         <div className={styles.PaperContainer}>
           <div className={styles.Menu}>
-            <Menu onClick={handleNavigate} />
+            <Menu />
           </div>
         </div>
       </div>
