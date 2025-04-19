@@ -27,6 +27,7 @@
     overflow-y: auto;
     height: auto;
     transition: max-width 0.3s ease-in-out;
+    padding: 0rem 3rem;
   }
   
   // 固定ページの場合
@@ -227,6 +228,9 @@
       width: 200px; // 幅を明示的に設定 - アスペクト比から計算された値
       min-width: 150px; // 最小値も設定
     }
+    .PaperContainer{
+      padding: 4%;
+    }
   }
   
   // スマホ・タブレット対応 (900px以下)
@@ -236,7 +240,6 @@
       max-width: 100%; // サイドバーが閉じているときは全幅
       overflow-y: auto;
       height: auto;
-      padding: 0 1rem; // 余白を縮小
     }
     
     .hamburgerButton {
@@ -247,9 +250,9 @@
       transform: translateX(100%); // 標準で非表示
       opacity: 0;
       pointer-events: none;
-      width: 80%; // 幅を調整
-      max-width: 400px;
-      aspect-ratio: auto; // アスペクト比をリセット
+      width: auto; // 幅を調整
+      aspect-ratio: 6/16; 
+      
       
       &.open {
         transform: translateX(0);
@@ -273,12 +276,10 @@
   
   // さらに小さい画面向け微調整
   @media (max-width: 480px) {
-    .page {
-      padding: 0 0.75rem; // さらに余白を縮小
-    }
     
     .Sidebar {
-      max-width: 300px;
+      aspect-ratio: 6/16; // アスペクト比を設定
+      width: auto;
     }
   
     .circleTitle {

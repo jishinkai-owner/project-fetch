@@ -1,6 +1,9 @@
 // src/app/page.module.scss
 @import './styles/global.scss';
 
+.page {
+  padding: 0rem; // 上下の余白を調整
+}
 .Container {
   /* ノートの罫線（左側の赤い線） */
   &::before {
