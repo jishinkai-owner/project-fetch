@@ -33,8 +33,7 @@ export default function RootLayout({
           <input 
             type="checkbox" 
             id="menu-toggle" 
-            className={styles.menuCheckbox} 
-            defaultChecked={true}
+            className={styles.menuCheckbox}
           />
 
           <div className={styles.page}>
@@ -47,7 +46,7 @@ export default function RootLayout({
             className={styles.hamburgerButton}
             aria-label="メニューを開閉する"
           >
-            ☰
+            <span className={styles.hamburgerIcon} />
           </label>
 
           {/* メニューコンテナ */}
