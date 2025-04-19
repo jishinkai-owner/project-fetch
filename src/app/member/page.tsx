@@ -149,31 +149,34 @@ const MemberPage: React.FC = () => {
       <div className={styles.membersWrapper}>
         <div className={styles.memberCardList}>
           {filteredMembers.map((member) => (
-            <div key={member.id} className={styles.memberCard}>
-              <div className={styles.memberCardHeader}>
-                <h3 className={styles.memberName}>{member.nickname}</h3>
-                <span className={styles.memberMajor}>{member.major || "未設定"}</span>
-              </div>
-              
-              <div className={styles.memberImageContainer}>
+            <div key={member.id} className={styles.memberCoutainer}>
+              <div className={styles.imageWrapper}>
                 <Image 
-                  src={member.src || "/default-member.jpg"}
+                  src={member.src || "/default-image.png"}
                   alt={member.nickname}
-                  width={200}
-                  height={200}
+                  width={1000}
+                  height={0}
+                  style={{ height: "100%", width: "100%", objectFit: "cover" }}
                   className={styles.memberImage}
                 />
+                <div className={styles.triangletop}></div>
+                <div className={styles.trianglebuttom}></div>
               </div>
-              
-              <div className={styles.memberDetails}>
-                <div className={styles.memberDetail}>
-                  <span className={styles.detailLabel}>役職</span>
-                  <span className={styles.detailValue}>{member.role}</span>
+              <div className={styles.memberCard}>
+                <div className={styles.memberCardHeader}>
+                  <h3 className={styles.memberName}>{member.nickname}</h3>
+                  <span className={styles.memberMajor}>{member.major || "未設定"}</span>
                 </div>
-                
-                <div className={styles.memberDetail}>
-                  <span className={styles.detailLabel}>プロフィール</span>
-                  <p className={styles.profileText}>{member.profile || "未設定"}</p>
+
+                <div className={styles.memberDetails}>
+                  <div className={styles.memberDetail}>
+                    <span className={styles.detailLabel}>役職</span>
+                    <span className={styles.detailValue}>{member.role}</span>
+                  </div>
+                  <div className={styles.memberDetail}>
+                    <span className={styles.detailLabel}>プロフィール</span>
+                    <p className={styles.profileText}>{member.profile || "未設定"}</p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -184,11 +184,48 @@
   border-radius: 1rem;
 }
 
-.memberImageContainer {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
+.imageWrapper {
   position: relative;
+  display: inline-block;
+  align-items: center;
+  height: 100%;
+  max-width: 30%;
+  justify-content: center;
+  margin-left: auto;
+  background-color: white;
+  padding: 1%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  transform: rotate(5deg); /* 少し斜めに回転 */
+  transition: transform 0.3s ease;
+}
+
+.image {
+  display: block; 
+  height: 100%;
+  object-fit: cover; /* 縦横比を維持しながら切り抜き */
+}
+
+.triangletop {
+  position: absolute;
+  left: -3%;
+  top: -3%;
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  background-color: #C9BDA8;
+  z-index: 3;
+}
+
+.trianglebuttom {
+  position: absolute;
+  right: -3%;
+  bottom: -3%;
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  background-color: #C9BDA8;
+  z-index: 3;
 }
 
 .memberImage {
