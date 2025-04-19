@@ -4,6 +4,8 @@ import React, { useState, useEffect, useMemo, useCallback, useTransition, memo }
 import styles from "../RecordPage.module.scss";
 import Link from "next/link";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
+import MainHeader from "@/components/MainHeader/MainHeader";
+import TabBar from "@/components/TabBar/TabBar";
 
 interface YamaRecordClientProps {
   initialRecords: RecordContentDTO[];
@@ -106,25 +108,18 @@ const YamaRecordClient: React.FC<YamaRecordClientProps> = ({
   return (
     <>
       {/* ナビゲーション */}
-      <nav className={styles.breadcrumb}>
-        <Link href="/">Home</Link> <span> &gt; </span>
-        <Link href="/record">活動記録</Link> <span> &gt; </span>
-        <span>山行記録</span>
-      </nav>
-      <h1 className={styles.circleTitle}>山行記録</h1>
+      <MainHeader breadcrumb={[
+        { title: "Home", url: "/" },
+        { title: "活動記録", url: "/record" },
+        { title: "山行記録" }
+      ]} title="山行記録" />
 
       {/* カテゴリ選択タブ */}
-      <div className={styles.tabContainer}>
-        <Link href="/record/yama" className={`${styles.tab} ${styles.activeTab}`}>
-          <span className={styles.placeIcon}>🏔️</span> 山行記録
-        </Link>
-        <Link href="/record/tabi" className={styles.tab}>
-          <span className={styles.placeIcon}>✈️</span> 旅行記録
-        </Link>
-        <Link href="/record/tsuri" className={styles.tab}>
-          <span className={styles.placeIcon}>🎣</span> 釣行記録
-        </Link>
-      </div>
+      <TabBar tabs={[
+        { title: "山行記録", icon: "🏔️", url: "/record/yama", isCurrent: true },
+        { title: "旅行記録", icon: "✈️", url: "/record/tabi" },
+        { title: "釣行記録", icon: "🎣", url: "/record/tsuri" }
+      ]} />
 
       <div className={styles.contentWrapper}>
         {isPending || loading ? (
