@@ -28,7 +28,7 @@ model Content {
   recordId Int
   authorId String?  @db.Uuid
   Record   Record   @relation(fields: [recordId], references: [id])
-  User     User?    @relation(fields: [authorId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  User     User?    @relation(fields: [authorId], references: [id])
 
   @@unique([recordId, filename])
 }

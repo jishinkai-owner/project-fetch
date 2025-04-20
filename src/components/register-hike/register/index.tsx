@@ -2,6 +2,7 @@
 import { useSnackbar } from "@/components/snackbar/hook";
 import { useFormSubmit, useHikeInfo } from "../hook";
 import RegisterForm from "../edit/form";
+import { Toaster } from "react-hot-toast";
 
 const HikeInfoEntry = () => {
   // const searchParams = useSearchParams();
@@ -28,16 +29,19 @@ const HikeInfoEntry = () => {
   );
 
   return (
-    <RegisterForm
-      open={open}
-      message={message}
-      status={status}
-      entry={entry}
-      handleClose={handleClose}
-      setEntry={setEntry}
-      submitForm={submitForm}
-      handleYearChange={handleYearChange}
-    />
+    <>
+      <RegisterForm
+        open={open}
+        message={message}
+        status={status}
+        entry={entry}
+        handleClose={handleClose}
+        setEntry={setEntry}
+        submitForm={submitForm}
+        handleYearChange={handleYearChange}
+      />
+      <Toaster />
+    </>
   );
 };
 

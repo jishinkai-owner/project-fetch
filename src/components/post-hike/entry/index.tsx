@@ -13,13 +13,15 @@ import SubmitSnackbar from "@/components/snackbar";
 import { useFormSubmit } from "../hook";
 
 const PostHikeForm = () => {
-  const { isCL, isSL, isMeal, isEquipment, isWeather, isLoading, isError } =
-    useUserContext();
+  // const { isCL, isSL, isMeal, isEquipment, isWeather, isLoading, isError } =
+  //   useUserContext();
+  const { contextValue } = useUserContext();
+  console.log("context:  sdfdf", contextValue);
 
   const { entries, setEntries } = useEntriesState();
 
   const { cl } = useCL();
-  const { postHikes } = usePostHikes();
+  const { postHikes, isLoading, isError } = usePostHikes();
   const { open, setOpen, message, setMessage, handleClose, status, setStatus } =
     useSnackbar();
   const submitForm = useFormSubmit({
@@ -56,7 +58,7 @@ const PostHikeForm = () => {
             }))
           }
         />
-        {isMeal && (
+        {contextValue.Role?.isMeal && (
           <EntryTextField
             id="reflection-meal-required"
             defaultValue=""
@@ -69,7 +71,7 @@ const PostHikeForm = () => {
             }
           />
         )}
-        {isWeather && (
+        {contextValue.Role?.isWeather && (
           <EntryTextField
             id="reflection-weather"
             defaultValue=""
@@ -82,7 +84,7 @@ const PostHikeForm = () => {
             }
           />
         )}
-        {isEquipment && (
+        {contextValue.Role?.isEquipment && (
           <EntryTextField
             id="reflection-equipment"
             defaultValue=""
@@ -95,7 +97,7 @@ const PostHikeForm = () => {
             }
           />
         )}
-        {isSL && (
+        {contextValue.Role?.isSL && (
           <EntryTextField
             id="reflection-sl"
             label="SLの反省"
@@ -109,7 +111,7 @@ const PostHikeForm = () => {
             }
           />
         )}
-        {isCL && (
+        {contextValue.Role?.isCL && (
           <>
             <EntryTextField
               id="ccomment-meal"

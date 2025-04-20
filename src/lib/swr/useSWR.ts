@@ -1,6 +1,5 @@
 import { fetcher } from "./fetcher";
 import useSWR from "swr";
-import { RecordRes } from "@/types/apiResponse";
 
 // export default function useData<T>(url: string) {
 //   const { data, error, isLoading } = useSWR<T>(url, fetcher, {

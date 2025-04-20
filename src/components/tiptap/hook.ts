@@ -3,11 +3,7 @@ import axios from "axios";
 import { useState, useMemo } from "react";
 import useData from "@/lib/swr/useSWR";
 import { Dispatch, SetStateAction } from "react";
-import {
-  RecordAuthorRes,
-  RecordsAuthorRes,
-  ContentRes,
-} from "@/types/apiResponse";
+import { RecordsAuthorRes, ContentRes } from "@/types/apiResponse";
 // import { useUserContext } from "@/providers/user";
 
 export const useEditorState = () => {
@@ -68,7 +64,7 @@ export const useRecordContent = (id: number) => {
   );
 
   const recordContent = useMemo(() => {
-    if (!data) return [];
+    if (!data) return null;
     return data.data;
   }, [data]);
   return {

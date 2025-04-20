@@ -4,7 +4,8 @@ import { HikeInfoEntryProps } from "@/types/hike";
 import { Dayjs } from "dayjs";
 import { SnackbarStateProps } from "@/types/snackbar";
 import useData from "@/lib/swr/useSWR";
-import { ActivitiesRes, ActivityRes } from "@/types/apiResponse";
+import { ActivitiesRes, ActivityWithIdRes } from "@/types/apiResponse";
+import toast from "react-hot-toast";
 
 export const useHikeInfo = () => {
   const [entry, setEntry] = useState<HikeInfoEntryProps>({
@@ -62,15 +63,16 @@ export const useFormSubmit = (
   };
 
   const submitSuccess = () => {
-    setMessage("活動情報を登録しました!");
+    setMessage("活動情報を登録しsdました!");
     setOpen(true);
     setStatus("success");
     setEntry({ year: null, date: null, place: null, activityType: "yama" });
   };
   const updateSuccess = () => {
-    setMessage("活動情報を登録しました!");
-    setOpen(true);
-    setStatus("success");
+    toast.success("活動情報を更新しました!");
+    // setMessage("活動情報を登録しました!");
+    // setOpen(true);
+    // setStatus("success");
   };
   const submitError = () => {
     // handleError("活動情報の登録に失敗しました。");
@@ -86,8 +88,13 @@ export const useFormSubmit = (
       if (res.success) {
         if (id) {
           updateSuccess();
+          toast.success("活動情報を更新しました!");
         } else {
           submitSuccess();
+          toast.success("活動情報を登録しました!", {
+            duration: 3000,
+            position: "bottom-right",
+          });
         }
       } else {
         submitError();
@@ -244,7 +251,9 @@ export const useActivity = (id: number | null) => {
   // const { data, isLoading, isError } = useData<ActivityRes>(
   //   `/api/activity?id=${id}`
   // );
-  const { data, isLoading, isError } = useData(`/api/activity?id=${id}`);
+  const { data, isLoading, isError } = useData<ActivityWithIdRes>(
+    `/api/activity?id=${id}`
+  );
 
   const activity = useMemo(() => {
     if (!data) return null;

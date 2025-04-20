@@ -32,10 +32,8 @@ export async function POST(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error: Error | any) {
-    console.error("Discord API Error:", error);
-    console.error("Response data:", error.response?.data);
-    console.error("Response status:", error.response?.status);
+  } catch (error) {
+    console.error("API Error: ", error);
     return NextResponse.json(
       { error: "error while retrieving roles from discord" },
       { status: 500 }

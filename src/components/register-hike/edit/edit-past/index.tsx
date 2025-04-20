@@ -34,8 +34,6 @@ const EditPastEntry = () => {
     if (activity) setEntry({ ...activity });
   }, [activity, setEntry]);
 
-  console.log("activity: ", activity);
-
   if (isLoadingActivity) return <Loading />;
   if (isErrorActivity) return <ErrorMessage />;
 

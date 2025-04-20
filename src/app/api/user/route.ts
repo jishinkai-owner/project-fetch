@@ -29,6 +29,7 @@ export async function GET() {
       select: {
         id: true,
         name: true,
+        grade: true,
         Role: {
           select: {
             isAdmin: true,
@@ -53,16 +54,7 @@ export async function GET() {
     return NextResponse.json(
       {
         success: true,
-        data: {
-          id: userFromTable.id,
-          name: userFromTable.name,
-          isAdmin: userFromTable.Role?.isAdmin,
-          isCL: userFromTable.Role?.isCL,
-          isSL: userFromTable.Role?.isSL,
-          isMeal: userFromTable.Role?.isMeal,
-          isEquipment: userFromTable.Role?.isEquipment,
-          isWeather: userFromTable.Role?.isWeather,
-        },
+        data: userFromTable,
       },
       { status: 200 }
     );

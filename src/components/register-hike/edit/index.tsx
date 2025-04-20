@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid2";
 import { ErrorMessage, Loading } from "@/components/load-status";
 import { useMemo } from "react";
 import RecordCard from "@/components/shared/record-card";
-import { RecordProps } from "@/types/record";
 import { useFormDelete } from "../hook";
 import { useSnackbar } from "@/components/snackbar/hook";
 import SubmitSnackbar from "@/components/snackbar";

@@ -17,7 +17,6 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
 import { usePostPostHikesWithRecordId } from "../hook";
 import { ErrorMessage, Loading } from "@/components/load-status";
-import { PostHikeContentGetProps } from "@/types/hike";
 
 type PostHikeViewCompProps = {
   recordId: number;
@@ -35,8 +34,6 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
   if (isError || !postHikes) {
     return <ErrorMessage />;
   }
-
-  console.log("postHikes", postHikes);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { PostHikeContent, Record } from "@prisma/client";
+import { PostHikeContent, Record, Role } from "@prisma/client";
 
 export type RecordAuthorRes = {
   title: string | null;
@@ -31,12 +31,8 @@ export type ContentRes = {
 export type UserRes = {
   id: string;
   name: string;
-  isAdmin?: boolean;
-  isCL?: boolean;
-  isSL?: boolean;
-  isMeal?: boolean;
-  isEquipment?: boolean;
-  isWeather?: boolean;
+  grade: number | null;
+  Role: Role | null;
 };
 
 export type PostHikeContentRes = {
@@ -78,6 +74,14 @@ export type ActivitiesRes = {
   year: number | null;
   place: string | null;
   date: string | null;
+};
+
+export type ActivityWithIdRes = {
+  id: number;
+  year: number | null;
+  place: string | null;
+  date: string | null;
+  activityType: string | null;
 };
 
 export type CLRes = {

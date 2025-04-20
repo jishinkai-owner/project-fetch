@@ -2,12 +2,20 @@ import { checkLinked } from "@/utils/discord/checkLinked";
 import { useState, useEffect } from "react";
 import { getDiscordInfo } from "@/app/actions";
 import { getUserRoles } from "@/utils/discord/getRoles";
+import { RoleType } from "@/types/user";
+import { postRoles } from "@/utils/discord/postRoles";
 
 type RoleMap = {
   [key: string]: boolean;
 };
 
-export const useLinked = () => {
+export const useLinked = (
+  userId?: string | null,
+  grade?: number | null,
+  role?: RoleType | null,
+  isLoading: boolean = false,
+  isError: boolean = false
+) => {
   const [isLinked, setIsLinked] = useState(false);
   const [id, setId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
@@ -32,7 +40,9 @@ export const useLinked = () => {
         try {
           const discordInfo = await getDiscordInfo();
           const id = discordInfo?.userIdentity?.id;
-          id && setId(id);
+          if (id) {
+            setId(id);
+          }
         } catch (error) {
           console.error("Error fetching Discord info: ", error);
         }
@@ -42,19 +52,41 @@ export const useLinked = () => {
   }, [isLinked]);
 
   useEffect(() => {
-    const fetchRoles = async () => {
+    const fetchAndPostRoles = async () => {
       if (id) {
         try {
           const data = await getUserRoles(id);
-          setDiscordData(data);
+
+          if (data.grade !== grade) {
+            console.log(
+              "Grades do not match, posting new grades... ",
+              data.grade
+            );
+            await postRoles(userId, data.grade, null);
+          }
+
+          const shouldUpdateRoles =
+            data.Role.isAdmin !== role?.isAdmin ||
+            data.Role.isCL !== role?.isCL ||
+            data.Role.isSL !== role?.isSL ||
+            data.Role.isWeather !== role?.isWeather ||
+            data.Role.isMeal !== role?.isMeal ||
+            data.Role.isEquipment !== role?.isEquipment;
+
+          if (shouldUpdateRoles) {
+            console.log("Roles do not match, posting new roles... ", data.Role);
+            await postRoles(userId, null, data.Role);
+          }
         } catch (error) {
-          console.error("Error fetching Discord roles: ", error);
+          console.error("Error fetching and posting Discord roles: ", error);
         }
       }
     };
 
-    fetchRoles();
-  }, [id]);
+    if (!isLoading && !isError) {
+      fetchAndPostRoles();
+    }
+  }, [id, userId, grade, role, isLoading, isError]);
 
   return { isLinked, open, setOpen, id, setId, discordData, setDiscordData };
 };

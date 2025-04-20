@@ -22,13 +22,10 @@ type RoleMap = {
 export async function getUserRoles(id: string) {
   try {
     const res = await axios.post(`/api/discord`, { id: id });
-    console.log("Discord roles: ", res.data);
     const roles: RoleMap = {};
     roleMap.forEach((role) => {
       roles[role.name] = false;
     });
-
-    console.log("Roles: ", res.data);
 
     res.data.roles.forEach((roleId: string) => {
       const roleName = roleMap.find((role) => role.id === roleId);
@@ -37,9 +34,29 @@ export async function getUserRoles(id: string) {
       }
     });
 
-    return roles;
+    let grade = null;
+    for (const [key, value] of Object.entries(roles)) {
+      if (!isNaN(Number(key)) && value) {
+        grade = Number(key);
+        break;
+      }
+    }
+
+    return {
+      grade,
+      Role: {
+        isAdmin: roles.isAdmin,
+        isCL: roles.isCL,
+        isSL: roles.isSL,
+        isWeather: roles.isWeather,
+        isMeal: roles.isMeal,
+        isEquipment: roles.isEquipment,
+      },
+    };
   } catch (error) {
     console.error("Error fetching user roles: ", error);
     throw error;
   }
 }
+
+// export async function postUserRole(id: string) {}

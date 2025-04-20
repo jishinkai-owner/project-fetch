@@ -23,10 +23,10 @@ import { useRecordSubmit } from "./hook";
 import SubmitSnackbar from "../snackbar";
 import { useSnackbar } from "../snackbar/hook";
 import { useUserContext } from "@/providers/user";
-import { Content, Record } from "@prisma/client";
 
 const EditorPage = () => {
-  const { userId } = useUserContext();
+  const { contextValue } = useUserContext();
+  const userId = contextValue.userId;
   const { postHikes, isLoading, isError } = usePostHikes();
   const { authorRecord, isLoadingAuthor, isErrorAuthor } =
     useAuthorRecord(userId);
