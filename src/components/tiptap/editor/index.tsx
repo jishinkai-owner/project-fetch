@@ -9,6 +9,9 @@ import Image from "@tiptap/extension-image";
 import Toolbar from "./toolbar/index";
 import FloatingBar from "./floating-menu";
 import { Toaster } from "react-hot-toast";
+import { isMarkdown } from "./paste-markdown/pasteMD";
+import { generateJSON } from "@tiptap/react";
+import MarkdownIt from "markdown-it";
 
 type SetContentProps = {
   content: string | null;
@@ -16,9 +19,9 @@ type SetContentProps = {
 };
 
 const TipTapEditor = ({ content, setContent }: SetContentProps) => {
-  // const [content, setContent] = useState("");
   const isExternalUpdate = useRef(false);
   const isFirstRender = useRef(true);
+  const markdownParser = new MarkdownIt();
 
   const extensions = [
     StarterKit,
@@ -35,6 +38,22 @@ const TipTapEditor = ({ content, setContent }: SetContentProps) => {
       if (!isExternalUpdate.current) {
         setContent(editor.getHTML());
       }
+    },
+    editorProps: {
+      handlePaste: (view, event) => {
+        const plainText = event.clipboardData?.getData("text/plain");
+        if (plainText && isMarkdown(plainText)) {
+          event.preventDefault();
+          const html = markdownParser.render(plainText);
+
+          const json = generateJSON(html, extensions);
+
+          editor?.commands.insertContent(json);
+          return true;
+        }
+
+        return false;
+      },
     },
   });
 
