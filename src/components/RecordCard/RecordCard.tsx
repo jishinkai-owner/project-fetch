@@ -21,16 +21,19 @@ const RecordCard = memo(({
 }: {
     record: RecordContentDTO;
 }) => {
-    // 現在選択されている年度を検知
+    // 現在の検索パラメータを取得
     const searchParams = useSearchParams();
     const currentYear = searchParams.get('year');
-
-    // 年度パラメータを含んだリンクを生成
-    const detailLink = `/record/${record.activityType}/${record.contentId}${currentYear ? `?year=${currentYear}` : ''}`;
+    
+    // 年度パラメータを含む詳細ページへのリンクを生成
+    let linkHref = `/record/${record.activityType}/${record.contentId}`;
+    if (currentYear) {
+        linkHref += `?year=${currentYear}`;
+    }
 
     return (
         <Link
-            href={detailLink}
+            href={linkHref}
             className={styles.recordCard}
         >
             <div className={styles.recordCardHeader}>
