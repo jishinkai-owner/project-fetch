@@ -1,78 +1,144 @@
-"use client";
-
-import React, { useState, useEffect, useMemo } from "react";
-import styles from "../RecordPage.module.scss";
-import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
+// src/app/record/tsuri/page.tsx
+import { PrismaClient } from "@prisma/client";
+import { Suspense } from "react";
+import TsuriRecordClient from "./client";
+import LoadingPlaceholder from "./loading";
 import TabBar from "@/components/TabBar/TabBar";
-import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import Title from "@/components/Title/Title";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 
-const TsuriRecordPage: React.FC = () => {
-  const [recordContents, setRecordContents] = useState<RecordContentDTO[]>([]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+// ISR設定（30分ごとに再生成、秒数で指定）
+export const revalidate = 1800;
 
-  // データ取得
-  useEffect(() => {
-    const fetchRecordContents = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/recordContents");
-        if (!res.ok) throw new Error("Failed to fetch recordContents");
-        const data: RecordContentDTO[] = await res.json();
-        // 釣行記録のみをフィルタリング
-        const tsuriRecords = data.filter(r => r.activityType === "tsuri");
-        setRecordContents(tsuriRecords);
-      } catch (error) {
-        console.error("Error fetching recordContents:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRecordContents();
-  }, []);
-
-  // 年度リスト取得（降順）
-  const years = useMemo(() => {
-    const uniqueYears = new Set<number>();
-    recordContents.forEach((r) => {
-      if (r.year !== null) {
-        uniqueYears.add(r.year);
-      }
-    });
-    return Array.from(uniqueYears).sort((a, b) => b - a); // 降順
-  }, [recordContents]);
-
-  // 初期表示で最新年度を選択
-  useEffect(() => {
-    if (years.length > 0 && selectedYear === null) {
-      setSelectedYear(years[0]);
+// 年度リスト取得（降順）
+function getUniqueYears(recordContents: RecordContentDTO[]): number[] {
+  const uniqueYears = new Set<number>();
+  recordContents.forEach((r) => {
+    if (r.year !== null) {
+      uniqueYears.add(r.year);
     }
-  }, [years, selectedYear]);
+  });
+  return Array.from(uniqueYears).sort((a, b) => b - a); // 降順
+}
 
-  // 選択された年度のレコードを取得
-  const recordsThisYear = useMemo(() => {
-    if (!selectedYear) return [];
-    return recordContents.filter((r) => r.year === selectedYear);
-  }, [recordContents, selectedYear]);
+// プリロードを行うための非同期関数
+async function getRecordData() {
+  // シングルトンインスタンスを使用（パフォーマンス向上）
+  const prisma = new PrismaClient({
+    // コネクションプールの最適化
+    log: ['error'],
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
+  });
 
-  // 場所リスト
-  const placeList = useMemo(() => {
-    const uniquePlaces = new Set<string>();
-    recordsThisYear.forEach((r) => {
-      if (r.place) uniquePlaces.add(r.place);
+  try {
+    // 釣行記録のデータを取得
+    const tsuriRecords = await prisma.record.findMany({
+      where: {
+        activityType: "tsuri"
+      },
+      include: {
+        contents: true // 関連するContentを取得
+      }
     });
-    return Array.from(uniquePlaces);
-  }, [recordsThisYear]);
+
+    // 取得したデータをRecordContentDTO形式に変換
+    const recordContents: RecordContentDTO[] = [];
+
+    tsuriRecords.forEach(record => {
+      // 関連コンテンツがない場合は、レコード自体の情報だけで1レコード作成
+      if (record.contents.length === 0) {
+        recordContents.push({
+          contentId: record.id,
+          recordId: record.id,
+          year: record.year,
+          place: record.place,
+          activityType: record.activityType,
+          date: record.date || null,
+          details: record.details,
+          title: null, // Contentから取得するフィールドなのでnull
+          filename: null // Contentから取得するフィールドなのでnull
+        });
+      } else {
+        // 各コンテンツごとに変換
+        record.contents.forEach(content => {
+          recordContents.push({
+            contentId: content.id,
+            recordId: record.id,
+            year: record.year,
+            place: record.place,
+            activityType: record.activityType,
+            date: record.date || null,
+            details: content.content || record.details,
+            title: content.title || null,
+            filename: content.filename || null
+          });
+        });
+      }
+    });
+
+    // 年度リストを取得
+    const years = getUniqueYears(recordContents);
+
+    // 最新年度を取得
+    const latestYear = years.length > 0 ? years[0] : null;
+
+    // 最新年度のレコードを取得
+    const initialRecords = latestYear
+      ? recordContents.filter(r => r.year === latestYear)
+      : [];
+
+    return {
+      initialRecords,
+      // 全データは必要最小限のみをクライアントに渡す（最適化）
+      allRecords: recordContents.map(({ contentId, recordId, year, place, activityType, date, title, filename }) => ({
+        contentId,
+        recordId,
+        year,
+        place,
+        activityType,
+        date,
+        title,
+        filename,
+        // detailsは一覧表示に必要な分だけ切り出す（データ量削減）
+        details: recordContents.find(r => r.contentId === contentId)?.details?.substring(0, 100) || null
+      })),
+      years,
+      initialYear: latestYear
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // エラー時のフォールバック
+    return {
+      initialRecords: [],
+      allRecords: [],
+      years: [],
+      initialYear: null
+    };
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+// サーバーサイドでデータを取得
+export default async function TsuriRecordPage() {
+  // データ取得を待ちつつ、Suspenseでラップして表示を最適化
+  const recordData = await getRecordData();
 
   return (
     <>
       {/* ナビゲーション */}
-      <BreadCrumbs breadcrumb={[
-        { title: "Home", url: "/" },
-        { title: "活動記録", url: "/record" },
-        { title: "釣行記録" }
-      ]} />
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "活動記録", url: "/record" },
+          { title: "釣行記録" }
+        ]}
+      />
 
       <Title title="釣行記録" />
 
@@ -83,63 +149,14 @@ const TsuriRecordPage: React.FC = () => {
         { title: "釣行記録", icon: "🎣", url: "/record/tsuri", isCurrent: true }
       ]} />
 
-      <div className={styles.contentWrapper}>
-        {loading ? (
-          <div className={styles.noDataMessage}>
-            <p>読み込み中...</p>
-          </div>
-        ) : years.length === 0 ? (
-          <div className={styles.noDataMessage}>
-            <p>釣行記録のデータがありません。</p>
-          </div>
-        ) : (
-          <>
-            {/* 年度セレクタ */}
-            <div className={styles.yearSelector}>
-              <select
-                onChange={(e) => setSelectedYear(Number(e.target.value) || null)}
-                value={selectedYear ?? ""}
-              >
-                <option value="">年度を選択</option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}年度
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* 記録一覧表示部分 */}
-            {selectedYear && (
-              <div className={styles.recordsWrapper}>
-                {placeList.length === 0 ? (
-                  <div className={styles.noDataMessage}>
-                    <p>{selectedYear}年度の釣行記録はありません。</p>
-                  </div>
-                ) : (
-                  placeList.map((place) => (
-                    <div key={place} className={styles.placeSection}>
-                      <h3 className={styles.placeTitle}>
-                        <span className={styles.placeIcon}>🎣</span>
-                        {place}
-                      </h3>
-                      <div className={styles.recordCardList}>
-                        {recordsThisYear
-                          .filter((r) => r.place === place)
-                          .map((record) => (
-                            <RecordCard record={record} key={record.contentId} />
-                          ))}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            )}
-          </>
-        )}
-      </div>
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <TsuriRecordClient
+          initialRecords={recordData.initialRecords}
+          allRecords={recordData.allRecords}
+          years={recordData.years}
+          initialYear={recordData.initialYear}
+        />
+      </Suspense>
     </>
   );
-};
-
-export default TsuriRecordPage;
+}
