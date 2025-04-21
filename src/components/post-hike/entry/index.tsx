@@ -11,6 +11,7 @@ import { usePostHikes } from "../hook";
 import { Toaster } from "react-hot-toast";
 import { useFormSubmit } from "../hook";
 import { useIds } from "../hook";
+import RetrospectiveText from "./retrospective-text";
 
 const PostHikeForm = () => {
   const { contextValue } = useUserContext();
@@ -117,6 +118,7 @@ const PostHikeForm = () => {
           )}
           {contextValue.Role?.isCL && (
             <>
+              <RetrospectiveText text={entries.mealPerson} role="食事係" />
               <EntryTextField
                 id="ccomment-meal"
                 value={entries.mealComment ?? ""}
@@ -128,6 +130,7 @@ const PostHikeForm = () => {
                   }))
                 }
               />
+              <RetrospectiveText text={entries.weatherPerson} role="天気図係" />
               <EntryTextField
                 value={entries.weatherComment ?? ""}
                 id="comment-weather"
@@ -139,6 +142,7 @@ const PostHikeForm = () => {
                   }))
                 }
               />
+              <RetrospectiveText text={entries.equipmentPerson} role="装備係" />
               <EntryTextField
                 value={entries.equipmentComment ?? ""}
                 id="comment-equipment"
@@ -150,6 +154,7 @@ const PostHikeForm = () => {
                   }))
                 }
               />
+              <RetrospectiveText text={entries.sl} role="SL" />
               <EntryTextField
                 value={entries.slComment ?? ""}
                 id="comment-sl"
