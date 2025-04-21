@@ -6,19 +6,19 @@ const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+  // const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
 
   if (!code) {
-    return NextResponse.redirect(`${baseUrl}/`);
+    return NextResponse.redirect(`${origin}/`);
   }
   // try {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
   console.log("Exchange code for session: ", { data, error });
   if (error || !data) {
-    return NextResponse.redirect(`${baseUrl}/`);
+    return NextResponse.redirect(`${origin}/`);
   }
 
   if (data.user && data.user.email) {
