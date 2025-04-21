@@ -19,9 +19,7 @@ import { useEditorState, useAuthorRecord } from "./hook";
 import HikeSelect from "../post-hike/entry/hike-select";
 import { ExpandMore } from "@mui/icons-material";
 import RecordCard from "../shared/record-card";
-import { useRecordSubmit } from "./hook";
-import SubmitSnackbar from "../snackbar";
-import { useSnackbar } from "../snackbar/hook";
+import { useRecordSubmit, useRecordDelete } from "./hook";
 import { useUserContext } from "@/providers/user";
 
 const EditorPage = () => {
@@ -32,17 +30,14 @@ const EditorPage = () => {
     useAuthorRecord(userId);
   const { content, setContent, recordContent, setRecordContent } =
     useEditorState();
-  const { open, setOpen, message, setMessage, handleClose, status, setStatus } =
-    useSnackbar();
 
   const submitRecord = useRecordSubmit({
     recordContent,
     userId,
     content,
-    setMessage,
-    setOpen,
-    setStatus,
   });
+
+  const deleteRecord = useRecordDelete();
 
   if (isError || isErrorAuthor) return <ErrorMessage />;
 
@@ -72,11 +67,13 @@ const EditorPage = () => {
             ) : (
               authorRecord.map((content) => (
                 <RecordCard
+                  includeDelete
                   key={content.id}
-                  buttonTitle={"反省を見る"}
+                  buttonTitle={"記録を編集する"}
                   pushUrl={`/club-members/records/edit/${content.id}`}
                   title={content.title ?? ""}
                   description={content.Record.place ?? ""}
+                  onDelete={() => deleteRecord(content.id)}
                 />
               ))
             )}
@@ -100,6 +97,7 @@ const EditorPage = () => {
             ) : (
               <HikeSelect
                 records={postHikes}
+                value={recordContent.recordId}
                 handleChange={(e) =>
                   setRecordContent((prev) => ({
                     ...prev,
@@ -144,12 +142,6 @@ const EditorPage = () => {
           </Stack>
         </AccordionDetails>
       </Accordion>
-      <SubmitSnackbar
-        open={open}
-        handleClose={handleClose}
-        message={message}
-        status={status}
-      />
     </MainCard>
   );
 };

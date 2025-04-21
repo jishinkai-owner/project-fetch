@@ -4,31 +4,22 @@ import { useEffect } from "react";
 import { useActivity, useHikeInfo, useFormSubmit } from "../../hook";
 import { Loading, ErrorMessage } from "@/components/load-status";
 import RegisterForm from "../form";
-import { useSnackbar } from "@/components/snackbar/hook";
 import MainCard from "@/components/main-card";
 import { Button } from "@mui/material";
+import { Toaster } from "react-hot-toast";
 
 const EditPastEntry = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = Number(searchParams.get("id"));
-  const { open, setOpen, message, setMessage, handleClose, status, setStatus } =
-    useSnackbar();
   const { activity, isLoadingActivity, isErrorActivity } = useActivity(id);
   const { entry, setEntry, handleYearChange } = useHikeInfo();
 
-  const submitForm = useFormSubmit(
-    {
-      setMessage,
-      setOpen,
-      setStatus,
-    },
-    {
-      id,
-      entry,
-      setEntry,
-    }
-  );
+  const submitForm = useFormSubmit({
+    id,
+    entry,
+    setEntry,
+  });
 
   useEffect(() => {
     if (activity) setEntry({ ...activity });
@@ -51,16 +42,13 @@ const EditPastEntry = () => {
       </Button>
       <MainCard>
         <RegisterForm
-          open={open}
-          message={message}
-          status={status}
           entry={entry}
-          handleClose={handleClose}
           setEntry={setEntry}
           submitForm={submitForm}
           handleYearChange={handleYearChange}
         />
       </MainCard>
+      <Toaster />
     </>
   );
 };

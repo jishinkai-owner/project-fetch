@@ -28,14 +28,15 @@ export async function GET() {
       );
     }
     console.log("CL members retrieved successfully:", clMembers);
-    const clMembersWithName = clMembers.map((member) => ({
-      userId: member.userId,
-      name: member.User.name,
-    }));
+    // const clMembersWithName = clMembers.map((member) => ({
+    //   userId: member.userId,
+    //   name: member.User.name,
+    // }));
     return NextResponse.json(
       {
         success: true,
-        data: clMembersWithName,
+        data: clMembers,
+        // data: clMembersWithName,
       },
       { status: 200 }
     );

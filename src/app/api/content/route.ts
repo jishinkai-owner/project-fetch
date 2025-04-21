@@ -19,6 +19,7 @@ export async function GET(req: NextRequest) {
       select: {
         title: true,
         content: true,
+        recordId: true,
       },
     });
 

@@ -1,4 +1,5 @@
 "use client";
+
 import HikeInfoEntry from "./register";
 import MainCard from "../main-card";
 import {

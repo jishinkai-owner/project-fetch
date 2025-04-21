@@ -2,10 +2,10 @@
 
 import { Tab, Tabs } from "@mui/material";
 import MainCard from "@/components/main-card";
-import { useState, SyntheticEvent } from "react";
 import PostHikeCards from "@/components/post-hike/post-hike-cards";
 import PostHikeForm from "@/components/post-hike/entry";
 import TabPanel from "../tabs";
+import { useTabs } from "./hook";
 
 function a11yProps(index: number) {
   return {
@@ -15,11 +15,7 @@ function a11yProps(index: number) {
 }
 
 const PostHikeComp = () => {
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const [value, setValue] = useState(0);
+  const { value, handleChange } = useTabs();
   return (
     <MainCard>
       <Tabs centered variant="fullWidth" value={value} onChange={handleChange}>

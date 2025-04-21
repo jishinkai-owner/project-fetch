@@ -2,7 +2,6 @@ import { Button, Box, Stack, TextField, MenuItem } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HikeInfoEntryProps } from "@/types/hike";
-import SubmitSnackbar from "@/components/snackbar";
 import Grid from "@mui/material/Grid2";
 import dayjs from "dayjs";
 
@@ -26,21 +25,13 @@ const activityType = [
 ];
 
 type RegisterFormProps = {
-  open: boolean;
-  message: string;
-  status: "success" | "error";
   entry: HikeInfoEntryProps;
-  handleClose: () => void;
   setEntry: React.Dispatch<React.SetStateAction<HikeInfoEntryProps>>;
   submitForm: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   handleYearChange: (date: dayjs.Dayjs | null) => void;
 };
 const RegisterForm = ({
-  open,
-  message,
-  status,
   entry,
-  handleClose,
   setEntry,
   submitForm,
   handleYearChange,
@@ -105,12 +96,6 @@ const RegisterForm = ({
           </Button>
         </Grid>
       </Stack>
-      <SubmitSnackbar
-        open={open}
-        handleClose={handleClose}
-        message={message}
-        status={status}
-      />
     </Box>
   );
 };

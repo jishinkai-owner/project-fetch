@@ -8,6 +8,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Image from "@tiptap/extension-image";
 import Toolbar from "./toolbar/index";
 import FloatingBar from "./floating-menu";
+import { Toaster } from "react-hot-toast";
 
 type SetContentProps = {
   content: string | null;
@@ -63,6 +64,7 @@ const TipTapEditor = ({ content, setContent }: SetContentProps) => {
       <Toolbar editor={editor} />
       <FloatingBar editor={editor} />
       <EditorContent editor={editor} />
+      <Toaster />
     </>
   );
 };

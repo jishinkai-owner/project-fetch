@@ -26,6 +26,7 @@ export type RecordRes = {
 export type ContentRes = {
   title: string | null;
   content: string | null;
+  recordId: number | null;
 };
 
 export type UserRes = {
@@ -44,7 +45,7 @@ export type PostHikeContentRes = {
   equipmentComment: string | null;
   weatherComment: string | null;
   mealComment: string | null;
-  slComment: string | null;
+  slComemnt: string | null;
   impression: string[];
   recordId: number;
   clId: string;

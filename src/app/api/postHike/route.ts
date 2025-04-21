@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
       equipmentComment,
       weatherComment,
       mealComment,
-      slComment,
+      slComemnt: slComment,
       clId,
     };
 
@@ -175,7 +175,7 @@ export async function PUT(req: NextRequest) {
           weatherComment: commentWeather ?? null,
           mealComment: commentMeal ?? null,
           slComemnt: commentSL ?? null,
-          impression: [impression],
+          impression: impression ? [impression] : [],
         }
       : {
           clName: clName,

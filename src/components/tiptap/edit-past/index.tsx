@@ -1,15 +1,15 @@
 "use client";
 import { Stack, TextField } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Grid from "@mui/material/Grid2";
 import MainCard from "@/components/main-card";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import TipTapEditor from "../editor";
 import { useEditorState, usePastRecord, useRecordUpdate } from "../hook";
 import { Loading, ErrorMessage } from "@/components/load-status";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "@/components/snackbar/hook";
-import SubmitSnackbar from "@/components/snackbar";
+import { usePostHikes } from "@/components/post-hike/hook";
+import HikeSelect from "@/components/post-hike/entry/hike-select";
 
 type EditPastRecordProps = {
   id: number;
@@ -18,31 +18,32 @@ type EditPastRecordProps = {
 const EditPastRecord = ({ id }: EditPastRecordProps) => {
   const { pastRecord, isLoadingPastRecord, isErrorPastRecord } =
     usePastRecord(id);
-  const { content, setContent } = useEditorState();
-  const [title, setTitle] = useState<string | null>("");
-  const { open, setOpen, message, setMessage, handleClose, status, setStatus } =
-    useSnackbar();
+  const { content, setContent, recordContent, setRecordContent } =
+    useEditorState();
+  const { postHikes, isLoading, isError } = usePostHikes();
 
   const router = useRouter();
 
   const updateRecord = useRecordUpdate({
     id,
     content,
-    title,
-    setOpen,
-    setMessage,
-    setStatus,
+    title: recordContent.title,
+    recordId: recordContent.recordId,
   });
 
   useEffect(() => {
     if (pastRecord && !isLoadingPastRecord) {
       setContent(pastRecord.content);
-      setTitle(pastRecord.title);
+      setRecordContent((prev) => ({
+        ...prev,
+        title: pastRecord.title,
+        recordId: pastRecord.recordId,
+      }));
     }
-  }, [pastRecord, isLoadingPastRecord, setContent]);
+  }, [pastRecord, isLoadingPastRecord, setContent, setRecordContent]);
 
   if (isLoadingPastRecord) return <Loading />;
-  if (isErrorPastRecord) return <ErrorMessage />;
+  if (isErrorPastRecord | isError) return <ErrorMessage />;
 
   return (
     <>
@@ -58,12 +59,28 @@ const EditPastRecord = ({ id }: EditPastRecordProps) => {
       </Button>
       <MainCard>
         <Stack direction="column" spacing={2}>
+          {isLoading ? (
+            <Skeleton variant="rectangular" height={56} width="100%" />
+          ) : (
+            <HikeSelect
+              records={postHikes}
+              value={recordContent.recordId}
+              handleChange={(e) =>
+                setRecordContent((prev) => ({
+                  ...prev,
+                  recordId: Number(e.target.value),
+                }))
+              }
+            />
+          )}
           <TextField
             id="title"
             label="タイトル"
             variant="outlined"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={recordContent.title || ""}
+            onChange={(e) =>
+              setRecordContent((prev) => ({ ...prev, title: e.target.value }))
+            }
           />
           <TipTapEditor content={content} setContent={setContent} />
         </Stack>
@@ -83,18 +100,17 @@ const EditPastRecord = ({ id }: EditPastRecordProps) => {
               e.preventDefault();
               updateRecord();
             }}
-            disabled={!content || !title || isLoadingPastRecord}
+            disabled={
+              !content ||
+              !recordContent.title ||
+              !recordContent.recordId ||
+              isLoadingPastRecord
+            }
           >
             保存
           </Button>
         </Grid>
       </MainCard>
-      <SubmitSnackbar
-        open={open}
-        handleClose={handleClose}
-        message={message}
-        status={status}
-      />
     </>
   );
 };

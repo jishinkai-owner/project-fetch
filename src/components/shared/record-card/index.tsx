@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
+import DeleteDialog from "../delete-dialog";
+import { useDeleteDialog } from "../delete-dialog/hook";
 
 type RecordCardProps = {
   buttonTitle: string;
@@ -27,6 +29,7 @@ const RecordCard = ({
   onDelete,
 }: RecordCardProps) => {
   const router = useRouter();
+  const { open, handleOpen } = useDeleteDialog();
 
   return (
     <Box sx={{ minWidth: 200 }}>
@@ -46,7 +49,8 @@ const RecordCard = ({
               size="small"
               onClick={(e: MouseEvent<HTMLButtonElement>) => {
                 e.stopPropagation();
-                if (onDelete !== undefined) onDelete();
+                handleOpen();
+                // if (onDelete !== undefined) onDelete();
               }}
             >
               削除
@@ -63,6 +67,7 @@ const RecordCard = ({
           </Button>
         </CardActions>
       </Card>
+      <DeleteDialog open={open} handleOpen={handleOpen} onDelete={onDelete} />
     </Box>
   );
 };

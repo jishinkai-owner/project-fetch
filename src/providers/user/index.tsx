@@ -1,9 +1,7 @@
 "use client";
 import { ReactNode, createContext, useContext, useMemo } from "react";
-import { useUser } from "./hook";
 import useData from "@/lib/swr/useSWR";
 import { UserRes } from "@/types/apiResponse";
-import { Suspense } from "react";
 
 export type UserContextType = {
   contextValue: {
@@ -34,7 +32,6 @@ const UserContext = createContext<UserContextType>({
 });
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  // const { userInfo, isLoading, isError } = useUser();
   const { data, isLoading, isError } = useData<UserRes>("/api/user");
 
   const contextValue = useMemo(
@@ -55,23 +52,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
       isError,
     }),
     [data, isLoading, isError]
-    // () => ({
-    //   userId: userInfo?.id,
-    //   grade: userInfo?.grade || null,
-    //   Role: !userInfo?.Role
-    //     ? null
-    //     : {
-    //         isAdmin: userInfo?.Role?.isAdmin,
-    //         isCL: userInfo?.Role?.isCL,
-    //         isSL: userInfo?.Role?.isSL,
-    //         isMeal: userInfo?.Role?.isMeal,
-    //         isEquipment: userInfo?.Role?.isEquipment,
-    //         isWeather: userInfo?.Role?.isWeather,
-    //       },
-    //   isLoading,
-    //   isError,
-    // }),
-    // [userInfo, isLoading, isError]
   );
 
   return (

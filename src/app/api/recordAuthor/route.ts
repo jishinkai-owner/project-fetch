@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const { id, title, content } = await req.json();
+  const { id, title, content, recordId } = await req.json();
 
   try {
     console.log("updating content...");
@@ -106,6 +106,7 @@ export async function PUT(req: NextRequest) {
       data: {
         title,
         content,
+        recordId: Number(recordId),
       },
     });
 
@@ -125,6 +126,42 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json(
       { error: "Failed to update content", details: error },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
+  const id = searchParams.get("id");
+
+  if (!id) {
+    return NextResponse.json({ error: "id is required" }, { status: 400 });
+  }
+
+  try {
+    console.log("deleting content with id: ", id);
+    const deletedContent = await prisma.content.delete({
+      where: { id: Number(id) },
+    });
+
+    if (!deletedContent) {
+      return NextResponse.json(
+        { error: "Failed to delete content" },
+        { status: 500 }
+      );
+    }
+
+    console.log("content successfully deleted: ", deletedContent);
+    return NextResponse.json(
+      { success: true, data: deletedContent },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("API Error: ", error);
+
+    return NextResponse.json(
+      { error: "Failed to delete content", details: error },
       { status: 500 }
     );
   }

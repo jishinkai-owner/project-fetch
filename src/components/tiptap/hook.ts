@@ -2,12 +2,10 @@ import { RecordContentProps } from "@/types/record";
 import axios from "axios";
 import { useState, useMemo } from "react";
 import useData from "@/lib/swr/useSWR";
-import { Dispatch, SetStateAction } from "react";
 import { RecordsAuthorRes, ContentRes } from "@/types/apiResponse";
-// import { useUserContext } from "@/providers/user";
+import toast from "react-hot-toast";
 
 export const useEditorState = () => {
-  // const { userId } = useUserContext();
   const [content, setContent] = useState<string | null>("");
   const [recordContent, setRecordContent] = useState<RecordContentProps>({
     title: null,
@@ -15,7 +13,6 @@ export const useEditorState = () => {
     recordId: null,
   });
 
-  // return { userId, content, setContent, recordContent, setRecordContent };
   return { content, setContent, recordContent, setRecordContent };
 };
 
@@ -31,7 +28,6 @@ export const useImage = () => {
 };
 
 export const useAuthorRecord = (userId?: string | null) => {
-  // const { userId } = useUserContext();
   const { data, isLoading, isError } = useData<RecordsAuthorRes[]>(
     userId ? `/api/recordsAuthor?authorId=${userId}` : ""
   );
@@ -77,12 +73,14 @@ export const useRecordContent = (id: number) => {
 export const handleContentUpdate = async (
   id: number,
   content: string | null,
-  title: string | null
+  title: string | null,
+  recordId: number | null
 ) => {
   const data = {
     id: id,
     content: content,
     title: title,
+    recordId: recordId,
   };
 
   try {
@@ -138,38 +136,32 @@ type RecordUpdateProps = {
   id: number;
   title: string | null;
   content: string | null;
-  setMessage: Dispatch<SetStateAction<string>>;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  setStatus: Dispatch<SetStateAction<"success" | "error">>;
+  recordId: number | null;
 };
 
 type RecordSubmitProps = {
   recordContent: RecordContentProps;
   userId: string | null | undefined;
   content: string | null;
-  setMessage: Dispatch<SetStateAction<string>>;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  setStatus: Dispatch<SetStateAction<"success" | "error">>;
 };
 
 export const useRecordSubmit = ({
   recordContent,
   userId,
   content,
-  setMessage,
-  setOpen,
-  setStatus,
 }: RecordSubmitProps) => {
   const submitRecord = async () => {
     const submitSuccess = () => {
-      setMessage("記録を登録しました！");
-      setOpen(true);
-      setStatus("success");
+      toast.success("記録を登録しました!", {
+        duration: 3000,
+        position: "bottom-right",
+      });
     };
     const submitError = () => {
-      setMessage("記録の登録に失敗しました。");
-      setOpen(true);
-      setStatus("error");
+      toast.error("記録の登録に失敗しました。", {
+        duration: 2000,
+        position: "bottom-right",
+      });
     };
     try {
       const res = await handleContentSubmit(recordContent, userId, content);
@@ -191,25 +183,49 @@ export const useRecordUpdate = ({
   id,
   title,
   content,
-  setMessage,
-  setOpen,
-  setStatus,
+  recordId,
 }: RecordUpdateProps) => {
   const updateRecord = async () => {
     try {
-      await handleContentUpdate(id, content, title);
-      setMessage("記録が更新されました！");
-      setOpen(true);
-      setStatus("success");
+      await handleContentUpdate(id, content, title, recordId);
+      toast.success("記録が更新されました!", {
+        duration: 3000,
+        position: "bottom-right",
+      });
     } catch (error) {
       console.error("Error while updating record: ", error);
-      setMessage("記録の更新に失敗しました。");
-      setOpen(true);
-      setStatus("error");
+      toast.error("記録の更新に失敗しました。", {
+        duration: 2000,
+        position: "bottom-right",
+      });
     }
   };
 
   return updateRecord;
+};
+
+export const useRecordDelete = () => {
+  const deleteRecord = async (id: number) => {
+    try {
+      const res = await axios.delete(`/api/recordAuthor?id=${id}`);
+      if (res.status === 200) {
+        toast.success("記録が削除されました!", {
+          duration: 3000,
+          position: "bottom-right",
+        });
+        return { success: true };
+      }
+      return { success: false, error: "Failed to delete record" };
+    } catch (error) {
+      console.error("Error while deleting record: ", error);
+      toast.error("記録の削除に失敗しました。", {
+        duration: 2000,
+        position: "bottom-right",
+      });
+      return { success: false, error: "Failed to delete record" };
+    }
+  };
+  return deleteRecord;
 };
 
 export default handleContentSubmit;

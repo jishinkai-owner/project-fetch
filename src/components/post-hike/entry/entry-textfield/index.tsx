@@ -5,16 +5,22 @@ type EntryTextFieldProps = {
   id: string;
   label: string;
   name?: string;
-  defaultValue: string | null;
+  value: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const EntryTextField = ({ id, label, handleChange }: EntryTextFieldProps) => {
+const EntryTextField = ({
+  id,
+  value,
+  label,
+  handleChange,
+}: EntryTextFieldProps) => {
   return (
     <TextField
       id={id}
       label={label}
       multiline
+      value={value}
       rows={4}
       onChange={handleChange}
     />

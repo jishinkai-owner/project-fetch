@@ -1,5 +1,5 @@
 import useData from "@/lib/swr/useSWR";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import axios from "axios";
 import { PostHikeContentProps } from "@/types/hike";
 import {
@@ -8,6 +8,7 @@ import {
   PostHikeContentRes,
   PostHikeContentResWithRecord,
 } from "@/types/apiResponse";
+import toast from "react-hot-toast";
 
 export const usePostHikes = () => {
   const { data, isLoading, isError } = useData<RecordRes[]>("/api/records");
@@ -24,9 +25,17 @@ export const useCL = () => {
   const cl = useMemo(() => {
     if (!data) return [];
     return data.data;
-    // return data;
   }, [data]);
   return { cl, isLoadingCL: isLoading, isErrorCL: isError };
+};
+
+export const useTabs = () => {
+  const [value, setValue] = useState<number>(0);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  return { value, setValue, handleChange };
 };
 
 export const usePastPostHike = (
@@ -61,7 +70,32 @@ export const usePostPostHikesWithRecordId = (recordId: number) => {
   return { postHikes, isLoading, isError };
 };
 
-export const useEntriesState = () => {
+type UserIdProps = {
+  clId: string | null;
+  recordId: number | null;
+};
+
+export const useIds = () => {
+  const [ids, setIds] = useState<UserIdProps>({
+    clId: null,
+    recordId: null,
+  });
+
+  return { ids, setIds };
+};
+
+export const useEntriesState = (
+  clId: string | null,
+  recordId: number | null
+) => {
+  const { data: postHikeData } = useData<PostHikeContentRes[]>(
+    clId && recordId ? `/api/postHike?recordId=${recordId}&clId=${clId}` : ""
+  );
+  const postHikeEntry = useMemo(() => {
+    if (!postHikeData) return null;
+    return postHikeData.data[0];
+  }, [postHikeData]);
+
   const [entries, setEntries] = useState<PostHikeContentProps>({
     clId: null,
     clName: null,
@@ -76,6 +110,27 @@ export const useEntriesState = () => {
     slComment: null,
     impression: null,
   });
+
+  useEffect(() => {
+    if (postHikeEntry) {
+      setEntries((prevEntries) => ({
+        ...prevEntries,
+        clId: postHikeEntry.clId || clId,
+        recordId: postHikeEntry.recordId || recordId,
+        clName: postHikeEntry.clName,
+        mealPerson: postHikeEntry.mealPerson,
+        weatherPerson: postHikeEntry.weatherPerson,
+        equipmentPerson: postHikeEntry.equipmentPerson,
+        sl: postHikeEntry.sl,
+        mealComment: postHikeEntry.mealComment,
+        weatherComment: postHikeEntry.weatherComment,
+        equipmentComment: postHikeEntry.equipmentComment,
+        slComment: postHikeEntry.slComemnt,
+      }));
+
+      console.log("postHikeEntry", entries);
+    }
+  }, [postHikeEntry, clId, recordId]);
 
   return { entries, setEntries };
 };
@@ -116,21 +171,13 @@ export const handleSubmit = async (entries: PostHikeContentProps) => {
 type UseFormSubmitProps = {
   entries: PostHikeContentProps;
   setEntries: React.Dispatch<React.SetStateAction<PostHikeContentProps>>;
-  setMessage: React.Dispatch<React.SetStateAction<string>>;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setStatus: React.Dispatch<React.SetStateAction<"success" | "error">>;
 };
-export const useFormSubmit = ({
-  entries,
-  setEntries,
-  setMessage,
-  setOpen,
-  setStatus,
-}: UseFormSubmitProps) => {
+export const useFormSubmit = ({ entries, setEntries }: UseFormSubmitProps) => {
   const submitSuccess = () => {
-    setMessage("反省を登録しました!");
-    setOpen(true);
-    setStatus("success");
+    toast.success("反省を登録しました!", {
+      duration: 3000,
+      position: "bottom-right",
+    });
     setEntries({
       clId: null,
       clName: null,
@@ -147,9 +194,10 @@ export const useFormSubmit = ({
     });
   };
   const submitError = () => {
-    setMessage("反省の登録に失敗しました。");
-    setOpen(true);
-    setStatus("error");
+    toast.error("反省の登録に失敗しました。", {
+      duration: 3000,
+      position: "bottom-right",
+    });
   };
 
   const submitForm = async () => {

@@ -32,13 +32,8 @@ type UseFormSubmitProps = {
   setEntry: Dispatch<SetStateAction<HikeInfoEntryProps>>;
 };
 
-export const useFormSubmit = (
-  { setMessage, setOpen, setStatus }: SnackbarStateProps,
-  { id, entry, setEntry }: UseFormSubmitProps
-) => {
+export const useFormSubmit = ({ id, entry, setEntry }: UseFormSubmitProps) => {
   const handleSubmit = async (e: HikeInfoEntryProps) => {
-    console.log("posting hike info...", e.year, e.date, e.place);
-
     const data = {
       year: e.year,
       date: e.date,
@@ -63,22 +58,29 @@ export const useFormSubmit = (
   };
 
   const submitSuccess = () => {
-    setMessage("活動情報を登録しsdました!");
-    setOpen(true);
-    setStatus("success");
+    toast.success("活動情報を登録しました!", {
+      duration: 3000,
+      position: "bottom-right",
+    });
+    // setMessage("活動情報を登録しsdました!");
+    // setOpen(true);
+    // setStatus("success");
     setEntry({ year: null, date: null, place: null, activityType: "yama" });
   };
   const updateSuccess = () => {
-    toast.success("活動情報を更新しました!");
+    toast.success("活動情報を更新しました!", {
+      duration: 3000,
+      position: "bottom-right",
+    });
     // setMessage("活動情報を登録しました!");
     // setOpen(true);
     // setStatus("success");
   };
   const submitError = () => {
-    // handleError("活動情報の登録に失敗しました。");
-    setMessage("活動情報の登録に失敗しました。");
-    setOpen(true);
-    setStatus("error");
+    toast.error("活動情報の登録に失敗しました。", {
+      duration: 2000,
+      position: "bottom-right",
+    });
   };
 
   const submitForm = async () => {
@@ -88,13 +90,8 @@ export const useFormSubmit = (
       if (res.success) {
         if (id) {
           updateSuccess();
-          toast.success("活動情報を更新しました!");
         } else {
           submitSuccess();
-          toast.success("活動情報を登録しました!", {
-            duration: 3000,
-            position: "bottom-right",
-          });
         }
       } else {
         submitError();
@@ -159,9 +156,6 @@ export const useFormDelete = ({
 type UseFormUpdateProps = {
   id: number;
   entry: HikeInfoEntryProps;
-  // setMessage: Dispatch<SetStateAction<string>>;
-  // setOpen: Dispatch<SetStateAction<boolean>>;
-  // setStatus: Dispatch<SetStateAction<"success" | "error">>;
 };
 
 export const useFormUpdate = (
@@ -232,8 +226,6 @@ export const useFormUpdate = (
 export const useActivities = () => {
   const { data, isLoading, isError } =
     useData<ActivitiesRes[]>("/api/activities");
-  // useData<ActivitiesRes>("/api/activities");
-  // useData("api/activities");
 
   const activities = useMemo(() => {
     if (!data) return [];
@@ -248,9 +240,6 @@ export const useActivities = () => {
 };
 
 export const useActivity = (id: number | null) => {
-  // const { data, isLoading, isError } = useData<ActivityRes>(
-  //   `/api/activity?id=${id}`
-  // );
   const { data, isLoading, isError } = useData<ActivityWithIdRes>(
     `/api/activity?id=${id}`
   );

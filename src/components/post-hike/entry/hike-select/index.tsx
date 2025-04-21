@@ -6,9 +6,10 @@ import { memo, useMemo } from "react";
 type HikeSelectProps = {
   records: RecordProps[];
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: number | null;
 };
 
-const HikeSelect = memo(({ records, handleChange }: HikeSelectProps) => {
+const HikeSelect = memo(({ records, handleChange, value }: HikeSelectProps) => {
   const menuItems = useMemo(
     () =>
       records.map((e: RecordProps) => (
@@ -25,7 +26,7 @@ const HikeSelect = memo(({ records, handleChange }: HikeSelectProps) => {
       select
       label="山行"
       onChange={handleChange}
-      defaultValue=""
+      value={value ?? ""}
       fullWidth
     >
       {menuItems}
@@ -33,6 +34,6 @@ const HikeSelect = memo(({ records, handleChange }: HikeSelectProps) => {
   );
 });
 
-HikeSelect.displayName = "HikeSelect"; // Set display name for easier debugging
+HikeSelect.displayName = "HikeSelect";
 
 export default HikeSelect;
