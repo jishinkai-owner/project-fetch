@@ -40,6 +40,7 @@
   position: fixed;
   top: 0;
   right: 0;
+  aspect-ratio: 7.5 / 16;
   background-color: #fff;
   width: var(--sidebar-width);
   height: 100%;
@@ -71,17 +72,17 @@
 }
 
 // サイドバー背景
-.PaperContainer {
+.Sidebar {
   background:
     linear-gradient(90deg,
       rgba(208, 147, 82, 0.3),
       rgba(192, 134, 70, 0.3) 60%,
       rgba(208, 147, 82, 0.3)),
     repeating-radial-gradient(ellipse at 60% 500%,
-      rgba(192, 134, 70, 0.5),
-      rgba(192, 134, 70, 0.5) 0.2%,
-      rgba(208, 147, 82, 0.5) 0.6%,
-      rgba(208, 147, 82, 0.5) 1%);
+      rgb(182, 164, 136),
+      rgb(188, 171, 142) 0.2%,
+      rgb(199, 181, 150) 0.6%,
+      rgb(205, 182, 142) 1%);
 }
 
 // ハンバーガーメニュー
@@ -212,13 +213,12 @@
     transform: translateX(0); // デフォルトで表示
     opacity: 1;
     pointer-events: auto;
-    aspect-ratio: 7.5/16; // アスペクト比を設定
     width: 250px; // 幅を明示的に設定 - アスペクト比から計算された値
     min-width: 200px; // 最小値も設定
   }
 }
 
-@media (min-width: 900px) and (max-height: 550px) {
+@media (min-width: 900px) and (max-height: 600px) {
   .page {
     position: relative;
     max-width: calc(100% - 200px); // アスペクト比で小さくなったサイドバーの幅
@@ -228,7 +228,6 @@
     transform: translateX(0); // デフォルトで表示
     opacity: 1;
     pointer-events: auto;
-    aspect-ratio: 7.5/16; // アスペクト比を設定
     width: 200px; // 幅を明示的に設定 - アスペクト比から計算された値
     min-width: 150px; // 最小値も設定
   }
@@ -259,7 +258,6 @@
     pointer-events: none;
     width: var(--sidebar-width);
     max-width: 400px;
-    aspect-ratio: auto; // アスペクト比をリセット
 
     &.open {
       transform: translateX(0);

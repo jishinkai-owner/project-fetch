@@ -2,13 +2,15 @@
 
 .container {
   position: relative;
-  display: inline-block;
-  align-items: center;
+  display: flex;
   flex-direction: column;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
   width: auto;
-  height: 100vh;
-  padding: 10%;
+  height: 100%;
+  
+  padding: 10% 5%;
+  box-sizing: border-box;
   z-index: 1;
 }
 
@@ -19,8 +21,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: auto;
-  overflow: hidden;
+  max-width: 300px;
+  margin: 5% 5%;
   z-index: 2;
 }
 
@@ -31,8 +33,6 @@
   display: block;
   width: 100%;
   height: auto;
-  max-width: 90%;
-  max-height: auto;
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease;
@@ -42,9 +42,7 @@
   display: block;
   width: 75%;
   height: auto;
-  max-width: 90%;
-  max-height: auto;
-  margin-top: 10%;
+  margin: 20px auto 10px;
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease;
@@ -58,50 +56,5 @@
   transform: scale(1.05);
 }
 
-// 低身長ディスプレイ対応
-@media (min-width: 900px) and (max-height: 700px) {
-  .container {
-    padding: 5%;
-  }
-  
-  .Recordimage,
-  .Shinkanimage,
-  .Qaimage,
-  .Memberimage {
-    margin-bottom: 10px;
-  }
-  
-  .Loginimage {
-    margin-top: 5%;
-  }
-}
 
-@media (min-width: 900px) and (max-height: 550px) {
-  .container {
-    padding: 3%;
-  }
-  
-  .Recordimage,
-  .Shinkanimage,
-  .Qaimage,
-  .Memberimage {
-    margin-bottom: 5px;
-  }
-  
-  .Loginimage {
-    margin-top: 3%;
-  }
-}
 
-// モバイル対応
-@media (max-width: 900px) {
-  .container {
-    margin-top: 10%;
-    height: 100vh;
-    padding: 5%;
-  }
-  
-  .imagecontainer{
-    padding: 5%;
-  }
-}
