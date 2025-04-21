@@ -1,18 +1,26 @@
-// src/app/record/[type]/page.tsx
 import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
-import RecordClient from "../RecordClient"; // 共通コンポーネントに変更
+import RecordClient from "../RecordClient";
 import LoadingPlaceholder from "./loading";
 import TabBar from "@/components/TabBar/TabBar";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import Title from "@/components/Title/Title";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import { Metadata } from "next";
 
 // ISR設定（30分ごとに再生成、秒数で指定）
 export const revalidate = 1800;
 
+// 型定義の修正
+type RecordTypePageProps = {
+  params: {
+    type: string;
+  };
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
 // サーバーサイドでデータを取得
-export default async function RecordTypePage({ params }: { params: { type: string } }) {
+export default async function RecordTypePage({ params, searchParams }: RecordTypePageProps) {
   const recordType = params.type;
   
   // タイプのバリデーション
