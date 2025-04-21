@@ -20,7 +20,11 @@ const MenuWrapper: React.FC<MenuWrapperProps> = ({ children }) => {
   
   // メニューを閉じる関数
   const closeMenu = () => {
-    setIsMenuOpen(false);
+    // モバイルの場合のみメニューを閉じる
+    if (isMobile) {
+      setIsMenuOpen(false);
+    }
+    // PCの場合は何もしない（メニューを開いたままにする）
   };
   
   // 画面サイズのチェック
