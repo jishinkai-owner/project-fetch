@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import "./globals.css";
-import MenuWrapper from "@/components/MenuWrapper/MenuWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,9 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body >
-        <MenuWrapper>
-          {children}
-        </MenuWrapper>
+        {children}
       </body>
     </html>
   );
