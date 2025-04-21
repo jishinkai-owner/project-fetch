@@ -1,382 +1,18 @@
 [
   {
-    "year": "C1",
-    "src": "",
-    "name": "tatsuya",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/54334235195_5ff9a6a16f.jpg",
+    "name": "araki",
     "profile": [
-      "オタク君さぁ..."
+      "出禁を言い渡された者"
     ],
-    "role": "線形代数A落単",
-    "major": "工",
-    "nickname": "あおき"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "oogi",
-    "profile": [
-      "結婚相談乗ります！"
-    ],
-    "role": "ロマンチスト大儀",
-    "major": "法",
-    "nickname": "おおぎ"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "ai",
-    "profile": [
-      "Re:いつでもおいで"
-    ],
-    "role": "包容力",
-    "major": "文",
-    "nickname": "かなざわ"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "kawanami2",
-    "profile": [
-      "うんこマン"
-    ],
-    "role": "トイレ",
-    "major": "理",
-    "nickname": "かわなみ"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "gotu",
-    "profile": [
-      "女の子と話すとき目が合わせられなかった(最近は何とか目を合わせることはできているらしい)"
-    ],
-    "role": "雑用",
-    "major": "工",
-    "nickname": "ごうつ"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "yuito",
-    "profile": [
-      "ぶりっ子酒野球無気力にゃんにゃんキャラ"
-    ],
-    "role": "無職",
-    "major": "理",
-    "nickname": "ゆいと"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "sinbo",
-    "profile": [
-      "牛が好きです！"
-    ],
-    "role": "嫁",
-    "major": "農",
-    "nickname": "しんぼ"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "takaoka3",
-    "profile": [
-      "前科持ちらしい"
-    ],
-    "role": "山口組",
-    "major": "工",
-    "nickname": "たかおか"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "yusuke3",
-    "profile": [
-      "キリトかなーやっぱりww自分は思わないんだけど周りにキリトに似てるってよく言われるwwwこないだDQNに絡まれた時も気が付いたら意識無くて周りに人が血だらけで倒れてたしなwwwちなみに彼女もアスナに似てる(聞いてないw)"
-    ],
-    "role": "煩悩",
-    "major": "工",
-    "nickname": "ゆうすけ"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "miyako",
-    "profile": [
-      "良い出汁出てます"
-    ],
-    "role": "昆布",
-    "major": "工",
-    "nickname": "みやこ"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "nakazima",
-    "profile": [
-      "スキーが好き～～(笑)"
-    ],
-    "role": "眼鏡に目がねぇ～～(笑)",
-    "major": "工",
-    "nickname": "なかじま"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "nagata",
-    "profile": [
-      "だれ？"
-    ],
-    "role": "だれ？",
-    "major": "工",
-    "nickname": "ながた"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "tamaki2",
-    "profile": [
-      "To:明日突っていい？"
-    ],
-    "role": "行動力",
-    "major": "文",
-    "nickname": "たまき"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "maeharu",
-    "profile": [
-      "全然殴るし蹴るしなんなら唾とかも吐く"
-    ],
-    "role": "好青年",
-    "major": "工",
-    "nickname": "まえはる"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "zeon2",
-    "profile": [
-      "通称「黒腕のゼファー」"
-    ],
-    "role": "元海軍本部大将",
-    "major": "理",
-    "nickname": "Z"
-  },
-  {
-    "year": "C1",
-    "src": "",
-    "name": "miyagi",
-    "profile": [
-      "授業受けても一人。"
-    ],
-    "role": "宮城の宮城",
+    "role": "CEO",
     "major": "経済",
-    "nickname": "みやぎ"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Toshiki",
-    "profile": [
-      "コミュ力お化け（自称）"
-    ],
-    "role": "解析A落単",
-    "major": "工",
-    "nickname": "としき"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Eri",
-    "profile": [
-      "明日から本気出す"
-    ],
-    "role": "ケセラセラ",
-    "major": "農",
-    "nickname": "いけださん"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Haruna",
-    "profile": [
-      "群馬県民の鑑\",",
-      "群馬愛No.1"
-    ],
-    "role": "純粋100%",
-    "major": "法",
-    "nickname": "えんぱる"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Iroha",
-    "profile": [
-      "4次元ポケット持ってます"
-    ],
-    "role": "母",
-    "major": "経済",
-    "nickname": "いろは"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Daichi",
-    "profile": [
-      "いつも黒い服"
-    ],
-    "role": "地蔵",
-    "major": "農",
-    "nickname": "かない"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Kouki",
-    "profile": [
-      "ボーっと、ボーっと"
-    ],
-    "role": "虫捕獲係",
-    "major": "工",
-    "nickname": "こうき"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Naoya",
-    "profile": [
-      "自然とは親しめる"
-    ],
-    "role": "周回",
-    "major": "農",
-    "nickname": "かんざき"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Kanta",
-    "profile": [
-      "記録書き忘れました。。。"
-    ],
-    "role": "記録",
-    "major": "理",
-    "nickname": "かんた"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Honoka",
-    "profile": [
-      "ザック下ろさない系女子"
-    ],
-    "role": "The 山ガール",
-    "major": "文",
-    "nickname": "さとほの"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Kazuki",
-    "profile": [
-      "ごく稀に顔を見せます"
-    ],
-    "role": "幽霊部員",
-    "major": "経済",
-    "nickname": "かずぽー"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Wataru",
-    "profile": [
-      "ゴマドレからレインボードレッシングに転向しました"
-    ],
-    "role": "おとなしい草食系男子",
-    "major": "法",
-    "nickname": "わたる"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Yuto",
-    "profile": [
-      "自科総は計画的に"
-    ],
-    "role": "消化不良",
-    "major": "工",
-    "nickname": "ゆうと"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Shusuke",
-    "profile": [
-      "いつもなんかうるさいww"
-    ],
-    "role": "魔女教大罪司教『ヤクザ』担当",
-    "major": "理",
-    "nickname": "名探偵ソナン"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Yousuke",
-    "profile": [
-      "土屋生"
-    ],
-    "role": "自然を通してみんなと仲良くしたいです！よろしくお願いします！",
-    "major": "スタンド使い",
-    "nickname": "文"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Taisei",
-    "profile": [
-      "サッカーがとっても大好き！！"
-    ],
-    "role": "サッカー少年",
-    "major": "経済",
-    "nickname": "たいちゃん"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Shota",
-    "profile": [
-      "今日も今日とて安全運転！"
-    ],
-    "role": "浮浪者",
-    "major": "理",
-    "nickname": "はせしょー"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Rikuto",
-    "profile": [
-      "Boys, be ambitious !"
-    ],
-    "role": "安定の絶起マン",
-    "major": "工",
-    "nickname": "クリークト博士"
-  },
-  {
-    "year": "C2",
-    "src": "",
-    "name": "Naohiro",
-    "profile": [
-      "デニム登山はやめとけ！！"
-    ],
-    "role": "部室開け係",
-    "major": "工",
-    "nickname": "なおひろ"
+    "nickname": "#ゆっくり寝ろ荒木"
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54333819196_8071f0b17b.jpg",
     "name": "suzuki",
     "profile": [
       "山登れるならおもりも背負います"
@@ -387,7 +23,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334042239_ae4c609bb8_z.jpg",
     "name": "tanahiro",
     "profile": [
       "アルプスを征した方向音痴"
@@ -398,7 +34,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334235170_0e5ecbc16a.jpg",
     "name": "eishin",
     "profile": [
       "残念なイケメン"
@@ -408,7 +44,8 @@
     "nickname": "地雷踏み抜き"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53283901113_be293fc0b5_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53283901113_be293fc0b5.jpg",
     "profile": [
       "エミリアは白髪じゃない！銀髪なんだ！👿"
     ],
@@ -417,7 +54,8 @@
     "nickname": "たなあみ後期"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53116248158_28c2013581_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53116248158_28c2013581.jpg",
     "profile": [
       "食事のお誘いは3ヶ月前までで"
     ],
@@ -426,7 +64,8 @@
     "nickname": "なぎっち"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53259392908_394515f559_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53259392908_394515f559.jpg",
     "profile": [
       "メンヘラ彼女?から頻繁に車を返すようTELされる男。ブラックリスト入り"
     ],
@@ -436,7 +75,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54333819231_b2752324d9.jpg",
     "name": "masashige",
     "profile": [
       "独り身になることを選んだ男"
@@ -447,7 +86,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334235230_65c9b388dc_z.jpg",
     "name": "soma",
     "profile": [
       "ぽん酢を手放さない者"
@@ -458,17 +97,7 @@
   },
   {
     "year": "C3",
-    "src": "",
-    "name": "araki",
-    "profile": [
-      "出禁を言い渡された者"
-    ],
-    "role": "CEO",
-    "major": "経済",
-    "nickname": "#ゆっくり寝ろ荒木"
-  },
-  {
-    "src": "https://live.staticflickr.com/65535/53182532069_0bc4552f97_b.jpg",
+    "src": "https://live.staticflickr.com/65535/53182532069_0bc4552f97.jpg",
     "profile": [
       "タンバリン永久機関"
     ],
@@ -477,7 +106,8 @@
     "nickname": "つじつじ"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53112244764_a7465848bd_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53112244764_a7465848bd.jpg",
     "profile": [
       "自科総最後に週に4つ残ってた"
     ],
@@ -486,7 +116,8 @@
     "nickname": "ちばお"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53282755517_0ec1e321b7_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53282755517_0ec1e321b7.jpg",
     "profile": [
       "それはもうえろい"
     ],
@@ -495,7 +126,8 @@
     "nickname": "すけべ"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53183192311_55240cfaf5_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53183192311_55240cfaf5.jpg",
     "profile": [
       "英語劇"
     ],
@@ -504,7 +136,8 @@
     "nickname": "フリー素材"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53281431916_e69447d446_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53281431916_e69447d446.jpg",
     "profile": [
       "マザコンステージ4←末期やん"
     ],
@@ -513,7 +146,8 @@
     "nickname": "やまけん"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53280539917_b34a0740ba_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53280539917_b34a0740ba.jpg",
     "profile": [
       "特技:公道ドリフト\",",
       "槍ヶ岳山頂に2万の置き土産(ゴアテックス)\",",
@@ -525,7 +159,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334235235_b17195d0b2.jpg",
     "name": "iwakura",
     "profile": [
       "Sブレーキって何？"
@@ -535,7 +169,8 @@
     "nickname": "たつき"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53067090837_679dc17768_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53067090837_679dc17768.jpg",
     "profile": [
       "「俺、キャンプ嫌いだから」（長期山行参加）"
     ],
@@ -544,7 +179,8 @@
     "nickname": "King Takeda Gnu"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53259164539_4a1a043f64_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53259164539_4a1a043f64.jpg",
     "profile": [
       "うたのお姉さんです"
     ],
@@ -554,7 +190,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334235175_6e8c8a4786.jpg",
     "name": "akiyama",
     "profile": [
       "憧れのポケモンマスターに俺はなる！"
@@ -565,7 +201,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334048093_0004d513f0.jpg",
     "name": "fukuhara",
     "profile": [
       "30万のPCでマイクラ\",",
@@ -578,7 +214,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334048108_c91bd076e9.jpg",
     "name": "aoto",
     "profile": [
       "建築最下位合格"
@@ -588,7 +224,8 @@
     "nickname": "あおとっち"
   },
   {
-    "src": "https://live.staticflickr.com/65535/53260804557_f23a44401b_b.jpg",
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/53260804557_f23a44401b.jpg",
     "profile": [
       "カラオケ歌わないで帰る\",",
       "スキーセンス⚪︎"
@@ -599,7 +236,7 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334235275_88986ff6ac.jpg",
     "name": "kando",
     "profile": [
       "８サークル所属"
@@ -610,23 +247,2400 @@
   },
   {
     "year": "C3",
-    "src": "",
+    "src": "https://live.staticflickr.com/65535/54334235155_3ddf46d158.jpg",
     "name": "co-duck",
     "profile": [
-      "１００円で取れた"
+      "１００円で取れた\",",
+      "仙台生まれ豪州育ち\","
     ],
     "role": "守り神",
     "major": "水タイプ",
     "nickname": "こだぴー"
   },
   {
+    "year": "C3",
     "src": "https://live.staticflickr.com/65535/53847981284_e0f41a5465_b.jpg",
     "profile": [
-      "またしても100円で取れた\",",
-      "渋谷出身\","
+      "またしても１００円で取れた\",",
+      "渋谷生まれ函館育ち\","
     ],
     "role": "旅のおとも",
     "major": "水タイプ",
     "nickname": "コダックJr"
+  },
+  {
+    "year": "C3",
+    "src": "https://live.staticflickr.com/65535/54457983908_a942e05806_z.jpg",
+    "profile": [
+      "１０００円かかった...\",",
+      "熊本生まれインド育ち\","
+    ],
+    "role": "八百万の神の化身",
+    "major": "水タイプ",
+    "nickname": "コダックⅢ世"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334047978_5e7380ff87.jpg",
+    "name": "Toshiki",
+    "profile": [
+      "コミュ力お化け（自称）"
+    ],
+    "role": "解析A落単",
+    "major": "工",
+    "nickname": "としき"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334047893_ae7a993087.jpg",
+    "name": "Eri",
+    "profile": [
+      "明日から本気出す"
+    ],
+    "role": "ケセラセラ",
+    "major": "農",
+    "nickname": "いけださん"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334234955_612210b241.jpg",
+    "name": "Haruna",
+    "profile": [
+      "群馬県民の鑑\",",
+      "群馬愛No.1"
+    ],
+    "role": "純粋100%",
+    "major": "法",
+    "nickname": "えんぱる"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334041984_31486ace68.jpg",
+    "name": "Iroha",
+    "profile": [
+      "4次元ポケット持ってます"
+    ],
+    "role": "母",
+    "major": "経済",
+    "nickname": "いろは"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54333818941_32d8134dc1.jpg",
+    "name": "Daichi",
+    "profile": [
+      "いつも黒い服"
+    ],
+    "role": "地蔵",
+    "major": "農",
+    "nickname": "かない"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54332914147_edf8c3fd78_w.jpg",
+    "name": "Kouki",
+    "profile": [
+      "ボーっと、ボーっと"
+    ],
+    "role": "虫捕獲係",
+    "major": "工",
+    "nickname": "こうき"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54332914182_e289383d7b.jpg",
+    "name": "Naoya",
+    "profile": [
+      "自然とは親しめる"
+    ],
+    "role": "周回",
+    "major": "農",
+    "nickname": "かんざき"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334047828_ee96c11524.jpg",
+    "name": "Kanta",
+    "profile": [
+      "記録書き忘れました。。。"
+    ],
+    "role": "記録",
+    "major": "理",
+    "nickname": "かんた"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54333818886_649f0a6008.jpg",
+    "name": "Honoka",
+    "profile": [
+      "ザック下ろさない系女子"
+    ],
+    "role": "The 山ガール",
+    "major": "文",
+    "nickname": "さとほの"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334041919_ddb1cbb2a7.jpg",
+    "name": "Kazuki",
+    "profile": [
+      "ごく稀に顔を見せます"
+    ],
+    "role": "幽霊部員",
+    "major": "経済",
+    "nickname": "かずぽー"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54332914272_0f37dc277e.jpg",
+    "name": "Wataru",
+    "profile": [
+      "ゴマドレからレインボードレッシングに転向しました"
+    ],
+    "role": "おとなしい草食系男子",
+    "major": "法",
+    "nickname": "わたる"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54333818956_4cfefa064b.jpg",
+    "name": "Yuto",
+    "profile": [
+      "自科総は計画的に"
+    ],
+    "role": "消化不良",
+    "major": "工",
+    "nickname": "ゆうと"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334234800_9ca14bf4a2.jpg",
+    "name": "Shusuke",
+    "profile": [
+      "いつもなんかうるさいww"
+    ],
+    "role": "魔女教大罪司教『ヤクザ』担当",
+    "major": "理",
+    "nickname": "名探偵ソナン"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54332914267_e0a22c032d.jpg",
+    "name": "Yousuke",
+    "profile": [
+      "土屋生"
+    ],
+    "role": "自然を通してみんなと仲良くしたいです！よろしくお願いします！",
+    "major": "スタンド使い",
+    "nickname": "文"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54332914292_8a703dc5fd.jpg",
+    "name": "Taisei",
+    "profile": [
+      "サッカーがとっても大好き！！"
+    ],
+    "role": "サッカー少年",
+    "major": "経済",
+    "nickname": "たいちゃん"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54332914127_0e6ca9876c.jpg",
+    "name": "Shota",
+    "profile": [
+      "今日も今日とて安全運転！"
+    ],
+    "role": "浮浪者",
+    "major": "理",
+    "nickname": "はせしょー"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54333818771_5aa106d5f2.jpg",
+    "name": "Rikuto",
+    "profile": [
+      "Boys, be ambitious !"
+    ],
+    "role": "安定の絶起マン",
+    "major": "工",
+    "nickname": "クリークト博士"
+  },
+  {
+    "year": "C2",
+    "src": "https://live.staticflickr.com/65535/54334047788_b2521de93f.jpg",
+    "name": "Naohiro",
+    "profile": [
+      "デニム登山はやめとけ！！"
+    ],
+    "role": "部室開け係",
+    "major": "工",
+    "nickname": "なおひろ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334041824_da8f5c7340.jpg",
+    "name": "tatsuya",
+    "profile": [
+      "オタク君さぁ..."
+    ],
+    "role": "線形代数A落単",
+    "major": "工",
+    "nickname": "あおき"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334041614_10d59282ee_n.jpg",
+    "name": "oogi",
+    "profile": [
+      "結婚相談乗ります！"
+    ],
+    "role": "ロマンチスト大儀",
+    "major": "法",
+    "nickname": "おおぎ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54333818536_a5ea9f3faf_n.jpg",
+    "name": "ai",
+    "profile": [
+      "Re:いつでもおいで"
+    ],
+    "role": "包容力",
+    "major": "文",
+    "nickname": "かなざわ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334047573_c7d4f51fd3.jpg",
+    "name": "kawanami2",
+    "profile": [
+      "うんこマン"
+    ],
+    "role": "トイレ",
+    "major": "理",
+    "nickname": "かわなみ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334047643_823e350d46.jpg",
+    "name": "gotu",
+    "profile": [
+      "女の子と話すとき目が合わせられなかった(最近は何とか目を合わせることはできているらしい)"
+    ],
+    "role": "雑用",
+    "major": "工",
+    "nickname": "ごうつ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334047668_937d7fe553.jpg",
+    "name": "yuito",
+    "profile": [
+      "ぶりっ子酒野球無気力にゃんにゃんキャラ"
+    ],
+    "role": "無職",
+    "major": "理",
+    "nickname": "ゆいと"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334041609_e9b0b582cb_n.jpg",
+    "name": "sinbo",
+    "profile": [
+      "牛が好きです！"
+    ],
+    "role": "嫁",
+    "major": "農",
+    "nickname": "しんぼ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54333818616_86fc79a6aa_b.jpg",
+    "name": "takaoka3",
+    "profile": [
+      "前科持ちらしい"
+    ],
+    "role": "山口組",
+    "major": "工",
+    "nickname": "たかおか"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334234635_189bfec309.jpg",
+    "name": "yusuke3",
+    "profile": [
+      "キリトかなーやっぱりww自分は思わないんだけど周りにキリトに似てるってよく言われるwwwこないだDQNに絡まれた時も気が付いたら意識無くて周りに人が血だらけで倒れてたしなwwwちなみに彼女もアスナに似てる(聞いてないw)"
+    ],
+    "role": "煩悩",
+    "major": "工",
+    "nickname": "ゆうすけ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54332913902_625e6ea139_n.jpg",
+    "name": "miyako",
+    "profile": [
+      "良い出汁出てます"
+    ],
+    "role": "昆布",
+    "major": "工",
+    "nickname": "みやこ"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54333818491_7afb96fbb5.jpg",
+    "name": "nakazima",
+    "profile": [
+      "スキーが好き～～(笑)"
+    ],
+    "role": "眼鏡に目がねぇ～～(笑)",
+    "major": "工",
+    "nickname": "なかじま"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334047473_a209e1699e.jpg",
+    "name": "nagata",
+    "profile": [
+      "だれ？"
+    ],
+    "role": "だれ？",
+    "major": "工",
+    "nickname": "ながた"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54332913987_588c4aaa0a_n.jpg",
+    "name": "tamaki2",
+    "profile": [
+      "To:明日突っていい？"
+    ],
+    "role": "行動力",
+    "major": "文",
+    "nickname": "たまき"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54334047558_da938cac64.jpg",
+    "name": "maeharu",
+    "profile": [
+      "全然殴るし蹴るしなんなら唾とかも吐く"
+    ],
+    "role": "好青年",
+    "major": "工",
+    "nickname": "まえはる"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54333818626_24eb2bce77.jpg",
+    "name": "zeon2",
+    "profile": [
+      "通称「黒腕のゼファー」"
+    ],
+    "role": "元海軍本部大将",
+    "major": "理",
+    "nickname": "Z"
+  },
+  {
+    "year": "C1",
+    "src": "https://live.staticflickr.com/65535/54332913867_21b1f47892.jpg",
+    "name": "miyagi",
+    "profile": [
+      "授業受けても一人。"
+    ],
+    "role": "宮城の宮城",
+    "major": "経済",
+    "nickname": "みやぎ"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54334234220_a4cb48a3ef_n.jpg",
+    "name": "kota",
+    "profile": [
+      "不労所得しか勝たん"
+    ],
+    "role": "絶起配車係",
+    "major": "法",
+    "nickname": "あさくら"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54333818156_0a2c3bf8f6_n.jpg",
+    "name": "akaru",
+    "profile": [
+      "アベレージ70\",",
+      "食の罪を一身に背負う男"
+    ],
+    "role": "最強ボウラー",
+    "major": "文",
+    "nickname": "アカル"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54334041319_7307f19f72_n.jpg",
+    "name": "shota",
+    "profile": [
+      "～老い～\",",
+      "繰り上がりの足し算ができない"
+    ],
+    "role": "具なしパスタの巨匠",
+    "major": "工",
+    "nickname": "おぎはら"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54334041339_8d3c33bc59_n.jpg",
+    "name": "teiho",
+    "profile": [
+      "サンドイッチはね、\",",
+      "パンよりも中のきゅうりが一番おいしいの。\",",
+      "挟まれた方がいい味出すのよ。"
+    ],
+    "role": "迫真お嬢様アイドル部部長",
+    "major": "理",
+    "nickname": "カンザワ"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54333818216_92764c78b0_n.jpg",
+    "name": "yuya",
+    "profile": [
+      "TKBがお好き\",",
+      "※酔うと脱ぎます"
+    ],
+    "role": "C0のアイドル、癒し",
+    "major": "工",
+    "nickname": "クスド_"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54333818201_80417f8feb_n.jpg",
+    "name": "takaki",
+    "profile": [
+      "こう見えて現役\",",
+      "腰がね……"
+    ],
+    "role": "おっさん",
+    "major": "工",
+    "nickname": "こっしー"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54332913637_8115f79115_n.jpg",
+    "name": "goki",
+    "profile": [
+      "趣味ダイエット\",",
+      "特技リバウンド"
+    ],
+    "role": "山梨の菅田将暉",
+    "major": "法",
+    "nickname": "ハギハラ"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54334234285_cd956a62c5_w.jpg",
+    "name": "yotaro",
+    "profile": [
+      "自粛中にリュウジにどハマりして自炊に目覚めた"
+    ],
+    "role": "自炊マン、シェフ",
+    "major": "工",
+    "nickname": "ようたろう"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54334041334_f37f21d836_n.jpg",
+    "name": "shintaro",
+    "profile": [
+      "寝てからもよくしゃべる．本当によくしゃべる"
+    ],
+    "role": "人頼み",
+    "major": "工",
+    "nickname": "シンタロー"
+  },
+  {
+    "year": "C0",
+    "src": "https://live.staticflickr.com/65535/54334234225_43a7475966_n.jpg",
+    "name": "takahide",
+    "profile": [
+      "ミスター東北大最有力候補（自称）"
+    ],
+    "role": "応物でよかった",
+    "major": "応物",
+    "nickname": "超絶イケメン"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54332913127_b022808eb7_n.jpg",
+    "name": "ueda",
+    "profile": [
+      "正論を言うのが生きがい"
+    ],
+    "role": "正論気取りマン",
+    "major": "工",
+    "nickname": "うえだ"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54332913052_37576de9b0_w.jpg",
+    "name": "miyagi",
+    "profile": [
+      "スマブラ狂"
+    ],
+    "role": "ステラおばさん",
+    "major": "文",
+    "nickname": "みやぎ"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334040859_532e0a42f1_n.jpg",
+    "name": "tonii",
+    "profile": [
+      "マジックマッシュルームを使っているらしい"
+    ],
+    "role": "スマブラ大好き留学生",
+    "major": "文",
+    "nickname": "トニー"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334233595_4f078203fd_n.jpg",
+    "name": "niitsu",
+    "profile": [
+      "自転車に乗れるようになった"
+    ],
+    "role": "よく寝る子",
+    "major": "農",
+    "nickname": "にいつ"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334233740_dc9bc42443_n.jpg",
+    "name": "yashiro",
+    "profile": [
+      "言葉に感情がない　育ちがいい"
+    ],
+    "role": "ロック・バランサー",
+    "major": "文",
+    "nickname": "やしろ"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334046728_e6b92f30f5_n.jpg",
+    "name": "koshiba",
+    "profile": [
+      "字が下手　マッドサイエンティスト"
+    ],
+    "role": "コック",
+    "major": "理",
+    "nickname": "こっしー"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334046833_63665eeac1_n.jpg",
+    "name": "hori",
+    "profile": [
+      "グリフィンドール"
+    ],
+    "role": "マグル",
+    "major": "理",
+    "nickname": "ホーリー"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334040899_fb37950aaa_n.jpg",
+    "name": "tanasyu",
+    "profile": [
+      "ド変態ココアシガレットジャンキージャックニコルソン"
+    ],
+    "role": "狂人",
+    "major": "経",
+    "nickname": "たなしゅん"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334233640_cb8740b605_w.jpg",
+    "name": "keisuke",
+    "profile": [
+      "B9のまとめやく(うるさい、ハブられてる)"
+    ],
+    "role": "ファッションリーダー",
+    "major": "理",
+    "nickname": "ケイスケ"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54333817666_16222be4c9_w.jpg",
+    "name": "shintani",
+    "profile": [
+      "実はアホの子"
+    ],
+    "role": "女帝",
+    "major": "農",
+    "nickname": "サヤ様"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334233765_1511491e98_n.jpg",
+    "name": "koyama",
+    "profile": [
+      "推しのライブは冠婚葬祭"
+    ],
+    "role": "声豚",
+    "major": "経",
+    "nickname": "こーやまん"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54333817571_439cda6643_n.jpg",
+    "name": "kawasaki",
+    "profile": [
+      "シラフでも酔ってる"
+    ],
+    "role": "汚水採取係",
+    "major": "農",
+    "nickname": "かわさき"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "iwaki",
+    "profile": [
+      "時刻表を覚えている変態"
+    ],
+    "role": "カメラマン",
+    "major": "工",
+    "nickname": "いわき"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334046708_35fd6fe3ef_n.jpg",
+    "name": "matsuura",
+    "profile": [
+      "いつもホーリーと一緒"
+    ],
+    "role": "癒し系",
+    "major": "理",
+    "nickname": "まつうら"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "tsunashima",
+    "profile": [
+      "いつもtwitterをしてるんだが？"
+    ],
+    "role": "ムードメーカー",
+    "major": "工",
+    "nickname": "ツナちゃん"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54333817621_b439acf11d_n.jpg",
+    "name": "abe",
+    "profile": [
+      "あべ"
+    ],
+    "role": "あべ",
+    "major": "あべ",
+    "nickname": "あべ"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334233850_046a26e847_n.jpg",
+    "name": "yamataku",
+    "profile": [
+      "新歓寝ブッチ"
+    ],
+    "role": "汚物部部長",
+    "major": "工",
+    "nickname": "やまたく"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54333817661_8b6ddce8f3_n.jpg",
+    "name": "nurupoga",
+    "profile": [
+      "た来てっやらか星?????????"
+    ],
+    "role": "太鼓の達人",
+    "major": "文",
+    "nickname": "ぬるぽが"
+  },
+  {
+    "year": "B9",
+    "src": "https://live.staticflickr.com/65535/54334046718_369975c22a_n.jpg",
+    "name": "momoko",
+    "profile": [
+      "髪の色がよく変わる"
+    ],
+    "role": "お昼ご飯を食べにくる女",
+    "major": "工",
+    "nickname": "ももこ"
+  },
+  {
+    "year": "B9",
+    "src": "",
+    "name": "kondo",
+    "profile": [
+      "残念なイケメン"
+    ],
+    "role": "ダークフォース",
+    "major": "法",
+    "nickname": "こんどう"
+  },
+  
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54332910847_7aaa4df138_m.jpg",
+    "name": "VV",
+    "profile": [
+      "B8の良心、元部長\",",
+      "下半身に疾患が多い"
+    ],
+    "role": "アイドル",
+    "major": "文",
+    "nickname": "ビバ"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334044353_5e10311c06_w.jpg",
+    "name": "HRT",
+    "profile": [
+      "二重人格"
+    ],
+    "role": "ドマゾ",
+    "major": "工",
+    "nickname": "ヒロト"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334044348_e718a4fcea_m.jpg",
+    "name": "NSMT",
+    "profile": [
+      "心の怪盗団"
+    ],
+    "role": "寝ブッチ",
+    "major": "工",
+    "nickname": "ナシモト"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334231275_39ca29e838_n.jpg",
+    "name": "ISTM",
+    "profile": [
+      "酒カスおじさん"
+    ],
+    "role": "ご飯に詳しいおじさん",
+    "major": "工",
+    "nickname": "イシトモ"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54333815336_c6e76757c8_n.jpg",
+    "name": "NSTM",
+    "profile": [
+      "煙"
+    ],
+    "role": "給仕係",
+    "major": "教育",
+    "nickname": "YK"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54333815361_55f8be63d5_n.jpg",
+    "name": "TISI",
+    "profile": [
+      "ふーん、えっちじゃん"
+    ],
+    "role": "広島のヤンキー",
+    "major": "工",
+    "nickname": "たいせいいいい"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54333815291_d3c05267a3_n.jpg",
+    "name": "BNB",
+    "profile": [
+      "あーい"
+    ],
+    "role": "プリン",
+    "major": "工",
+    "nickname": "バンバ"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334038579_ea408160e5_n.jpg",
+    "name": "A",
+    "profile": [
+      "機械と斜面に強い"
+    ],
+    "role": "ヨツンヴァイン",
+    "major": "工",
+    "nickname": "あ"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334231290_6bd35afb2b_n.jpg",
+    "name": "DN",
+    "profile": [
+      "毎月電気と水道が止まる"
+    ],
+    "role": "アホ",
+    "major": "工",
+    "nickname": "だんだだーん"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334231230_21ff74ce17_n.jpg",
+    "name": "MTKN",
+    "profile": [
+      "カボチャ農家\",",
+      "女装したみが深い"
+    ],
+    "role": "退部",
+    "major": "経済",
+    "nickname": "マツケン"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54333815241_3ef1f47702_m.jpg",
+    "name": "mti",
+    "profile": [
+      "存在に感謝"
+    ],
+    "role": "かわいい",
+    "major": "工",
+    "nickname": "みつい"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54332910792_de4f4b733e_m.jpg",
+    "name": "tkdr",
+    "profile": [
+      "ツッコミがキレてる"
+    ],
+    "role": "笑い顔が好き",
+    "major": "工",
+    "nickname": "高寺"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54333815251_97e3e1d43a_m.jpg",
+    "name": "kbys",
+    "profile": [
+      "酔ってからが本番"
+    ],
+    "role": "酒弱い部",
+    "major": "工",
+    "nickname": "キバヤシ"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334231225_352000e429_m.jpg",
+    "name": "mrwk",
+    "profile": [
+      "落単芸人"
+    ],
+    "role": "絵描き",
+    "major": "工",
+    "nickname": "森脇"
+  },
+  {
+    "year": "B8",
+    "src": "https://live.staticflickr.com/65535/54334231330_a59cca0134_n.jpg",
+    "name": "skt",
+    "profile": [
+      "バブー！"
+    ],
+    "role": "キモオタ",
+    "major": "工",
+    "nickname": "かみ"
+  },
+
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54332910472_0f7b3f37a4_n.jpg",
+    "name": "mrk",
+    "profile": [
+      "奇術師(トリッカー)\",",
+      "煽りに定評がある"
+    ],
+    "role": "ポイデビルマン",
+    "major": "工",
+    "nickname": "マルコ"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54334038254_073d6b0102_n.jpg",
+    "name": "ND",
+    "profile": [
+      "食に関わるネジが全部飛んでいる\",",
+      "他のネジも飛んでいる"
+    ],
+    "role": "じろうのねーちゃん",
+    "major": "文",
+    "nickname": "のだ"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54333815066_2f43dce43f_w.jpg",
+    "name": "KGY",
+    "profile": [
+      "スマブラでは現役会員最強"
+    ],
+    "role": "熱血スマブラ部",
+    "major": "農",
+    "nickname": "かがや"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54332910532_98d201a77d_n.jpg",
+    "name": "HR",
+    "profile": [
+      "休学マン"
+    ],
+    "role": "クロックス",
+    "major": "理",
+    "nickname": "原くん"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54334038269_0844f94fe4_w.jpg",
+    "name": "N_WTNB",
+    "profile": [
+      "歌ってます"
+    ],
+    "role": "歌う人",
+    "major": "農",
+    "nickname": "N.わたなべ"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54334038374_24918017ca.jpg",
+    "name": "INB",
+    "profile": [
+      "いちばんえらいひと\",",
+      "自親会ゆるキャン創始者"
+    ],
+    "role": "ボス",
+    "major": "工",
+    "nickname": "INB"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54334038264_54b396b2ee_n.jpg",
+    "name": "NKMR",
+    "profile": [
+      "茶飲もうぜ茶"
+    ],
+    "role": "電気グルー部",
+    "major": "理",
+    "nickname": "マキヒト"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54334038424_89caaa802e_n.jpg",
+    "name": "UCD",
+    "profile": [
+      "いつもニヤつきおじさん"
+    ],
+    "role": "不審者",
+    "major": "法",
+    "nickname": "ウチダ"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54333815121_bba9a9bd83_n.jpg",
+    "name": "TJ",
+    "profile": [
+      "チクチクすんねんな"
+    ],
+    "role": "剃毛ウロボロス",
+    "major": "工",
+    "nickname": "ジーツー"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54332910552_c49d826d41_n.jpg",
+    "name": "GNJ",
+    "profile": [
+      "実は単位が、、、"
+    ],
+    "role": "マシンガントーク",
+    "major": "文",
+    "nickname": "ぐんちゃん"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54334231100_cd73681cbf_n.jpg",
+    "name": "K_WTNB",
+    "profile": [
+      "限りなく理系"
+    ],
+    "role": "Villager",
+    "major": "経",
+    "nickname": "K.ワタナベ"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54333815006_d423832f34_n.jpg",
+    "name": "KTNM",
+    "profile": [
+      "モフモフ\",",
+      "グンマー唯一の美点"
+    ],
+    "role": "妖精",
+    "major": "法",
+    "nickname": "勝沼"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54332910487_e997030365_n.jpg",
+    "name": "KIK",
+    "profile": [
+      "連れションし太郎\",",
+      "特撮に造詣が深い"
+    ],
+    "role": "ともきくん係",
+    "major": "工",
+    "nickname": "こいけ"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54332910457_bae0822a87_n.jpg",
+    "name": "ONZT",
+    "profile": [
+      "B7のご意見番\",",
+      "発酵部幹部"
+    ],
+    "role": "インチキ中国人",
+    "major": "農",
+    "nickname": "ざと"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54333815136_2cb425c4a0_n.jpg",
+    "name": "TKD",
+    "profile": [
+      "アンチソーシャリスト\",",
+      "実は多趣味"
+    ],
+    "role": "アウトロー",
+    "major": "文",
+    "nickname": "高田"
+  },
+  {
+    "year": "B7",
+    "src": "https://live.staticflickr.com/65535/54334044253_0d3389062c_n.jpg",
+    "name": "TMR",
+    "profile": [
+      "自親会発酵部部長"
+    ],
+    "role": "小麦粉の魔術師",
+    "major": "工",
+    "nickname": "たむら"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54332910107_38e6b13909_n.jpg",
+    "name": "komuro2",
+    "profile": [
+      "反主流派"
+    ],
+    "role": "元部長・DUSKIN(ダイソン)",
+    "major": "文",
+    "nickname": "S.KOMURO"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54332910157_a74e08ea1d_w.jpg",
+    "name": "ishi",
+    "profile": [
+      "ジェネレーションギャップを感じる"
+    ],
+    "role": "三日坊主バイカー",
+    "major": "工",
+    "nickname": "ICI"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334043723_b1ac802951_n.jpg",
+    "name": "kuse",
+    "profile": [
+      "シルク・ドゥ・ソレイユ"
+    ],
+    "role": "100均女(自称)",
+    "major": "工",
+    "nickname": "KUSE"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334043823_afb02cb311_n.jpg",
+    "name": "goto",
+    "profile": [
+      "勤労学生"
+    ],
+    "role": "ラーメン乞食",
+    "major": "工",
+    "nickname": "GTO"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334043778_c004679827_n.jpg",
+    "name": "kazuho",
+    "profile": [
+      "冷静なツッコミに定評がある"
+    ],
+    "role": "学祭マン",
+    "major": "工",
+    "nickname": "マイケルらしい"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54333814801_abb437568b_n.jpg",
+    "name": "ootawara",
+    "profile": [
+      "アクティブ"
+    ],
+    "role": "自親会の良心",
+    "major": "農",
+    "nickname": "OOTWR"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334230740_082cb50f0d_w.jpg",
+    "name": "ogata",
+    "profile": [
+      "インドネシアに愛人がいる"
+    ],
+    "role": "嘘つきインド人",
+    "major": "工",
+    "href": "B6.hide/",
+    "style": "text-decoration: none; color: rgb(var(--on-background)); cursor: text"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334038034_94c5c687dc_n.jpg",
+    "name": "nonomura",
+    "profile": [
+      "脳筋馬鹿野郎"
+    ],
+    "role": "イケメン",
+    "major": "経",
+    "nickname": "NNMR"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54332910147_06c807f7d4_w.jpg",
+    "name": "katada",
+    "profile": [
+      "君の名は。"
+    ],
+    "role": "プロゲーマー",
+    "major": "理",
+    "nickname": "KTD"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334037949_c372b7d30d_n.jpg",
+    "name": "shimotsuma",
+    "profile": [
+      "覇気の使い手"
+    ],
+    "role": "クレイジー僧侶",
+    "major": "工",
+    "nickname": "SMTM"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334230615_436043575c_n.jpg",
+    "name": "kawakubo",
+    "profile": [
+      "MT大好き"
+    ],
+    "role": "サッカー少年",
+    "major": "理",
+    "nickname": "KWKB"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334230540_ac2fa46b53_n.jpg",
+    "name": "ryota",
+    "profile": [
+      "コミュ力モンスター"
+    ],
+    "role": "茶道家",
+    "major": "農",
+    "nickname": "りょーた"
+  },
+  {
+    "year": "B6",
+    "src": "https://live.staticflickr.com/65535/54334230865_09681f7daf_w.jpg",
+    "name": "suwa",
+    "profile": [
+      "料理ができる（確信）"
+    ],
+    "role": "オリエンテーリング",
+    "major": "農",
+    "nickname": "SW"
+  },
+
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334036899_97af123352_m.jpg",
+    "name": "new_tsukahara",
+    "profile": [
+      "不世出の指導者\",",
+      "敬愛する首領様"
+    ],
+    "role": "元部長",
+    "major": "工",
+    "nickname": "塚原大元帥閣下"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334037044_1a59567bd3_n.jpg",
+    "name": "egasira",
+    "profile": [
+      "良く言えばただのバカ\",",
+      "悪く言えばバカ"
+    ],
+    "role": "伊達メガネ",
+    "major": "文",
+    "nickname": "江頭"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334037129_6a1318f477_n.jpg",
+    "name": "takahashi2",
+    "profile": [
+      "虫と写真が嫌い"
+    ],
+    "role": "マジレス",
+    "major": "工",
+    "nickname": "高橋"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334036944_70e18bd1c8_w.jpg",
+    "name": "nakatsuka",
+    "profile": [
+      "チェストハーネスが締まりません"
+    ],
+    "role": "NINJA",
+    "major": "工",
+    "nickname": "中塚"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334229840_ee992ac6db_w.jpg",
+    "name": "kadoguchi2 // マウスホバーでkadoguchi3.jpg",
+    "profile": [
+      "バカと天才は紙一重\",",
+      "これでも総代"
+    ],
+    "role": "超人",
+    "major": "理",
+    "nickname": "門口"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54333814086_0d1966d985_n.jpg",
+    "name": "tomomin",
+    "profile": [
+      "ブランド厨\",",
+      "DB(コーラゴクー"
+    ],
+    "role": "ドラえもん",
+    "major": "工",
+    "nickname": "ともみん"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334042958_a45a427dbe_n.jpg",
+    "name": "kato",
+    "profile": [
+      "「金珠爆弾強いんですよ」\",",
+      "アーバンミュージックに精通している"
+    ],
+    "role": "悪代官",
+    "major": "工",
+    "nickname": "加藤"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54332909347_cf9a5155d5_n.jpg",
+    "name": "minamin",
+    "profile": [
+      "「のぐちのザックはずたぶくろ」"
+    ],
+    "role": "アンチまさきよ",
+    "major": "理",
+    "nickname": "みなみん"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54332909247_fca3de91d0_n.jpg",
+    "name": "sumichan",
+    "profile": [
+      "ラーメン二郎青葉山店"
+    ],
+    "role": "ほほえみ",
+    "major": "理",
+    "nickname": "すみちゃん"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54332909437_2b08e35371_n.jpg",
+    "name": "ito",
+    "profile": [
+      "英国密航\",",
+      "カフェバイト志望"
+    ],
+    "role": "賑やかし",
+    "major": "エセ経",
+    "nickname": "伊東ライフ"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54333813931_8d6f4e6f78_n.jpg",
+    "name": "nakajo",
+    "profile": [
+      "最近少食"
+    ],
+    "role": "ジャージ",
+    "major": "理",
+    "nickname": "ももち"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334229915_17c1d3e246_n.jpg",
+    "name": "yamazaki",
+    "profile": [
+      "ともみんの宿敵らしい"
+    ],
+    "role": "お父つぁん",
+    "major": "工",
+    "nickname": "山埼"
+  },
+  {
+    "year": "B5",
+    "src": "https://live.staticflickr.com/65535/54334229940_3b399d21c3_n.jpg",
+    "name": "ishizawa",
+    "profile": [
+      "Jazzと方言には一家言を持つ"
+    ],
+    "role": "お洒落番長",
+    "major": "農",
+    "nickname": "石澤"
+  },
+
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54333813536_baf787ffc7_o.jpg",
+    "name": "tanai",
+    "profile": [
+      "おう俺が部長だ\",",
+      "俺の名を語るな\",",
+      "お前らぶち殺すぞ"
+    ],
+    "role": "OLD HEAD",
+    "major": "工",
+    "nickname": "TNI"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54334042443_45d65a2e65_o.jpg",
+    "name": "daichi // マウスホバーでdaichi3.jpg",
+    "profile": [
+      "止まらないロマンティック\",",
+      "出ない昇竜"
+    ],
+    "role": "店長",
+    "major": "工",
+    "nickname": "だいち"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54332908577_363747afd8_o.jpg",
+    "name": "masakiyo",
+    "profile": [
+      "アンチ文化過激派\",",
+      "もっと人間のポテンシャルを信じよう"
+    ],
+    "role": "青果業者",
+    "major": "工",
+    "nickname": "まさきよ"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54333813521_0833777702_o.jpg",
+    "name": "yoshino",
+    "profile": [
+      "新入生の前でスピーチした（すごい）\",",
+      "最近コンタクトにした"
+    ],
+    "role": "よしの",
+    "major": "工",
+    "nickname": "よすぃの"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54334042633_a7f8a26244_o.jpg",
+    "name": "say_yes",
+    "profile": [
+      "学祭おつかれ"
+    ],
+    "role": "祭りの長",
+    "major": "経",
+    "nickname": "Say-Yeah"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54333813276_a36bb35eae_w.jpg",
+    "name": "kinoshita2",
+    "profile": [
+      "こぼれ落ちた単位たち"
+    ],
+    "role": "金欠",
+    "major": "工",
+    "nickname": "きのした"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54332908892_a12f9fc562_w.jpg",
+    "name": "yasuo3",
+    "profile": [
+      "そこに詰まっているのはゴミか浪漫か"
+    ],
+    "role": "アホザックおじさん",
+    "major": "文",
+    "nickname": "ヤス"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54332908697_0c09caf89e_w.jpg",
+    "name": "hata2",
+    "profile": [
+      "うぇぇーーあぁーくぁｗせｔ\",",
+      "屋久島の妖精\",",
+      "インテリヤクザ予備軍"
+    ],
+    "role": "ボクの夏休み",
+    "major": "理",
+    "nickname": "ハタ"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54334036644_91cb57e875_m.jpg",
+    "name": "oyake",
+    "profile": [
+      "『呼ぶときは「さん」をつけろ』\",",
+      "人の話を聞かない"
+    ],
+    "role": "女帝",
+    "major": "農",
+    "nickname": "OYK"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54334042653_c8dc3f7f49_w.jpg",
+    "name": "shimada4",
+    "profile": [
+      "アメ車を操る\",",
+      "果たして日本車を運転する日は来るのか"
+    ],
+    "role": "大臣",
+    "major": "経",
+    "nickname": "シマダ"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54334229435_d25413536a_w.jpg",
+    "name": "takafumi3",
+    "profile": [
+      "バイク部部長"
+    ],
+    "role": "スイーツ部部長",
+    "major": "工",
+    "nickname": "タカフミ"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54333813326_52b1712fa6_n.jpg",
+    "name": "hatta3",
+    "profile": [
+      "自親会スマブラ部最高戦力\",",
+      "写真写りがよい"
+    ],
+    "role": "尺八",
+    "major": "工",
+    "nickname": "はったさん"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54333813831_9507f655d8_q.jpg",
+    "name": "sakai",
+    "profile": [
+      "「俺やっぱ芋煮行かんわ&hellip;」\",",
+      "今年は来た"
+    ],
+    "role": "アンチ小宅",
+    "major": "理",
+    "nickname": "坂井"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54334036744_d87daf34ff_o.jpg",
+    "name": "ogane3",
+    "profile": [
+      "笑顔がステキ\",",
+      "雑になっていく扱い"
+    ],
+    "role": "ポンコツ",
+    "major": "理",
+    "nickname": "アジメ"
+  },
+  {
+    "year": "B4",
+    "src": "https://live.staticflickr.com/65535/54334042663_3e707a1c48_w.jpg",
+    "name": "sasa2",
+    "profile": [
+      "ささささささささささささささささささささささささささ"
+    ],
+    "role": "さささささささささ",
+    "major": "農（ささささ）",
+    "nickname": "ささ"
+  },
+
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334037558_e00ba35eea_o.jpg",
+    "name": "gussan",
+    "profile": [
+      "風格は出なかった\",",
+      "(他部員)「もうデカイ顔はさせない」\",",
+      "そういえばさ、ホームページ親が見てるんだよね"
+    ],
+    "role": "そういえば俺もう部長じゃないんだった&hellip;",
+    "major": "工",
+    "nickname": "GOD FATHER"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334224330_0b9e3680c2_w.jpg",
+    "name": "sugawara",
+    "profile": [
+      "平成27-28:自親会アメリカ支部総司令\",",
+      "既に三人をヤッた"
+    ],
+    "role": "原付&larr;15000kmで故障 2015.8.10",
+    "major": "工",
+    "nickname": "チャカワラさん"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334037353_f58ab0f94a_o.jpg",
+    "name": "kiyono3",
+    "profile": [
+      "かなりすごい\",",
+      "とてもすごい"
+    ],
+    "major": "工",
+    "nickname": "きよの"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334037103_312d8703b3_o.jpg",
+    "name": "saito",
+    "profile": [
+      "よく走るむすび丸"
+    ],
+    "role": "おにぎりの方のおにぎり",
+    "major": "農",
+    "nickname": "おにぎり"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334224350_c64ea5b888_o.jpg",
+    "name": "kamiya",
+    "profile": [
+      "美形\",",
+      "イカトンを超越したなにか"
+    ],
+    "role": "アルティメットパソ部",
+    "major": "経",
+    "nickname": "かみや"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334031029_be33dbabb1_o.jpg",
+    "name": "ryoki",
+    "profile": [
+      "脱イカトンのパイオニア"
+    ],
+    "role": "迷走",
+    "major": "経",
+    "nickname": "りょーき"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54333808386_7be9a328d1_o.jpg",
+    "name": "takahashi",
+    "profile": [
+      "ネタの宝庫"
+    ],
+    "role": "洗剤変えた？",
+    "major": "法",
+    "nickname": "名人"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334224205_a2f7e2dd5e_o.jpg",
+    "name": "matsuo2",
+    "profile": [
+      "ええ、彼がウチの瑛太ですよ\",",
+      "ああああああ！ぶっ○す！"
+    ],
+    "role": "学食のエース",
+    "major": "経",
+    "nickname": "オイマツオォ!"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54333808561_75a5bd28f9_o.jpg",
+    "name": "chiyoda",
+    "profile": [
+      "しばらく見ていません"
+    ],
+    "role": "リア充(真)",
+    "major": "工",
+    "nickname": "チヨケン"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334031004_b2a659f994_o.jpg",
+    "name": "sahho2",
+    "profile": [
+      "山ガールルック"
+    ],
+    "role": "やっほお",
+    "major": "農",
+    "nickname": "さっほー"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334037043_785591a7dc_o.jpg",
+    "name": "satoeri",
+    "profile": [
+      "川渡支部に異動が決まりました"
+    ],
+    "role": "ダバダ",
+    "major": "農",
+    "nickname": "さとえり"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54333808721_b0d25b70b8_w.jpg",
+    "name": "akariso",
+    "profile": [
+      "眠りん\",",
+      "移動手段はダッシュ"
+    ],
+    "role": "山の子",
+    "major": "工",
+    "nickname": "あかりん、宮川先生"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54333808471_0e98985a6a_o.jpg",
+    "name": "hrp // マウスホバーでhrp2.jpg",
+    "profile": [
+      "無限のパw&hellip;異動が決まりました"
+    ],
+    "role": "最高議長",
+    "major": "農",
+    "nickname": "HRP"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54332904242_504235d489_o.jpg",
+    "name": "shiho2",
+    "profile": [
+      "スターウォーズ観よう"
+    ],
+    "role": "しほしほ",
+    "major": "農",
+    "nickname": "しほ氏"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334224290_a25395de23_o.jpg",
+    "name": "matsunami",
+    "profile": [
+      "最近何してんの？"
+    ],
+    "role": "ゴシップ",
+    "major": "文",
+    "nickname": "マッツ"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334037118_3d31af015a_o.jpg",
+    "name": "sakimaru",
+    "profile": [
+      "タイ&uarr;ワン&darr;"
+    ],
+    "role": "開幕",
+    "major": "工",
+    "nickname": "さき丸"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54333808481_ee66d39821_o.jpg",
+    "name": "harada2 // マウスホバーでhrd.jpg",
+    "profile": [
+      "靴下を脱ぐな\",",
+      "すぐ寝るな\",",
+      "すっかり山の人\",",
+      "　　　ッッア゛ア゛ーーッッ！！"
+    ],
+    "role": "ディソ",
+    "major": "工",
+    "nickname": "HRD"
+  },
+  {
+    "year": "B3",
+    "src": "https://live.staticflickr.com/65535/54334037318_68e26853ff_o.jpg",
+    "name": "matsumoto",
+    "profile": [
+      "「おいもう酒ねえのかよ！」"
+    ],
+    "role": "プラチナゴールデンシェフ",
+    "major": "工"
+  },
+
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54332903052_cf05af3d7c_n.jpg",
+    "name": "Kaneta",
+    "profile": [
+      "ちゃっかりしてるの好き\",",
+      "暗躍するソロオプレイヤーKA-NE-TA"
+    ],
+    "role": "かつての部長",
+    "major": "工",
+    "nickname": "かねた"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54459979264_c5fe8750ee_o.jpg",
+    "name": "Kakuta",
+    "profile": [
+      "自転車っぽいってか自転車だったわ"
+    ],
+    "role": "自転車っぽい",
+    "major": "経",
+    "nickname": "かくた"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54333807761_db9e37a2a4_n.jpg",
+    "name": "Ozawa",
+    "profile": [
+      "アラスカ土産はアザラシの肉がいいです"
+    ],
+    "role": "メガネ",
+    "major": "文",
+    "nickname": "ざーわー"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54334223630_0b489d908b_o.jpg",
+    "name": "saito",
+    "profile": [
+      "落ち着きを見せてきた\",",
+      "葛藤の人生"
+    ],
+    "role": "なんJ語を操る",
+    "major": "経",
+    "nickname": "3110"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54459791351_8a98c0ee0c_o.jpg",
+    "name": "watanabe2",
+    "profile": [
+      "「豚骨ラーメンしか認めない」\",",
+      "バイクいいよお&hellip;"
+    ],
+    "role": "九州",
+    "major": "法",
+    "nickname": "ナベ"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54460150610_48336c515f_o.jpg",
+    "name": "Soutome",
+    "profile": [
+      "妹にしたい\",",
+      "ペンシルバニア土産は&hellip;アザラシの肉&hellip;？"
+    ],
+    "role": "マイハートエンジェル",
+    "major": "法"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54334030439_a94cd14fe5_n.jpg",
+    "profile": [
+      "酒におぼれる\",",
+      "寿司飲みまたやろう"
+    ],
+    "role": "かっきー",
+    "major": "理",
+    "nickname": "かっきー"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54332903302_ea84acac1b_o.jpg",
+    "name": "ono.jpg",
+    "profile": [
+      "最近ハジケが足りないんじゃない？\",",
+      "「俺が花火だ！！！」"
+    ],
+    "role": "オールラウンダー",
+    "major": "経",
+    "nickname": "オーノクン"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54459979254_3d60fed85f_n.jpg",
+    "name": "sugii2.jpg",
+    "profile": [
+      "オウ!オレカエルワ!\",",
+      "バイク買ったらツーリング行こう"
+    ],
+    "role": "ゼビオ",
+    "major": "工",
+    "nickname": "すぎー"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54332903287_b09811c309_o.jpg",
+    "name": "miyazawa2.jpg",
+    "profile": [
+      "右傾化\",",
+      "お馬さん大好き"
+    ],
+    "role": "シャイボー",
+    "major": "法",
+    "nickname": "つよしぃ"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54460150595_f28382e7d9_o.jpg",
+    "name": "inoue.jpg",
+    "profile": [
+      "もっと愛車をいたわろうよ"
+    ],
+    "role": "刺客",
+    "major": "経",
+    "nickname": "いのうえ"
+  },
+  {
+    "year": "B2",
+    "src": "https://live.staticflickr.com/65535/54334223585_ed5877b4b7_o.jpg",
+    "name": "dera",
+    "profile": [
+      "腹回りが&hellip;\",",
+      "そろそろ山行きたい"
+    ],
+    "role": "出禁",
+    "major": "工",
+    "nickname": "DeRA"
+  },
+
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54334029239_a56546236c_o.jpg",
+    "name": "okada",
+    "profile": [
+      "グンマの至宝"
+    ],
+    "role": "KING",
+    "major": "理"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54332902012_e397a346b3_o.jpg",
+    "name": "iwai2",
+    "profile": [
+      "嵐を呼ぶ男"
+    ],
+    "role": "ピュアマン",
+    "major": "薬",
+    "nickname": "とっしー"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54332902117_8bc2f5b95a_o.jpg",
+    "name": "sato",
+    "profile": [
+      "かもすぞー"
+    ],
+    "role": "めがねっ子",
+    "major": "農",
+    "nickname": "ちゃんみか"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54334035528_c8ce31c8e5_o.jpg",
+    "name": "sugawara",
+    "profile": [
+      "形式美。\",",
+      "一定の心酔した部下がいる"
+    ],
+    "role": "専属SP",
+    "major": "経",
+    "nickname": "スガワラ"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54334035638_029e58102f_o.jpg",
+    "name": "otani",
+    "profile": [
+      "自親会に棲む河童。自由。"
+    ],
+    "role": "キン肉マン",
+    "major": "農",
+    "nickname": "オータニ"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54334222375_3937a7a58b_o.jpg",
+    "name": "namikawa",
+    "profile": [
+      "自然主義者。"
+    ],
+    "role": "ちびっこ",
+    "major": "農",
+    "nickname": "まりっぺ"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54334222470_55b02a1f70_o.jpg",
+    "name": "MOri",
+    "profile": [
+      "謎が謎呼ぶ森ワールド"
+    ],
+    "role": "パラレルワールド",
+    "major": "薬",
+    "nickname": "もりどん"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54332901922_a3a94f1c07_o.jpg",
+    "name": "Matushima",
+    "profile": [
+      "冒険家\","
+    ],
+    "role": "癒し系",
+    "major": "農",
+    "nickname": "もえか様"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54333806486_9c4bc3bace_n.jpg",
+    "name": "Matumoto",
+    "profile": [
+      "最近見ないけど\",",
+      "元気？"
+    ],
+    "role": "つっこみ",
+    "major": "経",
+    "nickname": "まっさん"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54333806651_c71bf92712_w.jpg",
+    "name": "iida",
+    "profile": [
+      "超越的。あとお洒落。"
+    ],
+    "role": "チーター",
+    "major": "農",
+    "nickname": "ひかるん"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54333806426_2887859722_n.jpg",
+    "name": "obs",
+    "profile": [
+      "ひたすらに歩く"
+    ],
+    "role": "火星人",
+    "major": "理"
+  },
+  {
+    "year": "B1",
+    "src": "https://live.staticflickr.com/65535/54333806616_6cceb3a08f_n.jpg",
+    "name": "suzue",
+    "profile": [
+      "おなかいたい"
+    ],
+    "role": "旧部長",
+    "major": "工",
+    "nickname": "しゅじゅえ"
+  },
+
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334029114_a012a14582_o.jpg",
+    "name": "TKHR",
+    "profile": [
+      "老害というよりOL"
+    ],
+    "role": "NEO・TKHR",
+    "major": "文"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334029044_ca177bab30_o.jpg",
+    "name": "FuruyaHiroki",
+    "profile": [
+      "あるようでない。"
+    ],
+    "role": "裏ボス",
+    "major": "工",
+    "nickname": "やーふる"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54333806176_654e6b897a_o.jpg",
+    "name": "ObaraShinya",
+    "profile": [
+      "なんか最近急に大人びて見える"
+    ],
+    "role": "セックスピストルズ",
+    "major": "工"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54332901797_55aaae3902_o.jpg",
+    "name": "YukaUmetsu",
+    "profile": [
+      "弩天然美少女\",",
+      "自親会の良心"
+    ],
+    "role": "体力お化け",
+    "major": "農",
+    "nickname": "うめっちゃん"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334029049_32d7bec02a_o.jpg",
+    "name": "YonenoTomoshi",
+    "profile": [
+      "永久戦犯\",",
+      "ネパールから生還済"
+    ],
+    "role": "元部長",
+    "major": "農",
+    "nickname": "コメ"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334029024_709f7a6da9_o.jpg",
+    "name": "TakahashiYuta",
+    "profile": [
+      "伊達メガネ及びコンタクト反対派\",",
+      "怒ったらたぶん強い"
+    ],
+    "role": "くそゲーマー",
+    "major": "理",
+    "nickname": "TKHS"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334029029_26ee84a928_o.jpg",
+    "name": "TamuraKititaro",
+    "profile": [
+      "食事係\",",
+      "脱ぐとすごい"
+    ],
+    "role": "二代目おっぱい番長",
+    "major": "法",
+    "nickname": "きちたろう"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334035283_8364af2789_o.jpg",
+    "name": "YamanakaTakaki",
+    "profile": [
+      "山では無敵"
+    ],
+    "role": "実は双子",
+    "major": "理",
+    "nickname": "お父ちゃん"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334035208_5c70ab0753_o.jpg",
+    "name": "2G",
+    "profile": [
+      "圧倒的存在感。\",",
+      "最近までやんちゃだった"
+    ],
+    "role": "ドンタコス",
+    "major": "工",
+    "nickname": "２G"
+  },
+  {
+    "year": "B0",
+    "src": "https://live.staticflickr.com/65535/54334029059_b371a5745d_o.jpg",
+    "name": "Konno",
+    "profile": [
+      "こう見えて肉食系"
+    ],
+    "role": "ヤミコン",
+    "major": "農",
+    "nickname": "どじっ今野"
+  },
+
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54334028804_d0586884b3_o.jpg",
+    "name": "KimuraTakuma",
+    "profile": [
+      "踏んで欲しい時もある\",",
+      "紳士(変態という名の)"
+    ],
+    "role": "元々部長",
+    "major": "理"
+  },
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54333805891_cf3843c3fe_o.jpg",
+    "name": "OgawaSohei",
+    "profile": [
+      "在自親会うどん大使\",",
+      "研究室では石を洗っている"
+    ],
+    "role": "胸筋",
+    "major": "理"
+  },
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54333805991_e284c8f948_o.jpg",
+    "name": "YanagidaYasuhiro",
+    "profile": [
+      "なぜか冠婚葬祭によく振り回される\",",
+      "本当にいろいろあった。本当に・・・"
+    ],
+    "role": "HINANO",
+    "major": "理"
+  },
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54332901402_99fb5a22d7_o.jpg",
+    "name": "IwaiIkumi",
+    "profile": [
+      "私に単位をよこせ\",",
+      "酒豪"
+    ],
+    "role": "女帝",
+    "major": "工"
+  },
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54334034933_93d102b5e1_o.jpg",
+    "name": "KudoShoko",
+    "profile": [
+      "えへえへっへー\",",
+      "たぶん変人"
+    ],
+    "role": "元気のかたまり",
+    "major": "工",
+    "nickname": "くどしょ"
+  },
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54334034948_a5b0211f75_o.gif",
+    "name": "Negishi",
+    "profile": [
+      "自己埋葬"
+    ],
+    "major": "農",
+    "nickname": "ねぎー"
+  },
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54334034918_d58ba20a30_o.jpg",
+    "name": "OtsukaHikaru",
+    "profile": [
+      "学問と引き換えに大切なものを失った男\",",
+      "機械語を話す"
+    ],
+    "role": "ポエマー",
+    "major": "工"
+  },
+  {
+    "year": "A9",
+    "src": "https://live.staticflickr.com/65535/54334034973_20181b9082_o.gif",
+    "name": "Shimizu",
+    "profile": [
+      "リアルにリア充"
+    ],
+    "major": "農",
+    "nickname": "しみず"
+  },
+
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334026139_3610398477_o.jpg",
+    "name": "kitamura",
+    "profile": [
+      "釣り合宿で山登り"
+    ],
+    "role": "元・部長",
+    "major": "工",
+    "nickname": "マサミン"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334219045_2879bb0e42_o.jpg",
+    "name": "dandy",
+    "profile": [
+      "年下な感じはしませんね"
+    ],
+    "role": "元・副部長",
+    "major": "工",
+    "nickname": "四浪さん"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334032238_507b05efc6_o.jpg",
+    "name": "ntani",
+    "profile": [
+      "実は空気"
+    ],
+    "role": "自称自親会専属カメラマン",
+    "major": "工",
+    "nickname": "N谷"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334026244_f762c4ec9c_o.jpg",
+    "name": "mattsun",
+    "profile": [
+      "偉大な先人"
+    ],
+    "role": "元祖☆山美少女 / 元・会計",
+    "major": "理"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334032323_daaa72d3be_o.jpg",
+    "name": "mattyann",
+    "profile": [
+      "箱入り"
+    ],
+    "major": "工",
+    "nickname": "まっちゃん"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334032263_d601eedb06_o.jpg",
+    "name": "iwabuchiHP",
+    "profile": [
+      "毎日元気がない"
+    ],
+    "major": "理",
+    "nickname": "下ブチ"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334219090_14973403e9_o.jpg",
+    "name": "CCDmini",
+    "profile": [
+      "ラ・ヨダソウ・スティアーナ(別れの合い言葉、意味はない)"
+    ],
+    "role": "ニコ厨",
+    "major": "工",
+    "nickname": "CCD"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334219155_585501bf24_o.jpg",
+    "name": "sobata",
+    "profile": [
+      "C級映画が大好物"
+    ],
+    "role": "漢ファッションリーダー",
+    "major": "工",
+    "nickname": "ソバタリアン"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54332898662_f0aa83720f_o.jpg",
+    "name": "kurosakisann",
+    "profile": [
+      "元祖☆釣り婆"
+    ],
+    "role": "自称自親会専属カメラマン",
+    "major": "理",
+    "nickname": "くろ"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334218990_0a3607aa90_o.gif",
+    "name": "monmart",
+    "profile": [
+      "似顔絵うますぎ"
+    ],
+    "major": "農",
+    "nickname": "モンマート☆"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334218955_14a5ba58ee_o.gif",
+    "name": "washimin",
+    "profile": [
+      "とあるサーキットにて"
+    ],
+    "role": "ダンディ",
+    "major": "工",
+    "nickname": "わしみん"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334032333_59edbcf4a4_o.jpg",
+    "name": "pinko",
+    "profile": [
+      "いつの間にか下な紹介欄"
+    ],
+    "role": "2年生だけどCL",
+    "major": "工",
+    "nickname": "ピンコ"
+  },
+  {
+    "year": "A8",
+    "src": "https://live.staticflickr.com/65535/54334218960_b26f2a2b34_o.jpg",
+    "name": "kato",
+    "profile": [
+      "いつも猛っている（理由は不明）\",",
+      "3セメバリア粉砕!"
+    ],
+    "role": "部室の住人",
+    "major": "工",
+    "nickname": "たけはる"
   }
 ]
+
+
+
+
+  

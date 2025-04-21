@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import styles from "./QaPage.module.scss";
-import Link from "next/link";
-import Menu from "@/components/Menu/Menu";
 import { qaData, QaCategory } from "./qaData";
+import TabBar from "@/components/TabBar/TabBar";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import Title from "@/components/Title/Title";
 
 // Suspense でラップするコンポーネント
 function SearchParamsWrapper({
@@ -27,41 +28,40 @@ function SearchParamsWrapper({
   return null;
 }
 
+// カテゴリとアイコンのマッピング
+const categoryIcons: Record<QaCategory, string> = {
+  "登山編": "⛰️",
+  "釣り編": "🎣",
+  "旅行編": "✈️",
+  "その他編": "❓"
+};
+
 const QaPage: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const [selectedCategory, setSelectedCategory] =
-    useState<QaCategory>("登山編");
-
-  const router = useRouter();
-  const handleNavigate = (path: string) => {
-    router.push(path);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
+  // デフォルトで「登山編」を表示
+  const [selectedCategory, setSelectedCategory] = useState<QaCategory>("登山編");
 
   const renderContent = () => {
-    if (!selectedCategory) return <div>カテゴリを選択してください。</div>;
+    if (!selectedCategory) return <div className={styles.noDataMessage}>カテゴリを選択してください。</div>;
 
     const categoryData = qaData[selectedCategory];
-    if (!categoryData) return <div>該当するQ&Aがありません。</div>;
+    if (!categoryData) return <div className={styles.noDataMessage}>該当するQ&Aがありません。</div>;
 
     return (
       <div className={styles.qaList}>
         {categoryData.map((qa, index) => (
-          <div key={index} className={styles.qaItem}>
-            <p className={styles.question}>
-              <strong>Q: {qa.question}</strong>
-            </p>
-            <p className={styles.answer}>
-              {qa.answer.split("\n").map((line, i) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-            </p>
+          <div key={index} className={styles.qaCard}>
+            <div className={styles.questionSection}>
+              <span className={styles.questionIcon}>Q</span>
+              <h3 className={styles.questionText}>{qa.question}</h3>
+            </div>
+            <div className={styles.answerSection}>
+              <span className={styles.answerIcon}>A</span>
+              <div className={styles.answerText}>
+                {qa.answer.split("\n").map((line, i) =>
+                  line ? <p key={i}>{line}</p> : <br key={i} />
+                )}
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -69,47 +69,35 @@ const QaPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.pageWrapper}>
-      <div className={styles.page}>
-        <nav className={styles.breadcrumb}>
-          <Link href="/">Home</Link> <span> &gt; </span>{" "}
-          <span>よくある質問</span>
-        </nav>
-        <h1 className={styles.circleTitle}>よくある質問</h1>
+    <>
+      {/* ナビゲーション */}
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "よくある質問" }
+        ]}
+      />
 
-        {/* Suspense で useSearchParams をラップ */}
-        <Suspense>
-          <SearchParamsWrapper setSelectedCategory={setSelectedCategory} />
-        </Suspense>
+      <Title title="よくある質問" />
 
-        <div className={styles.tabContainer}>
-          {Object.keys(qaData).map((category) => (
-            <button
-              key={category}
-              className={`${styles.tab} ${
-                selectedCategory === category ? styles.activeTab : ""
-              }`}
-              onClick={() => setSelectedCategory(category as QaCategory)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+      {/* Suspense でラップして useSearchParams を利用 */}
+      <Suspense fallback={<div>読み込み中...</div>}>
+        <SearchParamsWrapper setSelectedCategory={setSelectedCategory} />
+      </Suspense>
 
-        <div className={styles.contentContainer}>{renderContent()}</div>
-      </div>
+      {/* Tab選択カテゴリ */}
+      <TabBar
+        tabs={(Object.entries(categoryIcons) as [QaCategory, string][]).map(([key, icon]) => ({
+          title: key,
+          icon: icon,
+          url: () => setSelectedCategory(key),
+          isCurrent: selectedCategory === key
+        }))}
+      />
 
-      <button className={styles.hamburgerButton} onClick={toggleMenu}>
-        ☰
-      </button>
-      <div
-        className={`${styles.paperContainer} ${
-          isMenuOpen ? styles.open : styles.closed
-        }`}
-      >
-        <Menu onClick={handleNavigate} />
-      </div>
-    </div>
+      {/* Q&Aリスト表示エリア */}
+      <div className={styles.contentWrapper}>{renderContent()}</div>
+    </>
   );
 };
 

@@ -1,0 +1,345 @@
+// 基本コンテナ
+.container {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+  position: relative;
+
+  background-color: #f9f5eb;
+  background-image:
+    linear-gradient(to right, rgba(150, 150, 150, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 150, 150, 0.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+
+  // CSSカスタムプロパティの追加
+  --sidebar-width: 350px;
+  --page-max-width: calc(100% - var(--sidebar-width));
+}
+
+// オーバーレイ（サイドバーの背景）- モバイルのみ表示
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+  touch-action: none; // スクロールを防止
+  -webkit-tap-highlight-color: transparent; // タップ時のハイライトを非表示
+  display: none; // デフォルトで非表示
+}
+
+// メインコンテンツエリア
+.page {
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: var(--page-max-width);
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  height: auto;
+  transition: max-width 0.3s ease-in-out;
+}
+
+// 固定ページの場合
+.page-fixed {
+  position: fixed;
+  height: 100vh;
+}
+
+// サイドバー
+.Sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  width: var(--sidebar-width);
+  height: 100%;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  z-index: 10;
+  overflow-y: auto;
+
+  &.closed {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// サイドバー背景
+.PaperContainer {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg,
+      rgba(208, 147, 82, 0.3),
+      rgba(192, 134, 70, 0.3) 60%,
+      rgba(208, 147, 82, 0.3)),
+    repeating-radial-gradient(ellipse at 60% 500%,
+      rgba(192, 134, 70, 0.5),
+      rgba(192, 134, 70, 0.5) 0.2%,
+      rgba(208, 147, 82, 0.5) 0.6%,
+      rgba(208, 147, 82, 0.5) 1%);
+}
+
+// ハンバーガーメニュー
+.hamburgerButton {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  &:focus {
+    outline: 2px solid #007bff;
+  }
+}
+
+// ハンバーガーアイコン
+.hamburgerIcon {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #333;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transition: all 0.3s ease-in-out;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &::before {
+    top: -6px;
+  }
+
+  &::after {
+    top: 6px;
+  }
+
+  &.open {
+    background-color: transparent;
+
+    &::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+// ローディング表示
+.loadingContainer,
+.noDataMessage {
+  text-align: center;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  margin: 2rem 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+// 高さと幅に応じたサイドバー幅の自動調整
+@media (min-width: 901px) {
+  .container {
+    --sidebar-width: 350px;
+    --page-max-width: calc(100% - var(--sidebar-width));
+  }
+  
+  // PCでは常にサイドバーを表示
+  .Sidebar {
+    transform: translateX(0); // デフォルトで表示
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  // PCでは背景オーバーレイを表示しない（明示的に非表示に）
+  .overlay {
+    display: none !important;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 750px) and (min-height: 651px) {
+  .container {
+    --sidebar-width: 300px;
+    --page-max-width: calc(100% - var(--sidebar-width));
+  }
+}
+
+@media (min-width: 901px) and (max-height: 650px) and (min-height: 551px) {
+  .container {
+    --sidebar-width: 250px;
+    --page-max-width: calc(100% - var(--sidebar-width));
+  }
+}
+
+@media (min-width: 901px) and (max-height: 550px) {
+  .container {
+    --sidebar-width: 200px;
+    --page-max-width: calc(100% - var(--sidebar-width));
+  }
+}
+
+// 高さに応じたサイドバーのアスペクト比調整
+// 高さが700px以下の場合
+@media (min-width: 901px) and (max-height: 750px) {
+  .page {
+    position: relative;
+    max-width: calc(100% - 300px); // アスペクト比で小さくなったサイドバーの幅
+  }
+
+  .Sidebar {
+    transform: translateX(0); // デフォルトで表示
+    opacity: 1;
+    pointer-events: auto;
+    aspect-ratio: 7.5/16; // アスペクト比を設定
+    width: 300px; // 幅を明示的に設定 - アスペクト比から計算された値
+    min-width: 250px; // 最小値も設定
+  }
+}
+
+@media (min-width: 901px) and (max-height: 650px) {
+  .page {
+    position: relative;
+    max-width: calc(100% - 250px); // アスペクト比で小さくなったサイドバーの幅
+  }
+
+  .Sidebar {
+    transform: translateX(0); // デフォルトで表示
+    opacity: 1;
+    pointer-events: auto;
+    aspect-ratio: 7.5/16; // アスペクト比を設定
+    width: 250px; // 幅を明示的に設定 - アスペクト比から計算された値
+    min-width: 200px; // 最小値も設定
+  }
+}
+
+@media (min-width: 901px) and (max-height: 550px) {
+  .page {
+    position: relative;
+    max-width: calc(100% - 200px); // アスペクト比で小さくなったサイドバーの幅
+  }
+
+  .Sidebar {
+    transform: translateX(0); // デフォルトで表示
+    opacity: 1;
+    pointer-events: auto;
+    aspect-ratio: 7.5/16; // アスペクト比を設定
+    width: 200px; // 幅を明示的に設定 - アスペクト比から計算された値
+    min-width: 150px; // 最小値も設定
+  }
+}
+
+// スマホ・タブレット対応 (900px以下)
+@media (max-width: 900px) {
+  .container {
+    --sidebar-width: 70%; // サイドバー幅を小さく
+    --page-max-width: 100%;
+  }
+
+  .page {
+    position: relative;
+    max-width: 100%; // サイドバーが閉じているときは全幅
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .hamburgerButton {
+    display: block; // ハンバーガーメニューを表示
+  }
+
+  .Sidebar {
+    transform: translateX(100%); // 標準で非表示
+    opacity: 0;
+    pointer-events: none;
+    width: var(--sidebar-width);
+    max-width: 350px; // 最大幅を小さく
+    aspect-ratio: auto; // アスペクト比をリセット
+
+    &.open {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  // モバイル表示のときのみオーバーレイを表示
+  .overlay {
+    display: block; // モバイルでは表示
+  }
+
+  .container::before {
+    left: 20px; // 罫線位置を調整
+  }
+}
+
+// さらに小さい画面向け微調整
+@media (max-width: 480px) {
+  .container {
+    --sidebar-width: 65%; // モバイル向けさらに幅を小さく
+  }
+
+  .Sidebar {
+    max-width: 280px; // 最大幅をさらに小さく
+  }
+
+  .hamburgerButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    line-height: 40px;
+  }
+}
+
+// iPhone SE など特に小さい画面向け
+@media (max-width: 375px) {
+  .container {
+    --sidebar-width: 60%; // さらに幅を小さく
+  }
+  
+  .Sidebar {
+    max-width: 240px;
+  }
+}

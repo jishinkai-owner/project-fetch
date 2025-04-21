@@ -1,0 +1,26 @@
+// ページタイトル
+.circleTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  border-bottom: 2px dashed rgba(220, 75, 75, 0.6);
+  padding-bottom: 0.5rem;
+  width: auto;
+  display: inline-block;
+}
+
+
+// スマホ・タブレット対応 (900px以下)
+@media (max-width: 900px) {
+  .circleTitle {
+    font-size: 1.8rem;
+  }
+}
+
+// さらに小さい画面向け微調整
+@media (max-width: 480px) {
+  .circleTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}

@@ -1,153 +1,134 @@
-.pageWrapper {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    background-color: #eee2cc; /* 背景色 */
-    color: #000;
-    min-height: 100vh; /* ページ全体の高さ */
-    position: relative;
-  }
-  
-  .page {
-    flex: 3; /* メインコンテンツの幅を3割 */
-    background-color: #eee2cc;
-    color: #000;
-    padding: 2rem;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .breadcrumb {
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-  
-    a {
-      color: #000;
-      text-decoration: none;
-      margin-right: 0.5rem;
-    }
-  
-    span {
-      color: #888;
-    }
-  }
-  
-.tabContainer {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #ccc;
-  }
-  
-  .tab {
-    background: none;
-    border: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    color: #000;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom 0.2s ease;
-  
-    &:hover {
-      border-bottom: 2px solid #888;
-    }
-  }
-  
-  .activeTab {
-    border-bottom: 2px solid #000;
-    font-weight: bold;
+// src/app/qa/QaPage.module.scss
+
+// コンテンツラッパー
+.contentWrapper {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 3rem;
 }
-  
-.paperContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: #e4c89b;
-  width: 25%;
-  max-width: 350px;
-  height: 100vh;
-  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+
+.qaList {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    
-
-    &.closed {
-        transform: translateX(100%); /* 右に隠す */
-        opacity: 0;
-        pointer-events: none; /* クリックを無効化 */
-    }
-
-    &.open {
-        transform: translateX(0); /* 表示する */
-        opacity: 1;
-        pointer-events: auto; /* クリックを有効化 */
-    }
+  gap: 2rem;
+  width: 100%;
 }
 
-/* ハンバーガーメニュー */
-.hamburgerButton {
-  display: none;
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background-color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  font-size: 1.5rem;
-  text-align: center;
-  line-height: 50px;
-  z-index: 1000;
-
+.qaCard {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid rgba(220, 75, 75, 0.6);
+  position: relative;
+  
+  // ノートのような紙の質感
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 250, 250, 0.8) 100%);
+  
   &:hover {
-      background-color: #f0f0f0;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:nth-child(odd) {
+    transform: rotate(0.5deg);
+    
+    &:hover {
+      transform: rotate(0deg) translateY(-5px);
+    }
+  }
+  
+  &:nth-child(even) {
+    transform: rotate(-0.5deg);
+    
+    &:hover {
+      transform: rotate(0deg) translateY(-5px);
+    }
   }
 }
 
-.contentContainer {
-    width: 80%;
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
+.questionSection {
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+  background-color: rgba(245, 245, 245, 0.5);
+}
 
-@media (max-width: 768px) {
-    .pageWrapper {
-        display: flex; /* ハンバーガーメニューを表示 */
-    }
-    .paperContainer {
-      width: 50%;
-      max-width: 80%;
-      height: 100%;
-      display: flex; 
-      justify-content: center;
-      align-items: center;
-      max-width: none;
-      position: fixed;
-      right: 0;
-      top: 0;
-      z-index: 999;
-      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-    }
+.questionIcon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d9534f;
+  min-width: 30px;
+  text-align: center;
+}
+
+.questionText {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+  flex: 1;
+}
+
+.answerSection {
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.answerIcon {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #5cb85c;
+  min-width: 30px;
+  text-align: center;
+}
+
+.answerText {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  flex: 1;
   
-    .paperContainer.open {
-      transform: translateX(0);
+  p {
+    margin: 0 0 0.75rem 0;
+    
+    &:last-child {
+      margin-bottom: 0;
     }
+  }
+}
+
+// モバイル対応
+@media (max-width: 900px) {  
+  .qaCard {
+    transform: none !important;
+    
+    &:hover {
+      transform: translateY(-3px) !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .questionSection, .answerSection {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
   
-    .hamburgerButton {
-      display: block;
-    }
+  .questionIcon, .answerIcon {
+    font-size: 1.25rem;
+    min-width: 25px;
+  }
+  
+  .questionText {
+    font-size: 1rem;
+  }
 }

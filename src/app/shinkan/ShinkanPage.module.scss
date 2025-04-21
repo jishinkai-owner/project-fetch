@@ -1,0 +1,389 @@
+// src/app/shinkan/ShinkanPage.module.scss
+
+.newcomerContent {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem 3rem;
+  margin-bottom: 2rem;
+}
+
+/* タイトルセクション */
+.titleSection {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.mainTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+  display: inline-block;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+  
+  /* 背景をつける */
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background-color: rgba(220, 75, 75, 0.2);
+    z-index: -1;
+    transform: rotate(-1deg);
+  }
+}
+
+.titleDecoration {
+  width: 70%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, rgba(220, 75, 75, 0.8), transparent);
+  margin: 0 auto;
+}
+
+/* イントロテキスト */
+.introText {
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  color: #444;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transform: rotate(-0.5deg);
+}
+
+/* セクション共通スタイル */
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  color: #333;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, rgba(220, 75, 75, 0.8), transparent);
+  }
+}
+
+/* SNSセクション */
+.snsSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid rgba(220, 75, 75, 0.6);
+  position: relative;
+  transform: rotate(0.5deg);
+  
+  /* ノートのような紙の質感 */
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 250, 250, 0.8) 100%);
+}
+
+.snsButtons {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.snsButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-width: 160px;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.snsIcon {
+  font-size: 1.3rem;
+}
+
+.snsLabel {
+  font-size: 1.1rem;
+}
+
+.snsDescription {
+  width: 100%;
+  
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    
+    strong {
+      color: #333;
+    }
+  }
+}
+
+/* LINEオープンチャットセクション */
+.lineSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: #06c755;
+  background-image: linear-gradient(to bottom right, rgba(255,255,255,0.3), transparent);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: white;
+  transform: rotate(-0.5deg);
+  
+  .sectionTitle {
+    color: white;
+    
+    &::after {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+    }
+  }
+}
+
+.qrCodeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.qrCode {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.qrDescription {
+  max-width: 300px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  
+  p {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.emphasis {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid white;
+  display: inline-block;
+}
+
+/* 連絡先セクション */
+.contactSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid rgba(220, 75, 75, 0.6);
+  position: relative;
+  transform: rotate(0.3deg);
+  
+  /* ノートのような紙の質感 */
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 250, 250, 0.8) 100%);
+}
+
+.email {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  background-color: rgba(220, 75, 75, 0.1);
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  line-height: 1.6;
+}
+
+.emailNote {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: normal;
+}
+
+/* 部室の場所セクション */
+.locationSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: rotate(-0.3deg);
+}
+
+.mapWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mapImage {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border: 4px solid white;
+}
+
+.locationText {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 締めのメッセージ */
+.closingSection {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.closingMessage {
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #444;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid rgba(220, 75, 75, 0.6);
+  position: relative;
+  
+  /* ノートのような紙の質感 */
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 250, 250, 0.8) 100%);
+}
+
+.highlightMessage {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: rgba(220, 75, 75, 0.9);
+  display: inline-block;
+  padding: 0 0.5rem;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background-color: rgba(220, 75, 75, 0.2);
+    z-index: -1;
+  }
+}
+
+// モバイル対応
+@media (max-width: 900px) {
+  .newcomerContent {
+    padding: 1rem 0 3rem;
+  }
+  
+  .mainTitle {
+    font-size: 2rem;
+  }
+  
+  .snsSection,
+  .lineSection,
+  .contactSection,
+  .locationSection,
+  .closingMessage {
+    padding: 1.5rem;
+  }
+  
+  .qrCodeWrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainTitle {
+    font-size: 1.7rem;
+    padding: 0 1rem;
+  }
+  
+  .introText {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+  
+  .snsButtons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .email {
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .mapImage {
+    width: 100%;
+    height: auto;
+  }
+  
+  .highlightMessage {
+    font-size: 1.2rem;
+  }
+}

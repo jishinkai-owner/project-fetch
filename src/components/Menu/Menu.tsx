@@ -1,64 +1,41 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import styles from "./Menu.module.scss";
 import { login } from "@/app/actions";
 
 interface MenuProps {
-  onClick: (path: string) => void;
+  onClick?: (path: string) => void;
 }
 
-const Menu: React.FC<MenuProps> = () => {
-  const router = useRouter();
-  const handleNavigate = (path: string) => {
-    router.push(path);
-  };
+const Menu: React.FC<MenuProps> = ({ onClick }) => {
+  // メニュー項目のリスト（管理を容易にするために配列化）
+  const menuItems = [
+    { path: '/record', src: '/Record.svg', alt: '活動記録', className: styles.Recordimage, width: 200, height: 50 },
+    { path: '/qa', src: '/Qa.svg', alt: 'Q&A', className: styles.Qaimage, width: 200, height: 100 },
+    { path: '/member', src: '/Member.svg', alt: 'member', className: styles.Memberimage, width: 200, height: 100 },
+    { path: '/shinkan', src: '/Shinkan.svg', alt: '新歓情報', className: styles.Shinkanimage, width: 200, height: 50 },
+  ];
 
   return (
     <div className={styles.container}>
       <div className={styles.imagecontainer}>
-        <Image
-          src="/Record.svg"
-          alt="活動記録"
-          className={styles.Recordimage}
-          width={100}
-          height={50}
-          priority
-          onClick={() => handleNavigate("/record")}
-          style={{ cursor: "pointer" }}
-        />
-        <Image
-          src="/Qa.svg"
-          alt="Q&A"
-          className={styles.Qaimage}
-          width={200}
-          height={100}
-          priority
-          onClick={() => handleNavigate("/qa")}
-          style={{ cursor: "pointer" }}
-        />
-        <Image
-          src="/Member.svg"
-          alt="member"
-          className={styles.Memberimage}
-          width={200}
-          height={100}
-          priority
-          onClick={() => handleNavigate("/member")}
-          style={{ cursor: "pointer" }}
-        />
-        <Image
-          src="/Shinkan.svg"
-          alt="新歓情報"
-          className={styles.Shinkanimage}
-          width={200}
-          height={50}
-          priority
-          onClick={() => handleNavigate("/shinkan")}
-          style={{ cursor: "pointer" }}
-        />
+        {menuItems.map((item, index) => (
+          <Link 
+            key={index} 
+            href={item.path}
+            onClick={() => onClick && onClick(item.path)}
+          >
+            <Image
+              src={item.src}
+              alt={item.alt}
+              className={item.className}
+              width={item.width}
+              height={item.height}
+              priority
+            />
+          </Link>
+        ))}
         <Image
           src="/login.webp"
           alt="ログイン"
@@ -66,9 +43,7 @@ const Menu: React.FC<MenuProps> = () => {
           width={200}
           height={200}
           priority
-          // onClick={() => handleNavigate('/shinkan')}
           onClick={() => login()}
-          style={{ cursor: "pointer" }}
         />
       </div>
     </div>

@@ -1,8 +1,8 @@
-/* * {
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-} */
+}
 
 html,
 body {
@@ -11,16 +11,9 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
-/* :root {
+:root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html,
@@ -47,9 +40,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-} */

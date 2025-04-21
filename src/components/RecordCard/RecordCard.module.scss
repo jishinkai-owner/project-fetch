@@ -1,0 +1,158 @@
+.recordCard {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    border-left: 4px solid rgba(220, 75, 75, 0.6);
+    display: flex;
+    flex-direction: column;
+    min-height: 160px;
+    position: relative;
+    overflow: hidden;
+
+    // ノートのような紙の質感
+    background-image:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(252, 252, 252, 0.9) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(0, 0, 0, 0.03) 28px, rgba(0, 0, 0, 0.03) 29px);
+
+    &:hover {
+        transform: translateY(-8px) rotate(0deg) !important;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid rgba(220, 75, 75, 0.9);
+        
+        .readMore {
+            color: rgba(220, 75, 75, 1);
+            
+            &::after {
+                transform: translateX(5px);
+            }
+        }
+    }
+
+    &:nth-child(odd) {
+        transform: rotate(1deg);
+    }
+
+    &:nth-child(even) {
+        transform: rotate(-1deg);
+    }
+    
+    // ポラロイド写真のような装飾
+    &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 20px;
+        height: 20px;
+        background-color: rgba(220, 75, 75, 0.1);
+        border-radius: 0 0 0 5px;
+        z-index: 1;
+    }
+}
+
+.recordCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.recordTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    word-break: break-word;
+    flex: 1;
+    line-height: 1.4;
+    position: relative;
+    padding-bottom: 0.5rem;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30px;
+        height: 2px;
+        background-color: rgba(220, 75, 75, 0.4);
+        transition: width 0.3s ease;
+    }
+}
+
+.recordCard:hover .recordTitle::after {
+    width: 60px;
+    background-color: rgba(220, 75, 75, 0.7);
+}
+
+.recordPreview {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    flex: 1;
+    margin: 0.5rem 0 1.2rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3; /* 標準プロパティも追加 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.readMore {
+    color: rgba(220, 75, 75, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-right: 1.2rem;
+
+    &::after {
+        content: '→';
+        position: absolute;
+        right: 0;
+        transition: transform 0.3s ease;
+    }
+}
+
+// モバイル対応
+@media (max-width: 768px) {
+    .recordCard {
+        padding: 1.2rem;
+        min-height: 140px;
+    }
+    
+    .recordTitle {
+        font-size: 1.15rem;
+    }
+    
+    .recordPreview {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2; /* 標準プロパティも追加 */
+    }
+}
+
+@media (max-width: 480px) {
+    .recordCard {
+        padding: 1rem;
+        min-height: 130px;
+    }
+    
+    .recordTitle {
+        font-size: 1.1rem;
+    }
+}
