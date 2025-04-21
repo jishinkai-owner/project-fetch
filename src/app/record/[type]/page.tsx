@@ -1,3 +1,4 @@
+// src/app/record/[type]/page.tsx
 import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import RecordClient from "../RecordClient";
@@ -11,23 +12,22 @@ import { Metadata } from "next";
 // ISR設定（30分ごとに再生成、秒数で指定）
 export const revalidate = 1800;
 
-// 型定義の修正
-type RecordTypePageProps = {
+// 正しい型定義を使用
+type Props = {
   params: {
     type: string;
   };
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 // サーバーサイドでデータを取得
-export default async function RecordTypePage({ params, searchParams }: RecordTypePageProps) {
+export default async function RecordTypePage({ params, searchParams }: Props) {
   const recordType = params.type;
   
   // タイプのバリデーション
   if (!["yama", "tabi", "tsuri"].includes(recordType)) {
     throw new Error(`Invalid record type: ${recordType}`);
   }
-  
   // タイトル設定
   const titles = {
     yama: "山行記録",
