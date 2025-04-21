@@ -29,7 +29,7 @@ const SnsButton: React.FC<SnsButtonProps> = ({ icon, label, url, color }) => {
 
 const NewcomerPage: React.FC = () => {
   return (
-    <>
+    <div className={styles.page}>
       {/* ナビゲーション */}
       <BreadCrumbs breadcrumb={[
         { title: "HOME", url: "/" },
@@ -128,7 +128,7 @@ const NewcomerPage: React.FC = () => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

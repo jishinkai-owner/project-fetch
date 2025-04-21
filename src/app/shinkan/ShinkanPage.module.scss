@@ -1,5 +1,11 @@
 // src/app/shinkan/ShinkanPage.module.scss
-
+.page{
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 3rem;
+  padding: 0 4%;
+  align-items: center;
+}
 .newcomerContent {
   width: 100%;
   max-width: 800px;
