@@ -8,7 +8,7 @@
     border-left: 4px solid rgba(220, 75, 75, 0.6);
     display: flex;
     flex-direction: column;
-    min-height: 180px;
+    min-height: 150px;
     position: relative;
 
     // ノートのような紙の質感
@@ -52,16 +52,6 @@
     color: #333;
     word-break: break-word;
     flex: 1;
-}
-
-.recordDate {
-    font-size: 0.8rem;
-    color: #666;
-    background-color: rgba(240, 240, 240, 0.7);
-    padding: 0.25rem 0.5rem;
-    border-radius: 1rem;
-    white-space: nowrap;
-    margin-left: 0.5rem;
 }
 
 .recordPreview {

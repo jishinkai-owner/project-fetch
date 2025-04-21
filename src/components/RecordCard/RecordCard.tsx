@@ -15,21 +15,11 @@ export interface RecordContentDTO {
     filename: string | null;
 }
 
-// 日付をフォーマットする関数
-const formatDate = (dateString: string | null): string => {
-    if (!dateString) return "-";
-    const date = new Date(dateString);
-    return `${date.getMonth() + 1}月${date.getDate()}日`;
-};
-
 const RecordCard = memo(({
     record,
 }: {
     record: RecordContentDTO;
 }) => {
-    // 日付のメモ化
-    const formattedDate = useMemo(() => formatDate(record.date), [record.date]);
-
     // 詳細テキストのメモ化
     const previewText = useMemo(() => {
         if (!record.details) return null;
@@ -41,12 +31,11 @@ const RecordCard = memo(({
     return (
         record.filename ?
             <Link
-                href={`/record/tabi/${record.filename}`}
+                href={`/record/${record.activityType}/${record.filename}`}
                 className={styles.recordCard}
             >
                 <div className={styles.recordCardHeader}>
                     <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
-                    <span className={styles.recordDate}>{formattedDate}</span>
                 </div>
                 {previewText && (
                     <p className={styles.recordPreview}>{previewText}</p>
@@ -61,7 +50,6 @@ const RecordCard = memo(({
             >
                 <div className={styles.recordCardHeader}>
                     <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
-                    <span className={styles.recordDate}>{formattedDate}</span>
                 </div>
                 {previewText && (
                     <p className={styles.recordPreview}>{previewText}</p>

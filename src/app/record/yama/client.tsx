@@ -11,6 +11,18 @@ interface YamaRecordClientProps {
   initialYear: number | null;
 }
 
+// 日付順に並び替える関数
+const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
+  return [...records].sort((a, b) => {
+    // 日付がない場合は後ろに配置
+    if (!a.date) return 1;
+    if (!b.date) return -1;
+    
+    // 日付を比較（降順 - 新しい日付が上に）
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+};
+
 // プレースセクションをメモ化されたコンポーネントとして分離
 const PlaceSection = memo(({
   place,
@@ -19,10 +31,31 @@ const PlaceSection = memo(({
   place: string;
   records: RecordContentDTO[];
 }) => {
-  // このプレースに対応するレコードをメモ化
+  // このプレースに対応するレコードをメモ化し、日付順に並び替え
   const placeRecords = useMemo(() => {
-    return records.filter(r => r.place === place);
+    const filteredRecords = records.filter(r => r.place === place);
+    return sortByDate(filteredRecords);
   }, [records, place]);
+
+  // ユニークな日付と対応するレコードを取得
+  const dateGroups = useMemo(() => {
+    const dates = new Map<string, RecordContentDTO[]>();
+    
+    placeRecords.forEach(record => {
+      const dateKey = record.date || 'no-date';
+      if (!dates.has(dateKey)) {
+        dates.set(dateKey, []);
+      }
+      dates.get(dateKey)?.push(record);
+    });
+    
+    // 日付でソートして返す（降順 - 新しい日付が上に）
+    return Array.from(dates.entries()).sort((a, b) => {
+      if (a[0] === 'no-date') return 1;
+      if (b[0] === 'no-date') return -1;
+      return new Date(b[0]).getTime() - new Date(a[0]).getTime();
+    });
+  }, [placeRecords]);
 
   return (
     <div className={styles.placeSection}>
@@ -30,12 +63,24 @@ const PlaceSection = memo(({
         <span className={styles.placeIcon}>🏔️</span>
         {place}
       </h3>
+      
       <div className={styles.recordCardList}>
-        {placeRecords.map((record) => (
-          <RecordCard
-            record={record}
-            key={record.contentId}
-          />
+        {dateGroups.map(([date, dateRecords]) => (
+          <div key={date} className={styles.dateGroup}>
+            {date !== 'no-date' && (
+              <div className={styles.dateHeader}>
+                <time dateTime={date}>{date}</time>
+              </div>
+            )}
+            <div className={styles.dateRecords}>
+              {dateRecords.map((record) => (
+                <RecordCard
+                  record={{...record, date: null}} // 日付を非表示にするためnullで上書き
+                  key={record.contentId}
+                />
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>
