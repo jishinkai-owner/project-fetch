@@ -145,7 +145,6 @@ export default function RecordDetailPage() {
           <div className={styles.detailMeta}>
             {content.place && (
               <span className={styles.detailPlace}>
-                <span className={styles.placeIcon}>📍</span>
                 {content.place}
               </span>
             )}

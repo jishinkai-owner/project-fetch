@@ -1,17 +1,16 @@
 // src/app/member/MemberPage.module.scss
 
-.page{
-  padding: 0rem 3rem; // 上下の余白を調整
-}
 // メンバー一覧スタイル
 .contentWrapper {
   width: 100%;
   max-width: 1200px;
   padding: 1rem 0 3rem 0;
+  align-items: center;
 }
 
 .membersWrapper {
   width: 100%;
+  padding: 0rem 5%;
 }
 
 .memberCardList {
@@ -33,8 +32,8 @@
 .imageWrapper {
   position: absolute;
   top: -60px;
-  width: 120px;
-  height: 120px;
+  width: 190px;
+  height: 190px;
   padding: 5px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -86,7 +85,7 @@
   width: 100%;
   min-height: 250px;
   border-left: 4px solid rgba(220, 75, 75, 0.6);
-  padding-top: 70px; // 画像用の余白
+  padding-top: 170px; // 画像用の余白
   
   // ノートのような紙の質感
   background-image: 
@@ -168,21 +167,6 @@
   .memberCardList {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
-  }
-  
-  .imageWrapper {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .memberCardList {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .memberCoutainer {
-    margin-top: 50px; // 小さい画面での余白調整
+    align-items: center;
   }
 }
