@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter, notFound, useSearchParams } from "next/navigation";
-import styles from "../../RecordPage.module.scss";
+import styles from "../RecordPage.module.scss";
 import Image from "next/image";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Link from "next/link";
+import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -39,7 +40,7 @@ export default function RecordDetailPage() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [content, setContent] = useState<ContentDetail | null>(null);
-  const [relatedContents, setRelatedContents] = useState<any[]>([]);
+  const [relatedContents, setRelatedContents] = useState<RecordContentDTO[]>([]);
 
   // データ取得
   useEffect(() => {
@@ -68,11 +69,11 @@ export default function RecordDetailPage() {
             throw new Error('Failed to fetch related contents');
           }
 
-          const allContents = await relatedRes.json();
+          const allContents = await relatedRes.json() as RecordContentDTO[];
           
           // 現在の記録を除外し、最大5件までの関連記録を取得
           const filtered = allContents
-            .filter((item: any) => item.contentId !== parseInt(contentId))
+            .filter((item) => item.contentId !== parseInt(contentId))
             .slice(0, 10);
           
           setRelatedContents(filtered);

@@ -1,5 +1,5 @@
 // src/app/record/[type]/loading.tsx
-import styles from "../RecordPage.module.scss";
+import styles from "./RecordPage.module.scss";
 import TabBar from "@/components/TabBar/TabBar";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Title from "@/components/Title/Title";

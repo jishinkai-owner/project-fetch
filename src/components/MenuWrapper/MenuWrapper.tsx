@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import styles from "../../app/layout.module.scss";
+import styles from "./MenuWrapper.module.scss";
 import Menu from "@/components/Menu/Menu";
 
 interface MenuWrapperProps {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import styles from "./layout.module.scss";
 import "./globals.css";
 import MenuWrapper from "@/components/MenuWrapper/MenuWrapper";
 

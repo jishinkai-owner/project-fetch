@@ -1,43 +1,41 @@
 // src/app/record/[type]/page.tsx
 import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
-import RecordClient from "../RecordClient";
+import RecordClient from "./client";
 import LoadingPlaceholder from "./loading";
 import TabBar from "@/components/TabBar/TabBar";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import Title from "@/components/Title/Title";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
-import { Metadata } from "next";
 
 // ISR設定（30分ごとに再生成、秒数で指定）
 export const revalidate = 1800;
 
-export default async function RecordTypePage({ 
-  params 
-}: { 
-  params: { type: string } 
+export default async function RecordTypePage({
+  params,
+}: {
+  params: Promise<{
+    type: string;
+  }>;
 }) {
-  const recordType = params.type;
-  
+  const recordType = (await params).type;
+
+  const activityTypes: {
+    title: string;
+    icon: string;
+    id: "yama" | "tabi" | "tsuri";
+  }[] = [
+    { title: "山行記録", icon: "🏔️", id: "yama" },
+    { title: "旅行記録", icon: "✈️", id: "tabi" },
+    { title: "釣行記録", icon: "🎣", id: "tsuri" },
+  ];
+
   // タイプのバリデーション
-  if (!["yama", "tabi", "tsuri"].includes(recordType)) {
+  const activityType = activityTypes.find((e) => e.id == recordType);
+  if (activityType === undefined) {
     throw new Error(`Invalid record type: ${recordType}`);
   }
-  
-  // タイトル設定
-  const titles = {
-    yama: "山行記録",
-    tabi: "旅行記録",
-    tsuri: "釣行記録"
-  };
-  
-  // アイコン設定
-  const icons = {
-    yama: "🏔️",
-    tabi: "✈️",
-    tsuri: "🎣"
-  };
-  
+
   // データ取得を待ちつつ、Suspenseでラップして表示を最適化
   const recordData = await getRecordData(recordType);
 
@@ -48,18 +46,21 @@ export default async function RecordTypePage({
         breadcrumb={[
           { title: "Home", url: "/" },
           { title: "活動記録", url: "/record" },
-          { title: titles[recordType as keyof typeof titles] }
+          { title: activityType.title },
         ]}
       />
 
-      <Title title={titles[recordType as keyof typeof titles]} />
+      <Title title={activityType.title} />
 
       {/* カテゴリ選択タブ */}
-      <TabBar tabs={[
-        { title: "山行記録", icon: "🏔️", url: "/record/yama", isCurrent: recordType === "yama" },
-        { title: "旅行記録", icon: "✈️", url: "/record/tabi", isCurrent: recordType === "tabi" },
-        { title: "釣行記録", icon: "🎣", url: "/record/tsuri", isCurrent: recordType === "tsuri" }
-      ]} />
+      <TabBar
+        tabs={activityTypes.map((e) => ({
+          title: e.title,
+          icon: e.icon,
+          url: `/record/${e.id}`,
+          isCurrent: e == activityType,
+        }))}
+      />
 
       <Suspense fallback={<LoadingPlaceholder type={recordType} />}>
         <RecordClient
@@ -67,7 +68,7 @@ export default async function RecordTypePage({
           allRecords={recordData.allRecords}
           years={recordData.years}
           initialYear={recordData.initialYear}
-          activityType={recordType as "yama" | "tabi" | "tsuri"}
+          activityType={activityType.id}
         />
       </Suspense>
     </>
@@ -90,7 +91,7 @@ async function getRecordData(recordType: string) {
   // シングルトンインスタンスを使用（パフォーマンス向上）
   const prisma = new PrismaClient({
     // コネクションプールの最適化
-    log: ['error'],
+    log: ["error"],
     datasources: {
       db: {
         url: process.env.DATABASE_URL,
@@ -99,34 +100,26 @@ async function getRecordData(recordType: string) {
   });
 
   try {
-    // 活動タイプに応じたクエリを構築
-    let whereClause: any = {};
-    
-    if (recordType === "tabi") {
-      whereClause = {
-        OR: [
-          { activityType: "tabi" },
-          { activityType: "other" } // tabiページでは「other」もフィルタリング
-        ]
-      };
-    } else {
-      whereClause = {
-        activityType: recordType
-      };
-    }
-    
     // 記録データを取得
     const records = await prisma.record.findMany({
-      where: whereClause,
+      where:
+        recordType === "tabi"
+          ? {
+              OR: [
+                { activityType: "tabi" },
+                { activityType: "other" }, // tabiページでは「other」もフィルタリング
+              ],
+            }
+          : { activityType: recordType },
       include: {
-        contents: true // 関連するContentを取得
-      }
+        contents: true, // 関連するContentを取得
+      },
     });
 
     // 取得したデータをRecordContentDTO形式に変換
     const recordContents: RecordContentDTO[] = [];
 
-    records.forEach(record => {
+    records.forEach((record) => {
       // 関連コンテンツがない場合は、レコード自体の情報だけで1レコード作成
       if (record.contents.length === 0) {
         recordContents.push({
@@ -138,11 +131,11 @@ async function getRecordData(recordType: string) {
           date: record.date || null,
           details: record.details,
           title: null, // Contentから取得するフィールドなのでnull
-          filename: null // Contentから取得するフィールドなのでnull
+          filename: null, // Contentから取得するフィールドなのでnull
         });
       } else {
         // 各コンテンツごとに変換
-        record.contents.forEach(content => {
+        record.contents.forEach((content) => {
           recordContents.push({
             contentId: content.id,
             recordId: record.id,
@@ -152,7 +145,7 @@ async function getRecordData(recordType: string) {
             date: record.date || null,
             details: content.content || record.details,
             title: content.title || null,
-            filename: content.filename || null
+            filename: content.filename || null,
           });
         });
       }
@@ -166,26 +159,40 @@ async function getRecordData(recordType: string) {
 
     // 最新年度のレコードを取得
     const initialRecords = latestYear
-      ? recordContents.filter(r => r.year === latestYear)
+      ? recordContents.filter((r) => r.year === latestYear)
       : [];
 
     return {
       initialRecords,
       // 全データは必要最小限のみをクライアントに渡す（最適化）
-      allRecords: recordContents.map(({ contentId, recordId, year, place, activityType, date, title, filename }) => ({
-        contentId,
-        recordId,
-        year,
-        place,
-        activityType,
-        date,
-        title,
-        filename,
-        // detailsは一覧表示に必要な分だけ切り出す（データ量削減）
-        details: recordContents.find(r => r.contentId === contentId)?.details?.substring(0, 100) || null
-      })),
+      allRecords: recordContents.map(
+        ({
+          contentId,
+          recordId,
+          year,
+          place,
+          activityType,
+          date,
+          title,
+          filename,
+        }) => ({
+          contentId,
+          recordId,
+          year,
+          place,
+          activityType,
+          date,
+          title,
+          filename,
+          // detailsは一覧表示に必要な分だけ切り出す（データ量削減）
+          details:
+            recordContents
+              .find((r) => r.contentId === contentId)
+              ?.details?.substring(0, 100) || null,
+        })
+      ),
       years,
-      initialYear: latestYear
+      initialYear: latestYear,
     };
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -194,7 +201,7 @@ async function getRecordData(recordType: string) {
       initialRecords: [],
       allRecords: [],
       years: [],
-      initialYear: null
+      initialYear: null,
     };
   } finally {
     await prisma.$disconnect();
