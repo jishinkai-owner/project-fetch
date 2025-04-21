@@ -127,8 +127,6 @@ export const useEntriesState = (
         equipmentComment: postHikeEntry.equipmentComment,
         slComment: postHikeEntry.slComemnt,
       }));
-
-      console.log("postHikeEntry", entries);
     }
   }, [postHikeEntry, clId, recordId]);
 

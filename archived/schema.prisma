@@ -60,7 +60,7 @@ model Content {
   images   String[]
   filename String?
   recordId Int
-  Record   Record   @relation(fields: [recordId], references: [id], name: "RecordToContent") // 🔴 リレーション名を追加
+  Record   Record   @relation(fields: [recordId], references: [id], name: "RecordToContent", onDelete: Cascade) // 🔴 リレーション名を追加
 
   @@unique([recordId, filename])
 }

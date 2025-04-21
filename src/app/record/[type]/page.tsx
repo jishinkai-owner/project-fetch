@@ -112,7 +112,7 @@ async function getRecordData(recordType: string) {
             }
           : { activityType: recordType },
       include: {
-        contents: true, // 関連するContentを取得
+        Content: true, // 関連するContentを取得
       },
     });
 
@@ -121,7 +121,7 @@ async function getRecordData(recordType: string) {
 
     records.forEach((record) => {
       // 関連コンテンツがない場合は、レコード自体の情報だけで1レコード作成
-      if (record.contents.length === 0) {
+      if (record.Content.length === 0) {
         recordContents.push({
           contentId: record.id,
           recordId: record.id,
@@ -135,7 +135,7 @@ async function getRecordData(recordType: string) {
         });
       } else {
         // 各コンテンツごとに変換
-        record.contents.forEach((content) => {
+        record.Content.forEach((content) => {
           recordContents.push({
             contentId: content.id,
             recordId: record.id,

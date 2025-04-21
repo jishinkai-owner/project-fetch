@@ -7,16 +7,15 @@ const prisma = new PrismaClient();
 const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
   yama: "yama",
   tabi: "tabi",
-  tsuri: "tsuri"
+  tsuri: "tsuri",
 };
-
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ type: string }> }
 ) {
   try {
-    const resolvedParams = await params; 
+    const resolvedParams = await params;
     const type = resolvedParams.type;
     const activityType = ACTIVITY_TYPE_MAP[type];
 
@@ -30,7 +29,7 @@ export async function GET(
     // RecordとContentを結合して取得
     const records = await prisma.record.findMany({
       where: {
-        activityType: activityType
+        activityType: activityType,
       },
       select: {
         id: true,
@@ -39,22 +38,22 @@ export async function GET(
         date: true,
         activityType: true,
         details: true,
-        contents: {
+        Content: {
           select: {
             id: true,
             title: true,
-            content: true
-          }
-        }
+            content: true,
+          },
+        },
       },
       orderBy: {
-        date: 'desc'
-      }
+        date: "desc",
+      },
     });
 
     // クライアント用にデータを整形
     const formattedRecords = records.flatMap((record) => {
-      return record.contents.map((content) => ({
+      return record.Content.map((content) => ({
         contentId: content.id,
         recordId: record.id,
         year: record.year,
@@ -62,7 +61,7 @@ export async function GET(
         activityType: record.activityType,
         date: record.date,
         details: record.details,
-        title: content.title
+        title: content.title,
       }));
     });
 
