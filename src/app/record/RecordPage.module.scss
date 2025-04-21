@@ -471,6 +471,123 @@
   }
 }
 
+// 関連コンテンツスタイル
+.relatedContents {
+  margin-top: 3.5rem;
+  border-top: 2px dashed rgba(220, 75, 75, 0.4);
+  padding-top: 2rem;
+}
+
+.relatedTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.8rem;
+  color: #333;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: rgba(220, 75, 75, 0.6);
+  }
+}
+
+.relatedList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.relatedItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.6rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  border-left: 3px solid rgba(220, 75, 75, 0.4);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid rgba(220, 75, 75, 0.8);
+    
+    .relatedItemArrow {
+      transform: translateX(5px);
+      color: rgba(220, 75, 75, 0.9);
+    }
+  }
+}
+
+.relatedItemContent {
+  flex: 1;
+}
+
+.relatedItemTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.relatedItemMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.relatedItemPlace {
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '📍';
+    margin-right: 0.3rem;
+    font-size: 0.9rem;
+  }
+}
+
+.relatedItemDate {
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '📅';
+    margin-right: 0.3rem;
+    font-size: 0.9rem;
+  }
+}
+
+.relatedItemArrow {
+  font-size: 1.2rem;
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+// モバイル対応
+@media (max-width: 768px) {
+  .relatedList {
+    grid-template-columns: 1fr;
+  }
+  
+  .relatedItem {
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .relatedItemTitle {
+    font-size: 1rem;
+  }
+}
+
 // モバイル対応
 @media (max-width: 900px) {
   .categoryContainer {

@@ -129,40 +129,46 @@ const RecordClient: React.FC<RecordClientProps> = ({
     }
   }, [activityType]);
 
-  // 年度変更時の処理
-  const handleYearChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    const yearValue = Number(e.target.value) || null;
+  // 年度セレクタの部分を修正
 
-    // 選択した年度を設定
-    startTransition(() => {
-      setSelectedYear(yearValue);
-    });
-  }, []);
+// 年度変更時の処理
+const handleYearChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+  const yearValue = Number(e.target.value) || null;
 
-  // 年度変更時のデータフィルタリング
-  useEffect(() => {
-    if (selectedYear === initialYear && initialRecords.length > 0) {
-      // 初期表示の年度の場合はサーバーから取得したデータを使用
-      setRecordsToShow(initialRecords);
-    } else if (selectedYear !== null) {
-      // 違う年度を選んだ場合、フィルタリング
-      setLoading(true);
-
-      // 非同期処理で UI ブロッキングを防止
-      const timeoutId = setTimeout(() => {
-        startTransition(() => {
-          // すでに全データを持っているのでフィルタリングするだけ
-          const filtered = allRecords.filter(r => r.year === selectedYear);
-          setRecordsToShow(filtered);
-          setLoading(false);
-        });
-      }, 0);
-
-      return () => clearTimeout(timeoutId);
+  // 選択した年度を設定
+  startTransition(() => {
+    setSelectedYear(yearValue);
+    
+    // URLに年度を反映（ブラウザ履歴も更新）
+    if (yearValue) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('year', yearValue.toString());
+      window.history.pushState({}, '', url);
     } else {
-      setRecordsToShow([]);
+      const url = new URL(window.location.href);
+      url.searchParams.delete('year');
+      window.history.pushState({}, '', url);
     }
-  }, [selectedYear, initialRecords, allRecords, initialYear]);
+  });
+}, []);
+
+// 初期ロード時にURLから年度を取得
+useEffect(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const yearFromUrl = urlParams.get('year');
+  
+  if (yearFromUrl) {
+    const yearValue = Number(yearFromUrl);
+    // 年度リストに存在するか確認
+    if (years.includes(yearValue)) {
+      setSelectedYear(yearValue);
+      
+      // 対応するデータをフィルタリング
+      const filtered = allRecords.filter(r => r.year === yearValue);
+      setRecordsToShow(filtered);
+    }
+  }
+}, [allRecords, years]);
 
   // 場所リスト（データが変わった時のみ再計算）
   const placeList = useMemo(() => {
