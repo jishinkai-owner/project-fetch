@@ -8,8 +8,7 @@
   justify-content: center;
   width: auto;
   height: 100%;
-  
-  padding: 10% 5%;
+  padding: 0% 10%;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -56,5 +55,9 @@
   transform: scale(1.05);
 }
 
-
+@media (max-width: 900px) {
+  .imagecontainer{
+    margin-top: 30%;
+  }
+}
 
