@@ -77,42 +77,47 @@
 // コンテンツ関連
 .contentWrapper {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 3rem;
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0rem 1rem;
 }
 
 .yearSelector {
   text-align: center;
-  margin-bottom: 2rem;
+  position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
 
   select {
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
+    padding: 0.75rem 2.5rem;
+    font-size: 1.1rem;
     border: none;
-    border-radius: 1.5rem;
-    background-color: #eee2cc;
-    color: #000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 2rem;
+    background-color: #f8f0e3;
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    width: 200px;
+    min-width: 200px;
     text-align: center;
     text-align-last: center;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1em;
+    transition: all 0.2s ease;
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px rgba(220, 75, 75, 0.4);
+      box-shadow: 0 0 0 3px rgba(220, 75, 75, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
     }
     
     &:hover {
-      background-color: #e5d5b5;
+      background-color: #fff;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
     }
   }
 }
@@ -121,64 +126,178 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 3rem;
   padding-bottom: 3rem;
 }
 
 .placeSection {
   width: 100%;
-  border-radius: 0.5rem;
+  padding: 1.5rem;
 }
 
 .placeTitle {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #333;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
   border-bottom: 2px solid rgba(220, 75, 75, 0.4);
   display: flex;
   align-items: center;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background-color: rgba(220, 75, 75, 0.7);
+  }
 }
 
 .placeIcon {
-  margin-right: 0.5rem;
-  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  font-size: 1.8rem;
 }
 
-.recordCardList {
+// 日付グループ
+.dateGroup {
+  margin-bottom: 2.5rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// 日付ヘッダー
+.dateHeader {
+  margin-bottom: 1.25rem;
+  padding: 0 0 0.5rem 0;
+  position: relative;
+  
+  time {
+    display: inline-block;
+    background-color: rgba(220, 75, 75, 0.1);
+    color: #555;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: var(--font-geist-mono);
+    letter-spacing: 0.5px;
+    border-left: 3px solid rgba(220, 75, 75, 0.6);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+}
+
+// 日付ごとのレコード
+.dateRecords {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
-  width: 100%;
+  transition: all 0.3s ease;
 }
 
+// カード一覧
+.recordCardList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+// データなしメッセージ
+.noDataMessage {
+  text-align: center;
+  padding: 3rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin: 2rem auto;
+  max-width: 600px;
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 1.2rem;
+  }
+}
+
+// ローディングスピナー
+.loadingSpinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  
+  p {
+    margin-top: 1.5rem;
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  &::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(220, 75, 75, 0.1);
+    border-radius: 50%;
+    border-top-color: rgba(220, 75, 75, 0.7);
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 詳細ページ関連のスタイル
 .recordDetail {
   width: 100%;
   max-width: 800px;
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  margin-bottom: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  margin: 2rem auto 3rem;
   position: relative;
   
   // ノートのような紙の質感
   background-image: 
     linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 250, 250, 0.8) 100%),
     repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(0, 0, 0, 0.05) 28px, rgba(0, 0, 0, 0.05) 29px);
+  
+  // 紙の影の効果
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 15px;
+    right: 10px;
+    width: 50%;
+    height: 20%;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+    transform: rotate(3deg);
+  }
 }
 
 .detailHeader {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   border-bottom: 2px dashed rgba(220, 75, 75, 0.4);
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
 }
 
 .detailTitle {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #333;
-  margin: 0 0 1rem 0;
+  margin: 0 0 1.2rem 0;
   line-height: 1.4;
 }
 
@@ -186,89 +305,126 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .detailPlace {
   background-color: rgba(240, 240, 240, 0.7);
-  padding: 0.4rem 0.8rem;
-  border-radius: 1rem;
-  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.95rem;
   color: #555;
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    background-color: rgba(240, 240, 240, 0.9);
+  }
 }
 
 .detailDate {
-  background-color: rgba(240, 240, 240, 0.7);
-  padding: 0.4rem 0.8rem;
-  border-radius: 1rem;
-  font-size: 0.9rem;
+  background-color: rgba(220, 75, 75, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.95rem;
   color: #555;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    background-color: rgba(220, 75, 75, 0.2);
+  }
 }
 
 .detailContent {
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #333;
   
   h1, h2, h3, h4, h5, h6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-top: 1.8rem;
+    margin-bottom: 1.2rem;
     color: #222;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: rgba(220, 75, 75, 0.6);
+    }
   }
   
   p {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
   }
   
   ul, ol {
-    margin-bottom: 1.2rem;
-    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1.8rem;
   }
   
   blockquote {
     border-left: 3px solid rgba(220, 75, 75, 0.6);
-    padding-left: 1rem;
-    margin-left: 0;
+    padding: 0.8rem 1.5rem;
+    margin: 1.5rem 0;
+    background-color: rgba(240, 240, 240, 0.5);
     color: #555;
     font-style: italic;
+    border-radius: 0 0.5rem 0.5rem 0;
   }
   
   img {
     max-width: 100%;
     height: auto;
-    margin: 1rem 0;
-    border-radius: 0.25rem;
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
 }
 
 .imageGallery {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   border-top: 2px dashed rgba(220, 75, 75, 0.4);
-  padding-top: 1.5rem;
+  padding-top: 2rem;
 }
 
 .galleryTitle {
-  font-size: 1.4rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.8rem;
   color: #333;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: rgba(220, 75, 75, 0.6);
+  }
 }
 
 .imageGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .imageWrapper {
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -277,10 +433,15 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .detailFooter {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   display: flex;
   justify-content: center;
 }
@@ -289,17 +450,24 @@
   background-color: rgba(240, 240, 240, 0.8);
   border: none;
   border-radius: 2rem;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
   color: #555;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   
   &:hover {
     background-color: rgba(220, 75, 75, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -309,25 +477,34 @@
     display: none; // PCサイズのカテゴリビューを非表示
   }
   
-  .recordCardList {
+  .placeSection {
+    padding: 1.2rem;
+  }
+  
+  .dateRecords {
     grid-template-columns: 1fr; // 1列に変更
   }
   
-  .recordCard {
-    min-height: 150px; // カードの高さを調整
+  .placeTitle {
+    font-size: 1.4rem;
   }
   
   .recordDetail {
     padding: 1.5rem;
+    margin: 1.5rem 1rem;
   }
   
   .detailTitle {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
   
   .detailMeta {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.8rem;
+  }
+  
+  .detailContent {
+    font-size: 1rem;
   }
   
   .imageGrid {
@@ -336,12 +513,35 @@
 }
 
 @media (max-width: 480px) {
+  .contentWrapper {
+    padding: 1.5rem 0.75rem;
+  }
+  
   .yearSelector select {
-    width: 180px;
+    width: 100%;
+    max-width: 220px;
     padding: 0.6rem 1.5rem;
+    font-size: 1rem;
   }
   
   .placeTitle {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+  
+  .placeIcon {
+    font-size: 1.5rem;
+  }
+  
+  .dateHeader time {
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem;
+  }
+  
+  .recordDetail {
+    padding: 1.2rem;
+  }
+  
+  .detailTitle {
+    font-size: 1.4rem;
   }
 }
