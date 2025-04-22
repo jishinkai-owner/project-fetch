@@ -19,7 +19,7 @@ export async function GET() {
       },
     });
 
-    console.log("✅ メンバーデータ取得成功:", members);
+    console.log("✅ メンバーデータ取得成功:", members.length, "件");
 
     return NextResponse.json(members);
   } catch (error) {

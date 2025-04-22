@@ -58,8 +58,6 @@ export default async function RecordTypePage({
     throw new Error(`Invalid record type: ${recordType}`);
   }
 
-  console.log("RecordTypePage", activityType);
-
   // データ取得を待ちつつ、Suspenseでラップして表示を最適化
   const recordData = await getRecordData(activityType.id);
 

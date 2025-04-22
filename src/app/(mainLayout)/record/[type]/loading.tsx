@@ -7,7 +7,6 @@ import activityTypes from "./activityTypes";
 
 // Suspenseのフォールバックとして使用するローディングUI
 export default function LoadingPlaceholder({ activityTitle }: { activityTitle: string }) {
-  console.log("LoadingPlaceholder", activityTitle);
   return (
     <>
       {/* ナビゲーション */}
