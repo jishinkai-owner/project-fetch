@@ -4,7 +4,10 @@ import React, { useState, useEffect, useMemo, useCallback, useTransition, memo }
 import styles from "./RecordPage.module.scss";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ActivityType } from "./activityTypes";
+import activityTypes, { ActivityType } from "./activityTypes";
+import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import TabBar from "@/components/TabBar/TabBar";
+import Title from "@/components/Title/Title";
 
 interface RecordClientProps {
   initialRecords: RecordContentDTO[];
@@ -173,57 +176,79 @@ const RecordClient: React.FC<RecordClientProps> = ({
   }, [recordsToShow]);
 
   return (
-    <div className={styles.contentWrapper}>
-      {isPending || loading ? (
-        <div className={styles.noDataMessage}>
-          <div className={styles.loadingSpinner}>
-            <p>読み込み中...</p>
-          </div>
-        </div>
-      ) : years.length === 0 ? (
-        <div className={styles.noDataMessage}>
-          <p>{activityType.title}のデータがありません。</p>
-        </div>
-      ) : (
-        <>
-          {/* 年度セレクタ */}
-          <div className={styles.yearSelector}>
-            <select
-              onChange={handleYearChange}
-              value={selectedYear ?? ""}
-              disabled={isPending}
-            >
-              <option value="">年度を選択</option>
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}年度
-                </option>
-              ))}
-            </select>
-          </div>
+    <>
+      {/* ナビゲーション */}
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "活動記録", url: "/record" },
+          { title: activityType.title },
+        ]}
+      />
 
-          {/* 記録一覧表示部分 */}
-          {selectedYear && (
-            <div className={styles.recordsWrapper}>
-              {placeList.length === 0 ? (
-                <div className={styles.noDataMessage}>
-                  <p>{selectedYear}年度の{activityType.title}はありません。</p>
-                </div>
-              ) : (
-                placeList.map((place) => (
-                  <PlaceSection
-                    key={place}
-                    place={place}
-                    records={recordsToShow}
-                    activityType={activityType}
-                  />
-                ))
-              )}
+      <Title title={activityType.title} />
+
+      {/* カテゴリ選択タブ */}
+      <TabBar
+        tabs={activityTypes.map((e) => ({
+          title: e.title,
+          icon: e.icon,
+          url: `/record/${e.id}`,
+          isCurrent: e.id == activityType.id,
+        }))}
+      />
+      <div className={styles.contentWrapper}>
+        {isPending || loading ? (
+          <div className={styles.noDataMessage}>
+            <div className={styles.loadingSpinner}>
+              <p>読み込み中...</p>
             </div>
-          )}
-        </>
-      )}
-    </div>
+          </div>
+        ) : years.length === 0 ? (
+          <div className={styles.noDataMessage}>
+            <p>{activityType.title}のデータがありません。</p>
+          </div>
+        ) : (
+          <>
+            {/* 年度セレクタ */}
+            <div className={styles.yearSelector}>
+              <select
+                onChange={handleYearChange}
+                value={selectedYear ?? ""}
+                disabled={isPending}
+              >
+                <option value="">年度を選択</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}年度
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* 記録一覧表示部分 */}
+            {selectedYear && (
+              <div className={styles.recordsWrapper}>
+                {placeList.length === 0 ? (
+                  <div className={styles.noDataMessage}>
+                    <p>{selectedYear}年度の{activityType.title}はありません。</p>
+                  </div>
+                ) : (
+                  placeList.map((place) => (
+                    <PlaceSection
+                      key={place}
+                      place={place}
+                      records={recordsToShow}
+                      activityType={activityType}
+                    />
+                  ))
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

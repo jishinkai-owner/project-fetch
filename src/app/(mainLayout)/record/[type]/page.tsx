@@ -3,10 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import RecordClient from "./client";
 import LoadingPlaceholder from "./loading";
-import TabBar from "@/components/TabBar/TabBar";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
-import Title from "@/components/Title/Title";
-import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import activityTypes from "./activityTypes";
 import { Metadata } from "next";
 
@@ -63,27 +60,6 @@ export default async function RecordTypePage({
 
   return (
     <>
-      {/* ナビゲーション */}
-      <BreadCrumbs
-        breadcrumb={[
-          { title: "Home", url: "/" },
-          { title: "活動記録", url: "/record" },
-          { title: activityType.title },
-        ]}
-      />
-
-      <Title title={activityType.title} />
-
-      {/* カテゴリ選択タブ */}
-      <TabBar
-        tabs={activityTypes.map((e) => ({
-          title: e.title,
-          icon: e.icon,
-          url: `/record/${e.id}`,
-          isCurrent: e == activityType,
-        }))}
-      />
-
       <Suspense fallback={<LoadingPlaceholder activityTitle={activityType.title} />}>
         <RecordClient
           initialRecords={recordData.initialRecords}
