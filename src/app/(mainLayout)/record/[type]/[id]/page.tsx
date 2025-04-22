@@ -7,6 +7,7 @@ import Image from "next/image";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Link from "next/link";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
+import activityTypes from "../activityTypes";
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -21,20 +22,19 @@ interface ContentDetail {
   activityType?: string | null;
 }
 
-// 活動タイプの日本語名マッピング
-const activityTypeNames: { [key: string]: string } = {
-  yama: "山行",
-  tabi: "旅行",
-  tsuri: "釣り"
-};
-
 export default function RecordDetailPage() {
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
   const contentId = params.id as string;
   const recordType = params.type as string;
-  
+
+  // タイプのバリデーション
+  const activityType = activityTypes.find((e) => e.id == recordType);
+  if (activityType === undefined) {
+    throw new Error(`Invalid record type: ${recordType}`);
+  }
+
   // URLから年度パラメータを取得
   const yearParam = searchParams.get('year');
 
@@ -50,7 +50,7 @@ export default function RecordDetailPage() {
       try {
         setIsLoading(true);
         // 大文字小文字に注意
-        const res = await fetch(`/api/record/${recordType}/${contentId}`);
+        const res = await fetch(`/api/record/${activityType.id}/${contentId}`);
 
         if (!res.ok) {
           if (res.status === 404) {
@@ -64,18 +64,18 @@ export default function RecordDetailPage() {
 
         // 関連コンテンツを取得
         try {
-          const relatedRes = await fetch(`/api/record/${recordType}`);
+          const relatedRes = await fetch(`/api/record/${activityType.id}`);
           if (!relatedRes.ok) {
             throw new Error('Failed to fetch related contents');
           }
 
           const allContents = await relatedRes.json() as RecordContentDTO[];
-          
+
           // 現在の記録を除外し、最大5件までの関連記録を取得
           const filtered = allContents
             .filter((item) => item.contentId !== parseInt(contentId))
             .slice(0, 10);
-          
+
           setRelatedContents(filtered);
         } catch (error) {
           console.error('Error fetching related contents:', error);
@@ -88,7 +88,7 @@ export default function RecordDetailPage() {
     };
 
     fetchContent();
-  }, [contentId, recordType]);
+  }, [contentId, activityType.id]);
 
   // 日付をそのまま表示するだけの関数
   const displayDate = (dateString: string | null | undefined) => {
@@ -101,11 +101,11 @@ export default function RecordDetailPage() {
     // 年度パラメータがある場合はその年度のページに戻る
     if (yearParam) {
       router.push(`/record/${recordType}?year=${yearParam}`);
-    } 
+    }
     // コンテンツ自身の年度情報があればそれを使用
     else if (content?.year) {
       router.push(`/record/${recordType}?year=${content.year}`);
-    } 
+    }
     // それ以外はトップページへ
     else {
       router.push(`/record/${recordType}`);
@@ -126,15 +126,13 @@ export default function RecordDetailPage() {
     return notFound();
   }
 
-  const activityName = activityTypeNames[recordType] || recordType;
-
   return (
     <>
       {/* パンくずリスト */}
       <BreadCrumbs breadcrumb={[
         { title: 'Home', url: '/' },
         { title: '活動記録', url: '/record' },
-        { title: `${activityName}記録`, url: `/record/${recordType}` },
+        { title: activityType.title, url: `/record/${activityType.id}` },
         { title: content.title || '無題' }
       ]} />
 
@@ -186,16 +184,16 @@ export default function RecordDetailPage() {
         {/* 関連記録 */}
         {relatedContents.length > 0 && (
           <div className={styles.relatedContents}>
-            <h2 className={styles.relatedTitle}>他の{activityName}記録</h2>
+            <h2 className={styles.relatedTitle}>他の{activityType.title}</h2>
             <div className={styles.relatedList}>
               {relatedContents.map((item) => {
                 // 年度パラメータを引き継ぐ
-                const linkHref = yearParam 
-                  ? `/record/${recordType}/${item.contentId}?year=${yearParam}`
-                  : `/record/${recordType}/${item.contentId}`;
+                const linkHref = yearParam
+                  ? `/record/${activityType.id}/${item.contentId}?year=${yearParam}`
+                  : `/record/${activityType.id}/${item.contentId}`;
 
                 return (
-                  <Link 
+                  <Link
                     href={linkHref}
                     className={styles.relatedItem}
                     key={item.contentId}
@@ -221,7 +219,7 @@ export default function RecordDetailPage() {
             className={styles.backButton}
             onClick={handleBackClick}
           >
-            ← {activityName}記録一覧に戻る
+            ← {activityType.title}一覧に戻る
           </button>
         </div>
       </div>

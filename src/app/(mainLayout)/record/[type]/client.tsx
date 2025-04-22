@@ -4,13 +4,14 @@ import React, { useState, useEffect, useMemo, useCallback, useTransition, memo }
 import styles from "./RecordPage.module.scss";
 import RecordCard, { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import { useSearchParams, useRouter } from "next/navigation";
+import { ActivityType } from "./activityTypes";
 
 interface RecordClientProps {
   initialRecords: RecordContentDTO[];
   allRecords: RecordContentDTO[];
   years: number[];
   initialYear: number | null;
-  activityType: "yama" | "tabi" | "tsuri";
+  activityType: ActivityType;
 }
 
 // 日付順に並び替える関数
@@ -19,20 +20,10 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
     // 日付がない場合は後ろに配置
     if (!a.date) return 1;
     if (!b.date) return -1;
-    
+
     // 日付を比較（降順 - 新しい日付が上に）
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
-};
-
-// アクティビティタイプに応じたアイコンを取得
-const getActivityIcon = (type: string) => {
-  switch (type) {
-    case "yama": return "🏔️";
-    case "tabi": return "✈️";
-    case "tsuri": return "🎣";
-    default: return "📝";
-  }
 };
 
 // プレースセクションをメモ化されたコンポーネントとして分離
@@ -43,7 +34,7 @@ const PlaceSection = memo(({
 }: {
   place: string;
   records: RecordContentDTO[];
-  activityType: string;
+  activityType: ActivityType;
 }) => {
   // このプレースに対応するレコードをメモ化し、日付順に並び替え
   const placeRecords = useMemo(() => {
@@ -54,7 +45,7 @@ const PlaceSection = memo(({
   // ユニークな日付と対応するレコードを取得
   const dateGroups = useMemo(() => {
     const dates = new Map<string, RecordContentDTO[]>();
-    
+
     placeRecords.forEach(record => {
       const dateKey = record.date || 'no-date';
       if (!dates.has(dateKey)) {
@@ -62,7 +53,7 @@ const PlaceSection = memo(({
       }
       dates.get(dateKey)?.push(record);
     });
-    
+
     // 日付でソートして返す（降順 - 新しい日付が上に）
     return Array.from(dates.entries()).sort((a, b) => {
       if (a[0] === 'no-date') return 1;
@@ -71,15 +62,13 @@ const PlaceSection = memo(({
     });
   }, [placeRecords]);
 
-  const activityIcon = getActivityIcon(activityType);
-
   return (
     <div className={styles.placeSection}>
       <h3 className={styles.placeTitle}>
-        <span className={styles.placeIcon}>{activityIcon}</span>
+        <span className={styles.placeIcon}>{activityType.icon}</span>
         {place}
       </h3>
-      
+
       <div className={styles.recordCardList}>
         {dateGroups.map(([date, dateRecords]) => (
           <div key={date} className={styles.dateGroup}>
@@ -91,7 +80,7 @@ const PlaceSection = memo(({
             <div className={styles.dateRecords}>
               {dateRecords.map((record) => (
                 <RecordCard
-                  record={{...record, date: null}} // 日付を非表示にするためnullで上書き
+                  record={{ ...record, date: null }} // 日付を非表示にするためnullで上書き
                   key={record.contentId}
                 />
               ))}
@@ -115,35 +104,25 @@ const RecordClient: React.FC<RecordClientProps> = ({
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   // URLから年度パラメータを取得
   const yearParam = searchParams.get('year');
   const yearFromUrl = yearParam ? parseInt(yearParam, 10) : null;
-  
+
   // React Transitionを使用してUIのブロックを防止
   const [isPending, startTransition] = useTransition();
 
   const [selectedYear, setSelectedYear] = useState<number | null>(
     yearFromUrl && years.includes(yearFromUrl) ? yearFromUrl : initialYear
   );
-  
+
   const [recordsToShow, setRecordsToShow] = useState<RecordContentDTO[]>(
     yearFromUrl && years.includes(yearFromUrl)
       ? allRecords.filter(r => r.year === yearFromUrl)
       : initialRecords
   );
-  
-  const [loading, setLoading] = useState(false);
 
-  // アクティビティ名の設定
-  const activityName = useMemo(() => {
-    switch (activityType) {
-      case "yama": return "山行";
-      case "tabi": return "旅行";
-      case "tsuri": return "釣行";
-      default: return "活動";
-    }
-  }, [activityType]);
+  const [loading, setLoading] = useState(false);
 
   // 年度変更時の処理
   const handleYearChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -152,15 +131,15 @@ const RecordClient: React.FC<RecordClientProps> = ({
     // 選択した年度を設定
     startTransition(() => {
       setSelectedYear(yearValue);
-      
+
       // URLに年度を反映
       if (yearValue) {
-        router.push(`/record/${activityType}?year=${yearValue}`, { scroll: false });
+        router.push(`/record/${activityType.id}?year=${yearValue}`, { scroll: false });
       } else {
-        router.push(`/record/${activityType}`, { scroll: false });
+        router.push(`/record/${activityType.id}`, { scroll: false });
       }
     });
-  }, [activityType, router]);
+  }, [activityType.id, router]);
 
   // 年度変更時のデータフィルタリング
   useEffect(() => {
@@ -168,9 +147,9 @@ const RecordClient: React.FC<RecordClientProps> = ({
       setRecordsToShow([]);
       return;
     }
-    
+
     setLoading(true);
-    
+
     // 非同期処理で UI ブロッキングを防止
     const timeoutId = setTimeout(() => {
       startTransition(() => {
@@ -203,7 +182,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
         </div>
       ) : years.length === 0 ? (
         <div className={styles.noDataMessage}>
-          <p>{activityName}記録のデータがありません。</p>
+          <p>{activityType.title}のデータがありません。</p>
         </div>
       ) : (
         <>
@@ -228,7 +207,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
             <div className={styles.recordsWrapper}>
               {placeList.length === 0 ? (
                 <div className={styles.noDataMessage}>
-                  <p>{selectedYear}年度の{activityName}記録はありません。</p>
+                  <p>{selectedYear}年度の{activityType.title}はありません。</p>
                 </div>
               ) : (
                 placeList.map((place) => (

@@ -7,9 +7,41 @@ import TabBar from "@/components/TabBar/TabBar";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import Title from "@/components/Title/Title";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import activityTypes from "./activityTypes";
+import { Metadata } from "next";
 
 // ISR設定（30分ごとに再生成、秒数で指定）
 export const revalidate = 1800;
+
+// [type]に入る値を列挙して事前生成
+export async function generateStaticParams() {
+  return activityTypes.map((type) => ({
+    type: type.id,
+  }));
+}
+
+// 列挙されたもの以外は404
+export const dynamicParams = false;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{
+    type: string;
+  }>;
+}): Promise<Metadata> {
+  const recordType = (await params).type;
+
+  const activityType = activityTypes.find((e) => e.id == recordType);
+  if (activityType === undefined) {
+    throw new Error(`Invalid record type: ${recordType}`);
+  }
+
+  return {
+    title: activityType.title,
+    description: `自然に親しむ会の${activityType.title}の一覧です。`,
+  };
+}
 
 export default async function RecordTypePage({
   params,
@@ -20,24 +52,16 @@ export default async function RecordTypePage({
 }) {
   const recordType = (await params).type;
 
-  const activityTypes: {
-    title: string;
-    icon: string;
-    id: "yama" | "tabi" | "tsuri";
-  }[] = [
-    { title: "山行記録", icon: "🏔️", id: "yama" },
-    { title: "旅行記録", icon: "✈️", id: "tabi" },
-    { title: "釣行記録", icon: "🎣", id: "tsuri" },
-  ];
-
   // タイプのバリデーション
   const activityType = activityTypes.find((e) => e.id == recordType);
   if (activityType === undefined) {
     throw new Error(`Invalid record type: ${recordType}`);
   }
 
+  console.log("RecordTypePage", activityType);
+
   // データ取得を待ちつつ、Suspenseでラップして表示を最適化
-  const recordData = await getRecordData(recordType);
+  const recordData = await getRecordData(activityType.id);
 
   return (
     <>
@@ -62,13 +86,13 @@ export default async function RecordTypePage({
         }))}
       />
 
-      <Suspense fallback={<LoadingPlaceholder type={recordType} />}>
+      <Suspense fallback={<LoadingPlaceholder activityTitle={activityType.title} />}>
         <RecordClient
           initialRecords={recordData.initialRecords}
           allRecords={recordData.allRecords}
           years={recordData.years}
           initialYear={recordData.initialYear}
-          activityType={activityType.id}
+          activityType={activityType}
         />
       </Suspense>
     </>
@@ -105,11 +129,11 @@ async function getRecordData(recordType: string) {
       where:
         recordType === "tabi"
           ? {
-              OR: [
-                { activityType: "tabi" },
-                { activityType: "other" }, // tabiページでは「other」もフィルタリング
-              ],
-            }
+            OR: [
+              { activityType: "tabi" },
+              { activityType: "other" }, // tabiページでは「other」もフィルタリング
+            ],
+          }
           : { activityType: recordType },
       include: {
         Content: true, // 関連するContentを取得
