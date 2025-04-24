@@ -15,6 +15,23 @@ async function withRetry<T>(fn: () => Promise<T>, retries = 3, delay = 2000) {
   }
 }
 
+export async function getUserUsingSession() {
+  const supabase = await createClient();
+  //maybe not the safest??? whatever!
+  const { data, error } = await supabase.auth.getSession();
+  if (error) {
+    console.error("Error getting session: ", error);
+    return null;
+  }
+
+  if (!data.session) {
+    console.error("Session not found");
+    return null;
+  }
+
+  return data.session.user;
+}
+
 export async function getUserfromSession() {
   const supabase = await createClient();
   const { data, error } = await withRetry(() => supabase.auth.getUser());
@@ -41,14 +58,14 @@ export async function login() {
       provider: "google",
       options: {
         redirectTo: `${baseUrl}/api/auth/callback?next=${encodeURIComponent(
-          nextUrl
+          nextUrl,
         )}`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
         },
       },
-    })
+    }),
   );
 
   if (error) {
@@ -93,27 +110,16 @@ export async function linkDiscord() {
 }
 
 export async function getUser() {
-  // const supabase = await createClient();
-  // const { data, error } = await supabase.auth.getUser();
-  const user = await getUserfromSession();
+  const user = await getUserUsingSession();
   if (!user) {
     console.error("User not found");
     return null;
   }
 
-  // if (error) {
-  //   console.error("Error getting user: ", error);
-  //   return null;
-  // }
-
-  // return data.user.id;
   return user.id;
 }
 
 export async function getDiscordInfo() {
-  // const supabase = await createClient();
-  // const { data, error } = await supabase.auth.getUser();
-
   const user = await getUserfromSession();
 
   if (!user) {
@@ -121,20 +127,8 @@ export async function getDiscordInfo() {
     return null;
   }
 
-  // if (error) {
-  //   console.error("Error getting user: ", error);
-  //   return null;
-  // }
-  // if (!data.user) {
-  //   console.error("User not found");
-  //   return null;
-  // }
-
-  // const discordIdentity = data.user.identities?.find(
-  //   (identity) => identity.provider === "discord"
-  // );
   const discordIdentity = user.identities?.find(
-    (identity) => identity.provider === "discord"
+    (identity) => identity.provider === "discord",
   );
 
   const userIdentity = discordIdentity;

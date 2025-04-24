@@ -1,3 +1,5 @@
+"use client";
+
 import { Box } from "@mui/material";
 import { Drawer } from "@mui/material";
 import DrawerContent from "./drawer-content";

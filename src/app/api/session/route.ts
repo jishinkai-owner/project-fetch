@@ -1,28 +1,25 @@
-// import { getUserData } from "@/utils/supabase/user";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { getUser } from "@/app/actions";
+import { getUserUsingSession } from "@/app/actions";
 
 const prisma = new PrismaClient();
 
-//get user data including id, name, and role
 export async function GET() {
-  try {
-    console.log("Getting user data...");
+  console.log("Getting session data...");
 
-    const id = await getUser();
-    if (!id) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+  try {
+    const session = await getUserUsingSession();
+    if (!session) {
+      return NextResponse.json({ error: "Session not found" }, { status: 404 });
     }
 
-    console.log("User data retrieved successfully:", id);
+    const id = session.user.id;
 
     const userFromTable = await prisma.user.findUnique({
       where: {
         id: String(id),
       },
       select: {
-        id: true,
         name: true,
         grade: true,
         Role: {
@@ -47,16 +44,12 @@ export async function GET() {
     console.log("User found in database:", userFromTable);
 
     return NextResponse.json(
-      {
-        success: true,
-        data: userFromTable,
-      },
+      { sucess: true, data: userFromTable },
       { status: 200 },
     );
   } catch (error) {
-    console.error("API Error: ", error);
     return NextResponse.json(
-      { error: "Failed to fetch user data", details: error },
+      { error: "Error getting session data" },
       { status: 500 },
     );
   }

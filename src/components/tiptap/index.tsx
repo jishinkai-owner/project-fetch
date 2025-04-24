@@ -21,6 +21,7 @@ import { ExpandMore } from "@mui/icons-material";
 import RecordCard from "../shared/record-card";
 import { useRecordSubmit, useRecordDelete } from "./hook";
 import { useUserContext } from "@/providers/user";
+import { Suspense } from "react";
 
 const EditorPage = () => {
   const { contextValue } = useUserContext();
@@ -118,7 +119,10 @@ const EditorPage = () => {
                 }))
               }
             />
-            <TipTapEditor content={null} setContent={setContent} />
+
+            <Suspense>
+              <TipTapEditor content={null} setContent={setContent} />
+            </Suspense>
             <AccordionActions>
               <Button
                 variant="contained"

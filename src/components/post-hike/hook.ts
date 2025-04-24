@@ -40,10 +40,10 @@ export const useTabs = () => {
 
 export const usePastPostHike = (
   recordId: number | null,
-  clId: string | null
+  clId: string | null,
 ) => {
   const { data, isLoading, isError } = useData<PostHikeContentRes[]>(
-    `/api/postHike?recordId=${recordId}&clId=${clId}`
+    `/api/postHike?recordId=${recordId}&clId=${clId}`,
   );
 
   const pastPostHike = useMemo(() => {
@@ -59,7 +59,7 @@ export const usePastPostHike = (
 
 export const usePostPostHikesWithRecordId = (recordId: number) => {
   const { data, isLoading, isError } = useData<PostHikeContentResWithRecord>(
-    `/api/postHikes?recordId=${recordId}`
+    `/api/postHikes?recordId=${recordId}`,
   );
 
   const postHikes = useMemo(() => {
@@ -86,10 +86,10 @@ export const useIds = () => {
 
 export const useEntriesState = (
   clId: string | null,
-  recordId: number | null
+  recordId: number | null,
 ) => {
   const { data: postHikeData } = useData<PostHikeContentRes[]>(
-    clId && recordId ? `/api/postHike?recordId=${recordId}&clId=${clId}` : ""
+    clId && recordId ? `/api/postHike?recordId=${recordId}&clId=${clId}` : "",
   );
   const postHikeEntry = useMemo(() => {
     if (!postHikeData) return null;

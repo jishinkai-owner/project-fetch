@@ -10,15 +10,11 @@ type HikeSelectProps = {
 };
 
 const HikeSelect = memo(({ records, handleChange, value }: HikeSelectProps) => {
-  const menuItems = useMemo(
-    () =>
-      records.map((e: RecordProps) => (
-        <MenuItem key={e.id} value={e.id}>
-          {e.place} - {e.date}, {e.year}
-        </MenuItem>
-      )),
-    [records]
-  );
+  const menuItems = records.map((e: RecordProps) => (
+    <MenuItem key={e.id} value={e.id}>
+      {e.place} - {e.date}, {e.year}
+    </MenuItem>
+  ));
 
   return (
     <TextField

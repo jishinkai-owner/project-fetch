@@ -58,5 +58,3 @@ export async function getUserRoles(id: string) {
     throw error;
   }
 }
-
-// export async function postUserRole(id: string) {}
