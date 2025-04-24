@@ -8,12 +8,13 @@ export async function GET() {
   console.log("Getting session data...");
 
   try {
-    const session = await getUserUsingSession();
-    if (!session) {
+    const sessionUser = await getUserUsingSession();
+    if (!sessionUser) {
       return NextResponse.json({ error: "Session not found" }, { status: 404 });
     }
 
-    const id = session.user.id;
+    // const id = session?.user.id;
+    const id = sessionUser.id;
 
     const userFromTable = await prisma.user.findUnique({
       where: {
@@ -48,6 +49,7 @@ export async function GET() {
       { status: 200 },
     );
   } catch (error) {
+    console.error("Error getting session data: ", error);
     return NextResponse.json(
       { error: "Error getting session data" },
       { status: 500 },
