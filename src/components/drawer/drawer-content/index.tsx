@@ -6,8 +6,9 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const drawerItem: { title: string; route: string }[] = [
   { title: "記録を記入する", route: "/club-members/records" },
@@ -17,52 +18,46 @@ const drawerItem: { title: string; route: string }[] = [
 ];
 
 const DrawerContent = () => {
-  const router = useRouter();
   const path = usePathname();
   return (
     <Stack direction="column">
-      <Stack
-        onClick={() => {
-          router.push("/club-members");
-        }}
-        direction="row"
-        justifyContent="center"
-      >
-        <Image
-          src="/jishinkaiboard.svg"
-          alt="logo"
-          width={200}
-          height={100}
-          priority
-        />
+      <Stack direction="row" justifyContent="center">
+        <Link href="/club-members">
+          <Image
+            src="/jishinkaiboard.svg"
+            alt="logo"
+            width={200}
+            height={100}
+            priority
+          />
+        </Link>
       </Stack>
       <List>
         {drawerItem.map((item, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton
-              selected={path === item.route}
-              sx={{
-                pl: 3,
-              }}
-              onClick={() => {
-                router.push(item.route);
-              }}
-            >
-              <ListItemText
-                disableTypography
-                primary={
-                  <Typography
-                    variant="body1"
-                    color="textPrimary"
-                    align="justify"
-                    fontWeight={600}
-                  >
-                    {item.title}
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
+          <Link href={item.route} key={index}>
+            <ListItem key={index} disablePadding>
+              <ListItemButton
+                selected={path === item.route}
+                sx={{
+                  pl: 3,
+                }}
+              >
+                <ListItemText
+                  disableTypography
+                  primary={
+                    <Typography
+                      variant="body1"
+                      color="textPrimary"
+                      align="justify"
+                      fontWeight={600}
+                    >
+                      {item.title}
+                    </Typography>
+                  }
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Stack>
