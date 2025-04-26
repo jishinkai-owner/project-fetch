@@ -1,7 +1,15 @@
 import PostHikeComp from "@/components/post-hike";
+import { UserContextProvider } from "@/providers/user";
+import { Suspense } from "react";
 
 const PostHikePage = () => {
-  return <PostHikeComp />;
+  return (
+    <Suspense>
+      <UserContextProvider>
+        <PostHikeComp />
+      </UserContextProvider>
+    </Suspense>
+  );
 };
 
 export default PostHikePage;

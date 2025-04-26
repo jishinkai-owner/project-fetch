@@ -33,6 +33,7 @@ export async function getUserUsingSession() {
 }
 
 export async function getUserfromSession() {
+  console.log("getting user via supabase auth");
   const supabase = await createClient();
   const { data, error } = await withRetry(() => supabase.auth.getUser());
   if (error) {
@@ -110,6 +111,7 @@ export async function linkDiscord() {
 }
 
 export async function getUser() {
+  console.log("getting user from session data");
   const user = await getUserUsingSession();
   if (!user) {
     console.error("User not found");

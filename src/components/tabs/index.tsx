@@ -14,7 +14,6 @@ const TabPanel = (props: TabPanelProps) => {
     <div
       role="tabpanel"
       hidden={value !== index}
-      // style={{ display: value !== index ? "none" : "block" }}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
