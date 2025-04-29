@@ -9,7 +9,7 @@ import Image from "@tiptap/extension-image";
 import Toolbar from "./toolbar/index";
 import FloatingBar from "./floating-menu";
 import { Toaster } from "react-hot-toast";
-import { isMarkdown } from "./paste-markdown/pasteMD";
+import { isMarkdown, isFlickrEmbed } from "./paste-markdown/pasteMD";
 import { generateJSON } from "@tiptap/react";
 import MarkdownIt from "markdown-it";
 
@@ -42,12 +42,20 @@ const TipTapEditor = ({ content, setContent }: SetContentProps) => {
     editorProps: {
       handlePaste: (view, event) => {
         const plainText = event.clipboardData?.getData("text/plain");
-        if (plainText && isMarkdown(plainText)) {
+        // const text = event.clipboardData?.getData("text/html");
+        console.log(plainText);
+        console.log("is it html? ", isFlickrEmbed(plainText ?? ""));
+        if (plainText && isFlickrEmbed(plainText)) {
+          event.preventDefault();
+          console.log("HTML", plainText);
+          editor?.commands.insertContent(plainText);
+
+          return true;
+        } else if (plainText && isMarkdown(plainText)) {
           event.preventDefault();
           const html = markdownParser.render(plainText);
 
           const json = generateJSON(html, extensions);
-
           editor?.commands.insertContent(json);
           return true;
         }
