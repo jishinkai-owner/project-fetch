@@ -7,6 +7,11 @@ export const metadata: Metadata = {
     default: "自然に親しむ会",
   },
   description: "自然に親しむ会の活動記録をまとめたサイトです。",
+  icons: {
+    icon: [
+      { url: "/favicon.webp", type: "image/webp" },
+    ]
+  },
 }
 
 export default function RootLayout({
