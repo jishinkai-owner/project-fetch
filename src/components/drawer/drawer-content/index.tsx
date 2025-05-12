@@ -13,7 +13,7 @@ import Link from "next/link";
 
 const drawerItem: { title: string; route: string }[] = [
   { title: "記録を記入する", route: "/club-members/records" },
-  { title: "天気図", route: "/club-members/weather-chart" },
+  { title: "天気図", route: "" },
   { title: "山行の反省", route: "/club-members/post-hikes" },
   { title: "山行の登録", route: "/club-members/register-hikes" },
 ];
