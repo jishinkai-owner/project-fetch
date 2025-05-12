@@ -9,7 +9,6 @@ const PostHikeCard = (postHike: RecordProps) => {
       title={postHike.place || "山行"}
       description={`${postHike.year}/${postHike.date}`}
       pushUrl={`/club-members/post-hikes/view/${postHike.id}`}
-      // pushParams={postHike.id.toString()}
     />
   );
 };

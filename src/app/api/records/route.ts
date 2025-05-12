@@ -11,7 +11,7 @@ export async function GET() {
 
     const records = await prisma.record.findMany({
       where: {
-        // activityType: "yama",
+        activityType: "yama",
         year: {
           gte: currentYear,
         },
@@ -31,7 +31,7 @@ export async function GET() {
     console.error("API Error: ", error);
     return NextResponse.json(
       { error: "Failed to fetch record data", details: error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     if (!year || !place || !date || !activityType) {
       return NextResponse.json(
         { error: "year, place, date, and activityType are all required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     if (!newRecord) {
       return NextResponse.json(
         { error: "Failed to post new hike info. new record info is null." },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -68,14 +68,14 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { success: true, data: newRecord },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("API Error: ", error);
 
     return NextResponse.json(
       { error: "Failed to post new hike info", details: error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import "./styles.scss";
+// import styles from "./Tiptap.module.scss";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -42,12 +43,8 @@ const TipTapEditor = ({ content, setContent }: SetContentProps) => {
     editorProps: {
       handlePaste: (view, event) => {
         const plainText = event.clipboardData?.getData("text/plain");
-        // const text = event.clipboardData?.getData("text/html");
-        console.log(plainText);
-        console.log("is it html? ", isFlickrEmbed(plainText ?? ""));
         if (plainText && isFlickrEmbed(plainText)) {
           event.preventDefault();
-          console.log("HTML", plainText);
           editor?.commands.insertContent(plainText);
 
           return true;
