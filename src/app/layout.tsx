@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "自然に親しむ会の活動記録をまとめたサイトです。",
   icons: {
     icon: [
-      { url: "/favicon.webp", type: "image/webp" },
+      { url: "/favicon2.webp", type: "image/webp" },
     ]
   },
 }
