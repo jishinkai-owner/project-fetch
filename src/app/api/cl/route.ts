@@ -9,7 +9,15 @@ export async function GET() {
 
     const clMembers = await prisma.role.findMany({
       where: {
-        isCL: true,
+        OR: [
+          { isCL: true },
+          {
+            isSL: true,
+            User: {
+              grade: 3,
+            },
+          },
+        ],
       },
       select: {
         userId: true,
@@ -24,7 +32,7 @@ export async function GET() {
     if (!clMembers || clMembers.length === 0) {
       return NextResponse.json(
         { error: "No CL members found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
     console.log("CL members retrieved successfully:", clMembers);
@@ -38,13 +46,13 @@ export async function GET() {
         data: clMembers,
         // data: clMembersWithName,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error: ", error);
     return NextResponse.json(
       { error: "Failed to fetch CL members", details: error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

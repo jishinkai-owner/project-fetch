@@ -65,7 +65,7 @@ const PostHikeForm = () => {
               }));
             }}
           />
-          {contextValue.Role?.isMeal && (
+          {(contextValue.Role?.isMeal || contextValue.Role?.isSL) && (
             <EntryTextField
               id="reflection-meal-required"
               value={entries.mealPerson ?? ""}
@@ -78,7 +78,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {contextValue.Role?.isWeather && (
+          {(contextValue.Role?.isWeather || contextValue.Role?.isSL) && (
             <EntryTextField
               id="reflection-weather"
               value={entries.weatherPerson ?? ""}
@@ -91,7 +91,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {contextValue.Role?.isEquipment && (
+          {(contextValue.Role?.isEquipment || contextValue.Role?.isSL) && (
             <EntryTextField
               id="reflection-equipment"
               value={entries.equipmentPerson ?? ""}
@@ -104,7 +104,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {contextValue.Role?.isSL && (
+          {(contextValue.Role?.isSL || contextValue.Role?.isSL) && (
             <EntryTextField
               id="reflection-sl"
               label="SLの反省"
@@ -117,7 +117,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {contextValue.Role?.isCL && (
+          {(contextValue.Role?.isCL || contextValue.Role?.isSL) && (
             <>
               <RetrospectiveText text={entries.mealPerson} role="食事係" />
               <EntryTextField
