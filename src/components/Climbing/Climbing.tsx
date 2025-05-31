@@ -45,7 +45,7 @@ const Climbing: React.FC<ClimbingProps> = () => {
           alt="山のアイコン"
           className={styles.sticker}
           width={2000}
-          height={2000}
+          height={500}
           priority
         />
       </div>

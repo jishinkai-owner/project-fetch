@@ -51,11 +51,10 @@
 
   .sticker {
     position: absolute;
-    aspect-ratio: 1;
     transform: rotate(6.65deg);
     z-index: 3;
     left: 90%;
-    top: 40%;
+    top: 100%;
     width: 130%;
     height: auto;
   }
