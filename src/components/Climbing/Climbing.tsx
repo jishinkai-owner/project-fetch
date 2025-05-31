@@ -35,9 +35,9 @@ const Climbing: React.FC<ClimbingProps> = () => {
             src="/Climbing3.webp"
             alt="山の風景"
             className={styles.image}
-            width={1000} // 必要な幅を指定
-            height={600} // 必要な高さを指定
-            priority // LCP改善のために優先的にロード
+            width={1000} 
+            height={600} 
+            priority 
           />
         </div>
         <Image
