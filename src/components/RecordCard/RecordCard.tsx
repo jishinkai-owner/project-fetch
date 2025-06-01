@@ -25,6 +25,19 @@ const RecordCard = memo(({
     const searchParams = useSearchParams();
     const currentYear = searchParams.get('year');
     
+    // activityType/contentIdが不正な場合はリンクを生成しない
+    if (!record.activityType || !record.contentId) {
+        return (
+            <div className={styles.recordCard + ' ' + styles.disabled} title="リンク情報が不正なため詳細ページに遷移できません">
+                <div className={styles.recordCardHeader}>
+                    <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
+                </div>
+                <div className={styles.cardFooter}>
+                    <span className={styles.readMore} style={{ color: '#aaa' }}>詳細ページに遷移できません</span>
+                </div>
+            </div>
+        );
+    }
     // 年度パラメータを含む詳細ページへのリンクを生成
     let linkHref = `/record/${record.activityType}/${record.contentId}`;
     if (currentYear) {
