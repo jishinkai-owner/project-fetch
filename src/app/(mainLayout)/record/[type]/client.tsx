@@ -41,7 +41,14 @@ const PlaceSection = memo(({
 }) => {
   // このプレースに対応するレコードをメモ化し、日付順に並び替え
   const placeRecords = useMemo(() => {
-    const filteredRecords = records.filter(r => r.place === place);
+    // "Contentの中身がない" 記録（details, title, filenameすべて空/未設定）は除外
+    const filteredRecords = records.filter(r =>
+      r.place === place && (
+        (r.details && r.details.trim() !== "") ||
+        (r.title && r.title.trim() !== "") ||
+        (r.filename && r.filename.trim() !== "")
+      )
+    );
     return sortByDate(filteredRecords);
   }, [records, place]);
 
