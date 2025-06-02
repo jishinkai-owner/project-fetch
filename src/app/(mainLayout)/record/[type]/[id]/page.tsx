@@ -8,6 +8,7 @@ import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Link from "next/link";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import activityTypes from "../activityTypes";
+import { parseMarkdownContent, enhanceHTMLContent } from "@/utils/markdown";
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -50,7 +51,7 @@ export default function RecordDetailPage() {
       try {
         setIsLoading(true);
         // 大文字小文字に注意
-        const res = await fetch(`/api/record/${activityType.id}/${contentId}`);
+        const res = await fetch(`/api/Record/${activityType.id}/${contentId}`);
 
         if (!res.ok) {
           if (res.status === 404) {
@@ -64,7 +65,7 @@ export default function RecordDetailPage() {
 
         // 関連コンテンツを取得
         try {
-          const relatedRes = await fetch(`/api/record/${activityType.id}`);
+          const relatedRes = await fetch(`/api/Record/${activityType.id}`);
           if (!relatedRes.ok) {
             throw new Error('Failed to fetch related contents');
           }
@@ -157,7 +158,11 @@ export default function RecordDetailPage() {
         {/* 記事本文 */}
         <div
           className={styles.detailContent}
-          dangerouslySetInnerHTML={{ __html: content.content || '内容がありません' }}
+          dangerouslySetInnerHTML={{ 
+            __html: content.content 
+              ? enhanceHTMLContent(parseMarkdownContent(content.content).html)
+              : '内容がありません' 
+          }}
         />
 
         {/* 画像ギャラリー */}

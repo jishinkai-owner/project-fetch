@@ -385,6 +385,42 @@
     border-radius: 0.5rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
+
+  // Enhanced styles for media embeds and forced line breaks
+  .media-embed {
+    margin: 2.5rem 0;
+    display: block;
+    clear: both;
+  }
+
+  .flickr-embed-wrapper {
+    text-align: center;
+    margin: 2.5rem 0;
+    
+    img {
+      border-radius: 0.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .image-container {
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+
+  // Force line breaks between text and images
+  p + .media-embed,
+  p + .flickr-embed-wrapper,
+  .media-embed + p,
+  .flickr-embed-wrapper + p {
+    margin-top: 2.5rem;
+  }
 }
 
 .imageGallery {
