@@ -89,7 +89,14 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
     }
 
     // 日付を比較（降順 - 新しい日付が上に）
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
+    const dateCompare = new Date(b.date).getTime() - new Date(a.date).getTime();
+    
+    // 日付が同じ場合は年度で比較（降順 - 新しい年度が上に）
+    if (dateCompare === 0) {
+      return (b.year || 0) - (a.year || 0);
+    }
+    
+    return dateCompare;
   });
 };
 
@@ -98,10 +105,12 @@ const PlaceSection = memo(({
   place,
   records,
   activityType,
+  isFishingRecords = false,
 }: {
   place: string;
   records: RecordContentDTO[];
   activityType: ActivityType;
+  isFishingRecords?: boolean;
 }) => {
   // このプレースに対応するレコードをメモ化し、日付順に並び替え
   const placeRecords = useMemo(() => {
@@ -132,7 +141,17 @@ const PlaceSection = memo(({
     return Array.from(dates.entries()).sort((a, b) => {
       if (a[0] === 'no-date') return 1;
       if (b[0] === 'no-date') return -1;
-      return new Date(b[0]).getTime() - new Date(a[0]).getTime();
+      
+      const dateCompare = new Date(b[0]).getTime() - new Date(a[0]).getTime();
+      
+      // 同じ日付の場合は年度で比較（釣果記録の場合のみ）
+      if (dateCompare === 0 && isFishingRecords) {
+        const maxYearA = Math.max(...a[1].map(r => r.year || 0));
+        const maxYearB = Math.max(...b[1].map(r => r.year || 0));
+        return maxYearB - maxYearA;
+      }
+      
+      return dateCompare;
     });
   }, [placeRecords]);
 
@@ -148,13 +167,23 @@ const PlaceSection = memo(({
           <div key={date} className={styles.dateGroup}>
             {date !== 'no-date' && (
               <div className={styles.dateHeader}>
-                <time dateTime={date}>{date}</time>
+                <time dateTime={date}>
+                  {date}
+                </time>
+                {isFishingRecords && dateRecords.length > 0 && dateRecords[0].year && (
+                  <span className={styles.yearBadge}>
+                    {dateRecords[0].year}年
+                  </span>
+                )}
               </div>
             )}
             <div className={styles.dateRecords}>
               {dateRecords.map((record) => (
                 <RecordCard
-                  record={{ ...record, date: null }} // 日付を非表示にするためnullで上書き
+                  record={{ 
+                    ...record, 
+                    date: null // 日付ヘッダーで表示しているのでカード内では非表示
+                  }}
                   key={record.contentId}
                 />
               ))}
@@ -179,6 +208,9 @@ const RecordClient: React.FC<RecordClientProps> = ({
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  // 釣果記録の場合は年度フィルタリングなしで全記録を表示
+  const isFishingRecords = activityType.id === "tsuri";
+
   // URLから年度パラメータを取得
   const yearParam = searchParams.get('year');
   const yearFromUrl = yearParam ? parseInt(yearParam, 10) : null;
@@ -187,13 +219,15 @@ const RecordClient: React.FC<RecordClientProps> = ({
   const [isPending, startTransition] = useTransition();
 
   const [selectedYear, setSelectedYear] = useState<number | null>(
-    yearFromUrl && years.includes(yearFromUrl) ? yearFromUrl : initialYear
+    isFishingRecords ? null : (yearFromUrl && years.includes(yearFromUrl) ? yearFromUrl : initialYear)
   );
 
   const [recordsToShow, setRecordsToShow] = useState<RecordContentDTO[]>(
-    yearFromUrl && years.includes(yearFromUrl)
-      ? allRecords.filter(r => r.year === yearFromUrl)
-      : initialRecords
+    isFishingRecords 
+      ? allRecords // 釣果記録は全記録を表示
+      : (yearFromUrl && years.includes(yearFromUrl)
+        ? allRecords.filter(r => r.year === yearFromUrl)
+        : initialRecords)
   );
 
   const [loading, setLoading] = useState(false);
@@ -217,6 +251,12 @@ const RecordClient: React.FC<RecordClientProps> = ({
 
   // 年度変更時のデータフィルタリング
   useEffect(() => {
+    // 釣果記録の場合は年度フィルタリングをスキップ
+    if (isFishingRecords) {
+      setRecordsToShow(allRecords);
+      return;
+    }
+
     if (!selectedYear) {
       setRecordsToShow([]);
       return;
@@ -235,7 +275,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
     }, 0);
 
     return () => clearTimeout(timeoutId);
-  }, [selectedYear, allRecords]);
+  }, [selectedYear, allRecords, isFishingRecords]);
 
   // 場所リスト（データが変わった時のみ再計算）
   const placeList = useMemo(() => {
@@ -243,8 +283,25 @@ const RecordClient: React.FC<RecordClientProps> = ({
     recordsToShow.forEach((r) => {
       if (r.place) uniquePlaces.add(r.place);
     });
+    
+    // 釣果記録の場合は場所を最新年度順に並び替える
+    if (isFishingRecords) {
+      const placeArray = Array.from(uniquePlaces);
+      return placeArray.sort((placeA, placeB) => {
+        // 各場所の最新年度を取得
+        const recordsA = recordsToShow.filter(r => r.place === placeA);
+        const recordsB = recordsToShow.filter(r => r.place === placeB);
+        
+        const maxYearA = Math.max(...recordsA.map(r => r.year || 0));
+        const maxYearB = Math.max(...recordsB.map(r => r.year || 0));
+        
+        // 最新年度が新しい順に並び替え（降順）
+        return maxYearB - maxYearA;
+      });
+    }
+    
     return Array.from(uniquePlaces);
-  }, [recordsToShow]);
+  }, [recordsToShow, isFishingRecords]);
 
   return (
     <>
@@ -281,28 +338,35 @@ const RecordClient: React.FC<RecordClientProps> = ({
           </div>
         ) : (
           <>
-            {/* 年度セレクタ */}
-            <div className={styles.yearSelector}>
-              <select
-                onChange={handleYearChange}
-                value={selectedYear ?? ""}
-                disabled={isPending}
-              >
-                <option value="">年度を選択</option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}年度
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* 釣果記録以外は年度セレクタを表示 */}
+            {!isFishingRecords && (
+              <div className={styles.yearSelector}>
+                <select
+                  onChange={handleYearChange}
+                  value={selectedYear ?? ""}
+                  disabled={isPending}
+                >
+                  <option value="">年度を選択</option>
+                  {years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}年度
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
 
             {/* 記録一覧表示部分 */}
-            {selectedYear && (
+            {(isFishingRecords || selectedYear) && (
               <div className={styles.recordsWrapper}>
                 {placeList.length === 0 ? (
                   <div className={styles.noDataMessage}>
-                    <p>{selectedYear}年度の{activityType.title}はありません。</p>
+                    <p>
+                      {isFishingRecords 
+                        ? `${activityType.title}はありません。`
+                        : `${selectedYear}年度の${activityType.title}はありません。`
+                      }
+                    </p>
                   </div>
                 ) : (
                   placeList.map((place) => (
@@ -311,6 +375,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
                       place={place}
                       records={recordsToShow}
                       activityType={activityType}
+                      isFishingRecords={isFishingRecords}
                     />
                   ))
                 )}
