@@ -134,13 +134,13 @@ export default function RecordDetailPage() {
         { title: 'Home', url: '/' },
         { title: '活動記録', url: '/record' },
         { title: activityType.title, url: `/record/${activityType.id}` },
-        { title: content.title || '無題' }
+        { title: content.title || 'ある日の記憶' }
       ]} />
 
       <div className={styles.recordDetail}>
         {/* 記事ヘッダー */}
         <div className={styles.detailHeader}>
-          <h1 className={styles.detailTitle}>{content.title || '無題'}</h1>
+          <h1 className={styles.detailTitle}>{content.title || 'ある日の記憶'}</h1>
           <div className={styles.detailMeta}>
             {content.place && (
               <span className={styles.detailPlace}>
@@ -204,7 +204,7 @@ export default function RecordDetailPage() {
                     key={item.contentId}
                   >
                     <div className={styles.relatedItemContent}>
-                      <h3 className={styles.relatedItemTitle}>{item.title || '無題'}</h3>
+                      <h3 className={styles.relatedItemTitle}>{item.title || 'ある日の記憶'}</h3>
                       <div className={styles.relatedItemMeta}>
                         {item.place && <span className={styles.relatedItemPlace}>{item.place}</span>}
                         {item.date && <span className={styles.relatedItemDate}>{displayDate(item.date)}</span>}

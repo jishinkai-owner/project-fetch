@@ -24,6 +24,70 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
     if (!a.date) return 1;
     if (!b.date) return -1;
 
+    // 同じ日付の場合、タイトルで「○日目」「前編」「中編」「後編」の順序をソート
+    if (a.date === b.date) {
+      // タイトルから順序を抽出してソート
+      const extractOrder = (title: string | null): number => {
+        if (!title) return 999; // タイトルがない場合は最後に
+        
+        // 漢数字を数字に変換する関数
+        const kanjiToNumber = (kanji: string): number => {
+          const kanjiMap: { [key: string]: number } = {
+            '一': 1, '二': 2, '三': 3, '四': 4, '五': 5,
+            '六': 6, '七': 7, '八': 8, '九': 9, '十': 10
+          };
+          return kanjiMap[kanji] || 0;
+        };
+        
+        // 「○日目」パターンをチェック（1日目、2日目、3日目...の順）
+        const dayMatch = title.match(/(\d+)日目/);
+        if (dayMatch) {
+          return parseInt(dayMatch[1], 10);
+        }
+        
+        // 「一日目」「二日目」「三日目」などの漢数字パターンをチェック
+        const kanjiDayMatch = title.match(/([一二三四五六七八九十])日目/);
+        if (kanjiDayMatch) {
+          return kanjiToNumber(kanjiDayMatch[1]);
+        }
+        
+        // 「前編」「中編」「後編」パターンをチェック
+        if (title.includes('前編')) return 1;
+        if (title.includes('中編')) return 2;
+        if (title.includes('後編')) return 3;
+        
+        // 「その1」「その2」「その3」パターンをチェック
+        const sonoMatch = title.match(/その(\d+)/);
+        if (sonoMatch) {
+          return parseInt(sonoMatch[1], 10);
+        }
+        
+        // 「第1話」「第2話」「第3話」パターンをチェック
+        const daiMatch = title.match(/第(\d+)話/);
+        if (daiMatch) {
+          return parseInt(daiMatch[1], 10);
+        }
+        
+        // 「PART1」「PART2」「PART3」パターンをチェック（大文字小文字問わず）
+        const partMatch = title.match(/part\s*(\d+)/i);
+        if (partMatch) {
+          return parseInt(partMatch[1], 10);
+        }
+        
+        return 999; // どのパターンにも当てはまらない場合は最後に
+      };
+
+      const orderA = extractOrder(a.title);
+      const orderB = extractOrder(b.title);
+      
+      if (orderA !== 999 && orderB !== 999) {
+        return orderA - orderB; // 順序通りにソート
+      }
+      
+      // 順序が抽出できない場合はタイトルの文字列比較
+      return (a.title || '').localeCompare(b.title || '');
+    }
+
     // 日付を比較（降順 - 新しい日付が上に）
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
