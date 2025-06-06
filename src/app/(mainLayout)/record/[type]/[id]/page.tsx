@@ -8,7 +8,6 @@ import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Link from "next/link";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import activityTypes from "../activityTypes";
-import { parseMarkdownContent, enhanceHTMLContent } from "@/utils/markdown";
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -158,11 +157,7 @@ export default function RecordDetailPage() {
         {/* 記事本文 */}
         <div
           className={styles.detailContent}
-          dangerouslySetInnerHTML={{ 
-            __html: content.content 
-              ? enhanceHTMLContent(parseMarkdownContent(content.content).html)
-              : '内容がありません' 
-          }}
+          dangerouslySetInnerHTML={{ __html: content.content || '内容がありません' }}
         />
 
         {/* 画像ギャラリー */}

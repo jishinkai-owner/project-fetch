@@ -50,10 +50,10 @@ const MemberClient: React.FC<{
   const renderContent = () => {
     // 学年とyearのマッピングを更新（殿堂入りを追加）
     const yearMapping: Record<YearCategory, string[]> = {
-      "2年生": ["C3"],
-      "3年生": ["C2"],
-      "4年生": ["C1"],
-      "殿堂入り": ["C0", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "B2", "B1", "B0", "A9", "A8"]
+      "2年生": ["C4"],
+      "3年生": ["C3"],
+      "4年生": ["C2"],
+      "殿堂入り": ["C1", "C0", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "B2", "B1", "B0", "A9", "A8"]
     };
 
     let filteredMembers: MemberDTO[] = [];
@@ -84,7 +84,12 @@ const MemberClient: React.FC<{
               </div>
               <div className={styles.memberCard}>
                 <div className={styles.memberCardHeader}>
-                  <h3 className={styles.memberName}>{member.nickname}</h3>
+                  <div>
+                    {selectedCategory === "殿堂入り" && (
+                      <div className={styles.yearBadge}>{member.year}</div>
+                    )}
+                    <h3 className={styles.memberName}>{member.nickname}</h3>
+                  </div>
                   <span className={styles.memberMajor}>{member.major || "未設定"}</span>
                 </div>
 

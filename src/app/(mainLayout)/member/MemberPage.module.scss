@@ -162,6 +162,30 @@
   margin: 0;
 }
 
+// データなしメッセージ
+.noDataMessage {
+  text-align: center;
+  color: #777;
+  font-size: 1.1rem;
+  margin: 2rem 0;
+}
+
+// 年度バッジ（メンバー用）
+.yearBadge {
+  display: inline-block;
+  background-color: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+  padding: 0.3rem 0.6rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: var(--font-geist-mono);
+  letter-spacing: 0.2px;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+}
+
 // モバイル対応
 @media (max-width: 900px) {
   .memberCardList {
