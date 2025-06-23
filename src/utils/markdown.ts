@@ -45,7 +45,7 @@ export function enhanceHTMLContent(html: string): string {
 
   // Wrap Flickr embed codes with special styling class
   enhancedHtml = enhancedHtml.replace(
-    /<a data-flickr-embed="true"[^>]*>.*?<\/a><script[^>]*><\/script>/gs,
+    /<a data-flickr-embed="true"[^>]*>[\s\S]*?<\/a><script[^>]*><\/script>/g,
     (match) => `<div class="media-embed flickr-embed-wrapper">${match}</div>`
   );
 
