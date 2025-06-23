@@ -91,3 +91,12 @@ export type CLRes = {
     name: string;
   };
 };
+
+export type FlickrPhotoSize = {
+  label: string;
+  width: number;
+  height: number;
+  source: string;
+  url: string;
+  media: string;
+};
