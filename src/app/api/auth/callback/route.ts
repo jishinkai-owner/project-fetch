@@ -13,41 +13,47 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/`);
   }
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.exchangeCodeForSession(code);
-  console.log("Exchange code for session: ", { data, error });
-  if (error || !data) {
-    return NextResponse.redirect(`${origin}/`);
-  }
 
-  if (data.user && data.user.email) {
-    console.log("User data: ", data.user);
-
-    if (!data.user.email.endsWith("@dc.tohoku.ac.jp")) {
-      console.log("Unauthorized email domain: ", data.user.email);
-      await supabase.auth.signOut();
+  try {
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+    console.log("Exchange code for session: ", { data, error });
+    if (error || !data) {
       return NextResponse.redirect(`${origin}/`);
     }
 
-    await prisma.user.upsert({
-      where: {
-        id: data.user.id,
-      },
-      update: {},
-      create: {
-        id: data.user.id,
-        email: data.user.email,
-        name: data.user.user_metadata.name,
-      },
-    });
-  }
+    if (data.user && data.user.email) {
+      console.log("User data: ", data.user);
 
-  const forwardedHost = request.headers.get("x-forwarded-host");
-  const isLocalEnv = process.env.NODE_ENV === "development";
-  if (isLocalEnv) {
-    return NextResponse.redirect(`${origin}${next}`);
-  } else if (forwardedHost) {
-    return NextResponse.redirect(`https://${forwardedHost}${next}`);
-  } else {
-    return NextResponse.redirect(`${origin}${next}`);
+      if (!data.user.email.endsWith("@dc.tohoku.ac.jp")) {
+        console.log("Unauthorized email domain: ", data.user.email);
+        await supabase.auth.signOut();
+        return NextResponse.redirect(`${origin}/error?code=403`);
+      }
+
+      await prisma.user.upsert({
+        where: {
+          id: data.user.id,
+        },
+        update: {},
+        create: {
+          id: data.user.id,
+          email: data.user.email,
+          name: data.user.user_metadata.name,
+        },
+      });
+    }
+
+    const forwardedHost = request.headers.get("x-forwarded-host");
+    const isLocalEnv = process.env.NODE_ENV === "development";
+    if (isLocalEnv) {
+      return NextResponse.redirect(`${origin}${next}`);
+    } else if (forwardedHost) {
+      return NextResponse.redirect(`https://${forwardedHost}${next}`);
+    } else {
+      return NextResponse.redirect(`${origin}${next}`);
+    }
+  } catch (error) {
+    console.log("Error during authentication callback: ", error);
+    return NextResponse.redirect(`${origin}/error?code=500`);
   }
 }
