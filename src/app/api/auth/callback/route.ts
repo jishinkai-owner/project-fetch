@@ -6,14 +6,12 @@ const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
-  // const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
 
   if (!code) {
     return NextResponse.redirect(`${origin}/`);
   }
-  // try {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
   console.log("Exchange code for session: ", { data, error });
@@ -23,6 +21,13 @@ export async function GET(request: Request) {
 
   if (data.user && data.user.email) {
     console.log("User data: ", data.user);
+
+    if (!data.user.email.endsWith("@dc.tohoku.ac.jp")) {
+      console.log("Unauthorized email domain: ", data.user.email);
+      await supabase.auth.signOut();
+      return NextResponse.redirect(`${origin}/`);
+    }
+
     await prisma.user.upsert({
       where: {
         id: data.user.id,
