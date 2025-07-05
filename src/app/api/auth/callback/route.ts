@@ -27,20 +27,26 @@ export async function GET(request: Request) {
       if (!data.user.email.endsWith("@dc.tohoku.ac.jp")) {
         console.log("Unauthorized email domain: ", data.user.email);
         await supabase.auth.signOut();
+        await supabase.auth.admin.deleteUser(data.user.id);
         return NextResponse.redirect(`${origin}/error?code=403`);
       }
 
-      await prisma.user.upsert({
-        where: {
-          id: data.user.id,
-        },
-        update: {},
-        create: {
-          id: data.user.id,
-          email: data.user.email,
-          name: data.user.user_metadata.name,
-        },
-      });
+      try {
+        await prisma.user.upsert({
+          where: {
+            id: data.user.id,
+          },
+          update: {},
+          create: {
+            id: data.user.id,
+            email: data.user.email,
+            name: data.user.user_metadata.name,
+          },
+        });
+      } catch (error) {
+        console.error("Error upserting user: ", error);
+        //continue authentication flow even if upsert fails
+      }
     }
 
     const forwardedHost = request.headers.get("x-forwarded-host");

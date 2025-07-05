@@ -21,11 +21,6 @@ type RoleMap = {
 };
 
 export async function getUserRoles(id: string) {
-  // if (!id) {
-  //   console.error("Discord ID is undefined");
-  //   return null;
-  // }
-
   try {
     const res = await axios.post(`/api/discord`, { id: id });
     const roles: RoleMap = {};
