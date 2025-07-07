@@ -1,3 +1,18 @@
+/**
+ * importAllRecords.ts
+ * 
+ * 山行記録データを一括でデータベースにインポートするスクリプト
+ * 
+ * 機能:
+ * - 2007年〜2009年の山行記録データ（ハードコーディング）をPrismaを使ってデータベースに登録
+ * - 各年度の山行データには年度、ファイル名、場所、タイトル、日付、活動タイプ、詳細が含まれる
+ * - filenameがnullの場合は中止になった山行やファイルが存在しない記録
+ * - 主にRecordテーブルへのデータ投入に使用
+ * 
+ * 使用方法:
+ * npm run tsx scripts/importAllRecords.ts
+ */
+
 import "dotenv/config";
 import fs from "fs-extra";
 import path from "path";

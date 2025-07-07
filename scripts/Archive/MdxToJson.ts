@@ -1,3 +1,24 @@
+/**
+ * MdxToJson.ts
+ * 
+ * 部員リストのMDXファイルをJSON形式に変換するスクリプト
+ * 
+ * 機能:
+ * - src/app/member/legend.mdx から部員情報を抽出
+ * - MDXコンテンツ内の <Member /> コンポーネントの属性を解析
+ * - プロフィール、年次、所属、役割、画像URL等の詳細情報をパース
+ * - 構造化されたJSONデータに変換してscripts/legend.jsonに保存
+ * - 複数行プロフィールやimg属性の複雑な構造にも対応
+ * 
+ * 対象ファイル: src/app/member/legend.mdx
+ * 出力ファイル: scripts/legend.json
+ * 
+ * 使用方法:
+ * npm run tsx scripts/MdxToJson.ts
+ * 
+ * 注意: MDX内の<Member />コンポーネントの属性形式に依存
+ */
+
 //このスクリプトは部員リスト（MDXファイル）をJSON形式に変換するためのもので、主な機能は:
 //src/app/member/index.mdxから部員情報を抽出
 //MDXコンテンツから<Member /> コンポーネントの部員情報をパース

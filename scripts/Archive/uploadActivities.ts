@@ -1,3 +1,23 @@
+/**
+ * uploadActivities.ts
+ * 
+ * 山行記録のMarkdownファイルをSupabaseのactivity_recordsテーブルに直接アップロードするスクリプト
+ * 
+ * 機能:
+ * - src/content/yama/ 以下の全MarkdownファイルをSupabaseのactivity_recordsテーブルに保存
+ * - ファイル名からタイトルと年度を自動抽出
+ * - ディレクトリ構造を走査して年度フォルダとファイルを自動検出
+ * - Supabaseに直接データをインサート（Prismaは使用しない）
+ * 
+ * 対象ファイル: src/content/yama のMarkdownファイル
+ * 
+ * 使用方法:
+ * npm run tsx scripts/uploadActivities.ts
+ * 
+ * 注意: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY環境変数が必要
+ * 注意: このスクリプトはuploadContent.tsとは異なるアプローチでSupabaseテーブルに直接保存
+ */
+
 import "dotenv/config";
 import fs from "fs";
 import path from "path";

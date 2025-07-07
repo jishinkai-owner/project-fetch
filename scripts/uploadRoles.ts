@@ -1,3 +1,21 @@
+/**
+ * uploadRoles.ts
+ * 
+ * ユーザーの役割・権限データをJSONファイルからデータベースに登録するスクリプト
+ * 
+ * 機能:
+ * - scripts/roles.jsonファイルから役割情報を読み込み
+ * - 既存のUserテーブルのemailを基に該当ユーザーを検索
+ * - Roleテーブルに各種権限フラグ（isAdmin, isCL, isSL, isMeal, isEquipment, isWeather）を設定
+ * - upsert処理により、既存レコードは更新、新規レコードは作成
+ * 
+ * 対象ファイル: scripts/roles.json
+ * 期待するJSONフォーマット: [{"email": "user@example.com", "isAdmin": true, "isCL": false, ...}, ...]
+ * 
+ * 使用方法:
+ * npm run tsx scripts/uploadRoles.ts
+ */
+
 import { PrismaClient } from "@prisma/client";
 import fs from "fs-extra";
 import path from "path";

@@ -1,3 +1,22 @@
+/**
+ * uploadActivityRecords.ts
+ * 
+ * 活動記録インデックスファイルから活動記録データを抽出してデータベースに登録するスクリプト
+ * 
+ * 機能:
+ * - src/content/yama/index.md から山行記録の一覧情報を解析
+ * - 正規表現を使って日付、タイトル、ファイル名、参加者情報を抽出
+ * - PrismaのActivityRecordテーブルに年度、日付、タイトル、ファイル名、場所、活動タイプを登録
+ * - upsert処理により重複データの回避
+ * - リンク形式とプレーンテキスト形式の両方に対応
+ * 
+ * 対象ファイル: src/content/yama/index.md
+ * 解析対象形式: "YYYY/MM/DD: [タイトル](リンク)" または "YYYY/MM/DD: タイトル (参加者)"
+ * 
+ * 使用方法:
+ * npm run tsx scripts/uploadActivityRecords.ts
+ */
+
 import { PrismaClient } from '@prisma/client';
 import "dotenv/config";
 import fs from "fs-extra";

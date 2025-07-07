@@ -1,3 +1,22 @@
+/**
+ * uploadContent.ts
+ * 
+ * 山行記録のMarkdownコンテンツと画像をデータベース・Supabaseに一括アップロードするスクリプト
+ * 
+ * 機能:
+ * - src/content/yama/ 以下の全年度の山行記録（.mdx/.md）を解析
+ * - 各記録のMarkdownコンテンツからfront matter・import文を除去してクリーニング
+ * - 同フォルダ内の画像ファイル（jpg, jpeg, png）をSupabase Storageにアップロード
+ * - PrismaのRecordContentテーブルに年度、ファイル名、コンテンツ、画像URLリストを保存
+ * - filename形式: "2007/Adatara/20070623adatara" （年度/山行名/ファイル名）
+ * - バッチ処理により大量データも効率的に処理
+ * 
+ * 使用方法:
+ * npm run tsx scripts/uploadContent.ts
+ * 
+ * 注意: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY環境変数が必要
+ */
+
 import "dotenv/config";
 import fs from "fs-extra";
 import path from "path";

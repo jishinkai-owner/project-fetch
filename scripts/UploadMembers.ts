@@ -1,3 +1,21 @@
+/**
+ * UploadMembers.ts
+ * 
+ * 部員情報をJSONファイルからデータベースに登録するスクリプト
+ * 
+ * 機能:
+ * - scripts/members.jsonファイルから部員情報を読み込み
+ * - PrismaのMemberテーブルに部員データ（name, year, role, major, nickname, profile, src）を登録
+ * - プロフィールが配列の場合は改行区切りの文字列に変換
+ * - 空のデータは適切なデフォルト値で補完
+ * 
+ * 対象ファイル: scripts/members.json
+ * 期待するJSONフォーマット: [{"name": "名前", "year": "年次", "role": "役職", "nickname": "ニックネーム", "profile": ["プロフィール"], "src": "画像URL"}, ...]
+ * 
+ * 使用方法:
+ * npm run tsx scripts/UploadMembers.ts
+ */
+
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
