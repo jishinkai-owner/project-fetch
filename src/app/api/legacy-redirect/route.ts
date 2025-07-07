@@ -14,6 +14,58 @@ export async function GET(request: NextRequest) {
 
     const pathSegments = pathname.split('/').filter(Boolean);
     
+    // /other/shinkan2025 パターンの処理
+    if (pathSegments[0] === 'other' && pathSegments[1] === 'shinkan2025') {
+      console.log(`Direct redirect: ${pathname} -> /shinkan`);
+      return NextResponse.json({
+        redirect: `/shinkan`,
+        found: true
+      });
+    }
+    
+    // 単一セグメントのパターン処理
+    if (pathSegments.length === 1) {
+      const segment = pathSegments[0];
+      
+      switch (segment) {
+        case 'qa':
+          console.log(`Direct redirect: ${pathname} -> /qa`);
+          return NextResponse.json({
+            redirect: `/qa`,
+            found: true
+          });
+        case 'member':
+          console.log(`Direct redirect: ${pathname} -> /member`);
+          return NextResponse.json({
+            redirect: `/member`,
+            found: true
+          });
+        case 'yama':
+          console.log(`Direct redirect: ${pathname} -> /record/yama`);
+          return NextResponse.json({
+            redirect: `/record/yama`,
+            found: true
+          });
+        case 'tabi':
+          console.log(`Direct redirect: ${pathname} -> /record/tabi`);
+          return NextResponse.json({
+            redirect: `/record/tabi`,
+            found: true
+          });
+        case 'tsuri':
+          console.log(`Direct redirect: ${pathname} -> /record/tsuri`);
+          return NextResponse.json({
+            redirect: `/record/tsuri`,
+            found: true
+          });
+        default:
+          return NextResponse.json({
+            redirect: `/record`,
+            found: false
+          });
+      }
+    }
+    
     // /record/yama/year/filename パターンの場合
     if (pathSegments[0] === 'record' && pathSegments.length >= 4) {
       const activityType = pathSegments[1]; // yama, tabi, tsuri

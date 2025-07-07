@@ -5,7 +5,9 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 旧ホームページからのリダイレクト処理
-  if (pathname.startsWith('/yama/') || pathname.startsWith('/tabi/') || pathname.startsWith('/tsuri/')) {
+  if (pathname.startsWith('/yama/') || pathname.startsWith('/tabi/') || pathname.startsWith('/tsuri/') ||
+      pathname.startsWith('/other/') ||
+      pathname === '/yama' || pathname === '/tabi' || pathname === '/tsuri') {
     return handleLegacyRedirect(request);
   }
 
