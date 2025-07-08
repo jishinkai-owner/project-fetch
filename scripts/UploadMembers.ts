@@ -13,9 +13,10 @@
  * 期待するJSONフォーマット: [{"name": "名前", "year": "年次", "role": "役職", "nickname": "ニックネーム", "profile": ["プロフィール"], "src": "画像URL"}, ...]
  * 
  * 使用方法:
- * npm run tsx scripts/UploadMembers.ts
+ * npx tsx scripts/UploadMembers.ts
  */
 
+import "dotenv/config";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
