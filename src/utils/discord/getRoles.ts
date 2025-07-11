@@ -13,6 +13,7 @@ const roleMap = [
   { id: "1091924752219775068", name: 4 },
   { id: "1099984828763492383", name: 3 },
   { id: "1231841360949149716", name: 2 },
+  { id: "1365229697990004766", name: 1 },
 ];
 
 type RoleMap = {
@@ -20,11 +21,6 @@ type RoleMap = {
 };
 
 export async function getUserRoles(id: string) {
-  // if (!id) {
-  //   console.error("Discord ID is undefined");
-  //   return null;
-  // }
-
   try {
     const res = await axios.post(`/api/discord`, { id: id });
     const roles: RoleMap = {};
