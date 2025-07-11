@@ -19,9 +19,15 @@ export async function GET() {
       },
     });
 
-    console.log("✅ メンバーデータ取得成功:", members.length, "件");
+    // 画像がないメンバーにデフォルト画像を設定
+    const membersWithDefaultImage = members.map(member => ({
+      ...member,
+      src: member.src && member.src.trim() !== "" ? member.src : "/member.jpg"
+    }));
 
-    return NextResponse.json(members);
+    console.log("✅ メンバーデータ取得成功:", membersWithDefaultImage.length, "件");
+
+    return NextResponse.json(membersWithDefaultImage);
   } catch (error) {
     console.error("❌ API エラー: ", error);
     return NextResponse.json(
