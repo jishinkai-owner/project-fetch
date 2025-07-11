@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LegacyRedirectPage() {
+function LegacyRedirectContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const originalPath = searchParams.get('originalPath');
@@ -73,5 +73,38 @@ export default function LegacyRedirectPage() {
         }
       `}</style>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '50vh',
+      gap: '1rem'
+    }}>
+      <div style={{
+        width: '50px',
+        height: '50px',
+        border: '4px solid rgba(220, 75, 75, 0.1)',
+        borderRadius: '50%',
+        borderTopColor: 'rgba(220, 75, 75, 0.7)',
+        animation: 'spin 1s linear infinite'
+      }} />
+      <p style={{ color: '#666', fontSize: '1.1rem' }}>
+        読み込み中...
+      </p>
+    </div>
+  );
+}
+
+export default function LegacyRedirectPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <LegacyRedirectContent />
+    </Suspense>
   );
 }
