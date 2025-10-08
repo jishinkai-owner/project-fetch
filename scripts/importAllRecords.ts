@@ -1747,7 +1747,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
 
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/index",
+    filename: "2015/15.08.choki.akari/honpen/index",
     place: "長期登山in南アルプス AKARI編",
     title: "もくじ",
     date: "08/17～21",
@@ -1756,7 +1756,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/jinnbutu",
+    filename: "2015/15.08.choki.akari/omake/jinnbutu",
     place: "長期登山in南アルプス AKARI編",
     title: "メンバー紹介",
     date: "08/17～21",
@@ -1765,7 +1765,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/-1",
+    filename: "2015/15.08.choki.akari/omake/-1",
     place: "長期登山in南アルプス AKARI編",
     title: "移動日",
     date: "08/17～21",
@@ -1774,7 +1774,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/0",
+    filename: "2015/15.08.choki.akari/omake/0",
     place: "長期登山in南アルプス AKARI編",
     title: "前泊",
     date: "08/17～21",
@@ -1783,7 +1783,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/1",
+    filename: "2015/15.08.choki.akari/honpen/1",
     place: "長期登山in南アルプス AKARI編",
     title: "1日目",
     date: "08/17～21",
@@ -1792,7 +1792,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/2",
+    filename: "2015/15.08.choki.akari/honpen2",
     place: "長期登山in南アルプス AKARI編",
     title: "2日目",
     date: "08/17～21",
@@ -1801,7 +1801,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/3",
+    filename: "2015/15.08.choki.akari/honpen/3",
     place: "長期登山in南アルプス AKARI編",
     title: "3日目",
     date: "08/17～21",
@@ -1810,7 +1810,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/4",
+    filename: "2015/15.08.choki.akari/honpen/4",
     place: "長期登山in南アルプス AKARI編",
     title: "4日目",
     date: "08/17～21",
@@ -1819,7 +1819,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/5",
+    filename: "2015/15.08.choki.akari/honpen/5",
     place: "長期登山in南アルプス AKARI編",
     title: "5日目",
     date: "08/17～21",
@@ -1828,7 +1828,7 @@ const data2015: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2015,
-    filename: "2015/15.08.choki.akari/kakikirenai",
+    filename: "2015/15.08.choki.akari/omake/kakikirenai",
     place: "長期登山in南アルプス AKARI編",
     title: "その後",
     date: "08/17～21",
@@ -5140,6 +5140,417 @@ const data2023: Omit<MountainRecord, "id">[] = [
   },
 ];
 
+const data2024: Omit<MountainRecord, "id">[] = [
+  // 1) 2024/4/21: 新歓登山@泉ヶ岳(KOKI編・NAOYA編・TOSHIKI編・YUTO編・NAOHIRO編・RIKUTO編・HONOKA編)
+  {
+    year: 2024,
+    filename: "2024/2024_shinkan_KOKI",
+    place: "新歓登山@泉ヶ岳",
+    title: "KOKI編",
+    date: "4/21",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_shinkan_NAOYA",
+    place: "新歓登山@泉ヶ岳",
+    title: "NAOYA編",
+    date: "4/21",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_shinkan_TOSHIKI",
+    place: "新歓登山@泉ヶ岳",
+    title: "TOSHIKI編",
+    date: "4/21",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_shinkan_YUTO",
+    place: "新歓登山@泉ヶ岳",
+    title: "YUTO編",
+    date: "4/21",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_shinkan_NAOHIRO",
+    place: "新歓登山@泉ヶ岳",
+    title: "NAOHIRO編",
+    date: "4/21",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_shinkan_RIKUTO",
+    place: "新歓登山@泉ヶ岳",
+    title: "RIKUTO編",
+    date: "4/21",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_shinkan_HONOKA",
+    place: "新歓登山@泉ヶ岳",
+    title: "HONOKA編",
+    date: "4/21",
+    activityType: "yama",
+    details: null,
+  },
+
+  // 2) 2024/5/11-12: 磐梯山(RIKUTO編・NAOYA編・SHOTA編・KOKI編・NAOHIRO編・TOSHIKI編・IROHA編)
+  {
+    year: 2024,
+    filename: "2024/2024_bandai_RIKUTO",
+    place: "磐梯山",
+    title: "RIKUTO編",
+    date: "5/11-12",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_bandai_NAOYA",
+    place: "磐梯山",
+    title: "NAOYA編",
+    date: "5/11-12",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_bandai_SHOTA",
+    place: "磐梯山",
+    title: "SHOTA編",
+    date: "5/11-12",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_bandai_KOKI",
+    place: "磐梯山",
+    title: "KOKI編",
+    date: "5/11-12",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_bandai_NAOHIRO",
+    place: "磐梯山",
+    title: "NAOHIRO編",
+    date: "5/11-12",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_bandai_TOSHIKI",
+    place: "磐梯山",
+    title: "TOSHIKI編",
+    date: "5/11-12",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_bandai_IROHA",
+    place: "磐梯山",
+    title: "IROHA編",
+    date: "5/11-12",
+    activityType: "yama",
+    details: null,
+  },
+
+  // 3) 2024/5/25-26: 男体山(NAOHIRO編・TOSHIKI編・SHOTA編・NAOYA編・HONOKA編・KOKI編・RIKUTO編)
+  {
+    year: 2024,
+    filename: "2024/2024_nanntai_NAOHIRO",
+    place: "男体山",
+    title: "NAOHIRO編",
+    date: "5/25-26",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_nanntai_TOSHIKI",
+    place: "男体山",
+    title: "TOSHIKI編",
+    date: "5/25-26",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_nanntai_SHOTA",
+    place: "男体山",
+    title: "SHOTA編",
+    date: "5/25-26",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_nanntai_NAOYA",
+    place: "男体山",
+    title: "NAOYA編",
+    date: "5/25-26",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_nanntai_HONOKA",
+    place: "男体山",
+    title: "HONOKA編",
+    date: "5/25-26",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_nanntai_KOKI",
+    place: "男体山",
+    title: "KOKI編",
+    date: "5/25-26",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_nanntai_RIKUTO",
+    place: "男体山",
+    title: "RIKUTO編",
+    date: "5/25-26",
+    activityType: "yama",
+    details: null,
+  },
+
+  // 4) 2024/6/8-9: 岩手山(SHUSUKE編・NAOYA編・RIKUTO編・YUTO編・KOKI編・TOSHIKI編・NAOHIRO編)
+  {
+    year: 2024,
+    filename: "2024/2024_iwate_SHUSUKE",
+    place: "岩手山",
+    title: "SHUSUKE編",
+    date: "6/8-9",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_iwate_NAOYA",
+    place: "岩手山",
+    title: "NAOYA編",
+    date: "6/8-9",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_iwate_RIKUTO",
+    place: "岩手山",
+    title: "RIKUTO編",
+    date: "6/8-9",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_iwate_YUTO",
+    place: "岩手山",
+    title: "YUTO編",
+    date: "6/8-9",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_iwate_KOKI",
+    place: "岩手山",
+    title: "KOKI編",
+    date: "6/8-9",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_iwate_TOSHIKI",
+    place: "岩手山",
+    title: "TOSHIKI編",
+    date: "6/8-9",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_iwate_NAOHIRO",
+    place: "岩手山",
+    title: "NAOHIRO編",
+    date: "6/8-9",
+    activityType: "yama",
+    details: null,
+  },
+
+  // 5) 2024/6/22-23: 鳥海山(SHUSUKE編・NAOHIRO編・HONOKA編・RIKUTO編)
+  {
+    year: 2024,
+    filename: "2024/2024_chokai_SHUSUKE",
+    place: "鳥海山",
+    title: "SHUSUKE編",
+    date: "6/22-23",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_chokai_NAOHIRO",
+    place: "鳥海山",
+    title: "NAOHIRO編",
+    date: "6/22-23",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_chokai_HONOKA",
+    place: "鳥海山",
+    title: "HONOKA編",
+    date: "6/22-23",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_chokai_RIKUTO",
+    place: "鳥海山",
+    title: "RIKUTO編",
+    date: "6/22-23",
+    activityType: "yama",
+    details: null,
+  },
+
+  // 6) 2024/7/13-14: 訓練登山@蔵王(NAOYA編・SHOTA編・SHUSUKE編・NAOHIRO編・RIKUTO編・TOSHIKI編)
+  {
+    year: 2024,
+    filename: "2024/2024_kunren_NAOYA",
+    place: "訓練登山@蔵王",
+    title: "NAOYA編",
+    date: "7/13-14",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_kunren_SHOTA",
+    place: "訓練登山@蔵王",
+    title: "SHOTA編",
+    date: "7/13-14",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_kunren_SHUSUKE",
+    place: "訓練登山@蔵王",
+    title: "SHUSUKE編",
+    date: "7/13-14",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_kunren_NAOHIRO",
+    place: "訓練登山@蔵王",
+    title: "NAOHIRO編",
+    date: "7/13-14",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_kunren_RIKUTO",
+    place: "訓練登山@蔵王",
+    title: "RIKUTO編",
+    date: "7/13-14",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_kunren_TOSHIKI",
+    place: "訓練登山@蔵王",
+    title: "TOSHIKI編",
+    date: "7/13-14",
+    activityType: "yama",
+    details: null,
+  },
+
+  // 7) 2024/7/27: 燧ヶ岳(SHUSUKE編・IROHA編)
+  {
+    year: 2024,
+    filename: "2024/2024_hiuchi_SHUSUKE",
+    place: "燧ヶ岳",
+    title: "SHUSUKE編",
+    date: "7/27",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_hiuchi_IROHA",
+    place: "燧ヶ岳",
+    title: "IROHA編",
+    date: "7/27",
+    activityType: "yama",
+    details: null,
+  },
+
+  // 8) 2024/8/8-10: 長期山行@八ヶ岳 荒天中止
+  {
+    year: 2024,
+    filename: null,
+    place: "長期山行@八ヶ岳",
+    title: null,
+    date: "8/8-10",
+    activityType: "yama",
+    details: "荒天中止",
+  },
+
+  // 9) 2024/10/5: 秋山山行@栗駒(RYUTA編・TATSUHIRO)
+  {
+    year: 2024,
+    filename: "2024/2024_kurikoma_RYUTA",
+    place: "秋山山行@栗駒",
+    title: "RYUTA編",
+    date: "10/5",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2024,
+    filename: "2024/2024_kurikoma_TATSUHIRO",
+    place: "秋山山行@栗駒",
+    title: "TATSUHIRO編",
+    date: "10/5",
+    activityType: "yama",
+    details: null,
+  },
+];
+
+// dataOther配列は年度別Tabiデータに統合されました
+
+// 年度別Tabiデータは以下に統合されています
+
 const dataTsuri: Omit<MountainRecord, "id">[] = [
   // 2013年 塩釜港
   {
@@ -5300,7 +5711,89 @@ const data2007Tabi: Omit<MountainRecord, "id">[] = [
     date: "08/02～04",
     activityType: "tabi",
     details: null
-  }
+  },
+  // dataOtherから統合された2007年データ
+  {
+    year: 2007,
+    filename: null,
+    place: "大反省会＆忘年会",
+    title: null,
+    date: "12/14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "スケート",
+    title: null,
+    date: "12/9",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "映画鑑賞会＆モツ鍋会",
+    title: null,
+    date: "12/2",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "スキー初滑りin湯殿山",
+    title: null,
+    date: "12/1",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "ぶどう狩り",
+    title: null,
+    date: "10",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "芋煮",
+    title: null,
+    date: "10",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "餃子パーティー",
+    title: null,
+    date: "6",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "潮干狩り",
+    title: null,
+    date: "5",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2007,
+    filename: null,
+    place: "新入生歓迎花見",
+    title: null,
+    date: "4",
+    activityType: "tabi",
+    details: null,
+  },
 ];
 
 const data2008Tabi: Omit<MountainRecord, "id">[] = [
@@ -5312,7 +5805,53 @@ const data2008Tabi: Omit<MountainRecord, "id">[] = [
     date: "05/05～08",
     activityType: "tabi",
     details: null
-  }
+  },
+  // dataOtherから統合された2008年データ
+  {
+    year: 2008,
+    filename: null,
+    place: "北雄杯駅伝",
+    title: null,
+    date: "5/24",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2008,
+    filename: null,
+    place: "潮干狩り",
+    title: null,
+    date: "5/10",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2008,
+    filename: null,
+    place: "追いコン",
+    title: null,
+    date: "2/24",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2008,
+    filename: null,
+    place: "スキー合宿（山形蔵王）",
+    title: null,
+    date: "2/11~13",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2008,
+    filename: null,
+    place: "どんと祭はだか参り",
+    title: null,
+    date: "1/14",
+    activityType: "tabi",
+    details: null,
+  },
 ];
 
 const data2009Tabi: Omit<MountainRecord, "id">[] = [
@@ -5369,7 +5908,35 @@ const data2009Tabi: Omit<MountainRecord, "id">[] = [
     date: "03/??",
     activityType: "tabi",
     details: null
-  }
+  },
+  // dataOtherから統合された2009年データ
+  {
+    year: 2009,
+    filename: null,
+    place: "新入生歓迎花見",
+    title: null,
+    date: "4/18~19",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2009,
+    filename: null,
+    place: "スキー合宿（山形蔵王）",
+    title: null,
+    date: "2/23~25",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2009,
+    filename: null,
+    place: "どんと祭",
+    title: null,
+    date: "1/14",
+    activityType: "tabi",
+    details: null,
+  },
 ];
 
 const data2010Tabi: Omit<MountainRecord, "id">[] = [
@@ -5516,7 +6083,26 @@ const data2010Tabi: Omit<MountainRecord, "id">[] = [
     date: "09/??", 
     activityType: "tabi", 
     details: null 
-  }
+  },
+  // dataOtherから統合された2010年データ
+  {
+    year: 2010,
+    filename: null,
+    place: "スキー合宿（山形蔵王）",
+    title: null,
+    date: "2/23~25",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2010,
+    filename: null,
+    place: "どんと祭",
+    title: null,
+    date: "1/14",
+    activityType: "tabi",
+    details: null,
+  },
 ];
 
 const data2011Tabi: Omit<MountainRecord, "id">[] = [
@@ -5663,6 +6249,25 @@ const data2011Tabi: Omit<MountainRecord, "id">[] = [
     place: "屋久島",
     title: null,
     date: "09/20～24",
+    activityType: "tabi",
+    details: null,
+  },
+  // dataOtherから統合された2011年データ
+  {
+    year: 2011,
+    filename: null,
+    place: "追いコン",
+    title: null,
+    date: "5/7",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2011,
+    filename: null,
+    place: "スキー合宿（山形蔵王）",
+    title: null,
+    date: "2/13~15",
     activityType: "tabi",
     details: null,
   },
@@ -5837,6 +6442,548 @@ const data2012_16Tabi: Omit<MountainRecord, "id">[] = [
     place: "修学旅行",
     title: "8日目（京都４）",
     date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2013Tabi: Omit<MountainRecord, "id">[] = [
+  {
+    year: 2013,
+    filename: null,
+    place: "鳴子温泉と松島を巡る旅",
+    title: null,
+    date: "12",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "山梨方面 富士急ハイランドを目指す旅",
+    title: null,
+    date: "11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "北海道",
+    title: null,
+    date: "9",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "ベトナム",
+    title: null,
+    date: "8",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "ハイランドでバンジージャンプ",
+    title: null,
+    date: "5",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "一目千本桜",
+    title: null,
+    date: "4",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "喜多方ラーメン食べ歩き＆会津若松の旅",
+    title: null,
+    date: "2",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "カラオケ",
+    title: null,
+    date: "8/2~9/30",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "サーカス",
+    title: null,
+    date: "8/2~9/30",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "ラーメン食べ歩き",
+    title: null,
+    date: "8/2~9/30",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "大曲の花火",
+    title: null,
+    date: "8/2~9/30",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "花笠まつり",
+    title: null,
+    date: "8/2~9/30",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "前期セメスター打ち上げ",
+    title: null,
+    date: "8/7",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "泉ヶ岳登山(新歓登山)",
+    title: null,
+    date: "4/27",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2013,
+    filename: null,
+    place: "新入生歓迎会",
+    title: null,
+    date: "4",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2012Tabi: Omit<MountainRecord, "id">[] = [
+  {
+    year: 2012,
+    filename: null,
+    place: "猫の島",
+    title: null,
+    date: "11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2012,
+    filename: null,
+    place: "霊山ハイキング",
+    title: null,
+    date: "11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2012,
+    filename: null,
+    place: "東京旅行",
+    title: null,
+    date: "11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2012,
+    filename: null,
+    place: "平泉",
+    title: null,
+    date: "11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2012,
+    filename: null,
+    place: "インド",
+    title: null,
+    date: "9/18~28",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2012,
+    filename: null,
+    place: "タイ",
+    title: null,
+    date: "9",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2014Tabi: Omit<MountainRecord, "id">[] = [
+  {
+    year: 2014,
+    filename: null,
+    place: "コタツで鍋（野外）",
+    title: null,
+    date: "10",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2015Tabi: Omit<MountainRecord, "id">[] = [
+  // 48hカー潮岬往復旅行
+  {
+    year: 2015,
+    filename: "2015car48h/48hcar-top",
+    place: "48hカー潮岬往復旅行",
+    title: "トップページ",
+    date: "08/10～11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: "2015car48h/day1",
+    place: "48hカー潮岬往復旅行",
+    title: "一日目",
+    date: "08/10～11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: "2015car48h/48hcar-day2",
+    place: "48hカー潮岬往復旅行",
+    title: "二日目",
+    date: "08/10～11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: "2015car48h/toottatokoro",
+    place: "48hカー潮岬往復旅行",
+    title: "通ったところ",
+    date: "08/10～11",
+    activityType: "tabi",
+    details: null,
+  },
+  // dataOtherから統合された2015年データ
+  {
+    year: 2015,
+    filename: null,
+    place: "地下鉄東西線開通ぶらり旅",
+    title: null,
+    date: "12/6",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "もう誰もメキシコ湾水をストレートで飲めないように、ミシガン湖水でメキシコ湾を割る。",
+    title: null,
+    date: "12/13~1/2",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "鳥を焼く会（大学祭）",
+    title: null,
+    date: "10/30",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "前期セメスター打ち上げ",
+    title: null,
+    date: "8/3",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "廃道めぐり　万世大路（栗子隧道）",
+    title: null,
+    date: "7/12",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "盛岡でわんこそばをアレする",
+    title: null,
+    date: "5/2",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "新歓BBQ",
+    title: null,
+    date: "4/18",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "新歓なべ",
+    title: null,
+    date: "4/11",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: null,
+    place: "タクラマカン砂漠に黄砂を返却しにいく",
+    title: null,
+    date: "2/18~3/3",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2015,
+    filename: "other/ski2015",
+    place: "スキー合宿(安比高原)",
+    title: null,
+    date: "2/14~15",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2016Tabi: Omit<MountainRecord, "id">[] = [
+  // イスタンブール旅行
+  {
+    year: 2016,
+    filename: "2016/Constantinopolis/istanbul",
+    place: "イスタンブール",
+    title: "旅行記",
+    date: "03/01～09",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/Constantinopolis/udon",
+    place: "イスタンブール",
+    title: "おまけ",
+    date: "03/01～09",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/Constantinopolis/udon2",
+    place: "イスタンブール",
+    title: "帰国後",
+    date: "03/01～09",
+    activityType: "tabi",
+    details: null,
+  },
+  // 修学旅行
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day1",
+    place: "修学旅行",
+    title: "序章",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day2",
+    place: "修学旅行",
+    title: "初日",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day3",
+    place: "修学旅行",
+    title: "2日目（神戸）",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day4",
+    place: "修学旅行",
+    title: "3日目（大阪）",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day5",
+    place: "修学旅行",
+    title: "4日目（奈良１）",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day6",
+    place: "修学旅行",
+    title: "5日目（奈良２京都１）",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day7",
+    place: "修学旅行",
+    title: "6日目（京都２）",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day8",
+    place: "修学旅行",
+    title: "7日目（京都３）",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "2016/syuugakuryokou/day9",
+    place: "修学旅行",
+    title: "8日目（京都４）",
+    date: "03/07～14",
+    activityType: "tabi",
+    details: null,
+  },
+  // dataOtherから統合された2016年データ
+  {
+    year: 2016,
+    filename: "other/2016ohsoji",
+    place: "大掃除",
+    title: null,
+    date: "12/10",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "other/imoni2016",
+    place: "芋煮会with鍋二郎",
+    title: null,
+    date: "10/23",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "other/onikoube/onikoube",
+    place: "温泉卵を食べたくて車を走らせたら鬼首だった日",
+    title: null,
+    date: "9/17",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: null,
+    place: "セメ終わり飲み",
+    title: null,
+    date: "8/8",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: null,
+    place: "「五.二◯黒い雨」(主犯: 原田、共犯: 坂井)",
+    title: null,
+    date: "5/20",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "other/wankosoba2016",
+    place: "わんこそば2016",
+    title: null,
+    date: "5/8",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: null,
+    place: "新歓BBQ",
+    title: null,
+    date: "4/16",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: null,
+    place: "新歓女子会",
+    title: null,
+    date: "4/14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "other/ski2016",
+    place: "スキー合宿",
+    title: null,
+    date: "2",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2016,
+    filename: "other/dontosai2016",
+    place: "どんと祭",
+    title: null,
+    date: "1/14",
     activityType: "tabi",
     details: null,
   },
@@ -6090,7 +7237,7 @@ const data2017Tabi: Omit<MountainRecord, "id">[] = [
   place: "B7徒歩企画 To 福島",
   title: "前編",
   date: "10/07",
-  activityType: "other",
+  activityType: "tabi",
   details: null,
 },
 {
@@ -6099,7 +7246,7 @@ const data2017Tabi: Omit<MountainRecord, "id">[] = [
   place: "B7徒歩企画 To 福島",
   title: "中編",
   date: "10/07",
-  activityType: "other",
+  activityType: "tabi",
   details: null,
 },
 
@@ -6110,7 +7257,7 @@ const data2017Tabi: Omit<MountainRecord, "id">[] = [
   place: null,
   title: "船形山",
   date: "10/16",
-  activityType: "other",
+  activityType: "tabi",
   details: null,
 },
 {
@@ -6119,7 +7266,107 @@ const data2017Tabi: Omit<MountainRecord, "id">[] = [
   place: null,
   title: "流しそうめん",
   date: "07/16", 
-  activityType: "other",
+  activityType: "tabi",
+  details: null,
+},
+// dataOtherから統合された2017年データ
+{
+  year: 2017,
+  filename: "other/2017gakusai",
+  place: "やきとりを焼く会（大学祭）",
+  title: null,
+  date: "11/1~3",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: "other/2017funagata/funagata",
+  place: "船形山",
+  title: null,
+  date: "10/14~15",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: "other/2017B7hokou/hokou2",
+  place: "B7歩行後編",
+  title: null,
+  date: "10/7~8",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: "other/2017B7hokou/hokou2",
+  place: "B7歩行中編",
+  title: null,
+  date: "10/7~8",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: "other/2017B7hokou/hokou1",
+  place: "B7歩行前編",
+  title: null,
+  date: "10/7~8",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: null,
+  place: "地酒飲み",
+  title: null,
+  date: "9/30",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: "other/2017b5onsen",
+  place: "B5温泉旅行",
+  title: null,
+  date: "9/13~14",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: null,
+  place: "Jonas来仙",
+  title: null,
+  date: "8/23",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: "other/2017uraginza",
+  place: "裏銀座",
+  title: null,
+  date: "8/11~14",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: null,
+  place: "山形花笠まつり",
+  title: null,
+  date: "8/7",
+  activityType: "tabi",
+  details: null,
+},
+{
+  year: 2017,
+  filename: "other/2017nebuta",
+  place: "青森ねぶた祭",
+  title: null,
+  date: "8/6",
+  activityType: "tabi",
   details: null,
 },
 ];
@@ -6510,7 +7757,7 @@ const data2018Tabi: Omit<MountainRecord, "id">[] = [// For the first file
         place: "B8走行 松島編",
         title: "前哨戦",
         date: "08/05~31",
-        activityType: "other",
+        activityType: "tabi",
         details: null,
       },
       {
@@ -6519,7 +7766,7 @@ const data2018Tabi: Omit<MountainRecord, "id">[] = [// For the first file
         place: "B8走行 松島編",
         title: "一日目",
         date: "08/05~31",
-        activityType: "other",
+        activityType: "tabi",
         details: null,
       },
       {
@@ -6528,7 +7775,7 @@ const data2018Tabi: Omit<MountainRecord, "id">[] = [// For the first file
         place: "B8走行 松島編",
         title: "二日目",
         date: "08/05~31",
-        activityType: "other",
+        activityType: "tabi",
         details: null,
       },
       {
@@ -6537,10 +7784,289 @@ const data2018Tabi: Omit<MountainRecord, "id">[] = [// For the first file
         place: "B8走行 松島編",
         title: "三日目",
         date: "08/05~31",
-        activityType: "other",
+        activityType: "tabi",
+        details: null,
+      },
+      // dataOtherから統合された2018年データ
+      {
+        year: 2018,
+        filename: null,
+        place: "お茶会",
+        title: null,
+        date: "7/1",
+        activityType: "tabi",
+        details: null,
+      },
+      {
+        year: 2018,
+        filename: null,
+        place: "山菜採り",
+        title: null,
+        date: "5/20",
+        activityType: "tabi",
+        details: null,
+      },
+      {
+        year: 2018,
+        filename: null,
+        place: "キャンプツーリング",
+        title: null,
+        date: "4",
+        activityType: "tabi",
+        details: null,
+      },
+      {
+        year: 2018,
+        filename: null,
+        place: "卒業式",
+        title: null,
+        date: "3/27",
+        activityType: "tabi",
+        details: null,
+      },
+      {
+        year: 2018,
+        filename: "other/ski2018/ski",
+        place: "スキー合宿",
+        title: null,
+        date: "2/12~14",
+        activityType: "tabi",
+        details: null,
+      },
+      {
+        year: 2018,
+        filename: null,
+        place: "追いコン",
+        title: null,
+        date: "2/3",
+        activityType: "tabi",
+        details: null,
+      },
+      {
+        year: 2018,
+        filename: "other/2018donto",
+        place: "どんと祭",
+        title: null,
+        date: "1/14",
+        activityType: "tabi",
         details: null,
       },
   ];
+
+const data2019Tabi: Omit<MountainRecord, "id">[] = [
+  {
+    year: 2019,
+    filename: "2019/everest/everest1",
+    place: "エベレスト",
+    title: "第1章",
+    date: "02/24~03/18",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "2019/everest/everest2",
+    place: "エベレスト",
+    title: "第2章",
+    date: "02/24~03/18",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "2019/everest/everest3",
+    place: "エベレスト",
+    title: "第3章",
+    date: "02/24~03/18",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "2019/b7ryokou/b7ryokou",
+    place: "B7旅行",
+    title: null,
+    date: "03/25~26",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "2019/hiuchigadake/hiuchigadake",
+    place: "燧ヶ岳",
+    title: null,
+    date: "08/25",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "2019/oze/oze",
+    place: "個人山行尾瀬",
+    title: null,
+    date: "09/14~16",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "other/2019.yurucam/yurucam",
+    place: "ゆるキャン△",
+    title: null,
+    date: "12/7~8",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "other/2019.hutakuti_rindo/hutakuti",
+    place: "紅葉サイクリング（二口林道）",
+    title: null,
+    date: "11/2",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: "other/2019haikyogw/haikyo",
+    place: "化女沼観光",
+    title: null,
+    date: "3/31",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: null,
+    place: "スキー合宿",
+    title: null,
+    date: "2/12~14",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: null,
+    place: "追いコン",
+    title: null,
+    date: "2/10",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2019,
+    filename: null,
+    place: "どんと祭",
+    title: null,
+    date: "1/14",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2020Tabi: Omit<MountainRecord, "id">[] = [
+  // 2020年のコロナ禍により旅行記録が少ない可能性がありますが、
+  // 既存のファイルがあれば追加します
+];
+
+const data2021Tabi: Omit<MountainRecord, "id">[] = [
+  {
+    year: 2021,
+    filename: "2021/c0oze/c0oze",
+    place: "C0中期山行in尾瀬",
+    title: null,
+    date: "09/09~11",  
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2021,
+    filename: "2021/c0asahi/c0asahi",
+    place: "C0山行in朝日連峰",
+    title: null,
+    date: "09/28~29",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2021,
+    filename: "other/2021C0hokou/hokou",
+    place: "C0旅行in北海道",
+    title: null,
+    date: "9/17~22",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2021,
+    filename: "other/2021C0hokou/2021C0hokou",
+    place: "C0歩行",
+    title: null,
+    date: "7/10",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2022Tabi: Omit<MountainRecord, "id">[] = [
+  {
+    year: 2022,
+    filename: "2022/c0azuma/c0azuma",
+    place: "C0山行in吾妻小富士",
+    title: null,
+    date: "10/22",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2022,
+    filename: "other/2022C0camp/2022C0camp",
+    place: "C0キャンプin岩手",
+    title: null,
+    date: "5/4~5",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2022,
+    filename: null,
+    place: "C0旅行in新潟",
+    title: null,
+    date: "9/12~14",
+    activityType: "tabi",
+    details: null,
+  },
+];
+
+const data2023Tabi: Omit<MountainRecord, "id">[] = [
+  {
+    year: 2023,
+    filename: "2023/hayachine/hayachine",
+    place: "個人山行in早池峰山",
+    title: null,
+    date: "06/03",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2023,
+    filename: "other/2023C0ryokou/2023C0ryokou",
+    place: "C0旅行in栃木群馬",
+    title: null,
+    date: "3/13~15",
+    activityType: "tabi",
+    details: null,
+  },
+  {
+    year: 2023,
+    filename: "other/2023C0kaigai/2023C0kaigai",
+    place: "C0旅行inインドネシア",
+    title: null,
+    date: "9/2~10",
+    activityType: "tabi",
+    details: null,
+  },
+];
 
 // 他の年度も同様に data20xx を定義してください。
 // 例：const data2024: Omit<MountainRecord, "id">[] = [ ... ];
@@ -6571,23 +8097,27 @@ const allData: Omit<MountainRecord, "id">[] = [
   ...data2021,
   ...data2022,
   ...data2023,
+  ...data2024,
   ...dataTsuri,
   ...data2007Tabi,
   ...data2008Tabi,
   ...data2009Tabi,
   ...data2010Tabi,
   ...data2011Tabi,
+  ...data2012Tabi,
   ...data2012_16Tabi,
+  ...data2013Tabi,
+  ...data2014Tabi,
+  ...data2015Tabi,
+  ...data2016Tabi,
   ...data2017Tabi,
   ...data2018Tabi,
+  ...data2019Tabi,
+  ...data2020Tabi,
+  ...data2021Tabi,
+  ...data2022Tabi,
+  ...data2023Tabi,
 ];
-
-// =====================================
-// place が null の場合は title を代わりに使用
-// =====================================
-function getGroupKey(record: Omit<MountainRecord, "id">): string {
-  return record.place ? record.place : (record.title || "");
-}
 
 // =====================================
 // 画像ファイルを Supabase にアップロードしてパブリック URL を取得する
@@ -6626,14 +8156,9 @@ async function uploadImageToSupabase(localFilePath: string, year: number, folder
 async function loadLocalContent(baseFilename: string, activityType: string) {
   const BASE_DIR = path.join(process.cwd(), "src", "content", activityType);
 
-  // 例: "2022/2022.10.adatarayama.Gouki/2022.10.adatarayama.Gouki"
-  const parts = baseFilename.split("/");
-  const lastPart = parts[parts.length - 1];
-  const folderPath = path.join(BASE_DIR, ...parts.slice(0, parts.length - 1));
-
   // .md or .mdx を探す
-  const mdFile = path.join(folderPath, `${lastPart}.md`);
-  const mdxFile = path.join(folderPath, `${lastPart}.mdx`);
+  const mdFile = path.join(BASE_DIR, `${baseFilename}.md`);
+  const mdxFile = path.join(BASE_DIR, `${baseFilename}.mdx`);
 
   let targetFile = "";
   if (fs.existsSync(mdFile)) {
@@ -6644,6 +8169,8 @@ async function loadLocalContent(baseFilename: string, activityType: string) {
     console.warn(`⚠️ ファイルが見つかりません: ${mdFile} / ${mdxFile}`);
     return { content: "", images: [] };
   }
+
+  const folderPath = path.dirname(targetFile);
 
   let raw = fs.readFileSync(targetFile, "utf-8");
 
@@ -6690,7 +8217,9 @@ async function loadLocalContent(baseFilename: string, activityType: string) {
     }
     // フォルダ名には最後のディレクトリを使うなど、適宜
     const folderName = path.basename(path.dirname(localImgPath));
-    const year = parseInt(parts[0], 10) || 2000; // parts[0] は "2022" のような年度
+    // ファイル名から年度を推測
+    const yearMatch = baseFilename.match(/^(\d{4})/);
+    const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
 
     const publicUrl = await uploadImageToSupabase(localImgPath, year, folderName);
     if (publicUrl) {
@@ -6717,14 +8246,147 @@ async function loadLocalContent(baseFilename: string, activityType: string) {
 }
 
 // =====================================
+// ヘルパー関数: グループキー取得
+// =====================================
+function getGroupKey(record: Omit<MountainRecord, "id">): string {
+  return record.place || record.title || "不明";
+}
+
+// =====================================
+// フォルダをスキャンして自動的にレコードを作成
+// =====================================
+async function scanAndCreateRecords(activityType: string) {
+  const contentDir = path.join(process.cwd(), "src", "content", activityType);
+  if (!fs.existsSync(contentDir)) {
+    console.warn(`⚠️ ディレクトリが見つかりません: ${contentDir}`);
+    return [];
+  }
+
+  const records: Omit<MountainRecord, "id">[] = [];
+  
+  // 年度フォルダをスキャン
+  const yearFolders = fs.readdirSync(contentDir).filter(item => {
+    const fullPath = path.join(contentDir, item);
+    return fs.statSync(fullPath).isDirectory();
+  });
+
+  for (const yearFolder of yearFolders) {
+    // 年度を抽出
+    const yearMatch = yearFolder.match(/^(\d{4})/);
+    const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
+    
+    const yearPath = path.join(contentDir, yearFolder);
+    
+    // 年度フォルダ内のすべてのファイルとフォルダを取得
+    const scanDir = (dir: string, basePath: string = "") => {
+      const items = fs.readdirSync(dir);
+      
+      for (const item of items) {
+        const fullPath = path.join(dir, item);
+        const relativePath = path.join(basePath, item);
+        const stat = fs.statSync(fullPath);
+
+        if (stat.isDirectory()) {
+          // サブフォルダをスキャン
+          scanDir(fullPath, relativePath);
+        } else if (item.endsWith(".md") || item.endsWith(".mdx")) {
+          // index.md は除外
+          if (item === "index.md" || item === "index.mdx") continue;
+          
+          // ファイル名から情報を抽出
+          const fileNameWithoutExt = item.replace(/\.(md|mdx)$/, "");
+          const filename = path.join(yearFolder, relativePath).replace(/\.(md|mdx)$/, "");
+          
+          // placeはフォルダ名、titleはファイル名から推測
+          const folderName = path.dirname(relativePath);
+          const place = folderName === "." ? yearFolder : folderName;
+          const title = fileNameWithoutExt;
+          
+          records.push({
+            year,
+            filename,
+            place,
+            title,
+            date: `${year}`,
+            activityType,
+            details: null,
+          });
+        }
+      }
+    };
+    
+    scanDir(yearPath);
+  }
+
+  return records;
+}
+
+// otherフォルダ専用のスキャン関数（年度フォルダなしで直接ファイルを配置）
+async function scanOtherFolder() {
+  const contentDir = path.join(process.cwd(), "src", "content", "other");
+  if (!fs.existsSync(contentDir)) {
+    console.warn(`⚠️ ディレクトリが見つかりません: ${contentDir}`);
+    return [];
+  }
+
+  const records: Omit<MountainRecord, "id">[] = [];
+  
+  // otherフォルダ内のすべてのファイルを直接スキャン
+  const items = fs.readdirSync(contentDir);
+  
+  for (const item of items) {
+    const fullPath = path.join(contentDir, item);
+    const stat = fs.statSync(fullPath);
+
+    if (stat.isFile() && (item.endsWith(".md") || item.endsWith(".mdx"))) {
+      // index.md は除外
+      if (item === "index.md" || item === "index.mdx") continue;
+      
+      // ファイル名から情報を抽出
+      const fileNameWithoutExt = item.replace(/\.(md|mdx)$/, "");
+      const filename = fileNameWithoutExt; // パスはファイル名のみ
+      
+      // ファイル名から年度を抽出（例: 2016ohsoji.mdx → 2016）
+      const yearMatch = fileNameWithoutExt.match(/^(\d{4})/);
+      const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
+      
+      records.push({
+        year,
+        filename,
+        place: fileNameWithoutExt,
+        title: fileNameWithoutExt,
+        date: `${year}`,
+        activityType: "tsuri", // otherフォルダの内容はtsuriとして扱う
+        details: null,
+      });
+    }
+  }
+
+  return records;
+}
+
+// =====================================
 // メイン処理
 // =====================================
 async function main() {
-  console.log("🚀 明示的データ + Astro 画像置換のインポート開始");
+  console.log("🚀 明示的データ + 自動スキャン + Astro 画像置換のインポート開始");
+
+  // tabi と other(tsuri) のデータを自動スキャンで追加
+  console.log("\n📂 tabi フォルダをスキャン中...");
+  const tabiRecords = await scanAndCreateRecords("tabi");
+  console.log(`  ✅ ${tabiRecords.length} 件のファイルを検出`);
+  
+  console.log("\n📂 other フォルダ (activityType: tsuri) をスキャン中...");
+  const tsuriRecords = await scanOtherFolder();
+  console.log(`  ✅ ${tsuriRecords.length} 件のファイルを検出 (activityType: tsuri)`);
+
+  // すべてのデータを結合
+  const allRecords = [...allData, ...tabiRecords, ...tsuriRecords];
+  console.log(`\n📊 総レコード数: ${allRecords.length} 件`);
 
   // (year, activityType, place/title) ごとにグループ化
   const groups = new Map<string, Omit<MountainRecord, "id">[]>();
-  for (const record of allData) {
+  for (const record of allRecords) {
     const key = `${record.year}-${record.activityType}-${getGroupKey(record)}`;
     if (!groups.has(key)) {
       groups.set(key, []);

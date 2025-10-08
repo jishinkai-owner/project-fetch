@@ -12,7 +12,7 @@
  * - バッチ処理により大量データも効率的に処理
  * 
  * 使用方法:
- * npm run tsx scripts/uploadContent.ts
+ * npx tsx scripts/uploadContent.ts
  * 
  * 注意: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY環境変数が必要
  */
@@ -62,52 +62,51 @@ const getMarkdownFiles = (dir: string) => {
     if (isNaN(year) || year < 1900) continue; // 年のフォーマットチェック
 
     const yearPath = path.join(dir, yearDir.name);
-    // 年度ディレクトリ内の各「山行フォルダ」を走査
-    const records = fs.readdirSync(yearPath, { withFileTypes: true }).filter(dirent => dirent.isDirectory());
+    // 年度ディレクトリ内の.md/.mdxファイルを直接取得
+    const mdFiles = fs
+      .readdirSync(yearPath)
+      .filter(file => file.endsWith(".mdx") || file.endsWith(".md"));
 
-    for (const record of records) {
-      const recordPath = path.join(yearPath, record.name);
-      const mdxFiles = fs
-        .readdirSync(recordPath)
-        .filter(file => file.endsWith(".mdx") || file.endsWith(".md"));
+    if (mdFiles.length === 0) {
+      console.warn(`⚠️ .mdx / .md ファイルが見つかりません: ${yearDir.name}`);
+      continue;
+    }
 
-      if (mdxFiles.length === 0) {
-        console.warn(`⚠️ .mdx / .md ファイルが見つかりません: ${record.name}`);
+    for (const mdFile of mdFiles) {
+      const filePath = path.join(yearPath, mdFile);
+      const rawContent = fs.readFileSync(filePath, "utf-8").trim();
+      if (!rawContent) {
+        console.warn(`⚠️ 空のファイル: ${mdFile}`);
         continue;
       }
 
-      for (const mdxFile of mdxFiles) {
-        const filePath = path.join(recordPath, mdxFile);
-        const rawContent = fs.readFileSync(filePath, "utf-8").trim();
-        if (!rawContent) {
-          console.warn(`⚠️ 空のファイル: ${mdxFile}`);
-          continue;
-        }
+      // ★ ② Contentから front matter と import 行を削除
+      let cleanedContent = rawContent.replace(/^---[\s\S]*?---\s*/, "");
+      cleanedContent = cleanedContent
+        .split("\n")
+        .filter(line => !line.trim().startsWith("import "))
+        .join("\n")
+        .trim();
 
-        // ★ ② Contentから front matter と import 行を削除
-        let cleanedContent = rawContent.replace(/^---[\s\S]*?---\s*/, "");
-        cleanedContent = cleanedContent
-          .split("\n")
-          .filter(line => !line.trim().startsWith("import "))
-          .join("\n")
-          .trim();
+      // 画像ファイルを取得（jpg, jpeg, png）- 同じ年度フォルダ内から
+      const images = fs
+        .readdirSync(yearPath)
+        .filter(file => file.match(/\.(jpg|jpeg|png)$/i))
+        .map(file => path.join(yearPath, file));
 
-        // 画像ファイルを取得（jpg, jpeg, png）
-        const images = fs
-          .readdirSync(recordPath)
-          .filter(file => file.match(/\.(jpg|jpeg|png)$/i))
-          .map(file => path.join(recordPath, file));
+      // ファイル名から山行名を抽出（例: "2024_bandai_IROHA.md" -> "bandai"）
+      const fileNameParts = mdFile.replace(/\.(mdx|md)$/, "").split("_");
+      const mountainName = fileNameParts.length >= 2 ? fileNameParts[1] : "unknown";
+      
+      // ★ ① filename を "2024/bandai/2024_bandai_IROHA" の形式に変更
+      const filename = `${yearDir.name}/${mountainName}/${mdFile.replace(/\.(mdx|md)$/, "")}`;
 
-        // ★ ① filename を "2007/Adatara/20070623adatara" の形式に変更（拡張子削除、スラッシュ区切り）
-        const filename = `${yearDir.name}/${record.name}/${mdxFile.replace(/\.(mdx|md)$/, "")}`;
-
-        results.push({
-          year,
-          filename,
-          content: cleanedContent,
-          images,
-        });
-      }
+      results.push({
+        year,
+        filename,
+        content: cleanedContent,
+        images,
+      });
     }
   }
   return results;

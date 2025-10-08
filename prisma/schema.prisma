@@ -24,7 +24,7 @@ model Content {
   title    String?
   content  String?
   images   String[]
-  filename String?  @unique
+  filename String?
   recordId Int
   authorId String?  @db.Uuid
   Record   Record   @relation(fields: [recordId], references: [id])
