@@ -20,13 +20,13 @@ function LegacyRedirectContent() {
         const data = await response.json();
 
         if (response.ok && data.redirect) {
-          console.log(`Redirecting from ${originalPath} to ${data.redirect}`);
+          console.log(`[Legacy Redirect Page] ${originalPath} -> ${data.redirect} (${data.statusCode || 302})`);
           router.push(data.redirect);
         } else {
           throw new Error('Failed to get redirect information');
         }
       } catch (error) {
-        console.error('Error in legacy redirect:', error);
+        console.error('[Legacy Redirect Error]', error);
         
         // エラーが発生した場合のフォールバック処理
         const pathSegments = originalPath.split('/').filter(Boolean);

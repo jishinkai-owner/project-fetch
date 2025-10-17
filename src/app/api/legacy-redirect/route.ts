@@ -3,6 +3,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+/**
+ * レガシーリダイレクトAPI
+ * 旧URL形式（/yama/2022/filename など）を新URL形式にマッピング
+ * ファイル名からコンテンツを検索して、正確にリダイレクト
+ */
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -14,12 +19,16 @@ export async function GET(request: NextRequest) {
 
     const pathSegments = pathname.split('/').filter(Boolean);
     
+    console.log(`[Legacy Redirect API] Processing: ${pathname}`);
+    console.log(`[Legacy Redirect API] Segments: ${JSON.stringify(pathSegments)}`);
+    
     // /other/shinkan2025 パターンの処理
     if (pathSegments[0] === 'other' && pathSegments[1] === 'shinkan2025') {
-      console.log(`Direct redirect: ${pathname} -> /shinkan`);
+      console.log(`[Legacy Redirect] Direct: ${pathname} -> /shinkan`);
       return NextResponse.json({
         redirect: `/shinkan`,
-        found: true
+        found: true,
+        statusCode: 301
       });
     }
     
@@ -27,43 +36,28 @@ export async function GET(request: NextRequest) {
     if (pathSegments.length === 1) {
       const segment = pathSegments[0];
       
-      switch (segment) {
-        case 'qa':
-          console.log(`Direct redirect: ${pathname} -> /qa`);
-          return NextResponse.json({
-            redirect: `/qa`,
-            found: true
-          });
-        case 'member':
-          console.log(`Direct redirect: ${pathname} -> /member`);
-          return NextResponse.json({
-            redirect: `/member`,
-            found: true
-          });
-        case 'yama':
-          console.log(`Direct redirect: ${pathname} -> /record/yama`);
-          return NextResponse.json({
-            redirect: `/record/yama`,
-            found: true
-          });
-        case 'tabi':
-          console.log(`Direct redirect: ${pathname} -> /record/tabi`);
-          return NextResponse.json({
-            redirect: `/record/tabi`,
-            found: true
-          });
-        case 'tsuri':
-          console.log(`Direct redirect: ${pathname} -> /record/tsuri`);
-          return NextResponse.json({
-            redirect: `/record/tsuri`,
-            found: true
-          });
-        default:
-          return NextResponse.json({
-            redirect: `/record`,
-            found: false
-          });
+      const directRedirects: Record<string, string> = {
+        'qa': '/qa',
+        'member': '/member',
+        'yama': '/record/yama',
+        'tabi': '/record/tabi',
+        'tsuri': '/record/tsuri',
+      };
+
+      if (directRedirects[segment]) {
+        console.log(`[Legacy Redirect] Direct: ${pathname} -> ${directRedirects[segment]}`);
+        return NextResponse.json({
+          redirect: directRedirects[segment],
+          found: true,
+          statusCode: 301
+        });
       }
+
+      return NextResponse.json({
+        redirect: `/record`,
+        found: false,
+        statusCode: 301
+      });
     }
     
     // /record/yama/year/filename パターンの場合
@@ -78,26 +72,27 @@ export async function GET(request: NextRequest) {
         filename = pathSegments[3];
       } else {
         // /record/yama/2007/dir/filename 形式
-        filename = pathSegments.slice(2).join('/');
+        filename = pathSegments.slice(3).join('/');
       }
       
-      console.log(`Legacy redirect API (record pattern): ${pathname}`);
-      console.log(`Activity type: ${activityType}, Year: ${year}, Filename: ${filename}`);
+      console.log(`[Legacy Redirect API] Record pattern: activityType=${activityType}, year=${year}, filename=${filename}`);
       
       return await processLegacyRedirect(activityType, year, filename, pathname);
     }
     
     // 従来の /yama/year/filename パターンの場合
-    if (pathSegments.length < 2) {
-      const activityType = pathSegments[0];
-      return NextResponse.json({
-        redirect: `/record/${activityType}`,
-        found: false
-      });
-    }
-
     const activityType = pathSegments[0]; // yama, tabi, tsuri
     const year = pathSegments[1];
+    
+    // 検証：activityType が正しいか確認
+    if (!['yama', 'tabi', 'tsuri'].includes(activityType)) {
+      console.log(`[Legacy Redirect] Invalid activity type: ${activityType}`);
+      return NextResponse.json({
+        redirect: `/record`,
+        found: false,
+        statusCode: 301
+      });
+    }
     
     // ファイル名は year 以降のすべてのセグメントを結合
     let filename: string;
@@ -106,22 +101,23 @@ export async function GET(request: NextRequest) {
       filename = pathSegments[2];
     } else if (pathSegments.length > 3) {
       // /yama/2007/dir/filename 形式
-      filename = pathSegments.slice(1).join('/');
+      filename = pathSegments.slice(2).join('/');
     } else {
       // year のみの場合は年度フィルタ付き一覧ページへ
+      console.log(`[Legacy Redirect] Year only: ${pathname} -> /record/${activityType}?year=${year}`);
       return NextResponse.json({
         redirect: `/record/${activityType}?year=${year}`,
-        found: false
+        found: false,
+        statusCode: 301
       });
     }
 
-    console.log(`Legacy redirect API: ${pathname}`);
-    console.log(`Activity type: ${activityType}, Year: ${year}, Filename: ${filename}`);
+    console.log(`[Legacy Redirect API] Traditional pattern: activityType=${activityType}, year=${year}, filename=${filename}`);
 
     return await processLegacyRedirect(activityType, year, filename, pathname);
 
   } catch (error) {
-    console.error('Error in legacy redirect API:', error);
+    console.error('[Legacy Redirect Error]', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -131,37 +127,80 @@ export async function GET(request: NextRequest) {
   }
 }
 
-async function processLegacyRedirect(activityType: string, year: string, filename: string, pathname: string) {
-  // Contentテーブルからfilenameで検索し、関連するRecordも取得
-  const content = await prisma.content.findFirst({
-    where: {
-      filename: filename,
-    },
-    include: {
-      Record: {
-        select: {
-          year: true,
-          activityType: true,
+/**
+ * ファイル名からコンテンツを検索し、適切なリダイレクト先を決定
+ * 
+ * マッピング例：
+ * - /yama/2022/filename → /record/yama/contentId?year=2022 (contentIdが見つかった場合)
+ * - /yama/2022/filename → /record/yama?year=2022 (contentIdが見つからない場合)
+ */
+async function processLegacyRedirect(
+  activityType: string,
+  year: string,
+  filename: string,
+  originalPathname: string
+) {
+  try {
+    // ファイル名の拡張子を削除（.html, .mdなど）
+    const filenameWithoutExt = filename.replace(/\.(html|md|mdx)$/, '');
+    
+    console.log(`[processLegacyRedirect] Searching for: filename=${filename}, filenameWithoutExt=${filenameWithoutExt}`);
+    
+    // Contentテーブルからfilenameで検索
+    // filenameはディレクトリ構造を含む可能性あり（例：2022/2022_kurikoma_RYUTA）
+    const content = await prisma.content.findFirst({
+      where: {
+        OR: [
+          // 完全一致
+          { filename: filename },
+          // 拡張子なしで検索
+          { filename: filenameWithoutExt },
+          // ディレクトリを含めた検索
+          { filename: { contains: filenameWithoutExt } },
+        ],
+      },
+      include: {
+        Record: {
+          select: {
+            id: true,
+            year: true,
+            activityType: true,
+          },
         },
       },
-    },
-  });
-
-  if (content) {
-    const redirectUrl = `/record/${activityType}/${content.id}?year=${content.Record.year || year}`;
-    console.log(`Legacy redirect: ${pathname} -> ${redirectUrl}`);
-    
-    return NextResponse.json({
-      redirect: redirectUrl,
-      found: true,
-      contentId: content.id
     });
-  } else {
-    // 該当するコンテンツが見つからない場合は年度フィルタ付き一覧ページへ
-    console.log(`Content not found for filename: ${filename}, redirecting to year list`);
+
+    if (content && content.Record) {
+      const redirectUrl = `/record/${activityType}/${content.id}?year=${content.Record.year || year}`;
+      console.log(`[processLegacyRedirect] Found content: ${originalPathname} -> ${redirectUrl}`);
+      
+      return NextResponse.json({
+        redirect: redirectUrl,
+        found: true,
+        statusCode: 301,
+        contentId: content.id
+      });
+    } else {
+      // 該当するコンテンツが見つからない場合は年度フィルタ付き一覧ページへ
+      const fallbackUrl = `/record/${activityType}?year=${year}`;
+      console.log(`[processLegacyRedirect] Content not found: ${originalPathname}, fallback to ${fallbackUrl}`);
+      
+      return NextResponse.json({
+        redirect: fallbackUrl,
+        found: false,
+        statusCode: 301
+      });
+    }
+  } catch (error) {
+    console.error('[processLegacyRedirect Error]', error);
+    
+    // エラー時のフォールバック
+    const fallbackUrl = `/record/${activityType}?year=${year}`;
     return NextResponse.json({
-      redirect: `/record/${activityType}?year=${year}`,
-      found: false
+      redirect: fallbackUrl,
+      found: false,
+      statusCode: 301,
+      error: String(error)
     });
   }
 }
