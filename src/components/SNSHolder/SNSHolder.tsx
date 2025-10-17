@@ -7,12 +7,14 @@ interface SNSHolderProps {
   className?: string;
   twitterUrl?: string;
   instagramUrl?: string;
+  oldhomepageUrl?: string;
 }
 
 const SNSHolder: React.FC<SNSHolderProps> = ({
   className,
   twitterUrl = "https://x.com/jishinkai",
-  instagramUrl = "https://www.instagram.com/jishinkai_tohoku"
+  instagramUrl = "https://www.instagram.com/jishinkai_tohoku",
+  oldhomepageUrl = "https://old.jishinkai.club"
 }) => {
   return (
     <div className={`${styles.container} ${className || ''}`}>
@@ -57,8 +59,17 @@ const SNSHolder: React.FC<SNSHolderProps> = ({
         </Link>
       </div>
 
+      {/* 新しいテキスト */}
+      <p className={styles.additionalText}>
+        自親会旧ホームページはこちらから! →
+      </p>
+
       {/* くま画像 */}
       <div className={styles.kumaContainer}>
+        <Link
+          href={oldhomepageUrl}
+          target="_blank"
+        >
         <Image
           src="/kuma.png"
           alt="くま"
@@ -67,6 +78,7 @@ const SNSHolder: React.FC<SNSHolderProps> = ({
           height={150}
           priority
         />
+        </Link>
       </div>
     </div >
   );
