@@ -100,3 +100,15 @@
   bottom: 5%;
   left: 3%;
 }
+
+.additionalText {
+  position: absolute;
+  bottom: 7%;
+  left: 10%;
+  font-size: 0.8rem;
+  color: #222;
+  text-align: left;
+  font-weight: 700; /* Bold */
+  /* Prefer a modern UI font; fall back to Japanese-safe and system fonts */
+  letter-spacing: 0.2px;
+}
