@@ -8154,19 +8154,53 @@ async function uploadImageToSupabase(localFilePath: string, year: number, folder
 // - 最終的な content と images 配列を返す
 // =====================================
 async function loadLocalContent(baseFilename: string, activityType: string) {
-  const BASE_DIR = path.join(process.cwd(), "src", "content", activityType);
+  const CWD = process.cwd();
 
-  // .md or .mdx を探す
-  const mdFile = path.join(BASE_DIR, `${baseFilename}.md`);
-  const mdxFile = path.join(BASE_DIR, `${baseFilename}.mdx`);
+  // 優先順位で候補パスを列挙
+  // 1) src/content/<activityType>/<base>.md(x)
+  // 2) baseFilename の先頭セグメントを content 直下のルートとして扱う（例: other/imoni2016 → src/content/other/imoni2016.md）
+  // 3) 最後のフォールバック: src/content/<base>.md(x)
+  const buildCandidates = (base: string) => {
+    const candidates: string[] = [];
+    const baseDirActivity = path.join(CWD, "src", "content", activityType);
+    candidates.push(path.join(baseDirActivity, `${base}.md`));
+    candidates.push(path.join(baseDirActivity, `${base}.mdx`));
+
+    if (base.includes("/")) {
+      const [first, ...restParts] = base.split("/");
+      const rest = restParts.join("/");
+      if (first) {
+        const altDir = path.join(CWD, "src", "content", first);
+        if (rest) {
+          candidates.push(path.join(altDir, `${rest}.md`));
+          candidates.push(path.join(altDir, `${rest}.mdx`));
+        } else {
+          candidates.push(path.join(altDir, `index.md`));
+          candidates.push(path.join(altDir, `index.mdx`));
+        }
+      }
+    }
+
+    const rootDir = path.join(CWD, "src", "content");
+    candidates.push(path.join(rootDir, `${base}.md`));
+    candidates.push(path.join(rootDir, `${base}.mdx`));
+    return candidates;
+  };
+
+  const candidates = buildCandidates(baseFilename);
 
   let targetFile = "";
-  if (fs.existsSync(mdFile)) {
-    targetFile = mdFile;
-  } else if (fs.existsSync(mdxFile)) {
-    targetFile = mdxFile;
-  } else {
-    console.warn(`⚠️ ファイルが見つかりません: ${mdFile} / ${mdxFile}`);
+  for (const p of candidates) {
+    if (fs.existsSync(p)) {
+      targetFile = p;
+      break;
+    }
+  }
+
+  if (!targetFile) {
+    console.warn(
+      `⚠️ ファイルが見つかりません: ${candidates.join(" / ")}`
+    );
     return { content: "", images: [] };
   }
 
@@ -8441,25 +8475,34 @@ async function main() {
           filename: item.filename,
         },
       });
-      if (existingContent) {
-        console.log(`🔎 重複コンテンツをスキップ: ${item.filename}`);
-        continue;
-      }
-
+      
       // ファイル読み込み + 画像アップロード + Astro置換
       const { content, images } = await loadLocalContent(item.filename, base.activityType);
 
-      await prisma.content.create({
-        data: {
-          recordId,
-          title: item.title,
-          filename: item.filename,
-          content,
-          images,
-        },
-      });
-      createdContents++;
-      console.log(`✅ Content 登録: ${item.filename}`);
+      // 既存があれば更新、なければ作成
+      if (existingContent) {
+        await prisma.content.update({
+          where: { id: existingContent.id },
+          data: {
+            title: item.title ?? existingContent.title,
+            content: content || existingContent.content,
+            images: images.length ? images : (existingContent.images as any),
+          },
+        });
+        console.log(`♻️ Content 更新: ${item.filename}`);
+      } else {
+        await prisma.content.create({
+          data: {
+            recordId,
+            title: item.title,
+            filename: item.filename,
+            content,
+            images,
+          },
+        });
+        createdContents++;
+        console.log(`✅ Content 登録: ${item.filename}`);
+      }
     }
   }
 
