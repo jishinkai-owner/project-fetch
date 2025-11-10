@@ -12,31 +12,50 @@ export async function GET(
     const { type, id } = params;
     const contentId = parseInt(id);
 
-    if (isNaN(contentId)) {
-      return NextResponse.json(
-        { error: "Invalid content ID" },
-        { status: 400 }
-      );
-    }
+    let content;
 
-    // Contentを取得し、Recordも一緒に取得
-    const content = await prisma.content.findFirst({
-      where: {
-        id: contentId
-      },
-      include: {
-        Record: {
-          select: {
-            id: true,
-            year: true,
-            place: true,
-            date: true,
-            activityType: true,
-            details: true
+    // IDが数値でない場合、filenameで検索
+    if (isNaN(contentId)) {
+      // filenameで検索（パスの末尾のファイル名のみで照合）
+      content = await prisma.content.findFirst({
+        where: {
+          filename: {
+            endsWith: `/${id}.mdx`
+          }
+        },
+        include: {
+          Record: {
+            select: {
+              id: true,
+              year: true,
+              place: true,
+              date: true,
+              activityType: true,
+              details: true
+            }
           }
         }
-      }
-    });
+      });
+    } else {
+      // 数値IDで検索
+      content = await prisma.content.findFirst({
+        where: {
+          id: contentId
+        },
+        include: {
+          Record: {
+            select: {
+              id: true,
+              year: true,
+              place: true,
+              date: true,
+              activityType: true,
+              details: true
+            }
+          }
+        }
+      });
+    }
 
     if (!content) {
       return NextResponse.json(

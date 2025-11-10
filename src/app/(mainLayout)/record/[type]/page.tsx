@@ -173,6 +173,7 @@ async function getRecordData(recordType: string) {
           date,
           title,
           filename,
+          details,
         }) => ({
           contentId,
           recordId,
@@ -182,11 +183,8 @@ async function getRecordData(recordType: string) {
           date,
           title,
           filename,
-          // detailsは一覧表示に必要な分だけ切り出す（データ量削減）
-          details:
-            recordContents
-              .find((r) => r.contentId === contentId)
-              ?.details?.substring(0, 100) || null,
+          // detailsは場所名の補足説明として使用するため完全に含める
+          details: details || null,
         })
       ),
       years,

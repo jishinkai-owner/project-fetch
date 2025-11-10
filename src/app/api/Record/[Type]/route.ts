@@ -4,10 +4,10 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 // 活動タイプのマッピング
-const ACTIVITY_TYPE_MAP: { [key: string]: string } = {
-  yama: "yama",
-  tabi: "tabi",
-  tsuri: "tsuri",
+const ACTIVITY_TYPE_MAP: { [key: string]: string[] } = {
+  yama: ["yama"],
+  tabi: ["tabi", "other"], // tabiページでは「other」も含める
+  tsuri: ["tsuri"],
 };
 
 export async function GET(
@@ -17,9 +17,9 @@ export async function GET(
   try {
     const resolvedParams = await params;
     const type = resolvedParams.type;
-    const activityType = ACTIVITY_TYPE_MAP[type];
+    const activityTypes = ACTIVITY_TYPE_MAP[type];
 
-    if (!activityType) {
+    if (!activityTypes) {
       return NextResponse.json(
         { error: "Invalid record type" },
         { status: 400 }
@@ -29,7 +29,9 @@ export async function GET(
     // RecordとContentを結合して取得
     const records = await prisma.record.findMany({
       where: {
-        activityType: activityType,
+        activityType: {
+          in: activityTypes,
+        },
       },
       select: {
         id: true,

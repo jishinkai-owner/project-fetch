@@ -62,6 +62,17 @@ export default function RecordDetailPage() {
         const data: ContentDetail = await res.json();
         setContent(data);
 
+        // filenameでアクセスされた場合、正しい数値IDにリダイレクト
+        const isNumericId = !isNaN(parseInt(contentId));
+        if (!isNumericId && data.id) {
+          // 年度パラメータを引き継ぐ
+          const redirectUrl = yearParam
+            ? `/record/${activityType.id}/${data.id}?year=${yearParam}`
+            : `/record/${activityType.id}/${data.id}`;
+          router.replace(redirectUrl);
+          return;
+        }
+
         // 関連コンテンツを取得
         try {
           const relatedRes = await fetch(`/api/Record/${activityType.id}`);
@@ -73,7 +84,7 @@ export default function RecordDetailPage() {
 
           // 現在の記録を除外し、最大5件までの関連記録を取得
           const filtered = allContents
-            .filter((item) => item.contentId !== parseInt(contentId))
+            .filter((item) => item.contentId !== data.id)
             .slice(0, 10);
 
           setRelatedContents(filtered);
@@ -88,7 +99,7 @@ export default function RecordDetailPage() {
     };
 
     fetchContent();
-  }, [contentId, activityType.id]);
+  }, [contentId, activityType.id, yearParam, router]);
 
   // 日付をそのまま表示するだけの関数
   const displayDate = (dateString: string | null | undefined) => {
