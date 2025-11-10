@@ -11,7 +11,7 @@ datasource db {
 model Content {
   id       Int      @id @default(autoincrement())
   title    String?
-  content  String? @db.Text
+  content  String?  @db.Text
   images   String[]
   filename String?  @unique
   recordId Int
@@ -60,25 +60,26 @@ model RecordContent {
 }
 
 model User {
-  email     String    @unique
-  name      String
-  id        String    @id @db.Uuid @default(uuid())
-  createdAt DateTime  @default(now())
-  grade     Int?
-  updatedAt DateTime  @default(now()) @updatedAt
-  Content   Content[]
-  UserRoles UserRole[]
+  email            String            @unique
+  name             String
+  id               String            @id @default(uuid()) @db.Uuid
+  createdAt        DateTime          @default(now())
+  grade            Int?
+  updatedAt        DateTime          @default(now()) @updatedAt
+  Content          Content[]
+  UserRoles        UserRole[]
   PostHikeContents PostHikeContent[]
 
   @@index([grade])
 }
 
 model Role {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
   description String?
-  UserRoles       UserRole[]
+  UserRoles   UserRole[]
 }
+
 // model UserRole {
 //   isAdmin     Boolean @default(false)
 //   isCL        Boolean @default(false)
@@ -91,30 +92,29 @@ model Role {
 //   User        User    @relation("UserToRole", fields: [userId], references: [id], onDelete: Cascade)
 // }
 model UserRole {
-  id       Int @id @default(autoincrement())
-  userId   String @db.Uuid
-  roleId   Int
-  User     User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Role     Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  id     Int    @id @default(autoincrement())
+  userId String @db.Uuid
+  roleId Int
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
 }
-
 
 model PostHikeContent {
   id               Int      @id @default(autoincrement())
-  sl               String? @db.Text
-  equipmentComment String? @db.Text
-  weatherComment   String? @db.Text
-  mealComment      String? @db.Text
-  slComment        String? @db.Text
-  clId             String? @db.Uuid
+  sl               String?  @db.Text
+  equipmentComment String?  @db.Text
+  weatherComment   String?  @db.Text
+  mealComment      String?  @db.Text
+  slComment        String?  @db.Text
+  clId             String?  @db.Uuid
   recordId         Int
   equipmentPerson  String?
   weatherPerson    String?
   mealPerson       String?
   impression       String[]
   Record           Record   @relation("RecordToPostHikeContent", fields: [recordId], references: [id], onDelete: Cascade)
-  User             User?     @relation(fields: [clId], references: [id], onDelete: SetNull)
+  User             User?    @relation(fields: [clId], references: [id], onDelete: SetNull)
 
-
+  @@unique([recordId, clId], name: "clId_recordId_unique")
   @@index([recordId])
 }
