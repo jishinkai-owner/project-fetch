@@ -80,6 +80,13 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
       const extractOrder = (title: string | null): number => {
         if (!title) return 999; // タイトルがない場合は最後に
 
+        // 特別なタイトルは「0日目」よりも前に配置（負の値を使用）
+        const lowerTitle = title.toLowerCase();
+        if (lowerTitle.includes("もくじ") || lowerTitle.includes("目次")) return -100;
+        if (lowerTitle.includes("プロローグ") || lowerTitle.includes("prologue")) return -99;
+        if (lowerTitle.includes("メンバー紹介") || lowerTitle.includes("メンバー") || lowerTitle.includes("member")) return -98;
+        if (lowerTitle.includes("前日")) return -97; // 「山行前日」「前日」など
+
         // 漢数字を数字に変換する関数
         const kanjiToNumber = (kanji: string): number => {
           const kanjiMap: { [key: string]: number } = {
@@ -97,7 +104,19 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
           return kanjiMap[kanji] || 0;
         };
 
-        // 「○日目」パターンをチェック（1日目、2日目、3日目...の順）
+        // 「移動○日目」パターンをチェック（移動1日目、移動2日目...は通常の日目より前に配置）
+        const moveMatch = title.match(/移動(\d+)日目/);
+        if (moveMatch) {
+          return -50 + parseInt(moveMatch[1], 10); // -49, -48, -47...
+        }
+
+        // 「山行○日目」パターンをチェック（通常の○日目と同じ扱い）
+        const climbMatch = title.match(/山行(\d+)日目/);
+        if (climbMatch) {
+          return parseInt(climbMatch[1], 10);
+        }
+
+        // 「○日目」パターンをチェック（0日目、1日目、2日目、3日目...の順）
         const dayMatch = title.match(/(\d+)日目/);
         if (dayMatch) {
           return parseInt(dayMatch[1], 10);
@@ -131,6 +150,9 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
         if (partMatch) {
           return parseInt(partMatch[1], 10);
         }
+
+        // 「帰路」は最後に配置
+        if (lowerTitle.includes("帰路")) return 998;
 
         return 999; // どのパターンにも当てはまらない場合は最後に
       };
@@ -285,7 +307,7 @@ const PlaceSection = memo(
         {dateOnlyRecords.length > 0 && (
           <div style={{ marginTop: '0.5rem'}}>
             {dateOnlyRecords.map((record) => (
-              <div key={record.contentId} className={styles.dateHeader}>
+              <div key={`date-only-${record.contentId ?? record.recordId}`} className={styles.dateHeader}>
                 <time dateTime={record.date || undefined}>{record.date}</time>
               </div>
             ))}
@@ -316,7 +338,7 @@ const PlaceSection = memo(
                         ...record,
                         date: null, // 日付ヘッダーで表示しているのでカード内では非表示
                       }}
-                      key={record.contentId}
+                      key={record.contentId ?? `record-${record.recordId}`}
                     />
                   ))}
                 </div>

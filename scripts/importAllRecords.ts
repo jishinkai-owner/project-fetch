@@ -573,7 +573,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
     year: 2011,
     filename: "2011/2011.08tyoki/Part1/TyoukiPart1",
     place: "長期登山in大雪山",
-    title: "Part1",
+    title: "Kome編 Part1",
     date: "08/15～21",
     activityType: "yama",
     details: null,
@@ -582,7 +582,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
     year: 2011,
     filename: "2011/2011.08tyoki/Part2/TyoukiPart2",
     place: "長期登山in大雪山",
-    title: "Part2",
+    title: "Kome編 Part2",
     date: "08/15～21",
     activityType: "yama",
     details: null,
@@ -591,7 +591,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
     year: 2011,
     filename: "2011/2011.08tyoki/Part3/TyoukiPart3",
     place: "長期登山in大雪山",
-    title: "Part3",
+    title: "Kome編 Part3",
     date: "08/15～21",
     activityType: "yama",
     details: null,
@@ -600,7 +600,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
     year: 2011,
     filename: "2011/2011.08tyoki/Part4/TyoukiPart4",
     place: "長期登山in大雪山",
-    title: "Part4",
+    title: "Kome編 Part4",
     date: "08/15～21",
     activityType: "yama",
     details: null,
@@ -682,7 +682,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
   // 6) 2011/07/16～17: 焼石岳 ([Takuma編], [Tomoshi編])
   {
     year: 2011,
-    filename: null,
+    filename: "legacy/unavailable",
     place: "焼石岳",
     title: "Takuma編",
     date: "07/16～17",
@@ -691,7 +691,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2011,
-    filename: null,
+    filename: "legacy/unavailable",
     place: "焼石岳",
     title: "Tomoshi編",
     date: "07/16～17",
@@ -702,7 +702,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
   {
     year: 2011,
     filename: "2011/2011.07choukai/choukai2011",
-    place: "鳥海山",
+    place: "鳴海山",
     title: "Sohei編",
     date: "07/16～17",
     activityType: "yama",
@@ -720,7 +720,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2011,
-    filename: null,
+    filename: "2011/2011.07.iwate/2011.07.iwate",
     place: "岩手山",
     title: "Shoko編",
     date: "07/09～10",
@@ -730,7 +730,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
   // 9) 2011/07/02～03: 磐梯山・猫魔ヶ岳 ([1日目Takuma編], [1日目Yasuhiro編], [2日目全体編])
   {
     year: 2011,
-    filename: "2011/2011.07.iwate/2011.07.iwate",
+    filename: "legacy/unavailable",
     place: "磐梯山・猫魔ヶ岳",
     title: "1日目Takuma編",
     date: "07/02～03",
@@ -739,7 +739,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2011,
-    filename: null,
+    filename: "legacy/unavailable",
     place: "磐梯山・猫魔ヶ岳",
     title: "1日目Yasuhiro編",
     date: "07/02～03",
@@ -748,7 +748,7 @@ const data2011: Omit<MountainRecord, "id">[] = [
   },
   {
     year: 2011,
-    filename: null,
+    filename: "legacy/unavailable",
     place: "磐梯山・猫魔ヶ岳",
     title: "2日目全体編",
     date: "07/02～03",
@@ -839,8 +839,17 @@ const data2012: Omit<MountainRecord, "id">[] = [
   {
     year: 2012,
     filename: "2012/2012tyoukiteamkome/newfile",
-    place: "長期登山(KOME編)",
-    title: null,
+    place: "長期登山",
+    title: "KOME編",
+    date: "08/15～19",
+    activityType: "yama",
+    details: null,
+  },
+  {
+    year: 2012,
+    filename: "2012/2012.08.chouki.team.takaki/newfile",
+    place: "長期登山",
+    title: "yamanaka編 プロローグ",
     date: "08/15～19",
     activityType: "yama",
     details: null,
@@ -848,8 +857,8 @@ const data2012: Omit<MountainRecord, "id">[] = [
   {
     year: 2012,
     filename: "2012/2012.08.chouki.team.takaki/newfile1",
-    place: "長期登山(yamanaka編)",
-    title: "1日目",
+    place: "長期登山",
+    title: "yamanaka編 0日目",
     date: "08/15～19",
     activityType: "yama",
     details: null,
@@ -857,8 +866,8 @@ const data2012: Omit<MountainRecord, "id">[] = [
   {
     year: 2012,
     filename: "2012/2012.08.chouki.team.takaki/newfile2",
-    place: "長期登山(yamanaka編)",
-    title: "2日目",
+    place: "長期登山",
+    title: "yamanaka編 1日目",
     date: "08/15～19",
     activityType: "yama",
     details: null,
@@ -866,8 +875,8 @@ const data2012: Omit<MountainRecord, "id">[] = [
   {
     year: 2012,
     filename: "2012/2012.08.chouki.team.takaki/newfile3",
-    place: "長期登山(yamanaka編)",
-    title: "3日目",
+    place: "長期登山",
+    title: "yamanaka編 2日目",
     date: "08/15～19",
     activityType: "yama",
     details: null,
@@ -875,8 +884,8 @@ const data2012: Omit<MountainRecord, "id">[] = [
   {
     year: 2012,
     filename: "2012/2012.08.chouki.team.takaki/newfile4",
-    place: "長期登山(yamanaka編)",
-    title: "4日目",
+    place: "長期登山",
+    title: "yamanaka編 3日目",
     date: "08/15～19",
     activityType: "yama",
     details: null,
@@ -884,8 +893,8 @@ const data2012: Omit<MountainRecord, "id">[] = [
   {
     year: 2012,
     filename: "2012/2012.08.chouki.team.takaki/newfile5",
-    place: "長期登山(yamanaka編)",
-    title: "5日目",
+    place: "長期登山",
+    title: "yamanaka編 4日目",
     date: "08/15～19",
     activityType: "yama",
     details: null,
@@ -893,8 +902,8 @@ const data2012: Omit<MountainRecord, "id">[] = [
   {
     year: 2012,
     filename: "2012/2012.08.chouki.team.takaki/newfile6",
-    place: "長期登山(yamanaka編)",
-    title: "6日目",
+    place: "長期登山",
+    title: "yamanaka編 5日目",
     date: "08/15～19",
     activityType: "yama",
     details: null,
@@ -1081,7 +1090,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki1",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "1日目",
+    title: "プロローグ",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1090,7 +1099,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki2",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "2日目",
+    title: "移動1日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1099,7 +1108,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki3",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "3日目",
+    title: "移動2日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1108,7 +1117,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki4",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "4日目",
+    title: "1日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1117,7 +1126,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki5",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "5日目",
+    title: "2日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1126,7 +1135,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki6",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "6日目",
+    title: "3日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1135,7 +1144,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki7",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "7日目",
+    title: "4日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1144,7 +1153,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.08-tyoki.ryohei/tyouki8",
     place: "長期登山in北アルプス(RYOHEI編)",
-    title: "8日目",
+    title: "5日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1153,7 +1162,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki1",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "1日目",
+    title: "プロローグ",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1162,7 +1171,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki2",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "2日目",
+    title: "移動1日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1171,7 +1180,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki3",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "3日目",
+    title: "移動2日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1180,7 +1189,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki4",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "4日目",
+    title: "1日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1189,7 +1198,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki5",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "5日目",
+    title: "2日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1198,7 +1207,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki6",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "6日目",
+    title: "3日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1207,7 +1216,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki7",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "7日目",
+    title: "4日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -1216,7 +1225,7 @@ const data2013: Omit<MountainRecord, "id">[] = [
     year: 2013,
     filename: "2013/2013.choki.team.mika/chouki8",
     place: "長期登山in北アルプス(MIKA編)",
-    title: "8日目",
+    title: "5日目",
     date: "08/12～16",
     activityType: "yama",
     details: null,
@@ -8433,7 +8442,8 @@ const allData: Omit<MountainRecord, "id">[] = [
 // =====================================
 async function uploadImageToSupabase(localFilePath: string, year: number, folderName: string) {
   const fileName = path.basename(localFilePath);
-  const storagePath = `images/${year}/${folderName}/${fileName}`;
+  // バケット名は "images" なので、storagePath にはバケット内のパスのみを指定
+  const storagePath = `${year}/${folderName}/${fileName}`;
 
   // ファイル読み込み
   const fileBuffer = fs.readFileSync(localFilePath);
@@ -8450,8 +8460,8 @@ async function uploadImageToSupabase(localFilePath: string, year: number, folder
     return null;
   }
 
-  // パブリック URL を返す
-  return `${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${data.path}`;
+  // パブリック URL を返す（バケット名 "images" + data.path）
+  return `${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${data.path}`;
 }
 
 // =====================================
@@ -8792,13 +8802,21 @@ async function main() {
       totalContentItems++;
 
       try {
+        // "legacy/unavailable" の場合はユニークなfilenameを生成
+        let uniqueFilename = item.filename;
+        if (item.filename === "legacy/unavailable") {
+          // 年度、場所、タイトルを組み合わせてユニークにする
+          const suffix = `${item.year}_${item.place || 'unknown'}_${item.title || 'untitled'}`.replace(/[\/\s]/g, '_');
+          uniqueFilename = `legacy/unavailable_${suffix}`;
+        }
+
         // ファイル読み込み + 画像アップロード + Astro置換
         const { content, images } = await loadLocalContent(item.filename, base.activityType);
 
         // filenameでユニーク検索（recordIdに関係なく）
         const existingContent = await prisma.content.findFirst({
           where: {
-            filename: item.filename,
+            filename: uniqueFilename,
           },
         });
 
@@ -8814,20 +8832,20 @@ async function main() {
             },
           });
           updatedContents++;
-          console.log(`♻️ Content 更新: ${item.filename}`);
+          console.log(`♻️ Content 更新: ${uniqueFilename}`);
         } else {
           // 新規作成
           await prisma.content.create({
             data: {
               recordId,
               title: item.title,
-              filename: item.filename,
+              filename: uniqueFilename,
               content,
               images,
             },
           });
           createdContents++;
-          console.log(`✅ Content 作成: ${item.filename}`);
+          console.log(`✅ Content 作成: ${uniqueFilename}`);
         }
       } catch (error) {
         console.error(`❌ エラー: ${item.filename}`, error);

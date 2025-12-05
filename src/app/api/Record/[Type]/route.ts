@@ -12,11 +12,11 @@ const ACTIVITY_TYPE_MAP: { [key: string]: string[] } = {
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ type: string }> }
+  { params }: { params: Promise<{ Type: string }> }
 ) {
   try {
     const resolvedParams = await params;
-    const type = resolvedParams.type;
+    const type = resolvedParams.Type;
     const activityTypes = ACTIVITY_TYPE_MAP[type];
 
     if (!activityTypes) {
@@ -45,6 +45,7 @@ export async function GET(
             id: true,
             title: true,
             content: true,
+            filename: true,
           },
         },
       },
@@ -53,18 +54,47 @@ export async function GET(
       },
     });
 
+    // レスポンスの型定義
+    type FormattedRecord = {
+      contentId: number | null;
+      recordId: number;
+      year: number | null;
+      place: string | null;
+      activityType: string | null;
+      date: string | null;
+      details: string | null;
+      title: string | null;
+      filename: string | null;
+    };
+
     // クライアント用にデータを整形
-    const formattedRecords = records.flatMap((record) => {
-      return record.Content.map((content) => ({
-        contentId: content.id,
+    const formattedRecords: FormattedRecord[] = records.flatMap((record) => {
+      // Contentがある場合は各Contentごとにレコードを作成
+      if (record.Content.length > 0) {
+        return record.Content.map((content): FormattedRecord => ({
+          contentId: content.id,
+          recordId: record.id,
+          year: record.year,
+          place: record.place,
+          activityType: record.activityType,
+          date: record.date,
+          details: record.details,
+          title: content.title,
+          filename: content.filename,
+        }));
+      }
+      // Contentがない場合はRecordのみの情報を返す（中止になった山行など）
+      return [{
+        contentId: null,
         recordId: record.id,
         year: record.year,
         place: record.place,
         activityType: record.activityType,
         date: record.date,
         details: record.details,
-        title: content.title,
-      }));
+        title: null,
+        filename: null,
+      } as FormattedRecord];
     });
 
     return NextResponse.json(formattedRecords);

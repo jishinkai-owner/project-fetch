@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 
 // RecordContentDTO 定義
 export interface RecordContentDTO {
-    contentId: number;
+    contentId: number | null;  // Contentがない場合はnull
     recordId: number;
     year: number | null;
     place: string | null;
@@ -25,12 +25,12 @@ const RecordCard = memo(({
     const searchParams = useSearchParams();
     const currentYear = searchParams.get('year');
     
-    // activityType/contentIdが不正な場合はリンクを生成しない
-    if (!record.activityType || !record.contentId) {
+    // activityTypeが不正な場合はリンクを生成しない
+    if (!record.activityType) {
         return (
             <div className={styles.recordCard + ' ' + styles.disabled} title="リンク情報が不正なため詳細ページに遷移できません">
                 <div className={styles.recordCardHeader}>
-                    <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
+                    <h4 className={styles.recordTitle}>{record.title || record.place || "記録"}</h4>
                 </div>
                 <div className={styles.cardFooter}>
                     <span className={styles.readMore} style={{ color: '#aaa' }}>詳細ページに遷移できません</span>
@@ -38,6 +38,35 @@ const RecordCard = memo(({
             </div>
         );
     }
+
+    // contentIdがない場合（中止になった山行、記録ファイルがない等）
+    if (!record.contentId) {
+        return (
+            <div className={styles.recordCard + ' ' + styles.disabled} title={record.details || "記録ファイルがありません"}>
+                <div className={styles.recordCardHeader}>
+                    <h4 className={styles.recordTitle}>{record.title || record.place || "記録"}</h4>
+                </div>
+                <div className={styles.cardFooter}>
+                    <span className={styles.readMore} style={{ color: '#aaa' }}>{record.details || "記録なし"}</span>
+                </div>
+            </div>
+        );
+    }
+
+    // filenameがlegacy/で始まる場合（記録ファイルが利用不可）
+    if (record.filename?.startsWith('legacy/')) {
+        return (
+            <div className={styles.recordCard + ' ' + styles.disabled} title="記録が登録されていません">
+                <div className={styles.recordCardHeader}>
+                    <h4 className={styles.recordTitle}>{record.title || record.place || "記録"}</h4>
+                </div>
+                <div className={styles.cardFooter}>
+                    <span className={styles.readMore} style={{ color: '#aaa' }}>記録が登録されていません</span>
+                </div>
+            </div>
+        );
+    }
+
     // 年度パラメータを含む詳細ページへのリンクを生成
     let linkHref = `/record/${record.activityType}/${record.contentId}`;
     if (currentYear) {

@@ -5,23 +5,28 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  props: { params: Promise<{ type: string; id: string }> }
+  props: { params: Promise<{ Type: string; id: string }> }
 ) {
   const params = await props.params;
   try {
-    const { type, id } = params;
+    const { Type: type, id } = params;
     const contentId = parseInt(id);
 
     let content;
 
     // IDが数値でない場合、filenameで検索
     if (isNaN(contentId)) {
-      // filenameで検索（パスの末尾のファイル名のみで照合）
+      // filenameで検索（完全一致、または末尾一致）
       content = await prisma.content.findFirst({
         where: {
-          filename: {
-            endsWith: `/${id}.mdx`
-          }
+          OR: [
+            // 完全一致
+            { filename: id },
+            // 末尾一致（拡張子なし）
+            { filename: { endsWith: `/${id}` } },
+            // 末尾一致（.mdx拡張子付き）
+            { filename: { endsWith: `/${id}.mdx` } },
+          ]
         },
         include: {
           Record: {
@@ -87,6 +92,7 @@ export async function GET(
       title: content.title,
       content: content.content,
       images: content.images,
+      filename: content.filename,
       year: content.Record.year,
       place: content.Record.place,
       date: content.Record.date,
