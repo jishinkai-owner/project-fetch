@@ -7,7 +7,8 @@
     "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "records": "npx tsx scripts/importAllRecords.ts"
   },
   "dependencies": {
     "@babel/core": "^7.26.9",

@@ -5,38 +5,62 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  props: { params: Promise<{ type: string; id: string }> }
+  props: { params: Promise<{ Type: string; id: string }> }
 ) {
   const params = await props.params;
   try {
-    const { type, id } = params;
+    const { Type: type, id } = params;
     const contentId = parseInt(id);
 
-    if (isNaN(contentId)) {
-      return NextResponse.json(
-        { error: "Invalid content ID" },
-        { status: 400 }
-      );
-    }
+    let content;
 
-    // Contentを取得し、Recordも一緒に取得
-    const content = await prisma.content.findFirst({
-      where: {
-        id: contentId
-      },
-      include: {
-        Record: {
-          select: {
-            id: true,
-            year: true,
-            place: true,
-            date: true,
-            activityType: true,
-            details: true
+    // IDが数値でない場合、filenameで検索
+    if (isNaN(contentId)) {
+      // filenameで検索（完全一致、または末尾一致）
+      content = await prisma.content.findFirst({
+        where: {
+          OR: [
+            // 完全一致
+            { filename: id },
+            // 末尾一致（拡張子なし）
+            { filename: { endsWith: `/${id}` } },
+            // 末尾一致（.mdx拡張子付き）
+            { filename: { endsWith: `/${id}.mdx` } },
+          ]
+        },
+        include: {
+          Record: {
+            select: {
+              id: true,
+              year: true,
+              place: true,
+              date: true,
+              activityType: true,
+              details: true
+            }
           }
         }
-      }
-    });
+      });
+    } else {
+      // 数値IDで検索
+      content = await prisma.content.findFirst({
+        where: {
+          id: contentId
+        },
+        include: {
+          Record: {
+            select: {
+              id: true,
+              year: true,
+              place: true,
+              date: true,
+              activityType: true,
+              details: true
+            }
+          }
+        }
+      });
+    }
 
     if (!content) {
       return NextResponse.json(
@@ -68,6 +92,7 @@ export async function GET(
       title: content.title,
       content: content.content,
       images: content.images,
+      filename: content.filename,
       year: content.Record.year,
       place: content.Record.place,
       date: content.Record.date,

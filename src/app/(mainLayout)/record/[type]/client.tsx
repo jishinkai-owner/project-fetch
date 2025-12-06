@@ -26,6 +26,47 @@ interface RecordClientProps {
   activityType: ActivityType;
 }
 
+// 日付文字列を数値（YYYYMMDD形式）に変換する関数
+const dateStringToNumber = (dateStr: string, year: number): number => {
+  if (!dateStr) return 0;
+
+  // "06/23～24" や "11/10～11" のような形式から最初の日付を抽出
+  // より広範な区切り文字に対応（～、〜、~、-、ー、−など）
+  const rangeMatch = dateStr.match(/^(\d{2})\/(\d{2})[\s]*[～〜~\-ー−]/);
+  if (rangeMatch) {
+    const month = parseInt(rangeMatch[1], 10);
+    const day = parseInt(rangeMatch[2], 10);
+    return year * 10000 + month * 100 + day;
+  }
+
+  // "05/??" のような不明な日付を含む形式
+  const unknownMatch = dateStr.match(/^(\d{2})\/\?\?/);
+  if (unknownMatch) {
+    const month = parseInt(unknownMatch[1], 10);
+    // 不明な日付は月の最初（0日）として扱う
+    return year * 10000 + month * 100 + 0;
+  }
+
+  // "06/23" のような単一日付
+  const singleMatch = dateStr.match(/^(\d{2})\/(\d{2})$/);
+  if (singleMatch) {
+    const month = parseInt(singleMatch[1], 10);
+    const day = parseInt(singleMatch[2], 10);
+    return year * 10000 + month * 100 + day;
+  }
+
+  // "2007-06-23" のようなISO形式
+  const isoMatch = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (isoMatch) {
+    const isoYear = parseInt(isoMatch[1], 10);
+    const month = parseInt(isoMatch[2], 10);
+    const day = parseInt(isoMatch[3], 10);
+    return isoYear * 10000 + month * 100 + day;
+  }
+
+  return 0;
+};
+
 // 日付順に並び替える関数
 const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
   return [...records].sort((a, b) => {
@@ -38,6 +79,23 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
       // タイトルから順序を抽出してソート
       const extractOrder = (title: string | null): number => {
         if (!title) return 999; // タイトルがない場合は最後に
+
+        // 特別なタイトルは「0日目」よりも前に配置（負の値を使用）
+        const lowerTitle = title.toLowerCase();
+        if (lowerTitle.includes("もくじ") || lowerTitle.includes("目次"))
+          return -100;
+        if (
+          lowerTitle.includes("プロローグ") ||
+          lowerTitle.includes("prologue")
+        )
+          return -99;
+        if (
+          lowerTitle.includes("メンバー紹介") ||
+          lowerTitle.includes("メンバー") ||
+          lowerTitle.includes("member")
+        )
+          return -98;
+        if (lowerTitle.includes("前日")) return -97; // 「山行前日」「前日」など
 
         // 漢数字を数字に変換する関数
         const kanjiToNumber = (kanji: string): number => {
@@ -56,7 +114,19 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
           return kanjiMap[kanji] || 0;
         };
 
-        // 「○日目」パターンをチェック（1日目、2日目、3日目...の順）
+        // 「移動○日目」パターンをチェック（移動1日目、移動2日目...は通常の日目より前に配置）
+        const moveMatch = title.match(/移動(\d+)日目/);
+        if (moveMatch) {
+          return -50 + parseInt(moveMatch[1], 10); // -49, -48, -47...
+        }
+
+        // 「山行○日目」パターンをチェック（通常の○日目と同じ扱い）
+        const climbMatch = title.match(/山行(\d+)日目/);
+        if (climbMatch) {
+          return parseInt(climbMatch[1], 10);
+        }
+
+        // 「○日目」パターンをチェック（0日目、1日目、2日目、3日目...の順）
         const dayMatch = title.match(/(\d+)日目/);
         if (dayMatch) {
           return parseInt(dayMatch[1], 10);
@@ -91,6 +161,9 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
           return parseInt(partMatch[1], 10);
         }
 
+        // 「帰路」は最後に配置
+        if (lowerTitle.includes("帰路")) return 998;
+
         return 999; // どのパターンにも当てはまらない場合は最後に
       };
 
@@ -106,14 +179,17 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
     }
 
     // 日付を比較（降順 - 新しい日付が上に）
-    const dateCompare = new Date(b.date).getTime() - new Date(a.date).getTime();
+    // 日付を数値に変換して比較
+    const dateNumA = dateStringToNumber(a.date, a.year || 0);
+    const dateNumB = dateStringToNumber(b.date, b.year || 0);
 
-    // 日付が同じ場合は年度で比較（降順 - 新しい年度が上に）
-    if (dateCompare === 0) {
-      return (b.year || 0) - (a.year || 0);
-    }
+    // 解析できない日付の場合は後ろに配置
+    if (dateNumA === 0 && dateNumB === 0) return 0;
+    if (dateNumA === 0) return 1;
+    if (dateNumB === 0) return -1;
 
-    return dateCompare;
+    // 数値で降順比較（新しい日付が上に）
+    return dateNumB - dateNumA;
   });
 };
 
@@ -132,15 +208,30 @@ const PlaceSection = memo(
   }) => {
     // このプレースに対応するレコードをメモ化し、日付順に並び替え
     const placeRecords = useMemo(() => {
-      // "Contentの中身がない" 記録（details, title, filenameすべて空/未設定）は除外
-      const filteredRecords = records.filter(
+      const allPlaceRecords = records.filter((r) => r.place === place);
+
+      // "Contentの中身がある" 記録をフィルタリング
+      const filteredRecords = allPlaceRecords.filter(
         (r) =>
-          r.place === place &&
-          ((r.details && r.details.trim() !== "") ||
-            (r.title && r.title.trim() !== "") ||
-            (r.filename && r.filename.trim() !== "")),
+          (r.title && r.title.trim() !== "") ||
+          (r.filename && r.filename.trim() !== "")
       );
+
       return sortByDate(filteredRecords);
+    }, [records, place]);
+
+    // Contentはないが日付情報がある記録を取得（??を含む日付など）
+    const dateOnlyRecords = useMemo(() => {
+      const allPlaceRecords = records.filter((r) => r.place === place);
+
+      return allPlaceRecords.filter(
+        (r) =>
+          (!r.title || r.title.trim() === "") &&
+          (!r.filename || r.filename.trim() === "") &&
+          (!r.details || r.details.trim() === "") && // detailsがある場合は中止記録として扱う
+          r.date &&
+          r.date.trim() !== ""
+      );
     }, [records, place]);
 
     // ユニークな日付と対応するレコードを取得
@@ -160,58 +251,119 @@ const PlaceSection = memo(
         if (a[0] === "no-date") return 1;
         if (b[0] === "no-date") return -1;
 
-        const dateCompare = new Date(b[0]).getTime() - new Date(a[0]).getTime();
+        // 年度を取得（レコードのyearフィールドから）
+        const yearA = a[1][0]?.year || 0;
+        const yearB = b[1][0]?.year || 0;
 
-        // 同じ日付の場合は年度で比較（釣果記録の場合のみ）
-        if (dateCompare === 0 && isFishingRecords) {
-          const maxYearA = Math.max(...a[1].map((r) => r.year || 0));
-          const maxYearB = Math.max(...b[1].map((r) => r.year || 0));
-          return maxYearB - maxYearA;
+        // 日付を数値に変換して比較
+        const dateNumA = dateStringToNumber(a[0], yearA);
+        const dateNumB = dateStringToNumber(b[0], yearB);
+
+        // 解析できない日付の場合は後ろに配置
+        if (dateNumA === 0 && dateNumB === 0) {
+          // 両方解析できない場合は文字列比較
+          return b[0].localeCompare(a[0]);
         }
+        if (dateNumA === 0) return 1;
+        if (dateNumB === 0) return -1;
 
-        return dateCompare;
+        // 数値で降順比較（新しい日付が上に）
+        return dateNumB - dateNumA;
       });
     }, [placeRecords, isFishingRecords]);
+
+    // placeに対応する記録で、Contentが存在しないもの（中止などの理由がdetailsに記載されている）を取得
+    const noContentInfo = useMemo(() => {
+      const allPlaceRecords = records.filter((r) => r.place === place);
+
+      // Contentが存在しないレコードを探す
+      const noContentRecord = allPlaceRecords.find(
+        (r) =>
+          (!r.title || r.title.trim() === "") &&
+          (!r.filename || r.filename.trim() === "") &&
+          r.details &&
+          r.details.trim() !== ""
+      );
+
+      return noContentRecord
+        ? { details: noContentRecord.details, date: noContentRecord.date }
+        : null;
+    }, [records, place]);
 
     return (
       <div className={styles.placeSection}>
         <h3 className={styles.placeTitle}>
           <span className={styles.placeIcon}>{activityType.icon}</span>
-          {place}
+          {noContentInfo ? (
+            <>
+              <span style={{ textDecoration: "line-through" }}>{place}</span>
+              <span
+                style={{ marginLeft: "1rem", fontSize: "0.9em", color: "#666" }}
+              >
+                {noContentInfo.details}
+              </span>
+            </>
+          ) : (
+            place
+          )}
         </h3>
 
-        <div className={styles.recordCardList}>
-          {dateGroups.map(([date, dateRecords]) => (
-            <div key={date} className={styles.dateGroup}>
-              {date !== "no-date" && (
-                <div className={styles.dateHeader}>
-                  <time dateTime={date}>{date}</time>
-                  {isFishingRecords &&
-                    dateRecords.length > 0 &&
-                    dateRecords[0].year && (
-                      <span className={styles.yearBadge}>
-                        {dateRecords[0].year}年
-                      </span>
-                    )}
-                </div>
-              )}
-              <div className={styles.dateRecords}>
-                {dateRecords.map((record) => (
-                  <RecordCard
-                    record={{
-                      ...record,
-                      date: null, // 日付ヘッダーで表示しているのでカード内では非表示
-                    }}
-                    key={record.contentId}
-                  />
-                ))}
+        {/* Contentが存在しない記録の日付を表示 */}
+        {noContentInfo && noContentInfo.date && (
+          <div className={styles.dateHeader} style={{ marginTop: "0.5rem" }}>
+            <time dateTime={noContentInfo.date}>{noContentInfo.date}</time>
+          </div>
+        )}
+
+        {/* 日付情報のみの記録を表示（??を含む日付など） */}
+        {dateOnlyRecords.length > 0 && (
+          <div style={{ marginTop: "0.5rem" }}>
+            {dateOnlyRecords.map((record) => (
+              <div
+                key={`date-only-${record.contentId ?? record.recordId}`}
+                className={styles.dateHeader}
+              >
+                <time dateTime={record.date || undefined}>{record.date}</time>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+
+        {/* Contentが存在する場合のみRecordCardを表示 */}
+        {placeRecords.length > 0 && (
+          <div className={styles.recordCardList}>
+            {dateGroups.map(([date, dateRecords]) => (
+              <div key={date} className={styles.dateGroup}>
+                {date !== "no-date" && (
+                  <div className={styles.dateHeader}>
+                    <time dateTime={date}>{date}</time>
+                    {isFishingRecords &&
+                      dateRecords.length > 0 &&
+                      dateRecords[0].year && (
+                        <span className={styles.yearBadge}>
+                          {dateRecords[0].year}年
+                        </span>
+                      )}
+                  </div>
+                )}
+                <div className={styles.dateRecords}>
+                  {dateRecords.map((record) => (
+                    <RecordCard
+                      record={{
+                        ...record,
+                        date: null, // 日付ヘッダーで表示しているのでカード内では非表示
+                      }}
+                      key={record.contentId ?? `record-${record.recordId}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     );
-  },
+  }
 );
 
 PlaceSection.displayName = "PlaceSection";
@@ -241,16 +393,16 @@ const RecordClient: React.FC<RecordClientProps> = ({
     isFishingRecords
       ? null
       : yearFromUrl && years.includes(yearFromUrl)
-        ? yearFromUrl
-        : initialYear,
+      ? yearFromUrl
+      : initialYear
   );
 
   const [recordsToShow, setRecordsToShow] = useState<RecordContentDTO[]>(
     isFishingRecords
       ? allRecords // 釣果記録は全記録を表示
       : yearFromUrl && years.includes(yearFromUrl)
-        ? allRecords.filter((r) => r.year === yearFromUrl)
-        : initialRecords,
+      ? allRecords.filter((r) => r.year === yearFromUrl)
+      : initialRecords
   );
 
   const [loading, setLoading] = useState(false);
@@ -274,7 +426,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
         }
       });
     },
-    [activityType.id, router],
+    [activityType.id, router]
   );
 
   // 年度変更時のデータフィルタリング
@@ -312,9 +464,10 @@ const RecordClient: React.FC<RecordClientProps> = ({
       if (r.place) uniquePlaces.add(r.place);
     });
 
+    const placeArray = Array.from(uniquePlaces);
+
     // 釣果記録の場合は場所を最新年度順に並び替える
     if (isFishingRecords) {
-      const placeArray = Array.from(uniquePlaces);
       return placeArray.sort((placeA, placeB) => {
         // 各場所の最新年度を取得
         const recordsA = recordsToShow.filter((r) => r.place === placeA);
@@ -328,7 +481,22 @@ const RecordClient: React.FC<RecordClientProps> = ({
       });
     }
 
-    return Array.from(uniquePlaces);
+    // 釣果記録以外は、各場所の最新の日付で並び替え（降順）
+    return placeArray.sort((placeA, placeB) => {
+      const recordsA = recordsToShow.filter((r) => r.place === placeA);
+      const recordsB = recordsToShow.filter((r) => r.place === placeB);
+
+      // 各場所の最新の日付（最大の数値）を取得
+      const maxDateNumA = Math.max(
+        ...recordsA.map((r) => dateStringToNumber(r.date || "", r.year || 0))
+      );
+      const maxDateNumB = Math.max(
+        ...recordsB.map((r) => dateStringToNumber(r.date || "", r.year || 0))
+      );
+
+      // 降順でソート（新しい日付が上に）
+      return maxDateNumB - maxDateNumA;
+    });
   }, [recordsToShow, isFishingRecords]);
 
   return (

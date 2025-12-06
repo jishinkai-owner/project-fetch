@@ -22,6 +22,7 @@ interface ContentDetail {
   title: string | null;
   content: string | null;
   images: string[];
+  filename?: string | null;
   year?: number | null;
   place?: string | null;
   date?: string | null;
@@ -47,7 +48,7 @@ export default function RecordDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [content, setContent] = useState<ContentDetail | null>(null);
   const [relatedContents, setRelatedContents] = useState<RecordContentDTO[]>(
-    [],
+    []
   );
 
   // データ取得
@@ -70,6 +71,17 @@ export default function RecordDetailPage() {
         const data: ContentDetail = await res.json();
         setContent(data);
 
+        // filenameでアクセスされた場合、正しい数値IDにリダイレクト
+        const isNumericId = !isNaN(parseInt(contentId));
+        if (!isNumericId && data.id) {
+          // 年度パラメータを引き継ぐ
+          const redirectUrl = yearParam
+            ? `/record/${activityType.id}/${data.id}?year=${yearParam}`
+            : `/record/${activityType.id}/${data.id}`;
+          router.replace(redirectUrl);
+          return;
+        }
+
         // 関連コンテンツを取得
         try {
           const relatedRes = await fetch(`/api/Record/${activityType.id}`);
@@ -79,9 +91,27 @@ export default function RecordDetailPage() {
 
           const allContents = (await relatedRes.json()) as RecordContentDTO[];
 
-          // 現在の記録を除外し、最大5件までの関連記録を取得
+          // 年度パラメータまたはコンテンツの年度情報を使用してフィルタリング
+          const targetYear = yearParam ? parseInt(yearParam) : data.year;
+
+          // 同じ年度の記録のみをフィルタリングし、現在の記録を除外
+          // contentIdがnullの記録（中止など）は関連記録として表示しない
           const filtered = allContents
-            .filter((item) => item.contentId !== parseInt(contentId))
+            .filter((item) => {
+              // contentIdがnullの記録は除外（リンクを作成できないため）
+              if (item.contentId === null) return false;
+
+              // 現在の記録を除外
+              if (item.contentId === data.id) return false;
+
+              // 年度が指定されている場合は同じ年度のみ
+              if (targetYear !== null && targetYear !== undefined) {
+                return item.year === targetYear;
+              }
+
+              // 年度が指定されていない場合はすべて表示
+              return true;
+            })
             .slice(0, 10);
 
           setRelatedContents(filtered);
@@ -96,12 +126,51 @@ export default function RecordDetailPage() {
     };
 
     fetchContent();
-  }, [contentId, activityType.id]);
+  }, [contentId, activityType.id, yearParam, router]);
 
   // 日付をそのまま表示するだけの関数
   const displayDate = (dateString: string | null | undefined) => {
     if (!dateString) return "日付なし";
     return dateString;
+  };
+
+  // コンテンツ内の相対リンクを絶対リンクに変換する関数
+  const transformContentLinks = (
+    htmlContent: string,
+    filename: string | null | undefined
+  ) => {
+    if (!htmlContent || !filename) return htmlContent;
+
+    // filenameからディレクトリパスを取得 (例: "2017/b5gj/top" -> "2017/b5gj")
+    const lastSlashIndex = filename.lastIndexOf("/");
+    if (lastSlashIndex === -1) return htmlContent;
+    const basePath = filename.substring(0, lastSlashIndex);
+
+    // href属性の相対リンクを変換
+    // 外部リンク(http/https)、絶対パス(/)、アンカー(#)は変換しない
+    const transformedHtml = htmlContent.replace(
+      /href="([^"]+)"/g,
+      (match, href) => {
+        // 外部リンク、絶対パス、アンカーリンクはそのまま
+        if (
+          href.startsWith("http") ||
+          href.startsWith("/") ||
+          href.startsWith("#") ||
+          href.startsWith("mailto:")
+        ) {
+          return match;
+        }
+        // 相対リンクをfilenameクエリパラメータ付きのパスに変換
+        const fullPath = `${basePath}/${href}`;
+        const queryParams = new URLSearchParams();
+        queryParams.set("filename", fullPath);
+        if (yearParam) queryParams.set("year", yearParam);
+        const newHref = `/record/${recordType}/resolve?${queryParams.toString()}`;
+        return `href="${newHref}"`;
+      }
+    );
+
+    return transformedHtml;
   };
 
   // 戻るボタンのハンドラー
@@ -168,7 +237,10 @@ export default function RecordDetailPage() {
         <div
           className={styles.detailContent}
           dangerouslySetInnerHTML={{
-            __html: content.content || "内容がありません",
+            __html: transformContentLinks(
+              content.content || "内容がありません",
+              content.filename
+            ),
           }}
         />
 
@@ -199,6 +271,7 @@ export default function RecordDetailPage() {
             <h2 className={styles.relatedTitle}>他の{activityType.title}</h2>
             <div className={styles.relatedList}>
               {relatedContents.map((item) => {
+                // contentIdがnullの記録はフィルタ済みなので、ここでは常に存在する
                 // 年度パラメータを引き継ぐ
                 const linkHref = yearParam
                   ? `/record/${activityType.id}/${item.contentId}?year=${yearParam}`
@@ -208,7 +281,7 @@ export default function RecordDetailPage() {
                   <Link
                     href={linkHref}
                     className={styles.relatedItem}
-                    key={item.contentId}
+                    key={item.contentId ?? item.recordId}
                   >
                     <div className={styles.relatedItemContent}>
                       <h3 className={styles.relatedItemTitle}>

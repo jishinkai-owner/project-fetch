@@ -78,7 +78,7 @@
 .contentWrapper {
   width: 100%;
   max-width: 1200px; 
-  margin: 0 auto;
+  margin-bottom: 3rem;
   padding: 0rem 1rem;
 }
 
@@ -126,8 +126,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  padding-bottom: 3rem;
+  gap: 1rem;
 }
 
 .placeSection {
@@ -359,6 +358,73 @@
   line-height: 1.8;
   font-size: 1.05rem;
   color: #333;
+  // デフォルトは中央揃え
+  text-align: center;
+  
+  // tableスタイル
+  table {
+    width: 100%;
+    max-width: 100%;
+    margin: 1.5rem auto;
+    border-collapse: collapse;
+    text-align: left;
+    background-color: transparent;
+    
+    // レイアウト用のテーブル（ボーダーなし）
+    &[width], &:not([border]) {
+      border: none;
+      
+      td, th {
+        border: none;
+        padding: 0.5rem;
+        vertical-align: top;
+      }
+    }
+    
+    // データテーブル（ボーダーあり）
+    &[border] {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      
+      th {
+        background-color: rgba(220, 75, 75, 0.1);
+        font-weight: 600;
+        padding: 0.75rem 1rem;
+        border-bottom: 2px solid rgba(220, 75, 75, 0.3);
+      }
+      
+      td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      
+      tr:last-child td {
+        border-bottom: none;
+      }
+      
+      tr:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+    }
+    
+    // テーブル内の要素
+    td, th {
+      text-align: left;
+      
+      p {
+        margin-bottom: 0.75rem;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      
+      img {
+        margin: 1rem auto;
+      }
+    }
+  }
   
   h1, h2, h3, h4, h5, h6 {
     margin-top: 1.8rem;
@@ -370,7 +436,8 @@
       content: '';
       position: absolute;
       bottom: -5px;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 40px;
       height: 2px;
       background-color: rgba(220, 75, 75, 0.6);
@@ -384,24 +451,45 @@
   ul, ol {
     margin-bottom: 1.5rem;
     padding-left: 1.8rem;
+    text-align: left;
+    display: inline-block;
   }
   
   blockquote {
     border-left: 3px solid rgba(220, 75, 75, 0.6);
     padding: 0.8rem 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1.5rem auto;
     background-color: rgba(240, 240, 240, 0.5);
     color: #555;
     font-style: italic;
     border-radius: 0 0.5rem 0.5rem 0;
+    text-align: left;
+    max-width: 90%;
   }
   
   img {
     max-width: 100%;
     height: auto;
-    margin: 1.5rem 0;
+    margin: 1.5rem auto;
     border-radius: 0.5rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: block;
+  }
+  
+  // リンクスタイル
+  a {
+    color: #0066cc;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #0044aa;
+      text-decoration: underline;
+    }
+    
+    &:visited {
+      color: #551a8b;
+    }
   }
 
   // Enhanced styles for media embeds and forced line breaks
