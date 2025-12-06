@@ -2,7 +2,7 @@ import { RecordContentProps } from "@/types/record";
 import axios from "axios";
 import { useState, useMemo } from "react";
 import useData from "@/lib/swr/useSWR";
-import { RecordsAuthorRes, ContentRes } from "@/types/apiResponse";
+import { AuthoredRecordRes, ContentRes } from "@/types/apiResponse";
 import toast from "react-hot-toast";
 
 export const useEditorState = () => {
@@ -28,8 +28,8 @@ export const useImage = () => {
 };
 
 export const useAuthorRecord = (userId?: string | null) => {
-  const { data, isLoading, isError } = useData<RecordsAuthorRes[]>(
-    userId ? `/api/recordsAuthor?authorId=${userId}` : ""
+  const { data, isLoading, isError } = useData<AuthoredRecordRes[]>(
+    userId ? `/api/recordsAuthor?authorId=${userId}` : "",
   );
 
   const authorRecord = useMemo(() => {
@@ -41,7 +41,7 @@ export const useAuthorRecord = (userId?: string | null) => {
 
 export const usePastRecord = (recordId: number) => {
   const { data, isLoading, isError } = useData<ContentRes>(
-    `/api/content?id=${recordId}`
+    `/api/content?id=${recordId}`,
   );
   const pastRecord = useMemo(() => {
     if (!data) return null;
@@ -56,7 +56,7 @@ export const usePastRecord = (recordId: number) => {
 
 export const useRecordContent = (id: number) => {
   const { data, isLoading, isError } = useData<ContentRes>(
-    `/api/content?id=${id}`
+    `/api/content?id=${id}`,
   );
 
   const recordContent = useMemo(() => {
@@ -74,7 +74,7 @@ export const handleContentUpdate = async (
   id: number,
   content: string | null,
   title: string | null,
-  recordId: number | null
+  recordId: number | null,
 ) => {
   const data = {
     id: id,
@@ -84,7 +84,12 @@ export const handleContentUpdate = async (
   };
 
   try {
-    const res = await axios.put("/api/recordAuthor", data, {
+    // const res = await axios.put("/api/recordAuthor", data, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    const res = await axios.put("/api/content", data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -101,18 +106,22 @@ export const handleContentUpdate = async (
 const handleContentSubmit = async (
   recordContent: RecordContentProps,
   userId: string | null | undefined,
-  content: string | null
+  content: string | null,
 ) => {
   const data = {
     authorId: userId,
     title: recordContent.title,
     content: content,
-    filename: null,
     recordId: recordContent.recordId,
   };
 
   try {
-    const res = await axios.post("/api/recordAuthor", data, {
+    // const res = await axios.post("/api/recordAuthor", data, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    const res = await axios.post("/api/content", data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -207,7 +216,7 @@ export const useRecordUpdate = ({
 export const useRecordDelete = () => {
   const deleteRecord = async (id: number) => {
     try {
-      const res = await axios.delete(`/api/recordAuthor?id=${id}`);
+      const res = await axios.delete(`/api/content?id=${id}`);
       if (res.status === 200) {
         toast.success("記録が削除されました!", {
           duration: 3000,
