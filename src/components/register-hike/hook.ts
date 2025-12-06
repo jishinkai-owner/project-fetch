@@ -4,7 +4,7 @@ import { HikeInfoEntryProps } from "@/types/hike";
 import { Dayjs } from "dayjs";
 import { SnackbarStateProps } from "@/types/snackbar";
 import useData from "@/lib/swr/useSWR";
-import { ActivitiesRes, ActivityWithIdRes } from "@/types/apiResponse";
+import { RecordRes } from "@/types/apiResponse";
 import toast from "react-hot-toast";
 
 export const useHikeInfo = () => {
@@ -43,8 +43,8 @@ export const useFormSubmit = ({ id, entry, setEntry }: UseFormSubmitProps) => {
 
     try {
       const res = id
-        ? await axios.put("/api/activity", { id, ...data })
-        : await axios.post("/api/activity", data);
+        ? await axios.put("/api/recorde", { id, ...data })
+        : await axios.post("/api/recorde", data);
       console.log("response from server: ", res);
       if (res.status === 201 || res.status === 200) {
         console.log("hike info posted successfully");
@@ -112,7 +112,7 @@ export const useFormDelete = ({
 }: SnackbarStateProps) => {
   const handleDelete = async (id: number) => {
     try {
-      const res = await axios.delete(`/api/activity?id=${id}`);
+      const res = await axios.delete(`/api/recorde?id=${id}`);
       console.log("response from server: ", res);
       if (res.status === 200) {
         console.log("activity data deleted successfully");
@@ -160,17 +160,9 @@ type UseFormUpdateProps = {
 
 export const useFormUpdate = (
   { id, entry }: UseFormUpdateProps,
-  { setMessage, setOpen, setStatus }: SnackbarStateProps
+  { setMessage, setOpen, setStatus }: SnackbarStateProps,
 ) => {
   const handleUpdate = async (e: HikeInfoEntryProps) => {
-    console.log(
-      "updating hike info...",
-      e.year,
-      e.date,
-      e.place,
-      e.activityType
-    );
-
     const data = {
       id,
       year: e.year,
@@ -180,10 +172,9 @@ export const useFormUpdate = (
     };
 
     try {
-      const res = await axios.put("/api/activity", data);
+      const res = await axios.put("/api/recorde", data);
       console.log("response from server: ", res);
       if (res.status === 200) {
-        console.log("hike info updated successfully");
         return { success: true, data: res.data };
       }
 
@@ -224,8 +215,9 @@ export const useFormUpdate = (
 };
 
 export const useActivities = () => {
-  const { data, isLoading, isError } =
-    useData<ActivitiesRes[]>("/api/activities");
+  const { data, isLoading, isError } = useData<RecordRes[]>(
+    "/api/records?getAll=true",
+  );
 
   const activities = useMemo(() => {
     if (!data) return [];
@@ -240,8 +232,8 @@ export const useActivities = () => {
 };
 
 export const useActivity = (id: number | null) => {
-  const { data, isLoading, isError } = useData<ActivityWithIdRes>(
-    `/api/activity?id=${id}`
+  const { data, isLoading, isError } = useData<RecordRes>(
+    `/api/recorde?id=${id}`,
   );
 
   const activity = useMemo(() => {
