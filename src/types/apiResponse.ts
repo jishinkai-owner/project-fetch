@@ -1,22 +1,40 @@
-import { PostHikeContent, Record, Content, Role, User } from "@prisma/client";
+import { PostHikeContent, Record, Content, User } from "@prisma/client";
 import { Diff } from "./diff";
 import { ActivityType } from "@/app/(mainLayout)/record/[type]/activityTypes";
 
-export type RecordAuthorRes = {
-  title: string | null;
-  content: string | null;
-  images: string[] | null;
-  filename: string | null;
-  recordId: number;
-  authorId: string | null;
-};
+// export type RecordAuthorRes = {
+//   title: string | null;
+//   content: string | null;
+//   images: string[] | null;
+//   filename: string | null;
+//   recordId: number;
+//   authorId: string | null;
+// };
 
-export type RecordsAuthorRes = {
-  id: number;
-  title: string | null;
-  content: string | null;
-  Record: Record;
-};
+// export type RecordsAuthorRes = {
+//   id: number;
+//   title: string | null;
+//   content: string | null;
+//   Record: Record;
+// };
+
+export type AuthoredRecordRes = Diff<
+  Content,
+  {
+    content: string | null;
+    images: string[];
+    filename: string | null;
+    recordId: number;
+  }
+> &
+  Diff<
+    Record,
+    {
+      id: number;
+      activityType: ActivityType | null;
+      details: string | null;
+    }
+  >;
 
 // export type RecordRes = {
 //   id: number;
@@ -25,12 +43,7 @@ export type RecordsAuthorRes = {
 //   date: string | null;
 // };
 
-export type RecordRes = Diff<
-  Record,
-  {
-    activityType: ActivityType | null;
-  }
->;
+export type RecordRes = Record;
 
 // export type ContentRes = {
 //   title: string | null;
@@ -55,10 +68,13 @@ export type ContentRes = Diff<
 
 // export type UserRes = {
 //   id: string;
-//   name: string;
+//   name: string1;
 //   grade: number | null;
 //   Role: Role | null;
 // };
+export type Role = {
+  name: string;
+};
 
 export type UserRes = Diff<
   User,
@@ -69,13 +85,9 @@ export type UserRes = Diff<
     Content: Content[];
     PostHikeContents: PostHikeContent[];
   }
-> &
-  Diff<
-    Role,
-    {
-      description: string | null;
-    }
-  >;
+> & {
+  roles: Role[];
+};
 
 // export type PostHikeContentRes = {
 //   id: number;
@@ -124,25 +136,37 @@ export type PostHikeContentBaseRes = Diff<
   roleComments: RoleComments;
 };
 
-export type PostHikeRes = PostHikeContentBaseRes &
-  Diff<
-    Record,
-    {
-      id: number;
-      activityType: ActivityType | null;
-      details: string | null;
-    }
-  > &
-  Diff<
-    User,
-    {
-      email: string;
-      id: string;
-      createdAt: Date;
-      grade: number | null;
-      updatedAt: Date;
-    }
-  >;
+// export type PostHikeRes = Diff<Record, {}
+export type PostHikeRes = Diff<
+  Record,
+  {
+    id: number;
+    activityType: ActivityType | null;
+    details: string | null;
+  }
+> & {
+  postHikeContents: (PostHikeContentBaseRes & { clName: string })[];
+};
+
+// export type PostHikeRes = PostHikeContentBaseRes &
+//   Diff<
+//     Record,
+//     {
+//       id: number;
+//       activityType: ActivityType | null;
+//       details: string | null;
+//     }
+//   > &
+//   Diff<
+//     User,
+//     {
+//       email: string;
+//       id: string;
+//       createdAt: Date;
+//       grade: number | null;
+//       updatedAt: Date;
+//     }
+//   >;
 
 export type PostHikeOverviewRes = {
   id: string;
