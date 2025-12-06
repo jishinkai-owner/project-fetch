@@ -1,63 +1,81 @@
-// import { getUserData } from "@/utils/supabase/user";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { getUser } from "@/app/actions";
-
+import { authenticateRequest } from "@/utils/supabase/auth";
+import { APIResponse } from "@/types/response";
+import { UserRes } from "@/types/apiResponse";
 const prisma = new PrismaClient();
 
 //get user data including id, name, and role
 export async function GET() {
+  const { user, error } = await authenticateRequest();
+  if (error || !user) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "user is not authenticated",
+    };
+    return NextResponse.json(response, { status: 401 });
+  }
+
   try {
     console.log("Getting user data...");
-
-    const id = await getUser();
-    if (!id) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
+    const id = user.id;
 
     console.log("User data retrieved successfully:", id);
 
     const userFromTable = await prisma.user.findUnique({
       where: {
-        id: String(id),
+        id: id,
       },
       select: {
         id: true,
         name: true,
         grade: true,
-        Role: {
+        UserRoles: {
           select: {
-            isAdmin: true,
-            isCL: true,
-            isSL: true,
-            isMeal: true,
-            isEquipment: true,
-            isWeather: true,
+            Role: {
+              select: {
+                name: true,
+              },
+            },
           },
         },
       },
     });
 
     if (!userFromTable) {
-      return NextResponse.json(
-        { error: "User not found in database" },
-        { status: 404 },
-      );
+      const response: APIResponse<null> = {
+        data: null,
+        status: "error",
+        error: "User not found in database",
+      };
+      return NextResponse.json(response, { status: 404 });
     }
     console.log("User found in database:", userFromTable);
 
-    return NextResponse.json(
-      {
-        success: true,
-        data: userFromTable,
-      },
-      { status: 200 },
-    );
+    const res: UserRes = {
+      id: userFromTable.id,
+      name: userFromTable.name,
+      grade: userFromTable.grade,
+      roles: userFromTable.UserRoles.map((ur) => ({
+        name: ur.Role.name,
+      })),
+    };
+
+    const response: APIResponse<UserRes> = {
+      data: res,
+      status: "success",
+      error: null,
+    };
+
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error("API Error: ", error);
-    return NextResponse.json(
-      { error: "Failed to fetch user data", details: error },
-      { status: 500 },
-    );
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "Internal Server Error",
+    };
+    return NextResponse.json(response, { status: 500 });
   }
 }
