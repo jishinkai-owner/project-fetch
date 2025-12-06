@@ -3,6 +3,7 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { ReactNode } from "react";
 import { Noto_Sans_JP } from "next/font/google";
 import { grey } from "@mui/material/colors";
+import React from "react";
 
 type ThemingProps = {
   children: ReactNode;

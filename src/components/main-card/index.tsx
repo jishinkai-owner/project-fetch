@@ -1,6 +1,7 @@
 import Grid from "@mui/material/Grid2";
 import { Card } from "@mui/material";
 import { ReactNode } from "react";
+import React from "react";
 
 type MainCardProps = {
   children: ReactNode;

@@ -2,6 +2,7 @@ import { TextField, MenuItem } from "@mui/material";
 import { ChangeEvent } from "react";
 import { RecordProps } from "@/types/record";
 import { memo } from "react";
+import React from "react";
 
 type HikeSelectProps = {
   records: RecordProps[];

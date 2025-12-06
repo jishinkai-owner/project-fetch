@@ -10,6 +10,7 @@ import { Loading, ErrorMessage } from "@/components/load-status";
 import { useRouter } from "next/navigation";
 import { usePostHikes } from "@/components/post-hike/hook";
 import HikeSelect from "@/components/post-hike/entry/hike-select";
+import React from "react";
 
 type EditPastRecordProps = {
   id: number;

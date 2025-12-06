@@ -138,7 +138,7 @@ const PlaceSection = memo(
           r.place === place &&
           ((r.details && r.details.trim() !== "") ||
             (r.title && r.title.trim() !== "") ||
-            (r.filename && r.filename.trim() !== ""))
+            (r.filename && r.filename.trim() !== "")),
       );
       return sortByDate(filteredRecords);
     }, [records, place]);
@@ -211,7 +211,7 @@ const PlaceSection = memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
 PlaceSection.displayName = "PlaceSection";
@@ -241,16 +241,16 @@ const RecordClient: React.FC<RecordClientProps> = ({
     isFishingRecords
       ? null
       : yearFromUrl && years.includes(yearFromUrl)
-      ? yearFromUrl
-      : initialYear
+        ? yearFromUrl
+        : initialYear,
   );
 
   const [recordsToShow, setRecordsToShow] = useState<RecordContentDTO[]>(
     isFishingRecords
       ? allRecords // 釣果記録は全記録を表示
       : yearFromUrl && years.includes(yearFromUrl)
-      ? allRecords.filter((r) => r.year === yearFromUrl)
-      : initialRecords
+        ? allRecords.filter((r) => r.year === yearFromUrl)
+        : initialRecords,
   );
 
   const [loading, setLoading] = useState(false);
@@ -274,7 +274,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
         }
       });
     },
-    [activityType.id, router]
+    [activityType.id, router],
   );
 
   // 年度変更時のデータフィルタリング

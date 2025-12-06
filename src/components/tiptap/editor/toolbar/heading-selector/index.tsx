@@ -1,6 +1,7 @@
 import { Typography, Button, Menu, MenuItem } from "@mui/material";
 import { useState, MouseEvent } from "react";
 import { Editor } from "@tiptap/react";
+import React from "react";
 
 type HeadingSelectorProps = {
   editor: Editor;

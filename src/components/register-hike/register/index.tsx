@@ -2,6 +2,7 @@
 import { useFormSubmit, useHikeInfo } from "../hook";
 import RegisterForm from "../edit/form";
 import { Toaster } from "react-hot-toast";
+import React from "react";
 
 const HikeInfoEntry = () => {
   const { entry, setEntry, handleYearChange } = useHikeInfo();

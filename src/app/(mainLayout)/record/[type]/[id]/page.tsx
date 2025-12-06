@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter, notFound, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  useRouter,
+  notFound,
+  useSearchParams,
+} from "next/navigation";
 import styles from "../RecordPage.module.scss";
 import Image from "next/image";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Link from "next/link";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import activityTypes from "../activityTypes";
+import React from "react";
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -36,11 +42,13 @@ export default function RecordDetailPage() {
   }
 
   // URLから年度パラメータを取得
-  const yearParam = searchParams.get('year');
+  const yearParam = searchParams.get("year");
 
   const [isLoading, setIsLoading] = useState(true);
   const [content, setContent] = useState<ContentDetail | null>(null);
-  const [relatedContents, setRelatedContents] = useState<RecordContentDTO[]>([]);
+  const [relatedContents, setRelatedContents] = useState<RecordContentDTO[]>(
+    [],
+  );
 
   // データ取得
   useEffect(() => {
@@ -56,7 +64,7 @@ export default function RecordDetailPage() {
           if (res.status === 404) {
             return notFound();
           }
-          throw new Error('Failed to fetch content');
+          throw new Error("Failed to fetch content");
         }
 
         const data: ContentDetail = await res.json();
@@ -66,10 +74,10 @@ export default function RecordDetailPage() {
         try {
           const relatedRes = await fetch(`/api/Record/${activityType.id}`);
           if (!relatedRes.ok) {
-            throw new Error('Failed to fetch related contents');
+            throw new Error("Failed to fetch related contents");
           }
 
-          const allContents = await relatedRes.json() as RecordContentDTO[];
+          const allContents = (await relatedRes.json()) as RecordContentDTO[];
 
           // 現在の記録を除外し、最大5件までの関連記録を取得
           const filtered = allContents
@@ -78,10 +86,10 @@ export default function RecordDetailPage() {
 
           setRelatedContents(filtered);
         } catch (error) {
-          console.error('Error fetching related contents:', error);
+          console.error("Error fetching related contents:", error);
         }
       } catch (error) {
-        console.error('Error fetching content:', error);
+        console.error("Error fetching content:", error);
       } finally {
         setIsLoading(false);
       }
@@ -92,7 +100,7 @@ export default function RecordDetailPage() {
 
   // 日付をそのまま表示するだけの関数
   const displayDate = (dateString: string | null | undefined) => {
-    if (!dateString) return '日付なし';
+    if (!dateString) return "日付なし";
     return dateString;
   };
 
@@ -129,22 +137,24 @@ export default function RecordDetailPage() {
   return (
     <>
       {/* パンくずリスト */}
-      <BreadCrumbs breadcrumb={[
-        { title: 'Home', url: '/' },
-        { title: '活動記録', url: '/record' },
-        { title: activityType.title, url: `/record/${activityType.id}` },
-        { title: content.title || 'ある日の記憶' }
-      ]} />
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "活動記録", url: "/record" },
+          { title: activityType.title, url: `/record/${activityType.id}` },
+          { title: content.title || "ある日の記憶" },
+        ]}
+      />
 
       <div className={styles.recordDetail}>
         {/* 記事ヘッダー */}
         <div className={styles.detailHeader}>
-          <h1 className={styles.detailTitle}>{content.title || 'ある日の記憶'}</h1>
+          <h1 className={styles.detailTitle}>
+            {content.title || "ある日の記憶"}
+          </h1>
           <div className={styles.detailMeta}>
             {content.place && (
-              <span className={styles.detailPlace}>
-                {content.place}
-              </span>
+              <span className={styles.detailPlace}>{content.place}</span>
             )}
             {content.date && (
               <span className={styles.detailDate}>
@@ -157,7 +167,9 @@ export default function RecordDetailPage() {
         {/* 記事本文 */}
         <div
           className={styles.detailContent}
-          dangerouslySetInnerHTML={{ __html: content.content || '内容がありません' }}
+          dangerouslySetInnerHTML={{
+            __html: content.content || "内容がありません",
+          }}
         />
 
         {/* 画像ギャラリー */}
@@ -169,7 +181,7 @@ export default function RecordDetailPage() {
                 <div key={index} className={styles.imageWrapper}>
                   <Image
                     src={src}
-                    alt={`${content.title || '記録'} - 画像 ${index + 1}`}
+                    alt={`${content.title || "記録"} - 画像 ${index + 1}`}
                     className={styles.contentImage}
                     width={800}
                     height={600}
@@ -199,10 +211,20 @@ export default function RecordDetailPage() {
                     key={item.contentId}
                   >
                     <div className={styles.relatedItemContent}>
-                      <h3 className={styles.relatedItemTitle}>{item.title || 'ある日の記憶'}</h3>
+                      <h3 className={styles.relatedItemTitle}>
+                        {item.title || "ある日の記憶"}
+                      </h3>
                       <div className={styles.relatedItemMeta}>
-                        {item.place && <span className={styles.relatedItemPlace}>{item.place}</span>}
-                        {item.date && <span className={styles.relatedItemDate}>{displayDate(item.date)}</span>}
+                        {item.place && (
+                          <span className={styles.relatedItemPlace}>
+                            {item.place}
+                          </span>
+                        )}
+                        {item.date && (
+                          <span className={styles.relatedItemDate}>
+                            {displayDate(item.date)}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className={styles.relatedItemArrow}>→</div>
@@ -215,10 +237,7 @@ export default function RecordDetailPage() {
 
         {/* 戻るボタン */}
         <div className={styles.detailFooter}>
-          <button
-            className={styles.backButton}
-            onClick={handleBackClick}
-          >
+          <button className={styles.backButton} onClick={handleBackClick}>
             ← {activityType.title}一覧に戻る
           </button>
         </div>

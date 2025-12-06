@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import React from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -8,11 +9,9 @@ export const metadata: Metadata = {
   },
   description: "自然に親しむ会の活動記録をまとめたサイトです。",
   icons: {
-    icon: [
-      { url: "/favicon2.webp", type: "image/webp" },
-    ]
+    icon: [{ url: "/favicon2.webp", type: "image/webp" }],
   },
-}
+};
 
 export default function RootLayout({
   children,
@@ -21,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

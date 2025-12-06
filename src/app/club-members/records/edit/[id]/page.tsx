@@ -1,5 +1,6 @@
 import EditPastRecord from "@/components/tiptap/edit-past";
 import { ErrorMessage } from "@/components/load-status";
+import React from "react";
 
 type EditRecordPageProps = {
   params: Promise<{

@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Box } from "@mui/material";
 import MenuDrawer from "@/components/drawer";
 import BreadcrumbsComp from "@/components/breadcrumbsMUI";
+import React from "react";
 
 type MainLayoutProps = {
   children: ReactNode;

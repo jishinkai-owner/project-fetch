@@ -1,4 +1,5 @@
 import { Snackbar, Alert } from "@mui/material";
+import React from "react";
 
 type SubmitSnackbarProps = {
   message: string;

@@ -1,5 +1,6 @@
 import { Typography, Button } from "@mui/material";
 import { ReactNode } from "react";
+import React from "react";
 
 type FloatingButtonProps = {
   onClick: () => void;

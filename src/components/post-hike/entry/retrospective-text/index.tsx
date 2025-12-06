@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import React from "react";
 type RetrospectiveTextProps = {
   text: string | null;
   role: string;

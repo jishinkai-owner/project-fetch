@@ -4,9 +4,14 @@ import TabBar from "@/components/TabBar/TabBar";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Title from "@/components/Title/Title";
 import activityTypes from "./activityTypes";
+import React from "react";
 
 // Suspenseのフォールバックとして使用するローディングUI
-export default function LoadingPlaceholder({ activityTitle }: { activityTitle: string }) {
+export default function LoadingPlaceholder({
+  activityTitle,
+}: {
+  activityTitle: string;
+}) {
   return (
     <>
       {/* ナビゲーション */}
@@ -14,7 +19,7 @@ export default function LoadingPlaceholder({ activityTitle }: { activityTitle: s
         breadcrumb={[
           { title: "Home", url: "/" },
           { title: "活動記録", url: "/record" },
-          { title: activityTitle }
+          { title: activityTitle },
         ]}
       />
       <Title title={activityTitle} />
