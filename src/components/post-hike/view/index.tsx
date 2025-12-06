@@ -17,6 +17,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
 import { usePostPostHikesWithRecordId } from "../hook";
 import { ErrorMessage, Loading } from "@/components/load-status";
+import React from "react";
 
 type PostHikeViewCompProps = {
   recordId: number;
@@ -51,7 +52,7 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
         <Typography variant="h3">
           {postHikes.place} - {postHikes.date}/{postHikes.year}
         </Typography>
-        {postHikes.PostHikeContents.map((e) => (
+        {postHikes.postHikeContents.map((e) => (
           <Stack spacing={1} key={e.clId}>
             <Typography
               variant="body1"
@@ -80,9 +81,9 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="食事係"
                   secondary={
                     <>
-                      {e.mealPerson}
+                      {e.roleComments.meal}
                       <br />
-                      CLからのコメント：{e.mealComment}
+                      CLからのコメント：{e.clComments.meal}
                     </>
                   }
                 />
@@ -95,9 +96,9 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="装備係"
                   secondary={
                     <>
-                      {e.equipmentPerson}
+                      {e.roleComments.equipment}
                       <br />
-                      CLからのコメント：{e.equipmentComment}
+                      CLからのコメント：{e.clComments.equipment}
                     </>
                   }
                 />
@@ -110,9 +111,9 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="天気図係"
                   secondary={
                     <>
-                      {e.weatherPerson}
+                      {e.roleComments.weather}
                       <br />
-                      CLからのコメント：{e.weatherComment}
+                      CLからのコメント：{e.clComments.weather}
                     </>
                   }
                 />
@@ -125,9 +126,9 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="SL"
                   secondary={
                     <>
-                      {e.sl}
+                      {e.roleComments.sl}
                       <br />
-                      CLからのコメント：{e.slComemnt}
+                      CLからのコメント：{e.clComments.sl}
                     </>
                   }
                 />
