@@ -3,8 +3,6 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { PrismaClient } from "@prisma/client";
-import { text } from "stream/consumers";
-import { ConstructionOutlined } from "@mui/icons-material";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,7 +11,7 @@ const prisma = new PrismaClient();
 
 const csvToObject = (filePath: string) => {
   const data = fs.readFileSync(filePath, "utf-8");
-  let entries = [];
+  const entries = [];
   console.log(data);
   const columns = data.split("\n");
 
@@ -24,7 +22,7 @@ const csvToObject = (filePath: string) => {
 
   for (let i = 1; i < columns.length; i++) {
     const values = columns[i].split(",");
-    let entry: { [key: string]: string } = {};
+    const entry: { [key: string]: string } = {};
     for (let j = 0; j < columnNames.length; j++) {
       const value = values[j].replace(/[\n\r]+/g, "");
       entry[columnNames[j]] = value;
@@ -42,18 +40,18 @@ const up = async () => {
   const userFilePath = path.join(
     __dirname,
     "oct2025Backup",
-    "User_rows(1).csv"
+    "User_rows(1).csv",
   );
-  const roleFilePath = path.join(
-    __dirname,
-    "oct2025Backup",
-    "Role_rows(1).csv"
-  );
-  const recordFilePath = path.join(
-    __dirname,
-    "oct2025Backup",
-    "Record_rows(1).csv"
-  );
+  // const roleFilePath = path.join(
+  //   __dirname,
+  //   "oct2025Backup",
+  //   "Role_rows(1).csv"
+  // );
+  // const recordFilePath = path.join(
+  //   __dirname,
+  //   "oct2025Backup",
+  //   "Record_rows(1).csv"
+  // );
   //   const memberFilePath = path.join(
   //     __dirname,
   //     "oct2025Backup",
@@ -61,8 +59,8 @@ const up = async () => {
   //   );
 
   const users = csvToObject(userFilePath);
-  const roles = csvToObject(roleFilePath);
-  const records = csvToObject(recordFilePath);
+  // const roles = csvToObject(roleFilePath);
+  // const records = csvToObject(recordFilePath);
   //   const members = csvToObject(memberFilePath);
 
   console.log("finished reading from CSV file.");
@@ -89,5 +87,4 @@ const up = async () => {
   console.log("Finished inserting users.");
 };
 
-// readFromJSON(path.join(__dirname, "roles.json"));
 up();
