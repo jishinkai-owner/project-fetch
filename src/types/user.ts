@@ -8,3 +8,12 @@ export type RoleType = {
   isLoading?: boolean;
   isError?: boolean;
 };
+
+export type RolesState = {
+  isAdmin: boolean;
+  isCL: boolean;
+  isSL: boolean;
+  isWeather: boolean;
+  isMeal: boolean;
+  isEquipment: boolean;
+};
