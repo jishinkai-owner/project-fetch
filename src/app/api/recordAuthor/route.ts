@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 //both get and post indivudual record
+// 11/16/2025 Dont use the below code, all moved to content
 
 //from record
 const prisma = new PrismaClient();
@@ -16,7 +17,7 @@ export async function GET(req: NextRequest) {
         {
           error: "authorId and recordId are both required",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     console.log("getting record data with id ", id);
@@ -40,7 +41,7 @@ export async function GET(req: NextRequest) {
         error: "Failed to fetch record data",
         details: error,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -53,7 +54,7 @@ export async function POST(req: NextRequest) {
     if (!authorId || !title || !content || !recordId) {
       return NextResponse.json(
         { error: "title, content, filename, and recordId are all required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -70,21 +71,21 @@ export async function POST(req: NextRequest) {
     if (!newContent) {
       return NextResponse.json(
         { error: "Failed to post new content" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     console.log("new content successfully posted: ", newContent);
     return NextResponse.json(
       { success: true, data: newContent },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("API Error: ", error);
 
     return NextResponse.json(
       { error: "Failed to post new content", details: error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -97,7 +98,7 @@ export async function PUT(req: NextRequest) {
     if (!id || !title || !content) {
       return NextResponse.json(
         { error: "id, title, and content are all required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -113,20 +114,20 @@ export async function PUT(req: NextRequest) {
     if (!updatedContent) {
       return NextResponse.json(
         { error: "Failed to update content" },
-        { status: 500 }
+        { status: 500 },
       );
     }
     console.log("content successfully updated: ", updatedContent);
     return NextResponse.json(
       { success: true, data: updatedContent },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("API Error: ", error);
 
     return NextResponse.json(
       { error: "Failed to update content", details: error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -148,21 +149,21 @@ export async function DELETE(req: NextRequest) {
     if (!deletedContent) {
       return NextResponse.json(
         { error: "Failed to delete content" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     console.log("content successfully deleted: ", deletedContent);
     return NextResponse.json(
       { success: true, data: deletedContent },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("API Error: ", error);
 
     return NextResponse.json(
       { error: "Failed to delete content", details: error },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
