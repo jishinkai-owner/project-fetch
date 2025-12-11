@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { APIResponse } from "@/types/response";
-import { ContentRes } from "@/types/apiResponse";
 import { authenticateRequest } from "@/utils/supabase/auth";
 
 const prisma = new PrismaClient();
@@ -18,37 +17,30 @@ export async function GET(req: NextRequest) {
   }
 
   const searchParams = req.nextUrl.searchParams;
-  const id = searchParams.get("id");
+  const recordId = searchParams.get("id");
 
-  if (!id) {
+  if (!recordId) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "id is required",
+      error: "recordId is required",
     };
-
     return NextResponse.json(response, { status: 400 });
   }
 
   try {
-    console.log("getting record content with id:", id);
-    const data = await prisma.content.findUnique({
+    console.log("getting records with recordId:", recordId);
+    const data = await prisma.record.findUnique({
       where: {
-        id: Number(id),
+        id: Number(recordId),
       },
       select: {
         id: true,
-        title: true,
-        content: true,
-        recordId: true,
-        authorId: true,
-        Record: {
-          select: {
-            year: true,
-            date: true,
-            place: true,
-          },
-        },
+        year: true,
+        place: true,
+        date: true,
+        details: true,
+        activityType: true,
       },
     });
 
@@ -56,43 +48,32 @@ export async function GET(req: NextRequest) {
       const response: APIResponse<null> = {
         data: null,
         status: "error",
-        error: "Content not found",
+        error: "Record not found",
       };
       return NextResponse.json(response, { status: 404 });
     }
 
-    const content: ContentRes = {
-      id: data.id,
-      title: data.title,
-      content: data.content,
-      recordId: data.recordId,
-      authorId: data.authorId,
-      year: data.Record.year,
-      date: data.Record.date,
-      place: data.Record.place,
-    };
-
-    console.log("record content fetched: ", content);
-    const response: APIResponse<ContentRes> = {
-      data: content,
+    const response: APIResponse<typeof data> = {
+      data,
       status: "success",
       error: null,
     };
+
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error("API Error: ", error);
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "Failed to fetch record content",
+      error: "Failed to fetch record data",
     };
     return NextResponse.json(response, { status: 500 });
   }
 }
 
-// use this from now one for getting content 11/16/2025
 export async function POST(req: NextRequest) {
   const { user, error } = await authenticateRequest();
+
   if (error || !user) {
     const response: APIResponse<null> = {
       data: null,
@@ -103,7 +84,8 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  if (typeof body !== "object" || body === null) {
+
+  if (typeof body !== "object" || body == null || body == undefined) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
@@ -112,40 +94,48 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(response, { status: 400 });
   }
 
-  const { authorId, title, content, recordId } = body;
+  const { year, place, date, activityType } = body;
 
-  if (!authorId || !title || !content || !recordId) {
+  if (!year || !place || !date || !activityType) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "authorId, title, content, and recordId are all required",
+      error: "year, place, date, and activityType are all required",
+    };
+    return NextResponse.json(response, { status: 400 });
+  }
+
+  if (typeof year !== "number") {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "year must be a number",
     };
     return NextResponse.json(response, { status: 400 });
   }
 
   if (
-    typeof authorId !== "string" ||
-    typeof title !== "string" ||
-    typeof content !== "string" ||
-    typeof recordId !== "number"
+    typeof place !== "string" ||
+    typeof date !== "string" ||
+    typeof activityType !== "string"
   ) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "Invalid data types in request body",
+      error: "place, date, and activityType must be strings",
     };
     return NextResponse.json(response, { status: 400 });
   }
 
-  try {
-    console.log("posting new content...");
+  console.log("posting new record...", { year, place, date, activityType });
 
-    const res = await prisma.content.create({
+  try {
+    const res = await prisma.record.create({
       data: {
-        authorId,
-        title,
-        content,
-        recordId,
+        year,
+        place,
+        date,
+        activityType,
       },
     });
 
@@ -155,22 +145,23 @@ export async function POST(req: NextRequest) {
       error: null,
     };
 
-    console.log("new content successfully posted: ", res);
     return NextResponse.json(response, { status: 201 });
   } catch (error) {
     console.error("API Error: ", error);
-
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "Failed to post new content",
+      error: "Failed to create new record",
     };
     return NextResponse.json(response, { status: 500 });
   }
+
+  // const { year, place, date, activityType } = await req.json();
 }
 
 export async function PUT(req: NextRequest) {
   const { user, error } = await authenticateRequest();
+
   if (error || !user) {
     const response: APIResponse<null> = {
       data: null,
@@ -181,7 +172,7 @@ export async function PUT(req: NextRequest) {
   }
 
   const body = await req.json();
-  if (typeof body !== "object" || body === null) {
+  if (typeof body !== "object" || body == null || body == undefined) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
@@ -190,38 +181,47 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json(response, { status: 400 });
   }
 
-  const { id, title, content, recordId } = body;
+  const { id, year, place, date, activityType } = body;
 
-  if (!id || !title || !content) {
+  if (!id || !year || !place || !date || !activityType) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "id, title, and content are all required",
+      error: "id, year, place, date, and activityType are all required",
+    };
+    return NextResponse.json(response, { status: 400 });
+  }
+
+  if (typeof year !== "number") {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "year must be a number",
     };
     return NextResponse.json(response, { status: 400 });
   }
 
   if (
-    typeof id !== "number" ||
-    typeof title !== "string" ||
-    typeof content !== "string" ||
-    typeof recordId !== "number"
+    typeof place !== "string" ||
+    typeof date !== "string" ||
+    typeof activityType !== "string"
   ) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "Invalid data types in request body",
+      error: "place, date, and activityType must be strings",
     };
     return NextResponse.json(response, { status: 400 });
   }
 
   try {
-    const res = await prisma.content.update({
-      where: { id: Number(id), authorId: user.id },
+    const res = await prisma.record.update({
+      where: { id: Number(id) },
       data: {
-        title,
-        content,
-        recordId: Number(recordId),
+        year,
+        place,
+        date,
+        activityType,
       },
     });
 
@@ -234,11 +234,10 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error("API Error: ", error);
-
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "Failed to update content",
+      error: "Failed to update record",
     };
     return NextResponse.json(response, { status: 500 });
   }
@@ -246,6 +245,7 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const { user, error } = await authenticateRequest();
+
   if (error || !user) {
     const response: APIResponse<null> = {
       data: null,
@@ -271,32 +271,29 @@ export async function DELETE(req: NextRequest) {
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "Invalid id format",
+      error: "id must be a valid number",
     };
     return NextResponse.json(response, { status: 400 });
   }
 
   try {
-    console.log("deleting content with id: ", id);
-    const res = await prisma.content.delete({
-      where: { id: Number(id), authorId: user.id },
+    console.log("Deleting record...", id);
+    const deletedRecord = await prisma.record.delete({
+      where: { id: Number(id) },
     });
-
-    const response: APIResponse<typeof res> = {
-      data: res,
+    console.log("Record deleted: ", deletedRecord);
+    const response: APIResponse<typeof deletedRecord> = {
+      data: deletedRecord,
       status: "success",
       error: null,
     };
-
-    console.log("content successfully deleted: ", res);
     return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error("API Error: ", error);
-
     const response: APIResponse<null> = {
       data: null,
       status: "error",
-      error: "Failed to delete content",
+      error: "Failed to delete record",
     };
     return NextResponse.json(response, { status: 500 });
   }

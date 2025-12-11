@@ -1,87 +1,152 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { APIResponse } from "@/types/response";
+import { authenticateRequest } from "@/utils/supabase/auth";
 
 const prisma = new PrismaClient();
 
+// export async function GET(req: NextRequest) {
+//   const { user, error } = await authenticateRequest();
+//   if (error || !user) {
+//     const response: APIResponse<null> = {
+//       data: null,
+//       status: "error",
+//       error: "user is not authenticated",
+//     };
+//     return NextResponse.json(response, { status: 401 });
+//   }
+// }
+
 export async function PUT(req: NextRequest) {
-  const { id, grade, role } = await req.json();
+  const { user, error } = await authenticateRequest();
+  if (error || !user) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "user is not authenticated",
+    };
+    return NextResponse.json(response, { status: 401 });
+  }
+  const body = await req.json();
+  console.log("role body", body);
+  if (!body || typeof body !== "object") {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "Invalid request body",
+    };
+    return NextResponse.json(response, { status: 400 });
+  }
 
-  console.log("Posting new role...", { id, grade, role });
+  const { id, grade, roleIds } = body;
+
+  console.log("Posting new role...", { id, grade, roleIds });
   if (!id) {
-    return NextResponse.json({ error: "id is required" }, { status: 400 });
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "user's id is required",
+    };
+    return NextResponse.json(response, { status: 400 });
   }
 
-  if (!grade && !role) {
-    return NextResponse.json(
-      { error: "grade or role is required" },
-      { status: 400 }
-    );
+  if (!grade && !roleIds) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "either grade or role is required",
+    };
+    return NextResponse.json(response, { status: 400 });
   }
+
+  if (grade && isNaN(Number(grade))) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "grade must be a number",
+    };
+    return NextResponse.json(response, { status: 400 });
+  }
+
+  if (roleIds && !Array.isArray(roleIds)) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "role must be an array of role IDs",
+    };
+    return NextResponse.json(response, { status: 400 });
+  }
+
+  // if (roleIds && roleIds.some((roleId: string) => isNaN(Number(roleId)))) {
+  //   const response: APIResponse<null> = {
+  //     data: null,
+  //     status: "error",
+  //     error: "each role ID must be a number",
+  //   };
+  //   return NextResponse.json(response, { status: 400 });
+  // }
+
   try {
+    let res;
     if (grade) {
-      const newGrade = await prisma.user.update({
+      res = await prisma.user.update({
         where: { id: String(id) },
         data: {
-          grade: grade,
+          grade: Number(grade),
         },
       });
-
-      if (!newGrade) {
-        return NextResponse.json(
-          { error: "Failed to update grade" },
-          { status: 400 }
-        );
-      }
-      if (!role) {
-        console.log("New grade created successfully:", newGrade);
-        return NextResponse.json(
-          { success: true, data: newGrade },
-          { status: 200 }
-        );
-      }
     }
-
-    if (role) {
-      const newRole = await prisma.role.upsert({
-        where: { userId: id },
-        update: {
-          userId: id,
-          isAdmin: role.isAdmin,
-          isCL: role.isCL,
-          isSL: role.isSL,
-          isMeal: role.isMeal,
-          isEquipment: role.isEquipment,
-          isWeather: role.isWeather,
-        },
-        create: {
-          userId: id,
-          isAdmin: role.isAdmin,
-          isCL: role.isCL,
-          isSL: role.isSL,
-          isMeal: role.isMeal,
-          isEquipment: role.isEquipment,
-          isWeather: role.isWeather,
-        },
-      });
-      if (!newRole) {
-        return NextResponse.json(
-          { error: "Failed to create or update role" },
-          { status: 400 }
-        );
-      }
-      console.log("New role created successfully:", newRole);
-      return NextResponse.json(
-        { success: true, data: newRole },
-        { status: 200 }
+    if (!roleIds || roleIds.length === 0) {
+      console.log(
+        "New grade created successfully. Skipping update of user roles: no roleIds provided",
       );
+      const response: APIResponse<typeof res> = {
+        data: res,
+        status: "success",
+        error: null,
+      };
+      return NextResponse.json(response, { status: 200 });
     }
 
-    return NextResponse.json({ error: "no action taken" }, { status: 400 });
+    const foundRoles = await prisma.role.findMany({
+      where: {
+        discordRoleId: {
+          in: roleIds,
+        },
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    const internalRoleIds = foundRoles.map((role) => role.id);
+
+    await prisma.userRole.deleteMany({
+      where: { userId: String(id) },
+    });
+
+    res = await prisma.userRole.createMany({
+      data: internalRoleIds.map((roleId: number) => ({
+        userId: String(id),
+        roleId: Number(roleId),
+      })),
+    });
+
+    console.log("New roles assigned successfully to user");
+    const response: APIResponse<typeof res> = {
+      data: res,
+      status: "success",
+      error: null,
+    };
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
+    // return NextResponse.json({ error: "no action taken" }, { status: 400 });
     console.error("API Error: ", error);
-    return NextResponse.json(
-      { error: "Failed to create role", details: error },
-      { status: 500 }
-    );
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "Failed to create role",
+    };
+    return NextResponse.json(response, { status: 500 });
   }
 }

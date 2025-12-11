@@ -2,6 +2,7 @@
 
 import { Typography, Link, Box, Breadcrumbs } from "@mui/material";
 import { usePathname } from "next/navigation";
+import React from "react";
 
 type breadcrumbItemProps = {
   items: { [key: string]: string };

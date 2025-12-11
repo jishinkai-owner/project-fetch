@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Stack, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { ChangeEvent } from "react";
@@ -33,23 +34,23 @@ const PostHikeForm = () => {
     <>
       <Box component="form" id="post-hike-form">
         <Stack direction="column" spacing={2}>
-          {!isLoadingCL && (
-            <CLSelect
-              clMembers={cl}
-              handleChange={(e: ChangeEvent<HTMLInputElement>) => {
-                const [clId, name] = e.target.value.split("|");
-                setIds((prevIds) => ({
-                  ...prevIds,
-                  clId: clId,
-                }));
-                setEntries((prevEntries) => ({
-                  ...prevEntries,
-                  clId: clId,
-                  clName: name,
-                }));
-              }}
-            />
-          )}
+          {/* {!isLoadingCL && ( */}
+          <CLSelect
+            clMembers={cl}
+            handleChange={(e: ChangeEvent<HTMLInputElement>) => {
+              const [clId, name] = e.target.value.split("|");
+              setIds((prevIds) => ({
+                ...prevIds,
+                clId: clId,
+              }));
+              setEntries((prevEntries) => ({
+                ...prevEntries,
+                clId: clId,
+                clName: name,
+              }));
+            }}
+          />
+          {/* )} */}
           <HikeSelect
             records={postHikes}
             value={entries.recordId}
@@ -65,7 +66,7 @@ const PostHikeForm = () => {
               }));
             }}
           />
-          {(contextValue.Role?.isMeal || contextValue.Role?.isSL) && (
+          {(contextValue.roles.isMeal || contextValue.roles.isSL) && (
             <EntryTextField
               id="reflection-meal-required"
               value={entries.mealPerson ?? ""}
@@ -78,7 +79,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {(contextValue.Role?.isWeather || contextValue.Role?.isSL) && (
+          {(contextValue.roles.isWeather || contextValue.roles.isSL) && (
             <EntryTextField
               id="reflection-weather"
               value={entries.weatherPerson ?? ""}
@@ -91,7 +92,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {(contextValue.Role?.isEquipment || contextValue.Role?.isSL) && (
+          {(contextValue.roles.isEquipment || contextValue.roles.isSL) && (
             <EntryTextField
               id="reflection-equipment"
               value={entries.equipmentPerson ?? ""}
@@ -104,7 +105,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {(contextValue.Role?.isSL || contextValue.Role?.isSL) && (
+          {(contextValue.roles.isSL || contextValue.roles.isSL) && (
             <EntryTextField
               id="reflection-sl"
               label="SLの反省"
@@ -117,7 +118,7 @@ const PostHikeForm = () => {
               }
             />
           )}
-          {(contextValue.Role?.isCL || contextValue.Role?.isSL) && (
+          {(contextValue.roles.isCL || contextValue.roles.isSL) && (
             <>
               <RetrospectiveText text={entries.mealPerson} role="食事係" />
               <EntryTextField

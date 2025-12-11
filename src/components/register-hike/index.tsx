@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import RegisterHikeEdit from "./edit";
+import React from "react";
 
 const RegisterHikeComp = () => {
   return (

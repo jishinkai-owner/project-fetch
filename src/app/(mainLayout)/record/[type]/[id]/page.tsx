@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter, notFound, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  useRouter,
+  notFound,
+  useSearchParams,
+} from "next/navigation";
 import styles from "../RecordPage.module.scss";
 import Image from "next/image";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Link from "next/link";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import activityTypes from "../activityTypes";
+import React from "react";
 
 // APIからのレスポンス型定義
 interface ContentDetail {
@@ -37,11 +43,13 @@ export default function RecordDetailPage() {
   }
 
   // URLから年度パラメータを取得
-  const yearParam = searchParams.get('year');
+  const yearParam = searchParams.get("year");
 
   const [isLoading, setIsLoading] = useState(true);
   const [content, setContent] = useState<ContentDetail | null>(null);
-  const [relatedContents, setRelatedContents] = useState<RecordContentDTO[]>([]);
+  const [relatedContents, setRelatedContents] = useState<RecordContentDTO[]>(
+    []
+  );
 
   // データ取得
   useEffect(() => {
@@ -57,7 +65,7 @@ export default function RecordDetailPage() {
           if (res.status === 404) {
             return notFound();
           }
-          throw new Error('Failed to fetch content');
+          throw new Error("Failed to fetch content");
         }
 
         const data: ContentDetail = await res.json();
@@ -78,29 +86,29 @@ export default function RecordDetailPage() {
         try {
           const relatedRes = await fetch(`/api/Record/${activityType.id}`);
           if (!relatedRes.ok) {
-            throw new Error('Failed to fetch related contents');
+            throw new Error("Failed to fetch related contents");
           }
 
-          const allContents = await relatedRes.json() as RecordContentDTO[];
+          const allContents = (await relatedRes.json()) as RecordContentDTO[];
 
           // 年度パラメータまたはコンテンツの年度情報を使用してフィルタリング
           const targetYear = yearParam ? parseInt(yearParam) : data.year;
-          
+
           // 同じ年度の記録のみをフィルタリングし、現在の記録を除外
           // contentIdがnullの記録（中止など）は関連記録として表示しない
           const filtered = allContents
             .filter((item) => {
               // contentIdがnullの記録は除外（リンクを作成できないため）
               if (item.contentId === null) return false;
-              
+
               // 現在の記録を除外
               if (item.contentId === data.id) return false;
-              
+
               // 年度が指定されている場合は同じ年度のみ
               if (targetYear !== null && targetYear !== undefined) {
                 return item.year === targetYear;
               }
-              
+
               // 年度が指定されていない場合はすべて表示
               return true;
             })
@@ -108,10 +116,10 @@ export default function RecordDetailPage() {
 
           setRelatedContents(filtered);
         } catch (error) {
-          console.error('Error fetching related contents:', error);
+          console.error("Error fetching related contents:", error);
         }
       } catch (error) {
-        console.error('Error fetching content:', error);
+        console.error("Error fetching content:", error);
       } finally {
         setIsLoading(false);
       }
@@ -122,38 +130,46 @@ export default function RecordDetailPage() {
 
   // 日付をそのまま表示するだけの関数
   const displayDate = (dateString: string | null | undefined) => {
-    if (!dateString) return '日付なし';
+    if (!dateString) return "日付なし";
     return dateString;
   };
 
   // コンテンツ内の相対リンクを絶対リンクに変換する関数
-  const transformContentLinks = (htmlContent: string, filename: string | null | undefined) => {
+  const transformContentLinks = (
+    htmlContent: string,
+    filename: string | null | undefined
+  ) => {
     if (!htmlContent || !filename) return htmlContent;
-    
+
     // filenameからディレクトリパスを取得 (例: "2017/b5gj/top" -> "2017/b5gj")
-    const lastSlashIndex = filename.lastIndexOf('/');
+    const lastSlashIndex = filename.lastIndexOf("/");
     if (lastSlashIndex === -1) return htmlContent;
     const basePath = filename.substring(0, lastSlashIndex);
-    
+
     // href属性の相対リンクを変換
     // 外部リンク(http/https)、絶対パス(/)、アンカー(#)は変換しない
     const transformedHtml = htmlContent.replace(
       /href="([^"]+)"/g,
       (match, href) => {
         // 外部リンク、絶対パス、アンカーリンクはそのまま
-        if (href.startsWith('http') || href.startsWith('/') || href.startsWith('#') || href.startsWith('mailto:')) {
+        if (
+          href.startsWith("http") ||
+          href.startsWith("/") ||
+          href.startsWith("#") ||
+          href.startsWith("mailto:")
+        ) {
           return match;
         }
         // 相対リンクをfilenameクエリパラメータ付きのパスに変換
         const fullPath = `${basePath}/${href}`;
         const queryParams = new URLSearchParams();
-        queryParams.set('filename', fullPath);
-        if (yearParam) queryParams.set('year', yearParam);
+        queryParams.set("filename", fullPath);
+        if (yearParam) queryParams.set("year", yearParam);
         const newHref = `/record/${recordType}/resolve?${queryParams.toString()}`;
         return `href="${newHref}"`;
       }
     );
-    
+
     return transformedHtml;
   };
 
@@ -190,22 +206,24 @@ export default function RecordDetailPage() {
   return (
     <>
       {/* パンくずリスト */}
-      <BreadCrumbs breadcrumb={[
-        { title: 'Home', url: '/' },
-        { title: '活動記録', url: '/record' },
-        { title: activityType.title, url: `/record/${activityType.id}` },
-        { title: content.title || 'ある日の記憶' }
-      ]} />
+      <BreadCrumbs
+        breadcrumb={[
+          { title: "Home", url: "/" },
+          { title: "活動記録", url: "/record" },
+          { title: activityType.title, url: `/record/${activityType.id}` },
+          { title: content.title || "ある日の記憶" },
+        ]}
+      />
 
       <div className={styles.recordDetail}>
         {/* 記事ヘッダー */}
         <div className={styles.detailHeader}>
-          <h1 className={styles.detailTitle}>{content.title || 'ある日の記憶'}</h1>
+          <h1 className={styles.detailTitle}>
+            {content.title || "ある日の記憶"}
+          </h1>
           <div className={styles.detailMeta}>
             {content.place && (
-              <span className={styles.detailPlace}>
-                {content.place}
-              </span>
+              <span className={styles.detailPlace}>{content.place}</span>
             )}
             {content.date && (
               <span className={styles.detailDate}>
@@ -218,7 +236,12 @@ export default function RecordDetailPage() {
         {/* 記事本文 */}
         <div
           className={styles.detailContent}
-          dangerouslySetInnerHTML={{ __html: transformContentLinks(content.content || '内容がありません', content.filename) }}
+          dangerouslySetInnerHTML={{
+            __html: transformContentLinks(
+              content.content || "内容がありません",
+              content.filename
+            ),
+          }}
         />
 
         {/* 画像ギャラリー */}
@@ -230,7 +253,7 @@ export default function RecordDetailPage() {
                 <div key={index} className={styles.imageWrapper}>
                   <Image
                     src={src}
-                    alt={`${content.title || '記録'} - 画像 ${index + 1}`}
+                    alt={`${content.title || "記録"} - 画像 ${index + 1}`}
                     className={styles.contentImage}
                     width={800}
                     height={600}
@@ -261,10 +284,20 @@ export default function RecordDetailPage() {
                     key={item.contentId ?? item.recordId}
                   >
                     <div className={styles.relatedItemContent}>
-                      <h3 className={styles.relatedItemTitle}>{item.title || 'ある日の記憶'}</h3>
+                      <h3 className={styles.relatedItemTitle}>
+                        {item.title || "ある日の記憶"}
+                      </h3>
                       <div className={styles.relatedItemMeta}>
-                        {item.place && <span className={styles.relatedItemPlace}>{item.place}</span>}
-                        {item.date && <span className={styles.relatedItemDate}>{displayDate(item.date)}</span>}
+                        {item.place && (
+                          <span className={styles.relatedItemPlace}>
+                            {item.place}
+                          </span>
+                        )}
+                        {item.date && (
+                          <span className={styles.relatedItemDate}>
+                            {displayDate(item.date)}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className={styles.relatedItemArrow}>→</div>
@@ -277,10 +310,7 @@ export default function RecordDetailPage() {
 
         {/* 戻るボタン */}
         <div className={styles.detailFooter}>
-          <button
-            className={styles.backButton}
-            onClick={handleBackClick}
-          >
+          <button className={styles.backButton} onClick={handleBackClick}>
             ← {activityType.title}一覧に戻る
           </button>
         </div>

@@ -2,43 +2,48 @@
 
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import React from "react";
 
 function LegacyRedirectContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const originalPath = searchParams.get('originalPath');
+  const originalPath = searchParams.get("originalPath");
 
   useEffect(() => {
     if (!originalPath) {
-      router.push('/record');
+      router.push("/record");
       return;
     }
 
     const handleRedirect = async () => {
       try {
-        const response = await fetch(`/api/legacy-redirect?pathname=${encodeURIComponent(originalPath)}`);
+        const response = await fetch(
+          `/api/legacy-redirect?pathname=${encodeURIComponent(originalPath)}`,
+        );
         const data = await response.json();
 
         if (response.ok && data.redirect) {
-          console.log(`[Legacy Redirect Page] ${originalPath} -> ${data.redirect} (${data.statusCode || 302})`);
+          console.log(
+            `[Legacy Redirect Page] ${originalPath} -> ${data.redirect} (${data.statusCode || 302})`,
+          );
           router.push(data.redirect);
         } else {
-          throw new Error('Failed to get redirect information');
+          throw new Error("Failed to get redirect information");
         }
       } catch (error) {
-        console.error('[Legacy Redirect Error]', error);
-        
+        console.error("[Legacy Redirect Error]", error);
+
         // エラーが発生した場合のフォールバック処理
-        const pathSegments = originalPath.split('/').filter(Boolean);
+        const pathSegments = originalPath.split("/").filter(Boolean);
         const activityType = pathSegments[0];
         const year = pathSegments[1];
-        
+
         if (activityType && year) {
           router.push(`/record/${activityType}?year=${year}`);
         } else if (activityType) {
           router.push(`/record/${activityType}`);
         } else {
-          router.push('/record');
+          router.push("/record");
         }
       }
     };
@@ -47,29 +52,35 @@ function LegacyRedirectContent() {
   }, [originalPath, router]);
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '50vh',
-      gap: '1rem'
-    }}>
-      <div style={{
-        width: '50px',
-        height: '50px',
-        border: '4px solid rgba(220, 75, 75, 0.1)',
-        borderRadius: '50%',
-        borderTopColor: 'rgba(220, 75, 75, 0.7)',
-        animation: 'spin 1s linear infinite'
-      }} />
-      <p style={{ color: '#666', fontSize: '1.1rem' }}>
-        ページを読み込み中...
-      </p>
-      <style jsx>{`
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "50vh",
+        gap: "1rem",
+      }}
+    >
+      <div
+        style={{
+          width: "50px",
+          height: "50px",
+          border: "4px solid rgba(220, 75, 75, 0.1)",
+          borderRadius: "50%",
+          borderTopColor: "rgba(220, 75, 75, 0.7)",
+          animation: "spin 1s linear infinite",
+        }}
+      />
+      <p style={{ color: "#666", fontSize: "1.1rem" }}>ページを読み込み中...</p>
+      <style>{`
         @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
     </div>
@@ -78,25 +89,27 @@ function LegacyRedirectContent() {
 
 function LoadingFallback() {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '50vh',
-      gap: '1rem'
-    }}>
-      <div style={{
-        width: '50px',
-        height: '50px',
-        border: '4px solid rgba(220, 75, 75, 0.1)',
-        borderRadius: '50%',
-        borderTopColor: 'rgba(220, 75, 75, 0.7)',
-        animation: 'spin 1s linear infinite'
-      }} />
-      <p style={{ color: '#666', fontSize: '1.1rem' }}>
-        読み込み中...
-      </p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "50vh",
+        gap: "1rem",
+      }}
+    >
+      <div
+        style={{
+          width: "50px",
+          height: "50px",
+          border: "4px solid rgba(220, 75, 75, 0.1)",
+          borderRadius: "50%",
+          borderTopColor: "rgba(220, 75, 75, 0.7)",
+          animation: "spin 1s linear infinite",
+        }}
+      />
+      <p style={{ color: "#666", fontSize: "1.1rem" }}>読み込み中...</p>
     </div>
   );
 }

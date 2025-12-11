@@ -1,6 +1,7 @@
 import styles from "./page.module.scss";
 import { Suspense } from "react";
 import ErrorComp from "@/components/error";
+import React from "react";
 
 const ErrorPage = () => {
   return (

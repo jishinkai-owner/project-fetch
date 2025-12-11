@@ -22,6 +22,7 @@ import RecordCard from "../shared/record-card";
 import { useRecordSubmit, useRecordDelete } from "./hook";
 import { useUserContext } from "@/providers/user";
 import { Suspense } from "react";
+import React from "react";
 
 const EditorPage = () => {
   const { contextValue } = useUserContext();
@@ -66,15 +67,15 @@ const EditorPage = () => {
             {isLoadingAuthor ? (
               <Skeleton variant="rectangular" height={56} width="100%" />
             ) : (
-              authorRecord.map((content) => (
+              authorRecord.map((ar) => (
                 <RecordCard
                   includeDelete
-                  key={content.id}
+                  key={ar.id}
                   buttonTitle={"記録を編集する"}
-                  pushUrl={`/club-members/records/edit/${content.id}`}
-                  title={content.title ?? ""}
-                  description={content.Record.place ?? ""}
-                  onDelete={() => deleteRecord(content.id)}
+                  pushUrl={`/club-members/records/edit/${ar.id}`}
+                  title={ar.title ?? ""}
+                  description={ar.place ?? ""}
+                  onDelete={() => deleteRecord(ar.id)}
                 />
               ))
             )}

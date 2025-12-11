@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
 import { ChangeEvent } from "react";
+import React from "react";
 
 type EntryTextFieldProps = {
   id: string;

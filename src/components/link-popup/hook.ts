@@ -1,19 +1,23 @@
 import { checkLinked } from "@/utils/discord/checkLinked";
 import { useState, useEffect } from "react";
 import { getDiscordInfo } from "@/app/actions";
-import { getUserRoles } from "@/utils/discord/getRoles";
-import { RoleType } from "@/types/user";
-import { postRoles } from "@/utils/discord/postRoles";
+import { RolesState } from "@/types/user";
+import { role_map } from "@/utils/discord/constants";
+import useData from "@/lib/swr/useSWR";
+import { useMemo } from "react";
+import axios from "axios";
 
 export const useLinked = (
+  roles: RolesState,
   userId?: string | null,
   grade?: number | null,
-  role?: RoleType | null,
+  // role?: RoleType | null,
   isLoading: boolean = false,
   isError: boolean = false,
 ) => {
   const [isLinked, setIsLinked] = useState(false);
   // const [id, setId] = useState<string | null>(null);
+  const [discordId, setDiscordId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -30,51 +34,164 @@ export const useLinked = (
   }, []);
 
   useEffect(() => {
-    console.log("fetchandpost useeffect is running");
-    const fetchAndPostRoles = async () => {
-      if (isLinked) {
-        try {
-          const discordInfo = await getDiscordInfo();
-          const discordId = discordInfo?.userIdentity?.id;
+    const fetchDiscordId = async () => {
+      const discordInfo = await getDiscordInfo();
+      const id = discordInfo?.userIdentity?.id || null;
 
-          if (discordId) {
-            // const data = await getUserRoles(id);
-            const data = await getUserRoles(discordId);
-
-            if (data.grade !== grade) {
-              console.log(
-                "Grades do not match, posting new grades... ",
-                data.grade,
-              );
-              await postRoles(userId, data.grade, null);
-            }
-
-            const shouldUpdateRoles =
-              data.Role.isAdmin !== role?.isAdmin ||
-              data.Role.isCL !== role?.isCL ||
-              data.Role.isSL !== role?.isSL ||
-              data.Role.isWeather !== role?.isWeather ||
-              data.Role.isMeal !== role?.isMeal ||
-              data.Role.isEquipment !== role?.isEquipment;
-
-            if (shouldUpdateRoles) {
-              console.log(
-                "Roles do not match, posting new roles... ",
-                data.Role,
-              );
-              await postRoles(userId, null, data.Role);
-            }
-          }
-        } catch (error) {
-          console.error("Error fetching and posting Discord roles: ", error);
-        }
+      if (id) {
+        setDiscordId(id);
       }
     };
-
-    if (!isLoading && !isError) {
-      fetchAndPostRoles();
+    if (isLinked) {
+      fetchDiscordId();
     }
-  }, [isLinked, userId, grade, role, isLoading, isError]);
+  }, [isLinked]);
+
+  const {
+    grade: discordGrade,
+    roles: discordRoles,
+    rolesRaw: discordRolesRaw,
+    isLoading: isDiscordLoading,
+    isError: isDiscordError,
+  } = useUserRoles(discordId);
+
+  useEffect(() => {
+    const syncRoles = async () => {
+      // const discordInfo = await getDiscordInfo();
+      // const discordId = discordInfo?.userIdentity?.id;
+      if (
+        isLoading ||
+        isError ||
+        isDiscordLoading ||
+        isDiscordError ||
+        !discordId ||
+        !userId
+      ) {
+        return;
+      }
+
+      console.log("Syncing roles...");
+
+      try {
+        if (grade !== discordGrade) {
+          console.log("updating grade!");
+          await postRoles(userId, discordGrade, null);
+        }
+
+        const shouldUpdateRoles =
+          discordRoles.isAdmin !== roles.isAdmin ||
+          discordRoles.isCL !== roles.isCL ||
+          discordRoles.isSL !== roles.isSL ||
+          discordRoles.isWeather !== roles.isWeather ||
+          discordRoles.isMeal !== roles.isMeal ||
+          discordRoles.isEquipment !== roles.isEquipment;
+
+        if (shouldUpdateRoles) {
+          console.log("updating roles!", discordRolesRaw);
+          await postRoles(userId, null, discordRolesRaw);
+        }
+      } catch (error) {
+        console.error("Error fetching and posting Discord roles: ", error);
+      }
+    };
+    syncRoles();
+  }, [
+    isLoading,
+    isError,
+    isDiscordLoading,
+    isDiscordError,
+    discordId,
+    userId,
+    grade,
+    roles,
+    discordGrade,
+    discordRoles,
+    discordRolesRaw,
+  ]);
 
   return { open };
+};
+
+const INITIAL_ROLES: RolesState = {
+  isAdmin: false,
+  isCL: false,
+  isSL: false,
+  isWeather: false,
+  isMeal: false,
+  isEquipment: false,
+};
+
+export const useUserRoles = (id: string | null) => {
+  const { data, isError, isLoading } = useData<string[]>(
+    id ? `/api/discord?id=${id}` : "",
+  );
+
+  const result = useMemo(() => {
+    if (!data?.data) {
+      return {
+        grade: null,
+        roles: INITIAL_ROLES,
+        rolesRaw: [],
+      };
+    }
+
+    const [roles, grade] = roleIdsToRolesStateAndGrade(data.data);
+
+    console.log("Fetched user roles: ", { grade, roles });
+
+    return {
+      grade,
+      roles,
+      rolesRaw: data.data,
+    };
+  }, [data]);
+
+  return {
+    grade: result.grade,
+    roles: result.roles,
+    rolesRaw: result.rolesRaw,
+    isLoading,
+    isError,
+  };
+};
+
+type RolesAndGrade = [RolesState, number | null];
+
+const roleIdsToRolesStateAndGrade = (roleIds: string[]): RolesAndGrade => {
+  const roles: RolesState = { ...INITIAL_ROLES };
+  let grade: number | null = null;
+
+  roleIds.forEach((roleId: string) => {
+    const roleValue = role_map[roleId];
+
+    if (typeof roleValue === "string" && roleValue in roles) {
+      roles[roleValue as keyof RolesState] = true;
+    } else if (typeof roleValue === "number" && grade === null) {
+      grade = roleValue;
+    }
+  });
+
+  return [roles, grade];
+};
+
+const postRoles = async (
+  id: string,
+  grade: number | null,
+  rolesRaw: string[] | null,
+) => {
+  try {
+    const res = await axios.put("/api/roles", {
+      id: id,
+      grade: grade,
+      roleIds: rolesRaw,
+    });
+    if (res.status === 201) {
+      console.log("Roles posted successfully");
+      return { success: true };
+    }
+    return { success: false, error: "Failed to post roles" };
+  } catch (error) {
+    console.error("Error posting roles: ", error);
+    throw error;
+  }
 };

@@ -10,15 +10,17 @@ import {
 import { linkDiscord } from "@/app/actions";
 import { useLinked } from "./hook";
 import { useUserContext } from "@/providers/user";
+import React from "react";
 
 const LinkPopup = () => {
   const { contextValue } = useUserContext();
   const { open } = useLinked(
+    contextValue.roles,
     contextValue.userId,
     contextValue.grade,
-    contextValue.Role,
+    // contextValue.Role,
     contextValue.isLoading,
-    contextValue.isError
+    contextValue.isError,
   );
 
   return (

@@ -11,6 +11,7 @@ import RedoIcon from "@mui/icons-material/Redo";
 import HeadingSelector from "./heading-selector";
 import InsertImage from "./insert-image";
 import { useEditorState } from "@tiptap/react";
+import React from "react";
 
 type ToolbarProps = {
   editor: Editor;

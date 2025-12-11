@@ -7,6 +7,7 @@ import { useFormDelete } from "../hook";
 import { useSnackbar } from "@/components/snackbar/hook";
 import SubmitSnackbar from "@/components/snackbar";
 import { useActivities } from "../hook";
+import React from "react";
 
 // type RegisterHikeEditProps = {
 //   setMessage: Dispatch<SetStateAction<string>>;

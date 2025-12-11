@@ -6,6 +6,7 @@ import PostHikeCards from "@/components/post-hike/post-hike-cards";
 import PostHikeForm from "@/components/post-hike/entry";
 import TabPanel from "../tabs";
 import { useTabs } from "./hook";
+import React from "react";
 
 function a11yProps(index: number) {
   return {

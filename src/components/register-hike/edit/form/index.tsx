@@ -4,6 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HikeInfoEntryProps } from "@/types/hike";
 import Grid from "@mui/material/Grid2";
 import dayjs from "dayjs";
+import React from "react";
 
 const activityType = [
   {

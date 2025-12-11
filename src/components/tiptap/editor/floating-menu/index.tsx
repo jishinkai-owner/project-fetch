@@ -2,6 +2,7 @@ import { FloatingMenu, Editor } from "@tiptap/react";
 import FormatListBulleted from "@mui/icons-material/FormatListBulleted";
 import FormatListNumbered from "@mui/icons-material/FormatListNumbered";
 import { FloatingButton } from "./floating-button";
+import React from "react";
 
 const FloatingBar = ({ editor }: { editor: Editor }) => {
   return (

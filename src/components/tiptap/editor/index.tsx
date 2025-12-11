@@ -13,6 +13,7 @@ import { Toaster } from "react-hot-toast";
 import { isMarkdown, isFlickrEmbed } from "./paste-markdown/pasteMD";
 import { generateJSON } from "@tiptap/react";
 import MarkdownIt from "markdown-it";
+import React from "react";
 
 type SetContentProps = {
   content: string | null;

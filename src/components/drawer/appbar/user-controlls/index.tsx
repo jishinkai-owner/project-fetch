@@ -9,6 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { logout } from "@/app/actions";
+import React from "react";
 
 import { useState, MouseEvent } from "react";
 

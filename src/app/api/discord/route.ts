@@ -1,8 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
+import { authenticateRequest } from "@/utils/supabase/auth";
+import { APIResponse } from "@/types/response";
 
-export async function POST(req: NextRequest) {
-  const { id } = await req.json();
+export async function GET(req: NextRequest) {
+  const { user, error } = await authenticateRequest();
+  if (error || !user) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "user is not authenticated",
+    };
+    return NextResponse.json(response, { status: 401 });
+  }
+  // const { id } = await req.json();
+  const id = req.nextUrl.searchParams.get("id");
 
   if (!id) {
     return NextResponse.json(
@@ -21,22 +33,24 @@ export async function POST(req: NextRequest) {
       },
     );
 
-    const roles = res.data.roles;
+    const roles: string[] = res.data.roles;
 
-    console.log("Roles retrieved successfully:", roles);
+    console.log("Discord roles retrieved successfully:", roles);
 
-    return NextResponse.json(
-      {
-        success: true,
-        roles: roles,
-      },
-      { status: 200 },
-    );
+    const response: APIResponse<typeof roles> = {
+      data: roles,
+      status: "success",
+      error: null,
+    };
+
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error("API Error: ", error);
-    return NextResponse.json(
-      { error: "error while retrieving roles from discord" },
-      { status: 500 },
-    );
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "Failed to fetch Discord roles",
+    };
+    return NextResponse.json(response, { status: 500 });
   }
 }

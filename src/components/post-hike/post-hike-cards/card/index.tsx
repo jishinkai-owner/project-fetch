@@ -1,5 +1,6 @@
 import { RecordProps } from "@/types/record";
 import RecordCard from "@/components/shared/record-card";
+import React from "react";
 
 const PostHikeCard = (postHike: RecordProps) => {
   return (

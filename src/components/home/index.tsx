@@ -3,6 +3,7 @@ import MainCard from "@/components/main-card";
 import Link from "next/link";
 import Image from "next/image";
 import LinkPopup from "@/components/link-popup";
+import React from "react";
 
 const HomeComp = () => {
   const usefulSites = [

@@ -82,6 +82,7 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
 
         // 特別なタイトルは「1日目」よりも前に配置（0より小さい値を使用）
         const lowerTitle = title.toLowerCase();
+<<<<<<< HEAD
         if (lowerTitle.includes("もくじ") || lowerTitle.includes("目次")) return -200;
         if (lowerTitle.includes("プロローグ") || lowerTitle.includes("prologue")) return -199;
         if (lowerTitle.includes("メンバー紹介") || lowerTitle.includes("メンバー") || lowerTitle.includes("member")) return -198;
@@ -90,6 +91,22 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
         
         // 「おまけ」「番外編」などは最後の方に配置
         if (lowerTitle.includes("おまけ") || lowerTitle.includes("番外")) return 900;
+=======
+        if (lowerTitle.includes("もくじ") || lowerTitle.includes("目次"))
+          return -100;
+        if (
+          lowerTitle.includes("プロローグ") ||
+          lowerTitle.includes("prologue")
+        )
+          return -99;
+        if (
+          lowerTitle.includes("メンバー紹介") ||
+          lowerTitle.includes("メンバー") ||
+          lowerTitle.includes("member")
+        )
+          return -98;
+        if (lowerTitle.includes("前日")) return -97; // 「山行前日」「前日」など
+>>>>>>> 6837f5eb00cc4870c1a8bedc975fc5598402ffec
 
         // 漢数字を数字に変換する関数
         const kanjiToNumber = (kanji: string): number => {
@@ -183,7 +200,7 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
     // 日付を数値に変換して比較
     const dateNumA = dateStringToNumber(a.date, a.year || 0);
     const dateNumB = dateStringToNumber(b.date, b.year || 0);
-    
+
     // 解析できない日付の場合は後ろに配置
     if (dateNumA === 0 && dateNumB === 0) {
       // 両方解析できない場合はcontentIdで比較（安定したソート）
@@ -253,24 +270,29 @@ const PlaceSection = memo(
     // このプレースに対応するレコードをメモ化し、日付順に並び替え
     const placeRecords = useMemo(() => {
       const allPlaceRecords = records.filter((r) => r.place === place);
-      
+
       // "Contentの中身がある" 記録をフィルタリング
       const filteredRecords = allPlaceRecords.filter(
         (r) =>
           (r.title && r.title.trim() !== "") ||
           (r.filename && r.filename.trim() !== "")
       );
+<<<<<<< HEAD
       
       // もくじページがある記録は、もくじのみを表示
       const mokujiFiltered = filterByMokuji(filteredRecords);
       
       return sortByDate(mokujiFiltered);
+=======
+
+      return sortByDate(filteredRecords);
+>>>>>>> 6837f5eb00cc4870c1a8bedc975fc5598402ffec
     }, [records, place]);
 
     // Contentはないが日付情報がある記録を取得（??を含む日付など）
     const dateOnlyRecords = useMemo(() => {
       const allPlaceRecords = records.filter((r) => r.place === place);
-      
+
       return allPlaceRecords.filter(
         (r) =>
           (!r.title || r.title.trim() === "") &&
@@ -315,6 +337,7 @@ const PlaceSection = memo(
           const yearA = a[1][0]?.year || 0;
           const yearB = b[1][0]?.year || 0;
 
+<<<<<<< HEAD
           // 日付を数値に変換して比較
           const dateNumA = dateStringToNumber(a[0], yearA);
           const dateNumB = dateStringToNumber(b[0], yearB);
@@ -326,6 +349,19 @@ const PlaceSection = memo(
           }
           if (dateNumA === 0) return 1;
           if (dateNumB === 0) return -1;
+=======
+        // 日付を数値に変換して比較
+        const dateNumA = dateStringToNumber(a[0], yearA);
+        const dateNumB = dateStringToNumber(b[0], yearB);
+
+        // 解析できない日付の場合は後ろに配置
+        if (dateNumA === 0 && dateNumB === 0) {
+          // 両方解析できない場合は文字列比較
+          return b[0].localeCompare(a[0]);
+        }
+        if (dateNumA === 0) return 1;
+        if (dateNumB === 0) return -1;
+>>>>>>> 6837f5eb00cc4870c1a8bedc975fc5598402ffec
 
           // 数値で降順比較（新しい日付が上に）
           return dateNumB - dateNumA;
@@ -335,7 +371,7 @@ const PlaceSection = memo(
     // placeに対応する記録で、Contentが存在しないもの（中止などの理由がdetailsに記載されている）を取得
     const noContentInfo = useMemo(() => {
       const allPlaceRecords = records.filter((r) => r.place === place);
-      
+
       // Contentが存在しないレコードを探す
       const noContentRecord = allPlaceRecords.find(
         (r) =>
@@ -344,8 +380,8 @@ const PlaceSection = memo(
           r.details &&
           r.details.trim() !== ""
       );
-      
-      return noContentRecord 
+
+      return noContentRecord
         ? { details: noContentRecord.details, date: noContentRecord.date }
         : null;
     }, [records, place]);
@@ -355,6 +391,7 @@ const PlaceSection = memo(
 
     return (
       <div className={styles.placeSection}>
+<<<<<<< HEAD
         {isDescriptionOnly ? (
           // 個人活動の場合は説明文のみを表示
           <p className={styles.descriptionText}>
@@ -380,6 +417,40 @@ const PlaceSection = memo(
             {noContentInfo && noContentInfo.date && (
               <div className={styles.dateHeader} style={{ marginTop: '0.5rem' }}>
                 <time dateTime={noContentInfo.date}>{noContentInfo.date}</time>
+=======
+        <h3 className={styles.placeTitle}>
+          <span className={styles.placeIcon}>{activityType.icon}</span>
+          {noContentInfo ? (
+            <>
+              <span style={{ textDecoration: "line-through" }}>{place}</span>
+              <span
+                style={{ marginLeft: "1rem", fontSize: "0.9em", color: "#666" }}
+              >
+                {noContentInfo.details}
+              </span>
+            </>
+          ) : (
+            place
+          )}
+        </h3>
+
+        {/* Contentが存在しない記録の日付を表示 */}
+        {noContentInfo && noContentInfo.date && (
+          <div className={styles.dateHeader} style={{ marginTop: "0.5rem" }}>
+            <time dateTime={noContentInfo.date}>{noContentInfo.date}</time>
+          </div>
+        )}
+
+        {/* 日付情報のみの記録を表示（??を含む日付など） */}
+        {dateOnlyRecords.length > 0 && (
+          <div style={{ marginTop: "0.5rem" }}>
+            {dateOnlyRecords.map((record) => (
+              <div
+                key={`date-only-${record.contentId ?? record.recordId}`}
+                className={styles.dateHeader}
+              >
+                <time dateTime={record.date || undefined}>{record.date}</time>
+>>>>>>> 6837f5eb00cc4870c1a8bedc975fc5598402ffec
               </div>
             )}
 
@@ -599,10 +670,10 @@ const RecordClient: React.FC<RecordClientProps> = ({
 
       // 各場所の最新の日付（最大の数値）を取得
       const maxDateNumA = Math.max(
-        ...recordsA.map((r) => dateStringToNumber(r.date || '', r.year || 0))
+        ...recordsA.map((r) => dateStringToNumber(r.date || "", r.year || 0))
       );
       const maxDateNumB = Math.max(
-        ...recordsB.map((r) => dateStringToNumber(r.date || '', r.year || 0))
+        ...recordsB.map((r) => dateStringToNumber(r.date || "", r.year || 0))
       );
 
       // 降順でソート（新しい日付が上に）

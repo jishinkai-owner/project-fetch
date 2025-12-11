@@ -5,6 +5,7 @@ import { RecordProps } from "@/types/record";
 import { Loading, ErrorMessage } from "@/components/load-status";
 import { useMemo } from "react";
 import { Alert } from "@mui/material";
+import React from "react";
 
 const PostHikeCards = () => {
   const { postHikes, isLoading, isError } = usePostHikes();

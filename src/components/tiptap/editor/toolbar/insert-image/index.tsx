@@ -11,6 +11,7 @@ import {
 import { Editor } from "@tiptap/react";
 import { useEffect, useCallback } from "react";
 import { useImage } from "@/components/tiptap/hook";
+import React from "react";
 
 type InsertImageProps = {
   editor: Editor;
@@ -29,7 +30,7 @@ const InsertImage = ({ editor }: InsertImageProps) => {
         editor.commands.insertContent(url);
       }
     },
-    [editor]
+    [editor],
   );
 
   return (

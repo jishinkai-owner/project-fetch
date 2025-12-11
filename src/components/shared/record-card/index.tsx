@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 import DeleteDialog from "../delete-dialog";
 import { useDeleteDialog } from "../delete-dialog/hook";
+import React from "react";
 
 type RecordCardProps = {
   buttonTitle: string;

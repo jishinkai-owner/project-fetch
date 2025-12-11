@@ -10,6 +10,7 @@ import {
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 const drawerItem: { title: string; route: string }[] = [
   { title: "記録を記入する", route: "/club-members/records" },

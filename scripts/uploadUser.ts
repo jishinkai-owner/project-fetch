@@ -1,16 +1,16 @@
 /**
  * uploadUser.ts
- * 
+ *
  * ユーザーデータをJSONファイルからデータベースに登録するスクリプト
- * 
+ *
  * 機能:
  * - scripts/users.jsonファイルからユーザー情報を読み込み
  * - PrismaのUserテーブルにユーザーデータ（email, name）を登録
  * - 各ユーザーには一意のIDが自動で割り当てられる
- * 
+ *
  * 対象ファイル: scripts/users.json
  * 期待するJSONフォーマット: [{"email": "user@example.com", "name": "ユーザー名"}, ...]
- * 
+ *
  * 使用方法:
  * npm run tsx scripts/uploadUser.ts
  */

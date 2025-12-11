@@ -1,48 +1,82 @@
 import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { APIResponse } from "@/types/response";
+import { AuthoredRecordRes } from "@/types/apiResponse";
+import { authenticateRequest } from "@/utils/supabase/auth";
 //get all records with the user's authorId
 
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
-  try {
-    const searchParams = req.nextUrl.searchParams;
-    const authorId = searchParams.get("authorId");
+  const { user, error } = await authenticateRequest();
+  if (error || !user) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "user is not authenticated",
+    };
+    return NextResponse.json(response, { status: 401 });
+  }
 
-    if (!authorId) {
-      return NextResponse.json(
-        {
-          error: "authorId is required",
-        },
-        { status: 400 }
-      );
-    }
+  const searchParams = req.nextUrl.searchParams;
+  const authorId = searchParams.get("authorId");
+
+  if (!authorId) {
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "authorId is required",
+    };
+    return NextResponse.json(response, { status: 400 });
+  }
+
+  try {
     console.log("getting record data with authorId ", authorId);
-    const records = await prisma.content.findMany({
+    const res = await prisma.content.findMany({
       where: {
         authorId: authorId,
       },
       select: {
         id: true,
         title: true,
-        content: true,
-        Record: true,
+        authorId: true,
+        Record: {
+          select: {
+            year: true,
+            place: true,
+            date: true,
+          },
+        },
       },
     });
 
-    if (!records) {
-      return NextResponse.json({ error: "Record not found" }, { status: 404 });
-    }
-    console.log("record data fetched: ", records);
-    return NextResponse.json({ success: true, data: records }, { status: 200 });
+    const resNormalized = res.map((r) => {
+      return {
+        id: r.id,
+        title: r.title,
+        year: r.Record.year,
+        place: r.Record.place,
+        date: r.Record.date,
+        authorId: r.authorId,
+      };
+    });
+
+    console.log("record data fetched: ", resNormalized);
+
+    const response: APIResponse<AuthoredRecordRes[]> = {
+      data: resNormalized,
+      status: "success",
+      error: null,
+    };
+
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error("API Error: ", error);
-    return NextResponse.json(
-      {
-        error: "Failed to fetch record data",
-        details: error,
-      },
-      { status: 500 }
-    );
+    const response: APIResponse<null> = {
+      data: null,
+      status: "error",
+      error: "Failed to fetch record data",
+    };
+    return NextResponse.json(response, { status: 500 });
   }
 }

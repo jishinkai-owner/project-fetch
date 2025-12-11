@@ -6,6 +6,7 @@ import LoadingPlaceholder from "./loading";
 import { RecordContentDTO } from "@/components/RecordCard/RecordCard";
 import activityTypes from "./activityTypes";
 import { Metadata } from "next";
+import React from "react";
 
 // ISR設定（30分ごとに再生成、秒数で指定）
 export const revalidate = 1800;
@@ -60,7 +61,9 @@ export default async function RecordTypePage({
 
   return (
     <>
-      <Suspense fallback={<LoadingPlaceholder activityTitle={activityType.title} />}>
+      <Suspense
+        fallback={<LoadingPlaceholder activityTitle={activityType.title} />}
+      >
         <RecordClient
           initialRecords={recordData.initialRecords}
           allRecords={recordData.allRecords}
@@ -103,11 +106,11 @@ async function getRecordData(recordType: string) {
       where:
         recordType === "tabi"
           ? {
-            OR: [
-              { activityType: "tabi" },
-              { activityType: "other" }, // tabiページでは「other」もフィルタリング
-            ],
-          }
+              OR: [
+                { activityType: "tabi" },
+                { activityType: "other" }, // tabiページでは「other」もフィルタリング
+              ],
+            }
           : { activityType: recordType },
       include: {
         Content: true, // 関連するContentを取得

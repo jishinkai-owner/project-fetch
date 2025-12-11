@@ -7,6 +7,7 @@ import RegisterForm from "../form";
 import MainCard from "@/components/main-card";
 import { Button } from "@mui/material";
 import { Toaster } from "react-hot-toast";
+import React from "react";
 
 const EditPastEntry = () => {
   const router = useRouter();

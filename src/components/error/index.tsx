@@ -1,10 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import styles from "./error.module.scss";
+import React from "react";
 
 const ErrorComp = () => {
   const searchParams = useSearchParams();
-  const code = Number(searchParams.get("code")) ?? 500;
+  const code = Number(searchParams.get("code") ?? 500);
   let message = "An unpected error occurred";
   switch (code) {
     case 404:

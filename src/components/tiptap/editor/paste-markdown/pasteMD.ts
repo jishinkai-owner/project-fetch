@@ -1,5 +1,5 @@
 export function isMarkdown(text: string) {
-  return /[#*_`\[\]\-]/.test(text);
+  return /[#*_`[\]-]/.test(text);
 }
 
 export function isFlickrEmbed(text: string) {

@@ -74,10 +74,11 @@ model User {
 }
 
 model Role {
-  id          Int        @id @default(autoincrement())
-  name        String     @unique
-  description String?
-  UserRoles   UserRole[]
+  id            Int        @id @default(autoincrement())
+  name          String     @unique
+  discordRoleId String?    @unique
+  description   String?
+  UserRoles     UserRole[]
 }
 
 // model UserRole {
@@ -97,6 +98,8 @@ model UserRole {
   roleId Int
   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   Role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId], name: "userId_roleId_unique")
 }
 
 model PostHikeContent {
