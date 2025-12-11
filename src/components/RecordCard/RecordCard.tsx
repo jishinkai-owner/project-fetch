@@ -30,7 +30,7 @@ const RecordCard = memo(({
         return (
             <div className={styles.recordCard + ' ' + styles.disabled} title="リンク情報が不正なため詳細ページに遷移できません">
                 <div className={styles.recordCardHeader}>
-                    <h4 className={styles.recordTitle}>{record.title || record.place || "記録"}</h4>
+                    <h4 className={styles.recordTitle}>{record.title || record.place || "ある日の記憶"}</h4>
                 </div>
                 <div className={styles.cardFooter}>
                     <span className={styles.readMore} style={{ color: '#aaa' }}>詳細ページに遷移できません</span>
@@ -44,7 +44,7 @@ const RecordCard = memo(({
         return (
             <div className={styles.recordCard + ' ' + styles.disabled} title={record.details || "記録ファイルがありません"}>
                 <div className={styles.recordCardHeader}>
-                    <h4 className={styles.recordTitle}>{record.title || record.place || "記録"}</h4>
+                    <h4 className={styles.recordTitle}>{record.title || record.place || "ある日の記憶"}</h4>
                 </div>
                 <div className={styles.cardFooter}>
                     <span className={styles.readMore} style={{ color: '#aaa' }}>{record.details || "記録なし"}</span>
@@ -58,7 +58,7 @@ const RecordCard = memo(({
         return (
             <div className={styles.recordCard + ' ' + styles.disabled} title="記録が登録されていません">
                 <div className={styles.recordCardHeader}>
-                    <h4 className={styles.recordTitle}>{record.title || record.place || "記録"}</h4>
+                    <h4 className={styles.recordTitle}>{record.title || record.place || "ある日の記憶"}</h4>
                 </div>
                 <div className={styles.cardFooter}>
                     <span className={styles.readMore} style={{ color: '#aaa' }}>記録が登録されていません</span>
@@ -79,7 +79,7 @@ const RecordCard = memo(({
             className={styles.recordCard}
         >
             <div className={styles.recordCardHeader}>
-                <h4 className={styles.recordTitle}>{record.title || "記録"}</h4>
+                <h4 className={styles.recordTitle}>{record.title || "ある日の記憶"}</h4>
             </div>
             <div className={styles.cardFooter}>
                 <span className={styles.readMore}>詳細を見る</span>

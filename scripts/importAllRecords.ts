@@ -4115,7 +4115,7 @@ const data2020: Omit<MountainRecord, "id">[] = [
   {
     year: 2020,
     filename: "2020/2020.10.zaodrive.viva/2020.10.zaodrive.viva",
-    place: "蔵王",
+    place: "蔵王（登山は断念し、ドライブ）",
     title: "VIVA編",
     date: "10/17",
     activityType: "yama",
@@ -4124,7 +4124,7 @@ const data2020: Omit<MountainRecord, "id">[] = [
   {
     year: 2020,
     filename: "2020/2020.09.zaodrive.hiroto/2020.10.zaodrive.hiroto",
-    place: "蔵王",
+    place: "蔵王（登山は断念し、ドライブ）",
     title: "HIROTO編",
     date: "10/17",
     activityType: "yama",
@@ -4133,7 +4133,7 @@ const data2020: Omit<MountainRecord, "id">[] = [
   {
     year: 2020,
     filename: "2020/2020.10.zaodrive.hayato/2020.10.zaodrive.hayato",
-    place: "蔵王",
+    place: "蔵王（登山は断念し、ドライブ）",
     title: "HAYATA編",
     date: "10/17",
     activityType: "yama",
@@ -4142,7 +4142,7 @@ const data2020: Omit<MountainRecord, "id">[] = [
   {
     year: 2020,
     filename: "2020/2020.10.zaodrive.kazuki/2020.10.zaodrive.kazuki",
-    place: "蔵王",
+    place: "蔵王（登山は断念し、ドライブ）",
     title: "KAZUKI編",
     date: "10/17",
     activityType: "yama",
@@ -4151,7 +4151,7 @@ const data2020: Omit<MountainRecord, "id">[] = [
   {
     year: 2020,
     filename: "2020/2020.10.zaodrive.tomoki/2020.10.zaodrive.tomoki",
-    place: "蔵王",
+    place: "蔵王（登山は断念し、ドライブ）",
     title: "TOMOKI編",
     date: "10/17",
     activityType: "yama",
@@ -4193,7 +4193,7 @@ const data2021: Omit<MountainRecord, "id">[] = [
   {
     year: 2021,
     filename: "2021/2021.10.kurikomayama.gouki/2021.10.kurikomayama.gouki",
-    place: "栗駒山",
+    place: "栗駒山 (秋山)",
     title: "GOUKI編",
     date: "10/09",
     activityType: "yama",
@@ -4202,7 +4202,7 @@ const data2021: Omit<MountainRecord, "id">[] = [
   {
     year: 2021,
     filename: "2021/2021.10.kurikomayama.yotaro/2021.10.kurikoma.yotaro",
-    place: "栗駒山",
+    place: "栗駒山 (秋山)",
     title: "YOTARO編",
     date: "10/09",
     activityType: "yama",
@@ -4211,7 +4211,7 @@ const data2021: Omit<MountainRecord, "id">[] = [
   {
     year: 2021,
     filename: "2021/2021.10.kurikomayama.shota/2021.10.kurikomayama.shota",
-    place: "栗駒山",
+    place: "栗駒山 (秋山)",
     title: "SHOTA編",
     date: "10/09",
     activityType: "yama",
@@ -4220,7 +4220,7 @@ const data2021: Omit<MountainRecord, "id">[] = [
   {
     year: 2021,
     filename: "2021/2021.10.kurikomayama.akaru/2021.10.kurikomayama.akaru",
-    place: "栗駒山",
+    place: "栗駒山 (秋山)",
     title: "AKARU編",
     date: "10/09",
     activityType: "yama",
@@ -4528,7 +4528,7 @@ const data2022: Omit<MountainRecord, "id">[] = [
   {
     year: 2022,
     filename: "2022/2022.10.adatarayama.Tamaki/2022.10.adatarayama.Tamaki",
-    place: "安達太良山",
+    place: "安達太良山 (秋山)",
     title: "TAMAKI編",
     date: "10/08",
     activityType: "yama",
@@ -4537,7 +4537,7 @@ const data2022: Omit<MountainRecord, "id">[] = [
   {
     year: 2022,
     filename: "2022/2022.10.adatarayama.Yusuke/2022.10.adatarayama.Yusuke",
-    place: "安達太良山",
+    place: "安達太良山 (秋山)",
     title: "YUSUKE編",
     date: "10/08",
     activityType: "yama",
@@ -4546,7 +4546,7 @@ const data2022: Omit<MountainRecord, "id">[] = [
   {
     year: 2022,
     filename: "2022/2022.10.adatarayama.Kousei/2022.10.adatarayama.Kousei",
-    place: "安達太良山",
+    place: "安達太良山 (秋山)",
     title: "KOUSEI編",
     date: "10/08",
     activityType: "yama",
@@ -4567,6 +4567,15 @@ const data2022: Omit<MountainRecord, "id">[] = [
   // 3) 2022/08/19-20: 長期山行＠北岳
     { 
       year: 2022, 
+      filename: "2022/2022.08.kitadake.Gouki/2022.08.Gouki", 
+      place: "長期山行in北岳 GOUKI編", 
+      title: "もくじ", 
+      date: "08/19～20", 
+      activityType: "yama", 
+      details: null 
+    },
+    { 
+      year: 2022, 
       filename: "2022/2022.08.kitadake.Gouki/1st", 
       place: "長期山行in北岳 GOUKI編", 
       title: "1日目", 
@@ -4579,6 +4588,15 @@ const data2022: Omit<MountainRecord, "id">[] = [
       filename: "2022/2022.08.kitadake.Gouki/2nd", 
       place: "長期山行in北岳 GOUKI編", 
       title: "2日目", 
+      date: "08/19～20", 
+      activityType: "yama", 
+      details: null 
+    },
+    { 
+      year: 2022, 
+      filename: "2022/2022.08.kitadake.Shota/2022.08.kitadake.Shota", 
+      place: "長期山行in北岳 SHOTA編", 
+      title: "もくじ", 
       date: "08/19～20", 
       activityType: "yama", 
       details: null 
@@ -4614,7 +4632,16 @@ const data2022: Omit<MountainRecord, "id">[] = [
       year: 2022, 
       filename: "2022/2022.08.kitadake.Yotaro/2022.08.kitadake.Yotaro", 
       place: "長期山行in北岳 YOTARO編", 
-      title: "0日目", 
+      title: null, 
+      date: "08/19～20", 
+      activityType: "yama", 
+      details: null 
+    },
+    { 
+      year: 2022, 
+      filename: "2022/2022.08.kitadake.yuya/2022.08.kitadake.yuya", 
+      place: "長期山行in北岳 YUYA編", 
+      title: "もくじ", 
       date: "08/19～20", 
       activityType: "yama", 
       details: null 
@@ -4633,6 +4660,15 @@ const data2022: Omit<MountainRecord, "id">[] = [
       filename: "2022/2022.08.kitadake.yuya/2", 
       place: "長期山行in北岳 YUYA編", 
       title: "2日目", 
+      date: "08/19～20", 
+      activityType: "yama", 
+      details: null 
+    },
+    { 
+      year: 2022, 
+      filename: "2022/2022.08.kitadake.yuya/3", 
+      place: "長期山行in北岳 YUYA編", 
+      title: "おまけ", 
       date: "08/19～20", 
       activityType: "yama", 
       details: null 
@@ -5013,8 +5049,8 @@ const data2023: Omit<MountainRecord, "id">[] = [
     {
       year: 2023,
       filename: "2023/2023.08.yarigatake.Haruki/index",
-      place: "長期山行@槍ヶ岳",
-      title: "HARUKI編",
+      place: "長期山行 TEAM HARUKI編",
+      title: null,
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5024,8 +5060,8 @@ const data2023: Omit<MountainRecord, "id">[] = [
     {
       year: 2023,
       filename: "2023/2023.08.yarigatake.KOSEI/2023.08.yarigatake.KOSEI",
-      place: "長期山行@槍ヶ岳",
-      title: "KOSEI編",
+      place: "長期山行 TEAM KOSEI編",
+      title: null,
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5034,9 +5070,18 @@ const data2023: Omit<MountainRecord, "id">[] = [
     // TATSUYA Team
     {
       year: 2023,
+      filename: "2023/2023.08.yarigatake.Tatuya/2023.08.yarigatake.TAYSUYA",
+      place: "長期山行 TEAM TATSUYA編",
+      title: "もくじ",
+      date: "08/10～12",
+      activityType: "yama",
+      details: null,
+    },
+    {
+      year: 2023,
       filename: "2023/2023.08.yarigatake.Tatuya/1",
-      place: "長期山行@槍ヶ岳",
-      title: "TATSUYA 1日目",
+      place: "長期山行 TEAM TATSUYA編",
+      title: "1日目",
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5044,8 +5089,8 @@ const data2023: Omit<MountainRecord, "id">[] = [
     {
       year: 2023,
       filename: "2023/2023.08.yarigatake.Tatuya/2",
-      place: "長期山行@槍ヶ岳",
-      title: "TATSUYA 2日目",
+      place: "長期山行 TEAM TATSUYA編",
+      title: "2日目",
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5053,8 +5098,8 @@ const data2023: Omit<MountainRecord, "id">[] = [
     {
       year: 2023,
       filename: "2023/2023.08.yarigatake.Tatuya/3",
-      place: "長期山行@槍ヶ岳",
-      title: "TATSUYA 3日目",
+      place: "長期山行 TEAM TATSUYA編",
+      title: "3日目",
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5063,9 +5108,18 @@ const data2023: Omit<MountainRecord, "id">[] = [
     // YUSUKE Team
     {
       year: 2023,
+      filename: "2023/2023.08.yarigatake.Yusuke/2023.08.yarigatake.Yusuke",
+      place: "長期山行 TEAM YUSUKE編",
+      title: "もくじ",
+      date: "08/10～12",
+      activityType: "yama",
+      details: null,
+    },
+    {
+      year: 2023,
       filename: "2023/2023.08.yarigatake.Yusuke/yarigatake.8.10",
-      place: "長期山行@槍ヶ岳",
-      title: "YUSUKE 1日目",
+      place: "長期山行 TEAM YUSUKE編",
+      title: "1日目",
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5073,8 +5127,8 @@ const data2023: Omit<MountainRecord, "id">[] = [
     {
       year: 2023,
       filename: "2023/2023.08.yarigatake.Yusuke/yarigatake.8.11",
-      place: "長期山行@槍ヶ岳",
-      title: "YUSUKE 2日目",
+      place: "長期山行 TEAM YUSUKE編",
+      title: "2日目",
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5082,8 +5136,8 @@ const data2023: Omit<MountainRecord, "id">[] = [
     {
       year: 2023,
       filename: "2023/2023.08.yarigatake.Yusuke/yarigatake.8.12",
-      place: "長期山行@槍ヶ岳",
-      title: "YUSUKE 3日目",
+      place: "長期山行 TEAM YUSUKE編",
+      title: "3日目",
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -5093,8 +5147,8 @@ const data2023: Omit<MountainRecord, "id">[] = [
     {
       year: 2023,
       filename: "2023/2023.08.yarigatke.Sousuke/2023.08.yarigatke.Sousuke",
-      place: "長期山行@槍ヶ岳",
-      title: "SOUSUKE編",
+      place: "長期山行 TEAM SOUSUKE編",
+      title: null,
       date: "08/10～12",
       activityType: "yama",
       details: null,
@@ -8682,6 +8736,18 @@ async function scanOtherFolder() {
     return [];
   }
 
+  // allDataに既に登録されているfilenameを収集（重複を避けるため）
+  const existingFilenames = new Set<string>();
+  for (const record of allData) {
+    if (record.filename) {
+      // "other/xxx" 形式のファイル名から "xxx" 部分を抽出
+      const baseName = record.filename.startsWith("other/") 
+        ? record.filename.replace("other/", "").split("/")[0]
+        : record.filename;
+      existingFilenames.add(baseName);
+    }
+  }
+
   const records: Omit<MountainRecord, "id">[] = [];
   
   // otherフォルダ内のすべてのファイルを直接スキャン
@@ -8697,10 +8763,18 @@ async function scanOtherFolder() {
       
       // ファイル名から情報を抽出
       const fileNameWithoutExt = item.replace(/\.(md|mdx)$/, "");
+      
+      // 既にallDataに存在するファイルはスキップ
+      if (existingFilenames.has(fileNameWithoutExt)) {
+        console.log(`⏭️ スキップ（既に登録済み）: ${fileNameWithoutExt}`);
+        continue;
+      }
+      
       const filename = fileNameWithoutExt; // パスはファイル名のみ
       
       // ファイル名から年度を抽出（例: 2016ohsoji.mdx → 2016）
-      const yearMatch = fileNameWithoutExt.match(/^(\d{4})/);
+      // ファイル名の任意の位置にある4桁の年度を探す
+      const yearMatch = fileNameWithoutExt.match(/(\d{4})/);
       const year = yearMatch ? parseInt(yearMatch[1], 10) : new Date().getFullYear();
       
       records.push({
@@ -8709,7 +8783,7 @@ async function scanOtherFolder() {
         place: fileNameWithoutExt,
         title: fileNameWithoutExt,
         date: `${year}`,
-        activityType: "other", // otherフォルダの内容はotherとして扱う
+        activityType: "tabi", // otherフォルダの内容はotherとして扱う
         details: null,
       });
     }

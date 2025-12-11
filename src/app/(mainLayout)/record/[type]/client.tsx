@@ -80,12 +80,16 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
       const extractOrder = (title: string | null): number => {
         if (!title) return 999; // タイトルがない場合は最後に
 
-        // 特別なタイトルは「0日目」よりも前に配置（負の値を使用）
+        // 特別なタイトルは「1日目」よりも前に配置（0より小さい値を使用）
         const lowerTitle = title.toLowerCase();
-        if (lowerTitle.includes("もくじ") || lowerTitle.includes("目次")) return -100;
-        if (lowerTitle.includes("プロローグ") || lowerTitle.includes("prologue")) return -99;
-        if (lowerTitle.includes("メンバー紹介") || lowerTitle.includes("メンバー") || lowerTitle.includes("member")) return -98;
-        if (lowerTitle.includes("前日")) return -97; // 「山行前日」「前日」など
+        if (lowerTitle.includes("もくじ") || lowerTitle.includes("目次")) return -200;
+        if (lowerTitle.includes("プロローグ") || lowerTitle.includes("prologue")) return -199;
+        if (lowerTitle.includes("メンバー紹介") || lowerTitle.includes("メンバー") || lowerTitle.includes("member")) return -198;
+        if (lowerTitle.includes("移動日") && !lowerTitle.match(/移動\d+日目/)) return -197; // 「移動日」（「移動1日目」などは除く）
+        if (lowerTitle.includes("前日") || lowerTitle.includes("前泊")|| lowerTitle.includes("停滞")|| lowerTitle.includes("停滞日")) return -196; // 「山行前日」「前日」「前泊」など
+        
+        // 「おまけ」「番外編」などは最後の方に配置
+        if (lowerTitle.includes("おまけ") || lowerTitle.includes("番外")) return 900;
 
         // 漢数字を数字に変換する関数
         const kanjiToNumber = (kanji: string): number => {
@@ -152,20 +156,27 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
         }
 
         // 「帰路」は最後に配置
-        if (lowerTitle.includes("帰路")) return 998;
+        if (lowerTitle.includes("帰路")) return 950;
 
-        return 999; // どのパターンにも当てはまらない場合は最後に
+        return 500; // どのパターンにも当てはまらない場合は中間に
       };
 
       const orderA = extractOrder(a.title);
       const orderB = extractOrder(b.title);
 
-      if (orderA !== 999 && orderB !== 999) {
-        return orderA - orderB; // 順序通りにソート
+      // 順序で比較（昇順：小さい値が先）
+      if (orderA !== orderB) {
+        return orderA - orderB;
       }
 
-      // 順序が抽出できない場合はタイトルの文字列比較
-      return (a.title || "").localeCompare(b.title || "");
+      // 順序が同じ場合はタイトルの文字列比較
+      const titleCompare = (a.title || "").localeCompare(b.title || "");
+      if (titleCompare !== 0) {
+        return titleCompare;
+      }
+
+      // タイトルも同じ場合はcontentIdで比較（安定したソート）
+      return (a.contentId || 0) - (b.contentId || 0);
     }
 
     // 日付を比較（降順 - 新しい日付が上に）
@@ -174,13 +185,56 @@ const sortByDate = (records: RecordContentDTO[]): RecordContentDTO[] => {
     const dateNumB = dateStringToNumber(b.date, b.year || 0);
     
     // 解析できない日付の場合は後ろに配置
-    if (dateNumA === 0 && dateNumB === 0) return 0;
+    if (dateNumA === 0 && dateNumB === 0) {
+      // 両方解析できない場合はcontentIdで比較（安定したソート）
+      return (a.contentId || 0) - (b.contentId || 0);
+    }
     if (dateNumA === 0) return 1;
     if (dateNumB === 0) return -1;
 
     // 数値で降順比較（新しい日付が上に）
-    return dateNumB - dateNumA;
+    const dateCompare = dateNumB - dateNumA;
+    if (dateCompare !== 0) {
+      return dateCompare;
+    }
+
+    // 日付が同じ場合はcontentIdで比較（安定したソート）
+    return (a.contentId || 0) - (b.contentId || 0);
   });
+};
+
+// 同じrecordIdを持つレコードをグループ化し、もくじページがある場合はそれのみを表示するフィルタ関数
+const filterByMokuji = (records: RecordContentDTO[]): RecordContentDTO[] => {
+  // recordIdでグループ化
+  const groupedByRecordId = new Map<number, RecordContentDTO[]>();
+  
+  records.forEach((record) => {
+    const key = record.recordId;
+    if (!groupedByRecordId.has(key)) {
+      groupedByRecordId.set(key, []);
+    }
+    groupedByRecordId.get(key)?.push(record);
+  });
+  
+  // 各グループをフィルタリング
+  const result: RecordContentDTO[] = [];
+  
+  groupedByRecordId.forEach((group) => {
+    // 「もくじ」を含むタイトルがあるかチェック
+    const mokujiRecord = group.find((r) => 
+      r.title && (r.title.includes("もくじ") || r.title.includes("目次") || r.title.includes("プロローグ"))
+    );
+    
+    if (mokujiRecord && group.length > 1) {
+      // もくじがある場合は、もくじのみを追加
+      result.push(mokujiRecord);
+    } else {
+      // もくじがない場合は全レコードを追加
+      result.push(...group);
+    }
+  });
+  
+  return result;
 };
 
 // プレースセクションをメモ化されたコンポーネントとして分離
@@ -207,7 +261,10 @@ const PlaceSection = memo(
           (r.filename && r.filename.trim() !== "")
       );
       
-      return sortByDate(filteredRecords);
+      // もくじページがある記録は、もくじのみを表示
+      const mokujiFiltered = filterByMokuji(filteredRecords);
+      
+      return sortByDate(mokujiFiltered);
     }, [records, place]);
 
     // Contentはないが日付情報がある記録を取得（??を含む日付など）
@@ -237,29 +294,42 @@ const PlaceSection = memo(
       });
 
       // 日付でソートして返す（降順 - 新しい日付が上に）
-      return Array.from(dates.entries()).sort((a, b) => {
-        if (a[0] === "no-date") return 1;
-        if (b[0] === "no-date") return -1;
+      return Array.from(dates.entries())
+        .map(([date, records]) => {
+          // 各日付グループ内のレコードをcontentIdでソート（安定したソート）
+          const sortedRecords = [...records].sort((a, b) => {
+            // contentIdがある場合はそれで比較
+            if (a.contentId && b.contentId) {
+              return a.contentId - b.contentId;
+            }
+            // contentIdがない場合はrecordIdで比較
+            return (a.recordId || 0) - (b.recordId || 0);
+          });
+          return [date, sortedRecords] as [string, RecordContentDTO[]];
+        })
+        .sort((a, b) => {
+          if (a[0] === "no-date") return 1;
+          if (b[0] === "no-date") return -1;
 
-        // 年度を取得（レコードのyearフィールドから）
-        const yearA = a[1][0]?.year || 0;
-        const yearB = b[1][0]?.year || 0;
+          // 年度を取得（レコードのyearフィールドから）
+          const yearA = a[1][0]?.year || 0;
+          const yearB = b[1][0]?.year || 0;
 
-        // 日付を数値に変換して比較
-        const dateNumA = dateStringToNumber(a[0], yearA);
-        const dateNumB = dateStringToNumber(b[0], yearB);
-        
-        // 解析できない日付の場合は後ろに配置
-        if (dateNumA === 0 && dateNumB === 0) {
-          // 両方解析できない場合は文字列比較
-          return b[0].localeCompare(a[0]);
-        }
-        if (dateNumA === 0) return 1;
-        if (dateNumB === 0) return -1;
+          // 日付を数値に変換して比較
+          const dateNumA = dateStringToNumber(a[0], yearA);
+          const dateNumB = dateStringToNumber(b[0], yearB);
+          
+          // 解析できない日付の場合は後ろに配置
+          if (dateNumA === 0 && dateNumB === 0) {
+            // 両方解析できない場合は文字列比較
+            return b[0].localeCompare(a[0]);
+          }
+          if (dateNumA === 0) return 1;
+          if (dateNumB === 0) return -1;
 
-        // 数値で降順比較（新しい日付が上に）
-        return dateNumB - dateNumA;
-      });
+          // 数値で降順比較（新しい日付が上に）
+          return dateNumB - dateNumA;
+        });
     }, [placeRecords, isFishingRecords]);
 
     // placeに対応する記録で、Contentが存在しないもの（中止などの理由がdetailsに記載されている）を取得
@@ -280,71 +350,76 @@ const PlaceSection = memo(
         : null;
     }, [records, place]);
 
+    // 「個人活動」などの説明文のみのケースかどうか
+    const isDescriptionOnly = place === "個人活動" && noContentInfo;
+
     return (
       <div className={styles.placeSection}>
-        <h3 className={styles.placeTitle}>
-          <span className={styles.placeIcon}>{activityType.icon}</span>
-          {noContentInfo ? (
-            <>
-              <span style={{ textDecoration: 'line-through' }}>{place}</span>
-              <span style={{ marginLeft: '1rem', fontSize: '0.9em', color: '#666' }}>
-                {noContentInfo.details}
-              </span>
-            </>
-          ) : (
-            place
-          )}
-        </h3>
+        {isDescriptionOnly ? (
+          // 個人活動の場合は説明文のみを表示
+          <p className={styles.descriptionText}>
+            {noContentInfo.details}
+          </p>
+        ) : (
+          <>
+            <h3 className={styles.placeTitle}>
+              <span className={styles.placeIcon}>{activityType.icon}</span>
+              {noContentInfo ? (
+                <>
+                  <span style={{ textDecoration: 'line-through' }}>{place}</span>
+                  <span style={{ marginLeft: '1rem', fontSize: '0.9em', color: '#666' }}>
+                    {noContentInfo.details}
+                  </span>
+                </>
+              ) : (
+                place
+              )}
+            </h3>
 
-        {/* Contentが存在しない記録の日付を表示 */}
-        {noContentInfo && noContentInfo.date && (
-          <div className={styles.dateHeader} style={{ marginTop: '0.5rem' }}>
-            <time dateTime={noContentInfo.date}>{noContentInfo.date}</time>
-          </div>
-        )}
-
-        {/* 日付情報のみの記録を表示（??を含む日付など） */}
-        {dateOnlyRecords.length > 0 && (
-          <div style={{ marginTop: '0.5rem'}}>
-            {dateOnlyRecords.map((record) => (
-              <div key={`date-only-${record.contentId ?? record.recordId}`} className={styles.dateHeader}>
-                <time dateTime={record.date || undefined}>{record.date}</time>
+            {/* Contentが存在しない記録の日付を表示 */}
+            {noContentInfo && noContentInfo.date && (
+              <div className={styles.dateHeader} style={{ marginTop: '0.5rem' }}>
+                <time dateTime={noContentInfo.date}>{noContentInfo.date}</time>
               </div>
-            ))}
-          </div>
-        )}
+            )}
 
-        {/* Contentが存在する場合のみRecordCardを表示 */}
-        {placeRecords.length > 0 && (
-          <div className={styles.recordCardList}>
-            {dateGroups.map(([date, dateRecords]) => (
-              <div key={date} className={styles.dateGroup}>
-                {date !== "no-date" && (
-                  <div className={styles.dateHeader}>
-                    <time dateTime={date}>{date}</time>
-                    {isFishingRecords &&
-                      dateRecords.length > 0 &&
-                      dateRecords[0].year && (
-                        <span className={styles.yearBadge}>
-                          {dateRecords[0].year}年
-                        </span>
-                      )}
+            {/* 日付情報のみの記録を表示（??を含む日付など） */}
+            {dateOnlyRecords.length > 0 && (
+              <div style={{ marginTop: '0.5rem'}}>
+                {dateOnlyRecords.map((record) => (
+                  <div key={`date-only-${record.contentId ?? record.recordId}`} className={styles.dateHeader}>
+                    <time dateTime={record.date || undefined}>{record.date}</time>
                   </div>
-                )}
-                <div className={styles.dateRecords}>
-                  {dateRecords.map((record) => (
-                    <RecordCard
-                      record={{
-                        ...record,
-                        date: null, // 日付ヘッダーで表示しているのでカード内では非表示
-                      }}
-                      key={record.contentId ?? `record-${record.recordId}`}
-                    />
-                  ))}
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            )}
+
+            {/* Contentが存在する場合のみRecordCardを表示 */}
+            {placeRecords.length > 0 && (
+              <div className={styles.recordCardList}>
+                {dateGroups.map(([date, dateRecords]) => (
+                  <div key={date} className={styles.dateGroup}>
+                    {date !== "no-date" && (
+                      <div className={styles.dateHeader}>
+                        <time dateTime={date}>{date}</time>
+                      </div>
+                    )}
+                    <div className={styles.dateRecords}>
+                      {dateRecords.map((record) => (
+                        <RecordCard
+                          record={{
+                            ...record,
+                            date: null, // 日付ヘッダーで表示しているのでカード内では非表示
+                          }}
+                          key={record.contentId ?? `record-${record.recordId}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     );
@@ -364,8 +439,8 @@ const RecordClient: React.FC<RecordClientProps> = ({
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // 釣果記録の場合は年度フィルタリングなしで全記録を表示
-  const isFishingRecords = activityType.id === "tsuri";
+  // 釣果記録・旅行記録の場合は年度フィルタリングなしで全記録を表示（年度グループ化表示）
+  const isFishingRecords = activityType.id === "tsuri" || activityType.id === "tabi";
 
   // URLから年度パラメータを取得
   const yearParam = searchParams.get("year");
@@ -441,6 +516,57 @@ const RecordClient: React.FC<RecordClientProps> = ({
 
     return () => clearTimeout(timeoutId);
   }, [selectedYear, allRecords, isFishingRecords]);
+
+  // 釣果記録用：年度でグループ化されたレコードを取得
+  const yearGroupedRecords = useMemo(() => {
+    if (!isFishingRecords) return null;
+
+    // 年度でグループ化
+    const yearMap = new Map<number, RecordContentDTO[]>();
+    recordsToShow.forEach((r) => {
+      const year = r.year || 0;
+      if (!yearMap.has(year)) {
+        yearMap.set(year, []);
+      }
+      yearMap.get(year)?.push(r);
+    });
+
+    // 年度を降順でソート
+    const sortedYears = Array.from(yearMap.keys()).sort((a, b) => b - a);
+
+    return sortedYears.map((year) => ({
+      year,
+      records: yearMap.get(year) || [],
+    }));
+  }, [recordsToShow, isFishingRecords]);
+
+  // 年度内の場所リストを取得する関数
+  const getPlaceListForYear = useCallback(
+    (yearRecords: RecordContentDTO[]) => {
+      const uniquePlaces = new Set<string>();
+      yearRecords.forEach((r) => {
+        if (r.place) uniquePlaces.add(r.place);
+      });
+
+      const placeArray = Array.from(uniquePlaces);
+
+      // 各場所の日付で並び替え（降順）
+      return placeArray.sort((placeA, placeB) => {
+        const recordsA = yearRecords.filter((r) => r.place === placeA);
+        const recordsB = yearRecords.filter((r) => r.place === placeB);
+
+        const maxDateNumA = Math.max(
+          ...recordsA.map((r) => dateStringToNumber(r.date || "", r.year || 0))
+        );
+        const maxDateNumB = Math.max(
+          ...recordsB.map((r) => dateStringToNumber(r.date || "", r.year || 0))
+        );
+
+        return maxDateNumB - maxDateNumA;
+      });
+    },
+    []
+  );
 
   // 場所リスト（データが変わった時のみ再計算）
   const placeList = useMemo(() => {
@@ -548,6 +674,38 @@ const RecordClient: React.FC<RecordClientProps> = ({
                         : `${selectedYear}年度の${activityType.title}はありません。`}
                     </p>
                   </div>
+                ) : isFishingRecords && yearGroupedRecords ? (
+                  // 釣果記録の場合は年度ごとにグループ化して表示
+                  <>
+                    {/* 年度ナビゲーション */}
+                    <nav className={styles.yearNav}>
+                      {yearGroupedRecords.map(({ year }) => (
+                        <a
+                          key={year}
+                          href={`#year-${year}`}
+                          className={styles.yearNavLink}
+                        >
+                          {year}年
+                        </a>
+                      ))}
+                    </nav>
+                    {yearGroupedRecords.map(({ year, records: yearRecords }) => (
+                      <div key={year} id={`year-${year}`} className={styles.yearSection}>
+                        <h2 className={styles.yearHeader}>
+                          {year}年
+                        </h2>
+                        {getPlaceListForYear(yearRecords).map((place) => (
+                          <PlaceSection
+                            key={`${year}-${place}`}
+                            place={place}
+                            records={yearRecords}
+                            activityType={activityType}
+                            isFishingRecords={isFishingRecords}
+                          />
+                        ))}
+                      </div>
+                    ))}
+                  </>
                 ) : (
                   placeList.map((place) => (
                     <PlaceSection

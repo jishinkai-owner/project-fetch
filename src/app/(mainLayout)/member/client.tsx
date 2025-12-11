@@ -59,6 +59,16 @@ const MemberClient: React.FC<{
     let filteredMembers: MemberDTO[] = [];
     if (selectedCategory && yearMapping[selectedCategory]) {
       filteredMembers = filterMembersByYear(yearMapping[selectedCategory]);
+      
+      // 殿堂入りの場合は年度順（C1, C0, B9, B8...）にソート
+      if (selectedCategory === "殿堂入り") {
+        const yearOrder = yearMapping["殿堂入り"];
+        filteredMembers.sort((a, b) => {
+          const indexA = yearOrder.indexOf(a.year);
+          const indexB = yearOrder.indexOf(b.year);
+          return indexA - indexB;
+        });
+      }
     }
 
     if (!filteredMembers.length) {

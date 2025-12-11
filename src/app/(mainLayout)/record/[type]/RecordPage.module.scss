@@ -129,9 +129,83 @@
   gap: 1rem;
 }
 
+// 年度セクション（釣果記録用）
+.yearSection {
+  width: 100%;
+  margin-bottom: 1rem;
+  
+  &:first-child {
+    margin-top: 0.5rem;
+  }
+}
+
+// 年度ナビゲーション（釣果記録用）
+.yearNav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  margin: 1rem 0 2rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem;
+}
+
+.yearNavLink {
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  text-decoration: none;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: #dc4b4b;
+    background: rgba(220, 75, 75, 0.1);
+  }
+}
+
+// 年度ヘッダー（釣果記録用）
+.yearHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.6rem;
+  color: #444;
+  margin: 2.5rem 0 1.5rem 0;
+  padding: 0.5rem 0;
+  font-weight: 700;
+  scroll-margin-top: 80px; // スクロール時のオフセット
+  
+  &::before {
+    content: '';
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(to right, transparent, rgba(220, 75, 75, 0.6));
+  }
+  
+  &::after {
+    content: '';
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(to left, transparent, rgba(220, 75, 75, 0.6));
+  }
+}
+
 .placeSection {
   width: 100%;
   padding: 1.5rem;
+}
+
+// 説明文のみの表示（個人活動など）
+.descriptionText {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0.5rem 0;
 }
 
 .placeTitle {
