@@ -1,3 +1,4 @@
+import React from "react";
 import MenuWrapper from "@/components/MenuWrapper/MenuWrapper";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
