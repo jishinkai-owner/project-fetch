@@ -465,7 +465,15 @@ const RecordClient: React.FC<RecordClientProps> = ({
       : initialRecords
   );
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // 初回ロード時のloading状態を解除
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // 年度変更時の処理
   const handleYearChange = useCallback(
@@ -638,6 +646,26 @@ const RecordClient: React.FC<RecordClientProps> = ({
             <div className={styles.loadingSpinner}>
               <p>読み込み中...</p>
             </div>
+            <div className={styles.waka}>
+              {activityType.id === "yama" && (
+                <>
+                  <p>面影に 花の姿を 先立てて 幾重越え来ぬ 峰の白雲</p>
+                  <p className={styles.author}>藤原俊成 『無名抄 深草の里』</p>
+                </>
+              )}
+              {activityType.id === "tsuri" && (
+                <>
+                  <p>わたの原 漕ぎ出でて見れば 久かたの 雲ゐにまがふ 沖つ白波</p>
+                  <p className={styles.author}>藤原忠通『詞花集』</p>
+                </>
+              )}
+              {activityType.id === "tabi" && (
+                <>
+                  <p>幾山河　越えさり行かば　寂しさの　はてなむ国ぞ　今日も旅ゆく</p>
+                  <p className={styles.author}>若山牧水</p>
+                </>
+              )}
+            </div>
           </div>
         ) : years.length === 0 ? (
           <div className={styles.noDataMessage}>
@@ -720,6 +748,42 @@ const RecordClient: React.FC<RecordClientProps> = ({
               </div>
             )}
           </>
+        )}
+        
+        {/* ページ下部の和歌 */}
+        {!loading && !isPending && years.length > 0 && (
+          <div className={styles.wakaFooter}>
+            {activityType.id === "yama" && (
+              <>
+                <p className={styles.wakaPoem}>面影に 花の姿を 先立てて 幾重越え来ぬ 峰の白雲</p>
+                <p className={styles.author}>藤原俊成 『無名抄 深草の里』</p>
+                <p className={styles.wakaExplanation}>
+                  花の美しく咲いた所を想い浮かべ、それを見たいという一念を標(しるべ)として<br />
+                  遠く幾重もの山々を、その峰の白雲をかき分けて越えてきたよ
+                </p>
+              </>
+            )}
+            {activityType.id === "tsuri" && (
+              <>
+                <p className={styles.wakaPoem}>わたの原 漕ぎ出でて見れば 久かたの 雲ゐにまがふ 沖つ白波</p>
+                <p className={styles.author}>藤原忠通『詞花集』</p>
+                <p className={styles.wakaExplanation}>
+                  大海原に船で漕ぎ出し、ずっと遠くを眺めてみれば、<br />
+                  かなたに雲と見間違うばかりに、沖の白波が立っていたよ
+                </p>
+              </>
+            )}
+            {activityType.id === "tabi" && (
+              <>
+                <p className={styles.wakaPoem}>幾山河　越えさり行かば　寂しさの　はてなむ国ぞ　今日も旅ゆく</p>
+                <p className={styles.author}>若山牧水</p>
+                <p className={styles.wakaExplanation}>
+                  いくつもの山河を越えて行けば、この寂しさが消える国にたどり着けるのだろうか<br />
+                  その地を目指して、今日も旅を続けよう
+                </p>
+              </>
+            )}
+          </div>
         )}
       </div>
     </>

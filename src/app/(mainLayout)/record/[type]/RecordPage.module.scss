@@ -348,6 +348,63 @@
   }
 }
 
+// 和歌スタイル（ローディング中）
+.waka {
+  margin-top: 2rem;
+  text-align: center;
+  color: #666;
+  line-height: 1.8;
+  
+  p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+  
+  .author {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 0.75rem;
+  }
+}
+
+// 和歌スタイル（ページ下部）
+.wakaFooter {
+  margin-top: 3rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: rgba(248, 240, 227, 0.3);
+  border-top: 2px solid rgba(220, 75, 75, 0.2);
+  border-radius: 0.5rem;
+  
+  .wakaPoem {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #333;
+    margin: 0 0 0.75rem 0;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  
+  .author {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 0 0 1.25rem 0;
+    font-style: italic;
+  }
+  
+  .wakaExplanation {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(220, 75, 75, 0.15);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 // 詳細ページ関連のスタイル
 .recordDetail {
   width: 100%;
@@ -873,5 +930,31 @@
   
   .detailTitle {
     font-size: 1.4rem;
+  }
+  
+  .waka p {
+    font-size: 0.9rem;
+  }
+  
+  .waka .author {
+    font-size: 0.75rem;
+  }
+  
+  .wakaFooter {
+    padding: 1.5rem 1rem;
+    
+    .wakaPoem {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    
+    .author {
+      font-size: 0.75rem;
+    }
+    
+    .wakaExplanation {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
   }
 }
