@@ -661,7 +661,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
               )}
               {activityType.id === "tabi" && (
                 <>
-                  <p>幾山河　越えさり行かば　寂しさの　はてなむ国ぞ　今日も旅ゆく</p>
+                  <p>幾山河 越えさり行かば 寂しさの はてなむ国ぞ 今日も旅ゆく</p>
                   <p className={styles.author}>若山牧水</p>
                 </>
               )}
@@ -775,7 +775,7 @@ const RecordClient: React.FC<RecordClientProps> = ({
             )}
             {activityType.id === "tabi" && (
               <>
-                <p className={styles.wakaPoem}>幾山河　越えさり行かば　寂しさの　はてなむ国ぞ　今日も旅ゆく</p>
+                <p className={styles.wakaPoem}>幾山河 越えさり行かば 寂しさの はてなむ国ぞ 今日も旅ゆく</p>
                 <p className={styles.author}>若山牧水</p>
                 <p className={styles.wakaExplanation}>
                   いくつもの山河を越えて行けば、この寂しさが消える国にたどり着けるのだろうか<br />
