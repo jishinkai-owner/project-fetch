@@ -19,7 +19,7 @@ export type MemberDTO = {
   src?: string | null; // 画像URL
 };
 
-const getMembers = async () => {
+const getMembers = async (): Promise<MemberDTO[]> => {
   try {
     console.log("📌 メンバーデータを取得開始...");
 
@@ -56,5 +56,6 @@ const MemberPage: React.FC = async () => {
 
 export default MemberPage;
 
-// ISR設定（毎回再生成）
+// 動的レンダリングを強制（キャッシュを完全に無効化）
+export const dynamic = 'force-dynamic';
 export const revalidate = 0;
