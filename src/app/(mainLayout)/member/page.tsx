@@ -3,6 +3,11 @@ import LoadingMemberPlaceholder from "./loading";
 import MemberClient from "./client";
 import { PrismaClient } from "@prisma/client";
 
+// シングルトンパターンでPrismaClientを管理
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
+const prisma = globalForPrisma.prisma || new PrismaClient();
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+
 // メンバーの型定義
 export type MemberDTO = {
   id: string;
@@ -15,8 +20,6 @@ export type MemberDTO = {
 };
 
 const getMembers = async () => {
-  const prisma = new PrismaClient();
-
   try {
     console.log("📌 メンバーデータを取得開始...");
 
@@ -53,5 +56,5 @@ const MemberPage: React.FC = async () => {
 
 export default MemberPage;
 
-// ISR設定（30分ごとに再生成、秒数で指定）
-export const revalidate = 1800;
+// ISR設定（毎回再生成）
+export const revalidate = 0;
