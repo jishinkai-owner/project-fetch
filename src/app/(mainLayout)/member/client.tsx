@@ -9,8 +9,8 @@ import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import Title from "@/components/Title/Title";
 import { MemberDTO } from "./page";
 
-// YearCategoryに殿堂入りを追加
-type YearCategory = "2年生" | "3年生" | "4年生" | "殿堂入り";
+// YearCategoryに1年生と殿堂入りを追加
+type YearCategory = "1年生" | "2年生" | "3年生" | "4年生" | "殿堂入り";
 
 // SearchParamsWrapper コンポーネント：URL のクエリパラメータからカテゴリを取得して更新
 function SearchParamsWrapper({ setCategory }: { setCategory: (category: YearCategory) => void }) {
@@ -19,7 +19,7 @@ function SearchParamsWrapper({ setCategory }: { setCategory: (category: YearCate
   useEffect(() => {
     const categoryFromQuery = searchParams.get("case");
     if (categoryFromQuery) {
-      if (["2年生", "3年生", "4年生", "殿堂入り"].includes(categoryFromQuery)) {
+      if (["1年生", "2年生", "3年生", "4年生", "殿堂入り"].includes(categoryFromQuery)) {
         setCategory(categoryFromQuery as YearCategory);
       }
     }
@@ -28,8 +28,9 @@ function SearchParamsWrapper({ setCategory }: { setCategory: (category: YearCate
   return null;
 }
 
-// アイコンマッピングに殿堂入りを追加
+// アイコンマッピングに1年生と殿堂入りを追加
 const yearIcons: Record<YearCategory, string> = {
+  "1年生": "🌰", // 1年生用のアイコン（種）
   "2年生": "🌱",
   "3年生": "🌿",
   "4年生": "🌳",
@@ -39,7 +40,7 @@ const yearIcons: Record<YearCategory, string> = {
 const MemberClient: React.FC<{
   members: MemberDTO[];
 }> = ({ members }) => {
-  const [selectedCategory, setSelectedCategory] = useState<YearCategory>("2年生");
+  const [selectedCategory, setSelectedCategory] = useState<YearCategory>("1年生");
 
   // 年度ごとのメンバーリストをフィルタ
   const filterMembersByYear = (years: string[]) => {
@@ -48,8 +49,9 @@ const MemberClient: React.FC<{
 
   // カテゴリごとのデータを表示するレンダリング関数
   const renderContent = () => {
-    // 学年とyearのマッピングを更新（殿堂入りを追加）
+    // 学年とyearのマッピングを更新（1年生と殿堂入りを追加）
     const yearMapping: Record<YearCategory, string[]> = {
+      "1年生": ["C5"],
       "2年生": ["C4"],
       "3年生": ["C3"],
       "4年生": ["C2"],
