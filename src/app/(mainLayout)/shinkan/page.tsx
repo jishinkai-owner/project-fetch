@@ -74,19 +74,7 @@ const NewcomerPage: React.FC = () => {
 
           <div className={styles.snsDescription}>
             <p><strong>・公式Twitter</strong><br />いままでの山行の記録やQ&Aを投稿しています。</p>
-            <p>
-              <strong>・新歓用Instagram</strong>（
-              <a
-                href={SHINKAN_INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.snsInlineLink}
-              >
-                @tohoku_shizen_2026
-              </a>
-              ）<br />
-              新歓の情報やお役立ち情報などを載せています！
-            </p>
+            <p><strong>・新歓用Instagram</strong><br />新歓の情報やお役立ち情報などを載せています！</p>
           </div>
         </div>
 
