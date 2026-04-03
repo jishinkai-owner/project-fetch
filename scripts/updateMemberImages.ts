@@ -35,17 +35,17 @@ interface MemberData {
 const updateMemberImages = async () => {
   try {
     const filePath = path.join(__dirname, "members.json");
-    
+
     if (!fs.existsSync(filePath)) {
       console.error(`❌ members.jsonファイルが見つかりません: ${filePath}`);
       process.exit(1);
     }
 
     console.log("📌 members.jsonファイルを読み込み中...");
-    
+
     // JSONファイルを読み込み
     const members: MemberData[] = await fs.readJSON(filePath);
-    
+
     console.log(`✅ ${members.length} 人のメンバーデータを読み込み完了`);
 
     // 画像がないメンバーを特定して更新
@@ -69,15 +69,15 @@ const updateMemberImages = async () => {
 
     // 更新されたデータを保存
     await fs.writeJSON(filePath, updatedMembers, { spaces: 2 });
-    
+
     console.log(`🚀 members.json ファイルを更新しました: ${filePath}`);
-    
+
     // 更新結果の確認表示
     console.log("\n📝 更新されたメンバーの確認:");
     updatedMembers.filter(m => m.src === "member.jpg").slice(0, 5).forEach(member => {
       console.log(`  - ${member.name || member.nickname}: ${member.src}`);
     });
-    
+
     if (updatedCount > 5) {
       console.log(`  ... 他 ${updatedCount - 5} 人`);
     }

@@ -1,21 +1,18 @@
 /**
- * UploadMembers.ts
+ * UploadMembersArchive.ts
  * 
- * 部員情報をJSONファイルからデータベースに登録・更新・削除するスクリプト
+ * 過去の部員情報（membersArchive.json）をデータベースに登録・更新・削除するスクリプト
  * 
  * 機能:
- * - scripts/members.jsonファイルから部員情報を読み込み
- * - PrismaのMemberテーブルに部員データ（name, year, role, major, nickname, profile, src）を登録
+ * - scripts/membersArchive.jsonファイルから部員情報を読み込み
  * - 既存メンバー（name + year で識別）は更新、新規メンバーは作成（upsert方式）
  * - JSONに存在しないがDBに存在するメンバー（対象年度のみ）は削除
- * - プロフィールが配列の場合は改行区切りの文字列に変換
- * - 空のデータは適切なデフォルト値で補完
  * 
- * 対象ファイル: scripts/members.json
- * 期待するJSONフォーマット: [{"name": "名前", "year": "年次", "role": "役職", "nickname": "ニックネーム", "profile": ["プロフィール"], "src": "画像URL"}, ...]
+ * 対象ファイル: scripts/membersArchive.json
+ * 含まれる年度: C3, C2, C1, C0, B9〜B0, A9, A8
  * 
  * 使用方法:
- * npx tsx scripts/UploadMembers.ts
+ * npx tsx scripts/UploadMembersArchive.ts
  */
 
 import "dotenv/config";
@@ -30,8 +27,8 @@ const prisma = new PrismaClient();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// `scripts/` フォルダの `members.json` を取得
-const filePath = path.join(__dirname, "members.json");
+// `scripts/` フォルダの `membersArchive.json` を取得
+const filePath = path.join(__dirname, "membersArchive.json");
 
 interface MemberInput {
   name?: string;
@@ -43,9 +40,9 @@ interface MemberInput {
   src?: string;
 }
 
-const uploadMembers = async () => {
+const uploadMembersArchive = async () => {
   try {
-    console.log("📌 JSON ファイルを読み込み中...");
+    console.log("📌 membersArchive.json を読み込み中...");
 
     if (!fs.existsSync(filePath)) {
       console.error("❌ JSON ファイルが見つかりません！", filePath);
@@ -82,7 +79,7 @@ const uploadMembers = async () => {
         year: memberYear,
         role: member.role || "",
         major: member.major || null,
-        nickname: member.nickname || "名無し",
+        nickname: member.nickname || memberName,
         profile: Array.isArray(member.profile) ? member.profile.join("\n") : member.profile || "",
         src: member.src || "",
       };
@@ -153,4 +150,4 @@ const uploadMembers = async () => {
 };
 
 // スクリプトを実行
-uploadMembers();
+uploadMembersArchive();

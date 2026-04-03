@@ -1,46 +1,36 @@
 [
   {
-    "name": "飯坂悠斗",
+    "name": "秋山雄一",
     "year": "C4",
-    "role": "",
-    "nickname": "飯坂悠斗",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "伊藤美南",
-    "year": "C4",
-    "role": "",
-    "nickname": "伊藤美南",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "石徹白和志",
-    "year": "C4",
-    "role": "",
-    "nickname": "石徹白和志",
-    "profile": [],
-    "src": ""
+    "role": "雀カス",
+    "major": "理物",
+    "nickname": "ゆういち",
+    "profile": [
+      "Ｃ4.5"
+    ],
+    "src": "https://live.staticflickr.com/65535/54546585169_d692d1ca39_c.jpg"
   },
   {
     "name": "稲村芭菜",
     "year": "C4",
     "role": "自称C4唯一の良心",
     "major": "農",
-    "nickname": "自称Zの理解者",
+    "nickname": "湘南の姐さん",
     "profile": [
       "エレガントな女性を目指します"
     ],
     "src": "https://live.staticflickr.com/65535/54608108041_22d7e395e5.jpg"
   },
   {
-    "name": "上原凛瞳",
+    "name": "上原大翔",
     "year": "C4",
-    "role": "",
-    "nickname": "上原凛瞳",
-    "profile": [],
-    "src": ""
+    "role": "元ジャムおじさん",
+    "major": "理物",
+    "nickname": "うえはら",
+    "profile": [
+      "山パン労働ガチ勢"
+    ],
+    "src": "https://live.staticflickr.com/65535/54468294064_b0358d1784_c.jpg"
   },
   {
     "name": "宇田川雄基",
@@ -49,9 +39,9 @@
     "major": "機知",
     "nickname": "うだっち",
     "profile": [
-      "11単位落単"
+      "17単位落単(1~3セメ合計)"
     ],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54510814942_118389a9aa_c.jpg"
   },
   {
     "name": "大槻諒",
@@ -60,9 +50,9 @@
     "major": "機知",
     "nickname": "tukki.(20)",
     "profile": [
-      "剽窃。卓越。パチ。フードバンク。網走服役未遂。青葉山収監中。"
+      "剽窃。卓越。パチ。フードバンク。網走服役未遂。青葉山脱獄成功。"
     ],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54858436361_681a5135fa_c.jpg"
   },
   {
     "name": "沖本宗礼",
@@ -73,7 +63,7 @@
     "profile": [
       "七大陸最高峰制覇を目指しています。"
     ],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54838599565_4a54acf316_c.jpg"
   },
   {
     "name": "小野口力",
@@ -93,9 +83,9 @@
     "major": "機知",
     "nickname": "乙骨憂太",
     "profile": [
-      "某牛タン店〇久次期社長"
+      "テコンドーとサッカー観戦が好き"
     ],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54669548909_e38bb3b65d_c.jpg"
   },
   {
     "name": "梶谷駿登",
@@ -106,15 +96,7 @@
     "profile": [
       "アルティメット"
     ],
-    "src": ""
-  },
-  {
-    "name": "角野吾生",
-    "year": "C4",
-    "role": "",
-    "nickname": "角野吾生",
-    "profile": [],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54731349258_07ee93903b_c.jpg"
   },
   {
     "name": "川上雄之助",
@@ -123,7 +105,7 @@
     "major": "機知",
     "nickname": "カワセミ",
     "profile": [
-      "最近keepメモを知った"
+      "チェーン店知らない"
     ],
     "src": "https://live.staticflickr.com/65535/54607232032_ef1b757d1e.jpg"
   },
@@ -139,22 +121,6 @@
     "src": "https://live.staticflickr.com/65535/54608411320_cf83d9dab5.jpg"
   },
   {
-    "name": "木滑颯太",
-    "year": "C4",
-    "role": "",
-    "nickname": "木滑颯太",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "小寺澤颯良",
-    "year": "C4",
-    "role": "",
-    "nickname": "小寺澤颯良",
-    "profile": [],
-    "src": ""
-  },
-  {
     "name": "齊暁彦",
     "year": "C4",
     "role": "",
@@ -163,37 +129,29 @@
     "profile": [
       "C4最弱"
     ],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54592728184_9136e3b804_c.jpg"
   },
   {
     "name": "佐藤愉太",
     "year": "C4",
-    "role": "パパ",
-    "major": "工学部建築",
+    "role": "ハーフ",
+    "major": "建築",
     "nickname": "さとゆう",
     "profile": [
-      "中本食べてえ、なんなら働きてえ、小野口君部費を払ってください"
+      "4000年の歴史を持つ"
     ],
     "src": "https://live.staticflickr.com/65535/54607231967_ae72703aa3.jpg"
   },
   {
     "name": "佐野薫",
     "year": "C4",
-    "role": "酒カス/線形AB解析A落単/チャッカマン",
+    "role": "酒カス/13単位落単/シヴァ",
     "major": "情物",
     "nickname": "ボディビルダー",
     "profile": [
       "悩める男"
     ],
     "src": "https://live.staticflickr.com/65535/54608107881_8e3934f231.jpg"
-  },
-  {
-    "name": "高橋太郎",
-    "year": "C4",
-    "role": "",
-    "nickname": "高橋太郎",
-    "profile": [],
-    "src": ""
   },
   {
     "name": "田丸和貴",
@@ -215,39 +173,7 @@
     "profile": [
       "君誰だ？"
     ],
-    "src": ""
-  },
-  {
-    "name": "月岡晃太郎",
-    "year": "C4",
-    "role": "",
-    "nickname": "月岡晃太郎",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "堤雅裕",
-    "year": "C4",
-    "role": "",
-    "nickname": "堤雅裕",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "寺師遼太郎",
-    "year": "C4",
-    "role": "",
-    "nickname": "寺師遼太郎",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "中川天智",
-    "year": "C4",
-    "role": "",
-    "nickname": "中川天智",
-    "profile": [],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54465137993_1020b95273_c.jpg"
   },
   {
     "name": "中島嶺央",
@@ -261,58 +187,10 @@
     "src": "https://live.staticflickr.com/65535/54607232757_ef422bc165.jpg"
   },
   {
-    "name": "中田康介",
-    "year": "C4",
-    "role": "",
-    "nickname": "中田康介",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "西田颯杜",
-    "year": "C4",
-    "role": "",
-    "nickname": "西田颯杜",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "沼田光希",
-    "year": "C4",
-    "role": "",
-    "nickname": "沼田光希",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "花岡泰成",
-    "year": "C4",
-    "role": "",
-    "nickname": "花岡泰成",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "浜崎優太",
-    "year": "C4",
-    "role": "",
-    "nickname": "浜崎優太",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "早見和希",
-    "year": "C4",
-    "role": "",
-    "nickname": "早見和希",
-    "profile": [],
-    "src": ""
-  },
-  {
     "name": "藤本珠々",
     "year": "C4",
     "role": "コーヒー強者",
-    "nickname": "藤本珠々",
+    "nickname": "すずさん",
     "profile": [
       "虫におののかない"
     ],
@@ -327,34 +205,40 @@
     "profile": [
       "男子校が生んだ悲しき漢、頼りになりそうでならない"
     ],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54833577876_0c0e8675ec_c.jpg"
+  },
+  {
+    "name": "堀間涼太",
+    "year": "C4",
+    "role": "原チャニキ",
+    "major": "理化",
+    "nickname": "ほりま",
+    "profile": [
+      "長期山行で仙台から松本まで原付で行きました（笑）"
+    ],
+    "src": "https://live.staticflickr.com/65535/54684296165_d5a45fa738_c.jpg"
   },
   {
     "name": "安田悠人",
     "year": "C4",
     "role": "",
-    "nickname": "安田悠人",
-    "profile": [],
-    "src": ""
+    "major": "農",
+    "nickname": "やすだ",
+    "profile": [
+      "扶養ギリギリを攻める"
+    ],
+    "src": "https://live.staticflickr.com/65535/54833577876_0c0e8675ec_c.jpg"
   },
   {
     "name": "山口悠翔",
     "year": "C4",
     "role": "組長",
-    "major": "理物",
+    "major": "地物",
     "nickname": "やまぐち",
     "profile": [
-      "体力には自信がありました...（過去形）"
+      "ママ。大好き♡"
     ],
     "src": "https://live.staticflickr.com/65535/54608317183_fa7afb2a39.jpg"
-  },
-  {
-    "name": "山本壮太",
-    "year": "C4",
-    "role": "",
-    "nickname": "山本壮太",
-    "profile": [],
-    "src": ""
   },
   {
     "name": "湯田真人",
@@ -363,33 +247,9 @@
     "major": "理物",
     "nickname": "ゆだ",
     "profile": [
-      "薩摩弁わかります"
+      "バイクリコールされた"
     ],
-    "src": ""
-  },
-  {
-    "name": "若生優輝",
-    "year": "C4",
-    "role": "",
-    "nickname": "若生優輝",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "渡邉壮",
-    "year": "C4",
-    "role": "",
-    "nickname": "渡邉壮",
-    "profile": [],
-    "src": ""
-  },
-  {
-    "name": "テスト",
-    "year": "C4",
-    "role": "",
-    "nickname": "テスト",
-    "profile": [],
-    "src": ""
+    "src": "https://live.staticflickr.com/65535/54636480343_7af75cccfd_c.jpg"
   },
   {
     "name": "安久津智希",
@@ -397,8 +257,10 @@
     "role": "C5の先駆者",
     "major": "経済",
     "nickname": "あくたん",
-    "profile": ["星野愛久愛海に憧れてます"],
-    "src": ""
+    "profile": [
+      "星野愛久愛海に憧れてます"
+    ],
+    "src": "https://live.staticflickr.com/65535/54913755215_77af0d3b20_4k.jpg"
   },
   {
     "name": "石井泰成",
@@ -406,7 +268,9 @@
     "role": "山歩",
     "major": "情物",
     "nickname": "やすなり",
-    "profile": ["トンビにふんをかけられた可哀想な男。山歩会との二刀流。"],
+    "profile": [
+      "トンビにふんをかけられた可哀想な男。山歩会との二刀流。"
+    ],
     "src": ""
   },
   {
@@ -415,7 +279,9 @@
     "role": "自転車職人",
     "major": "理球",
     "nickname": "だいちん",
-    "profile": [],
+    "profile": [
+      "チャリと山と雪に脳を焦がれている"
+    ],
     "src": ""
   },
   {
@@ -424,17 +290,10 @@
     "role": "イケメン、意味不明な言動",
     "major": "理球",
     "nickname": "いっちー",
-    "profile": ["男だけになると暴れ始める。ボディタッチ多め。"],
-    "src": ""
-  },
-  {
-    "name": "井上純青",
-    "year": "C5",
-    "role": "",
-    "major": "",
-    "nickname": "",
-    "profile": [],
-    "src": ""
+    "profile": [
+      "男だけになると暴れ始める。ボディタッチ多め。"
+    ],
+    "src": "https://live.staticflickr.com/65535/54913880151_b037635978_4k.jpg"
   },
   {
     "name": "猪瀬大翔",
@@ -442,16 +301,18 @@
     "role": "カービィ、掃除機",
     "major": "農",
     "nickname": "いのまる",
-    "profile": ["向上心の塊"],
-    "src": ""
+    "profile": [
+      "向上心の塊"
+    ],
+    "src": "https://live.staticflickr.com/65535/54843207138_1ff952b3e2_4k.jpg"
   },
   {
     "name": "植木仁乃亮",
     "year": "C5",
     "role": "",
     "major": "",
-    "nickname": "",
-    "profile": ["パツキン"],
+    "nickname": "パツキン",
+    "profile": [],
     "src": ""
   },
   {
@@ -468,45 +329,33 @@
     "year": "C5",
     "role": "何でも後回し党",
     "major": "機知",
-    "nickname": "ゆりな、わぽ",
-    "profile": ["寝るために生きてる"],
-    "src": ""
+    "nickname": "ゆりな、わぼ",
+    "profile": [
+      "寝るために生きてる"
+    ],
+    "src": "https://live.staticflickr.com/65535/54993936227_c7ea30f3a3_c.jpg"
   },
   {
-    "name": "大関祐樹",
+    "name": "大關祐樹",
     "year": "C5",
     "role": "部室の駐在員",
     "major": "工・機知兼理物",
     "nickname": "ぜきちゃん",
-    "profile": ["長髪オールブラックススタイルのイカツイguy。前世の記憶がある。"],
-    "src": ""
+    "profile": [
+      "長髪オールブラックススタイルのイカツイguy。前世の記憶がある。"
+    ],
+    "src": "https://live.staticflickr.com/65535/54911867391_5735e94564_4k.jpg"
   },
   {
-    "name": "大和田唯人",
-    "year": "C5",
-    "role": "狂人",
-    "major": "理物",
-    "nickname": "ちー",
-    "profile": ["ターザンマスター"],
-    "src": ""
-  },
-  {
-    "name": "小高ことみ",
+    "name": "小髙ことみ",
     "year": "C5",
     "role": "長女",
     "major": "法",
     "nickname": "ことみん(姐さん)",
-    "profile": ["運転の上手さに定評がある。ギターとピアノが弾ける。"],
-    "src": ""
-  },
-  {
-    "name": "尾前雄一",
-    "year": "C5",
-    "role": "",
-    "major": "",
-    "nickname": "",
-    "profile": [],
-    "src": ""
+    "profile": [
+      "運転の上手さに定評がある。ギターとピアノが弾ける。"
+    ],
+    "src": "https://live.staticflickr.com/65535/54995057238_17ec6e73a3_4k.jpg"
   },
   {
     "name": "加藤尊裕",
@@ -523,8 +372,10 @@
     "role": "一家に1台",
     "major": "理物",
     "nickname": "まこっちゃん",
-    "profile": ["野菜1日分を毎日飲んでます"],
-    "src": ""
+    "profile": [
+      "野菜1日分を毎日飲んでます"
+    ],
+    "src": "https://live.staticflickr.com/65535/54927108945_5e22b4b0ff_c.jpg"
   },
   {
     "name": "木下智博",
@@ -532,7 +383,9 @@
     "role": "落ち着き担当",
     "major": "化バイ",
     "nickname": "きのした",
-    "profile": ["午前中部室にいがち。鍵ください"],
+    "profile": [
+      "午前中部室にいがち。鍵ください"
+    ],
     "src": ""
   },
   {
@@ -541,7 +394,9 @@
     "role": "寡黙",
     "major": "建築",
     "nickname": "こーご",
-    "profile": ["自発的に話さないが自発的に上裸になれる"],
+    "profile": [
+      "自発的に話さないが自発的に上裸になれる"
+    ],
     "src": ""
   },
   {
@@ -549,27 +404,33 @@
     "year": "C5",
     "role": "スプラトゥーン係",
     "major": "情物",
-    "nickname": "こがっちょ、こがち",
-    "profile": ["マックの面接落ちました"],
-    "src": ""
+    "nickname": "こがっちょ、こがちょす、こがちょりす",
+    "profile": [
+      "マックの面接落ちました"
+    ],
+    "src": "https://live.staticflickr.com/65535/54832788577_3e5afe771d_4k.jpg"
   },
   {
     "name": "小林暁飛",
     "year": "C5",
     "role": "ドライバー",
     "major": "理物",
-    "nickname": "あさび",
-    "profile": ["運転モチベが異常に高いことで知られる。サー長候補とも囁かれているが如何に。"],
-    "src": ""
+    "nickname": "あさぴ",
+    "profile": [
+      "運転モチベが異常に高いことで知られる。サー長候補とも謳われているが如何に。"
+    ],
+    "src": "https://live.staticflickr.com/65535/54638552009_9289137afa_4k.jpg"
   },
   {
     "name": "小林律花",
     "year": "C5",
     "role": "ポケモンスリーパー",
     "major": "理物",
-    "nickname": "りっか♪さん",
-    "profile": ["ワードセンス"],
-    "src": ""
+    "nickname": "りっか⤴さん",
+    "profile": [
+      "ワードセンス"
+    ],
+    "src": "https://live.staticflickr.com/65535/54995158944_9e196a119c_4k.jpg"
   },
   {
     "name": "鈴木南奈",
@@ -577,7 +438,9 @@
     "role": "マネージャー",
     "major": "農",
     "nickname": "なあc",
-    "profile": ["マシュマロ焼くの得意です"],
+    "profile": [
+      "マシュマロ焼くの得意です"
+    ],
     "src": ""
   },
   {
@@ -586,7 +449,9 @@
     "role": "負傷者",
     "major": "文",
     "nickname": "瀬尾ちゃん",
-    "profile": ["怪我してるんですほんとです"],
+    "profile": [
+      "怪我してるんですほんとです"
+    ],
     "src": ""
   },
   {
@@ -595,8 +460,10 @@
     "role": "にわか",
     "major": "情物",
     "nickname": "とくさし",
-    "profile": ["ディズニー行きたい"],
-    "src": ""
+    "profile": [
+      "ディズニー行きたい"
+    ],
+    "src": "https://live.staticflickr.com/65535/54912087673_aad1d6741c_4k.jpg"
   },
   {
     "name": "中西来音",
@@ -604,7 +471,9 @@
     "role": "前髪担当",
     "major": "農",
     "nickname": "なかにしright",
-    "profile": ["C4の新歓係を宮教大の人だと思ってた。恋愛思想を語らせると面白いので聞いてみよう。"],
+    "profile": [
+      "C4の新歓係を宮教大の人だと思ってた。恋愛思想を語らせると面白いので聞いてみよう。"
+    ],
     "src": ""
   },
   {
@@ -612,9 +481,11 @@
     "year": "C5",
     "role": "クールキャラ(笑)",
     "major": "情物",
-    "nickname": "西川は西川なんだよ",
-    "profile": ["ボウリング魔人。バ先荒らし。"],
-    "src": ""
+    "nickname": "西川は西川なんだよなぁ",
+    "profile": [
+      "ボウリング魔人.バ先荒らし."
+    ],
+    "src": "https://live.staticflickr.com/65535/54723786001_bdf44d52c0_4k.jpg"
   },
   {
     "name": "秦優修",
@@ -622,8 +493,10 @@
     "role": "",
     "major": "理物",
     "nickname": "のぶ",
-    "profile": ["居酒屋バイトで声量抑え中"],
-    "src": ""
+    "profile": [
+      "居酒屋バイトで声量抑え中"
+    ],
+    "src": "https://live.staticflickr.com/65535/54723990763_3e13c1eccf_4k.jpg"
   },
   {
     "name": "林咲来",
@@ -631,8 +504,10 @@
     "role": "平部員",
     "major": "機知",
     "nickname": "さくら",
-    "profile": ["体力作り中です"],
-    "src": ""
+    "profile": [
+      "体力作り中です"
+    ],
+    "src": "https://live.staticflickr.com/65535/54994022828_767aee65ff_c.jpg"
   },
   {
     "name": "平岡拓磨",
@@ -640,17 +515,10 @@
     "role": "マッマ",
     "major": "理化",
     "nickname": "ぴー",
-    "profile": ["ふやかした高橋文哉"],
-    "src": ""
-  },
-  {
-    "name": "不和巧睦",
-    "year": "C5",
-    "role": "",
-    "major": "理生",
-    "nickname": "",
-    "profile": [],
-    "src": ""
+    "profile": [
+      "ふやかした高橋文哉"
+    ],
+    "src": "https://live.staticflickr.com/65535/54785888069_ec8f7837be_4k.jpg"
   },
   {
     "name": "室屋乃々佳",
@@ -658,26 +526,21 @@
     "role": "研一LOVE",
     "major": "理球",
     "nickname": "のんきち",
-    "profile": ["アルティメットやってます"],
-    "src": ""
-  },
-  {
-    "name": "元好琉斗",
-    "year": "C5",
-    "role": "SMマスター",
-    "major": "機知",
-    "nickname": "",
-    "profile": ["暴力担当"],
-    "src": ""
+    "profile": [
+      "アルティメットやってます"
+    ],
+    "src": "https://live.staticflickr.com/65535/54994831031_99dacda65e_c.jpg"
   },
   {
     "name": "山岸丸人",
     "year": "C5",
-    "role": "投資家",
+    "role": "サークルHPの破壊者",
     "major": "パソコンカタカタ学部",
     "nickname": "まるひと",
-    "profile": [],
-    "src": ""
+    "profile": [
+      "ここの部員紹介を完成させるのに数時間かかりました。"
+    ],
+    "src": "https://live.staticflickr.com/65535/54913016077_b20b31294a_c.jpg"
   },
   {
     "name": "山下寛",
@@ -685,7 +548,9 @@
     "role": "C5の安心枠",
     "major": "医医(2文字目の医を強調)",
     "nickname": "医医",
-    "profile": ["山行参加回数1回とは思えない存在感。発言の火力でBBQができる。"],
-    "src": ""
+    "profile": [
+      "山行参加回数1回とは思えない存在感。発言の火力でBBQができる。"
+    ],
+    "src": "https://live.staticflickr.com/65535/55086249351_8be528bd6e_c.jpg"
   }
 ]
