@@ -64,7 +64,7 @@ const NewcomerPage: React.FC = () => {
             <SnsButton
               icon="📷"
               label="Instagram"
-              url="https://www.instagram.com/jishinkai_tohoku"
+              url="https://www.instagram.com/tohoku_shizen_2026?igsh=d3prOGM5N3ppb2U="
               color="#E1306C"
             />
           </div>
@@ -100,7 +100,7 @@ const NewcomerPage: React.FC = () => {
         <div className={styles.contactSection}>
           <h2 className={styles.sectionTitle}>連絡先</h2>
           <p className={styles.email}>
-            jishinkaisk2024☆gmail.com<br />
+            jishinkaihp☆gmail.com<br />
             <span className={styles.emailNote}>☆をアットマークに変えてください。</span>
           </p>
         </div>
