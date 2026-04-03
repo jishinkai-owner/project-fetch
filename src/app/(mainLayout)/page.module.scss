@@ -51,7 +51,7 @@
 
 .Climbing,
 .Traveling,
-.Fishing,
+.HomeShinkan,
 .SNSHolder {
   width: 100%;
   height: auto;
@@ -68,7 +68,7 @@
 
 .Climbing,
 .Traveling,
-.Fishing {
+.HomeShinkan {
   transition: transform 0.2s ease;
   
   /* 回転効果（自然な感じに） */
@@ -99,7 +99,7 @@
   
   .Climbing,
   .Traveling,
-  .Fishing,
+  .HomeShinkan,
   .SNSHolder {
     min-height: 160px;
     margin-bottom: 5%;
@@ -120,7 +120,7 @@
   
   .Climbing,
   .Traveling,
-  .Fishing,
+  .HomeShinkan,
   .SNSHolder {
     min-height: 1px;
     margin-bottom: 0%;
@@ -144,7 +144,7 @@
   
   .Climbing,
   .Traveling,
-  .Fishing,
+  .HomeShinkan,
   .SNSHolder {
     min-height: 160px;
     margin-bottom: 2rem;
@@ -161,7 +161,7 @@
 
   .Climbing,
   .Traveling,
-  .Fishing,
+  .HomeShinkan,
   .SNSHolder {
     min-height: 140px;
     margin-bottom: 0.2rem;

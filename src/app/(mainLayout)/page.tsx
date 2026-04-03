@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import Climbing from "@/components/Climbing/Climbing";
-import Fishing from "@/components/Fishing/Fishing";
+import HomeShinkan from "@/components/HomeShinkan/HomeShinkan";
 import Traveling from "@/components/Traveling/Traveling";
 import SNSHolder from "@/components/SNSHolder/SNSHolder";
 
@@ -25,7 +25,7 @@ const Page: React.FC = () => {
       <div className={styles.recordcontainer}>
         <div className={styles.Climbing}><Climbing /></div>
         <div className={styles.Traveling}><Traveling /></div>
-        <div className={styles.Fishing}><Fishing /></div>
+        <div className={styles.HomeShinkan}><HomeShinkan /></div>
         <div className={styles.SNSHolder}>
           <SNSHolder
             twitterUrl="https://x.com/jishinkai"

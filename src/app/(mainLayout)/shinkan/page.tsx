@@ -43,7 +43,7 @@ const NewcomerPage: React.FC = () => {
       {/* メインコンテンツ */}
       <div className={styles.newcomerContent}>
         <div className={styles.titleSection}>
-          <h1 className={styles.mainTitle}>～新歓情報2025～</h1>
+          <h1 className={styles.mainTitle}>～新歓情報2026～</h1>
           <div className={styles.titleDecoration}></div>
         </div>
 

@@ -1,0 +1,82 @@
+.container {
+  width: 100%;
+  height: auto;
+  max-width: 450px;
+  margin-bottom: 5%;
+}
+
+.container:hover {
+  transform: scale(1.05);
+}
+
+.Frontimagecontainer {
+  width: 47%;
+  height: auto;
+  position: relative;
+  transform: rotate(5.56deg);
+  transition: transform 0.3s ease;
+  z-index: 3;
+}
+
+.Middleimagecontainer {
+  width: 80%;
+  height: auto;
+  position: absolute;
+  transform: rotate(15deg);
+  transition: transform 0.3s ease;
+  z-index: -1;
+  left: 75%;
+  bottom: 40%;
+}
+
+.Backimagecontainer {
+  width: 80%;
+  height: auto;
+  position: absolute;
+  transform: rotate(25deg);
+  transition: transform 0.3s ease;
+  z-index: -2;
+  left: 120%;
+  bottom: 50%;
+}
+
+.image {
+  display: block;
+  background-color: white;
+  padding: 5%;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sticker {
+  position: absolute;
+  transform: rotate(-5.56deg);
+  z-index: 3;
+  left: 100%;
+  top: 50%;
+  width: 130%;
+  height: auto;
+}
+
+.triangletop {
+  position: absolute;
+  left: -2%;
+  top: -4%;
+  width: 20%;
+  aspect-ratio: 1;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  background-color: #c9a896;
+  z-index: 4;
+}
+
+.trianglebuttom {
+  position: absolute;
+  right: -2%;
+  bottom: -4%;
+  width: 20%;
+  aspect-ratio: 1;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  background-color: #c9a896;
+  z-index: 4;
+}
