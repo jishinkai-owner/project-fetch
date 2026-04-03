@@ -4,6 +4,9 @@ import Image from "next/image";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import lineOpenChatQr from "./line-open-chat-qr.jpg";
 
+const SHINKAN_INSTAGRAM_URL =
+  "https://www.instagram.com/tohoku_shizen_2026?igsh=d3prOGM5N3ppb2U=";
+
 // SNSボタンのプロパティ
 interface SnsButtonProps {
   icon: string;
@@ -64,14 +67,26 @@ const NewcomerPage: React.FC = () => {
             <SnsButton
               icon="📷"
               label="Instagram"
-              url="https://www.instagram.com/tohoku_shizen_2026?igsh=d3prOGM5N3ppb2U="
+              url={SHINKAN_INSTAGRAM_URL}
               color="#E1306C"
             />
           </div>
 
           <div className={styles.snsDescription}>
             <p><strong>・公式Twitter</strong><br />いままでの山行の記録やQ&Aを投稿しています。</p>
-            <p><strong>・新歓用Instagram</strong><br />新歓の情報やお役立ち情報などを載せています！</p>
+            <p>
+              <strong>・新歓用Instagram</strong>（
+              <a
+                href={SHINKAN_INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.snsInlineLink}
+              >
+                @tohoku_shizen_2026
+              </a>
+              ）<br />
+              新歓の情報やお役立ち情報などを載せています！
+            </p>
           </div>
         </div>
 
