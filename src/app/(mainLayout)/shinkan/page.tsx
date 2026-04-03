@@ -80,7 +80,7 @@ const NewcomerPage: React.FC = () => {
 
           <div className={styles.qrCodeWrapper}>
             <Image
-              src="/qr.webp"
+              src="/qr.jpg"
               alt="LINEオープンチャットのQRコード"
               width={200}
               height={200}
