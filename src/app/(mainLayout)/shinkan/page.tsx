@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ShinkanPage.module.scss";
 import Image from "next/image";
 import BreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
+import lineOpenChatQr from "./line-open-chat-qr.jpg";
 
 // SNSボタンのプロパティ
 interface SnsButtonProps {
@@ -80,11 +81,13 @@ const NewcomerPage: React.FC = () => {
 
           <div className={styles.qrCodeWrapper}>
             <Image
-              src="/qr.jpg"
+              src={lineOpenChatQr}
               alt="LINEオープンチャットのQRコード"
-              width={200}
-              height={200}
+              width={lineOpenChatQr.width}
+              height={lineOpenChatQr.height}
               className={styles.qrCode}
+              sizes="200px"
+              priority
             />
             <div className={styles.qrDescription}>
               <p>QRコードを読み込むと<br />匿名で参加できます。</p>
