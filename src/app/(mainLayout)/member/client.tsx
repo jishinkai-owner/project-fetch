@@ -49,20 +49,20 @@ const MemberClient: React.FC<{
 
   // カテゴリごとのデータを表示するレンダリング関数
   const renderContent = () => {
-    // 学年とyearのマッピングを更新（1年生と殿堂入りを追加）
+    // 学年タブと入学年度（year）の対応（年度替え時は cohort を繰り上げ、旧4年生は殿堂入りへ）
     const yearMapping: Record<YearCategory, string[]> = {
-      "1年生": ["C5"],
-      "2年生": ["C4"],
-      "3年生": ["C3"],
-      "4年生": ["C2"],
-      "殿堂入り": ["C1", "C0", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "B2", "B1", "B0", "A9", "A8"]
+      "1年生": [], // 新入生（C6 等）を members.json に追加後、ここに year を指定
+      "2年生": ["C5"],
+      "3年生": ["C4"],
+      "4年生": ["C3"],
+      "殿堂入り": ["C2", "C1", "C0", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "B2", "B1", "B0", "A9", "A8"]
     };
 
     let filteredMembers: MemberDTO[] = [];
     if (selectedCategory && yearMapping[selectedCategory]) {
       filteredMembers = filterMembersByYear(yearMapping[selectedCategory]);
       
-      // 殿堂入りの場合は年度順（C1, C0, B9, B8...）にソート
+      // 殿堂入りの場合は年度順（C2, C1, C0, B9, B8...）にソート
       if (selectedCategory === "殿堂入り") {
         const yearOrder = yearMapping["殿堂入り"];
         filteredMembers.sort((a, b) => {
@@ -74,6 +74,9 @@ const MemberClient: React.FC<{
     }
 
     if (!filteredMembers.length) {
+      if (selectedCategory === "1年生") {
+        return <div className={styles.noDataMessage}>近日公開</div>;
+      }
       return <div className={styles.noDataMessage}>メンバー情報が見つかりません。</div>;
     }
 
