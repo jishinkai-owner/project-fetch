@@ -10,6 +10,7 @@ import {
 } from "@/types/apiResponse";
 import toast from "react-hot-toast";
 import {
+  buildClCommentsPayload,
   buildSubmitPayload,
   EntryType,
   PostHikeContentProps,
@@ -157,6 +158,20 @@ export const useEntriesState = (
   return { entries, setEntries };
 };
 
+const putPostHike = async (data: Record<string, string | number>) => {
+  const res = await axios.put("/api/postHike", data, {
+    headers: {
+      "Conten-Type": "application/json",
+    },
+  });
+
+  if (res.status === 201) {
+    return { success: true as const };
+  }
+
+  return { success: false as const, error: "failed to put retrospective data" };
+};
+
 export const handleSubmit = async (
   clId: string,
   recordId: number,
@@ -166,17 +181,30 @@ export const handleSubmit = async (
   const data = buildSubmitPayload(clId, recordId, entryType, value);
 
   try {
-    const res = await axios.put("/api/postHike", data, {
-      headers: {
-        "Conten-Type": "application/json",
-      },
-    });
+    return await putPostHike(data);
+  } catch (error) {
+    return { success: false, error: error };
+  }
+};
 
-    if (res.status === 201) {
-      return { success: true };
-    }
+export const handleSubmitClComments = async (
+  clId: string,
+  recordId: number,
+  entries: PostHikeContentProps,
+) => {
+  const data = buildClCommentsPayload(clId, recordId, entries);
 
-    return { success: false, error: "failed to put retrospective data" };
+  if (
+    !("commentMeal" in data) &&
+    !("commentEquipment" in data) &&
+    !("commentWeather" in data) &&
+    !("commentSL" in data)
+  ) {
+    return { success: false, error: "no comments to submit" };
+  }
+
+  try {
+    return await putPostHike(data);
   } catch (error) {
     return { success: false, error: error };
   }
@@ -220,16 +248,30 @@ export const useFormSubmit = ({
     if (!entries.clId || !entries.recordId || !entryType) return;
 
     try {
-      const res = await handleSubmit(
-        entries.clId,
-        entries.recordId,
-        entryType,
-        draft,
-      );
+      const res =
+        entryType === "cl"
+          ? await handleSubmitClComments(
+              entries.clId,
+              entries.recordId,
+              entries,
+            )
+          : await handleSubmit(
+              entries.clId,
+              entries.recordId,
+              entryType,
+              draft,
+            );
       if (res.success) {
         submitSuccess();
       } else {
-        submitError();
+        if (entryType === "cl" && "error" in res && res.error === "no comments to submit") {
+          toast.error("コメントを1つ以上入力してください。", {
+            duration: 3000,
+            position: "bottom-right",
+          });
+        } else {
+          submitError();
+        }
       }
     } catch (error) {
       console.error("Error posting hike info: ", error);

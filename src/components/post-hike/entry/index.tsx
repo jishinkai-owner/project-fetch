@@ -12,6 +12,7 @@ import { usePostHikes } from "../hook";
 import { Toaster } from "react-hot-toast";
 import { useFormSubmit } from "../hook";
 import { useIds } from "../hook";
+import ClCommentsForm from "./cl-comments-form";
 import {
   EntryType,
   ENTRY_TYPE_OPTIONS,
@@ -41,7 +42,7 @@ const PostHikeForm = () => {
   }, [ids.clId, ids.recordId]);
 
   useEffect(() => {
-    if (!entryType) {
+    if (!entryType || entryType === "cl") {
       setDraft("");
       return;
     }
@@ -93,7 +94,10 @@ const PostHikeForm = () => {
               setEntryType(e.target.value as EntryType);
             }}
           />
-          {entryType && (
+          {entryType === "cl" && (
+            <ClCommentsForm entries={entries} setEntries={setEntries} />
+          )}
+          {entryType && entryType !== "cl" && (
             <EntryTextField
               id="reflection-entry"
               value={draft}

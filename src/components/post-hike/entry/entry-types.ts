@@ -17,7 +17,35 @@ export const ENTRY_TYPE_OPTIONS = [
   { value: "equipment", label: "装備係の反省" },
   { value: "weather", label: "天気図係の反省" },
   { value: "sl", label: "SLの反省" },
+  { value: "cl", label: "CL" },
   { value: "impression", label: "感想" },
+] as const;
+
+export const CL_COMMENT_SECTIONS = [
+  {
+    role: "食事係",
+    reflectionKey: "mealPerson",
+    commentKey: "mealComment",
+    label: "コメント - 食事係",
+  },
+  {
+    role: "装備係",
+    reflectionKey: "equipmentPerson",
+    commentKey: "equipmentComment",
+    label: "コメント - 装備係",
+  },
+  {
+    role: "天気図係",
+    reflectionKey: "weatherPerson",
+    commentKey: "weatherComment",
+    label: "コメント - 天気図係",
+  },
+  {
+    role: "SL",
+    reflectionKey: "sl",
+    commentKey: "slComment",
+    label: "コメント - SL",
+  },
 ] as const;
 
 export type EntryType = (typeof ENTRY_TYPE_OPTIONS)[number]["value"];
@@ -35,6 +63,8 @@ export const getEntryValue = (
       return entries.weatherPerson ?? "";
     case "sl":
       return entries.sl ?? "";
+    case "cl":
+      return "";
     case "impression":
       return entries.impression ?? "";
   }
@@ -54,6 +84,8 @@ export const setEntryValue = (
       return { ...entries, weatherPerson: value };
     case "sl":
       return { ...entries, sl: value };
+    case "cl":
+      return entries;
     case "impression":
       return { ...entries, impression: value };
   }
@@ -81,10 +113,34 @@ export const buildSubmitPayload = (
     case "sl":
       payload.reflectionSL = trimmed;
       break;
+    case "cl":
+      break;
     case "impression":
       payload.impression = trimmed;
       break;
   }
+
+  return payload;
+};
+
+export const buildClCommentsPayload = (
+  clId: string,
+  recordId: number,
+  entries: PostHikeContentProps,
+) => {
+  const payload: Record<string, string | number> = { clId, recordId };
+
+  const addComment = (apiKey: string, value: string | null) => {
+    const trimmed = value?.trim();
+    if (trimmed) {
+      payload[apiKey] = trimmed;
+    }
+  };
+
+  addComment("commentMeal", entries.mealComment);
+  addComment("commentEquipment", entries.equipmentComment);
+  addComment("commentWeather", entries.weatherComment);
+  addComment("commentSL", entries.slComment);
 
   return payload;
 };
