@@ -17,6 +17,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import SnowboardingIcon from "@mui/icons-material/Snowboarding";
 import { usePostPostHikesWithRecordId } from "../hook";
 import { ErrorMessage, Loading } from "@/components/load-status";
+import NamedEntriesDisplay from "../named-entries-display";
 import React from "react";
 
 type PostHikeViewCompProps = {
@@ -81,9 +82,19 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="食事係"
                   secondary={
                     <>
-                      {e.roleComments.meal}
-                      <br />
-                      CLからのコメント：{e.clComments.meal}
+                      <NamedEntriesDisplay
+                        text={e.roleComments.meal}
+                        role="食事係"
+                      />
+                      <Typography variant="body2" sx={{ mt: 1, fontWeight: "bold" }}>
+                        CLからのコメント
+                      </Typography>
+                      <NamedEntriesDisplay
+                        text={e.clComments.meal}
+                        role="食事係"
+                        showRoleHeading={false}
+                        emptyLabel="なし"
+                      />
                     </>
                   }
                 />
@@ -96,9 +107,19 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="装備係"
                   secondary={
                     <>
-                      {e.roleComments.equipment}
-                      <br />
-                      CLからのコメント：{e.clComments.equipment}
+                      <NamedEntriesDisplay
+                        text={e.roleComments.equipment}
+                        role="装備係"
+                      />
+                      <Typography variant="body2" sx={{ mt: 1, fontWeight: "bold" }}>
+                        CLからのコメント
+                      </Typography>
+                      <NamedEntriesDisplay
+                        text={e.clComments.equipment}
+                        role="装備係"
+                        showRoleHeading={false}
+                        emptyLabel="なし"
+                      />
                     </>
                   }
                 />
@@ -111,9 +132,19 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="天気図係"
                   secondary={
                     <>
-                      {e.roleComments.weather}
-                      <br />
-                      CLからのコメント：{e.clComments.weather}
+                      <NamedEntriesDisplay
+                        text={e.roleComments.weather}
+                        role="天気図係"
+                      />
+                      <Typography variant="body2" sx={{ mt: 1, fontWeight: "bold" }}>
+                        CLからのコメント
+                      </Typography>
+                      <NamedEntriesDisplay
+                        text={e.clComments.weather}
+                        role="天気図係"
+                        showRoleHeading={false}
+                        emptyLabel="なし"
+                      />
                     </>
                   }
                 />
@@ -126,9 +157,16 @@ const PostHikeViewComp = ({ recordId }: PostHikeViewCompProps) => {
                   primary="SL"
                   secondary={
                     <>
-                      {e.roleComments.sl}
-                      <br />
-                      CLからのコメント：{e.clComments.sl}
+                      <NamedEntriesDisplay text={e.roleComments.sl} role="SL" />
+                      <Typography variant="body2" sx={{ mt: 1, fontWeight: "bold" }}>
+                        CLからのコメント
+                      </Typography>
+                      <NamedEntriesDisplay
+                        text={e.clComments.sl}
+                        role="SL"
+                        showRoleHeading={false}
+                        emptyLabel="なし"
+                      />
                     </>
                   }
                 />

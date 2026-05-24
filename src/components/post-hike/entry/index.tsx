@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid2";
 import { ChangeEvent } from "react";
 import { useEntriesState, useCL } from "../hook";
 import EntryTextField from "./entry-textfield";
+import AuthorNameField from "./author-name-field";
 import { Loading, ErrorMessage } from "@/components/load-status";
 import CLSelect from "./cl-select";
 import HikeSelect from "./hike-select";
@@ -13,47 +14,86 @@ import { Toaster } from "react-hot-toast";
 import { useFormSubmit } from "../hook";
 import { useIds } from "../hook";
 import ClCommentsForm from "./cl-comments-form";
+import useData from "@/lib/swr/useSWR";
+import { UserRes } from "@/types/apiResponse";
+import { getNamedEntryBody } from "../role-entries";
 import {
   EntryType,
   ENTRY_TYPE_OPTIONS,
+  ClCommentDrafts,
   getEntryValue,
-  setEntryValue,
 } from "./entry-types";
+
+const emptyCommentDrafts = (): ClCommentDrafts => ({
+  meal: "",
+  equipment: "",
+  weather: "",
+  sl: "",
+});
 
 const PostHikeForm = () => {
   const { ids, setIds } = useIds();
   const { cl, isLoadingCL, isErrorCL } = useCL();
   const { postHikes, isLoading, isError } = usePostHikes();
   const { entries, setEntries } = useEntriesState(ids.clId, ids.recordId);
+  const { data: userRes } = useData<UserRes>("/api/user");
   const [entryType, setEntryType] = useState<EntryType | "">("");
+  const [authorName, setAuthorName] = useState("");
   const [draft, setDraft] = useState("");
+  const [clCommentDrafts, setClCommentDrafts] =
+    useState<ClCommentDrafts>(emptyCommentDrafts);
 
   const submitForm = useFormSubmit({
     entries,
     setEntries,
     entryType,
+    authorName,
     draft,
     setDraft,
+    setAuthorName,
     setEntryType,
+    clCommentDrafts,
   });
 
   useEffect(() => {
+    if (userRes?.data?.name && !authorName) {
+      setAuthorName(userRes.data.name);
+    }
+  }, [userRes?.data?.name, authorName]);
+
+  useEffect(() => {
     setEntryType("");
-  }, [ids.clId, ids.recordId]);
+    setAuthorName(userRes?.data?.name ?? "");
+    setDraft("");
+    setClCommentDrafts(emptyCommentDrafts());
+  }, [ids.clId, ids.recordId, userRes?.data?.name]);
 
   useEffect(() => {
     if (!entryType || entryType === "cl") {
       setDraft("");
       return;
     }
-    setDraft(getEntryValue(entryType, entries));
-  }, [entryType, entries]);
+    if (!authorName.trim()) {
+      setDraft("");
+      return;
+    }
+    const fullText = getEntryValue(entryType, entries);
+    if (entryType === "impression") {
+      setDraft(getNamedEntryBody(fullText, authorName));
+    } else {
+      setDraft(getNamedEntryBody(fullText, authorName));
+    }
+  }, [entryType, entries, authorName]);
 
   const selectedLabel =
     ENTRY_TYPE_OPTIONS.find((o) => o.value === entryType)?.label ?? "";
 
   if (isLoading || isLoadingCL) return <Loading />;
   if (isError || isErrorCL) return <ErrorMessage />;
+
+  const showAuthorName = Boolean(entryType);
+  const canSubmit =
+    entries.clId && entries.recordId && entryType && authorName.trim();
 
   return (
     <>
@@ -94,19 +134,29 @@ const PostHikeForm = () => {
               setEntryType(e.target.value as EntryType);
             }}
           />
+          {showAuthorName && (
+            <AuthorNameField
+              value={authorName}
+              handleChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setAuthorName(e.target.value)
+              }
+            />
+          )}
           {entryType === "cl" && (
-            <ClCommentsForm entries={entries} setEntries={setEntries} />
+            <ClCommentsForm
+              entries={entries}
+              authorName={authorName}
+              setCommentDrafts={setClCommentDrafts}
+            />
           )}
           {entryType && entryType !== "cl" && (
             <EntryTextField
               id="reflection-entry"
               value={draft}
               label={selectedLabel}
-              handleChange={(e: ChangeEvent<HTMLInputElement>) => {
-                const value = e.target.value;
-                setDraft(value);
-                setEntries((prev) => setEntryValue(entryType, value, prev));
-              }}
+              handleChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setDraft(e.target.value)
+              }
             />
           )}
         </Stack>
@@ -115,7 +165,7 @@ const PostHikeForm = () => {
             variant="contained"
             color="primary"
             sx={{ mt: 2 }}
-            disabled={!entries.clId || !entries.recordId || !entryType}
+            disabled={!canSubmit}
             onClick={() => {
               submitForm();
             }}

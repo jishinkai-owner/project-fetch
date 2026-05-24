@@ -1,37 +1,72 @@
 import { Stack } from "@mui/material";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import React from "react";
 import EntryTextField from "../entry-textfield";
-import RetrospectiveText from "../retrospective-text";
+import NamedEntriesDisplay from "../../named-entries-display";
+import { getNamedEntryBody } from "../../role-entries";
 import {
   CL_COMMENT_SECTIONS,
+  ClCommentDrafts,
   PostHikeContentProps,
 } from "../entry-types";
 
 type ClCommentsFormProps = {
   entries: PostHikeContentProps;
-  setEntries: React.Dispatch<React.SetStateAction<PostHikeContentProps>>;
+  authorName: string;
+  setCommentDrafts: React.Dispatch<React.SetStateAction<ClCommentDrafts>>;
 };
 
-const ClCommentsForm = ({ entries, setEntries }: ClCommentsFormProps) => {
+const emptyDrafts = (): ClCommentDrafts => ({
+  meal: "",
+  equipment: "",
+  weather: "",
+  sl: "",
+});
+
+const ClCommentsForm = ({
+  entries,
+  authorName,
+  setCommentDrafts,
+}: ClCommentsFormProps) => {
+  const [drafts, setDrafts] = useState<ClCommentDrafts>(emptyDrafts);
+
+  useEffect(() => {
+    if (!authorName.trim()) {
+      const empty = emptyDrafts();
+      setDrafts(empty);
+      setCommentDrafts(empty);
+      return;
+    }
+    const next: ClCommentDrafts = {
+      meal: getNamedEntryBody(entries.mealComment, authorName),
+      equipment: getNamedEntryBody(entries.equipmentComment, authorName),
+      weather: getNamedEntryBody(entries.weatherComment, authorName),
+      sl: getNamedEntryBody(entries.slComment, authorName),
+    };
+    setDrafts(next);
+    setCommentDrafts(next);
+  }, [authorName, entries, setCommentDrafts]);
+
+  const updateDraft = (key: keyof ClCommentDrafts, value: string) => {
+    setDrafts((prev) => {
+      const next = { ...prev, [key]: value };
+      setCommentDrafts(next);
+      return next;
+    });
+  };
+
   return (
     <Stack spacing={2}>
       {CL_COMMENT_SECTIONS.map(
-        ({ role, reflectionKey, commentKey, label }) => (
-          <Stack key={commentKey} spacing={1}>
-            <RetrospectiveText
-              text={entries[reflectionKey]}
-              role={role}
-            />
+        ({ role, reflectionKey, draftKey, label }) => (
+          <Stack key={draftKey} spacing={1}>
+            <NamedEntriesDisplay text={entries[reflectionKey]} role={role} />
             <EntryTextField
-              id={`comment-${commentKey}`}
+              id={`comment-${draftKey}`}
               label={label}
-              value={entries[commentKey] ?? ""}
+              value={drafts[draftKey]}
               handleChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setEntries((prev) => ({
-                  ...prev,
-                  [commentKey]: e.target.value,
-                }))
+                updateDraft(draftKey, e.target.value)
               }
             />
           </Stack>

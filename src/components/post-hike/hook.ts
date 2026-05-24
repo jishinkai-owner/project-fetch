@@ -12,10 +12,12 @@ import toast from "react-hot-toast";
 import {
   buildClCommentsPayload,
   buildSubmitPayload,
+  ClCommentDrafts,
   EntryType,
+  getRoleFieldKey,
   PostHikeContentProps,
-  setEntryValue,
 } from "./entry/entry-types";
+import { upsertNamedEntry } from "./role-entries";
 
 export type { PostHikeContentProps } from "./entry/entry-types";
 
@@ -176,9 +178,29 @@ export const handleSubmit = async (
   clId: string,
   recordId: number,
   entryType: EntryType,
-  value: string,
+  authorName: string,
+  body: string,
+  entries: PostHikeContentProps,
 ) => {
-  const data = buildSubmitPayload(clId, recordId, entryType, value);
+  const data = buildSubmitPayload(
+    clId,
+    recordId,
+    entryType,
+    authorName,
+    body,
+    entries,
+  );
+
+  const hasPayload =
+    "reflectionMeal" in data ||
+    "reflectionEquipment" in data ||
+    "reflectionWeather" in data ||
+    "reflectionSL" in data ||
+    "impression" in data;
+
+  if (!hasPayload) {
+    return { success: false, error: "missing fields" };
+  }
 
   try {
     return await putPostHike(data);
@@ -190,9 +212,17 @@ export const handleSubmit = async (
 export const handleSubmitClComments = async (
   clId: string,
   recordId: number,
+  authorName: string,
   entries: PostHikeContentProps,
+  drafts: ClCommentDrafts,
 ) => {
-  const data = buildClCommentsPayload(clId, recordId, entries);
+  const data = buildClCommentsPayload(
+    clId,
+    recordId,
+    authorName,
+    entries,
+    drafts,
+  );
 
   if (
     !("commentMeal" in data) &&
@@ -214,27 +244,88 @@ type UseFormSubmitProps = {
   entries: PostHikeContentProps;
   setEntries: React.Dispatch<React.SetStateAction<PostHikeContentProps>>;
   entryType: EntryType | "";
+  authorName: string;
   draft: string;
   setDraft: React.Dispatch<React.SetStateAction<string>>;
+  setAuthorName: React.Dispatch<React.SetStateAction<string>>;
   setEntryType: React.Dispatch<React.SetStateAction<EntryType | "">>;
+  clCommentDrafts: ClCommentDrafts;
 };
 export const useFormSubmit = ({
   entries,
   setEntries,
   entryType,
+  authorName,
   draft,
   setDraft,
+  setAuthorName,
   setEntryType,
+  clCommentDrafts,
 }: UseFormSubmitProps) => {
   const submitSuccess = () => {
     toast.success("反省を登録しました!", {
       duration: 3000,
       position: "bottom-right",
     });
-    if (entryType) {
-      setEntries((prev) => setEntryValue(entryType, draft.trim(), prev));
+    if (entryType && entryType !== "cl") {
+      const trimmedName = authorName.trim();
+      const trimmedBody = draft.trim();
+      if (entryType === "impression" && trimmedBody) {
+        setEntries((prev) => ({
+          ...prev,
+          impression: trimmedName
+            ? upsertNamedEntry(prev.impression, trimmedName, trimmedBody)
+            : trimmedBody,
+        }));
+      } else {
+        const fieldKey = getRoleFieldKey(entryType);
+        if (fieldKey && trimmedName && trimmedBody) {
+          setEntries((prev) => ({
+            ...prev,
+            [fieldKey]: upsertNamedEntry(
+              prev[fieldKey],
+              trimmedName,
+              trimmedBody,
+            ),
+          }));
+        }
+      }
+    }
+    if (entryType === "cl" && authorName.trim()) {
+      setEntries((prev) => ({
+        ...prev,
+        mealComment: clCommentDrafts.meal.trim()
+          ? upsertNamedEntry(
+              prev.mealComment,
+              authorName.trim(),
+              clCommentDrafts.meal,
+            )
+          : prev.mealComment,
+        equipmentComment: clCommentDrafts.equipment.trim()
+          ? upsertNamedEntry(
+              prev.equipmentComment,
+              authorName.trim(),
+              clCommentDrafts.equipment,
+            )
+          : prev.equipmentComment,
+        weatherComment: clCommentDrafts.weather.trim()
+          ? upsertNamedEntry(
+              prev.weatherComment,
+              authorName.trim(),
+              clCommentDrafts.weather,
+            )
+          : prev.weatherComment,
+        slComment: clCommentDrafts.sl.trim()
+          ? upsertNamedEntry(
+              prev.slComment,
+              authorName.trim(),
+              clCommentDrafts.sl,
+            )
+          : prev.slComment,
+      }));
     }
     setDraft("");
+    setAuthorName("");
     setEntryType("");
   };
   const submitError = () => {
@@ -247,25 +338,42 @@ export const useFormSubmit = ({
   const submitForm = async () => {
     if (!entries.clId || !entries.recordId || !entryType) return;
 
+    if (!authorName.trim()) {
+      toast.error("名前を入力してください。", {
+        duration: 3000,
+        position: "bottom-right",
+      });
+      return;
+    }
+
     try {
       const res =
         entryType === "cl"
           ? await handleSubmitClComments(
               entries.clId,
               entries.recordId,
+              authorName,
               entries,
+              clCommentDrafts,
             )
           : await handleSubmit(
               entries.clId,
               entries.recordId,
               entryType,
+              authorName,
               draft,
+              entries,
             );
       if (res.success) {
         submitSuccess();
       } else {
         if (entryType === "cl" && "error" in res && res.error === "no comments to submit") {
           toast.error("コメントを1つ以上入力してください。", {
+            duration: 3000,
+            position: "bottom-right",
+          });
+        } else if ("error" in res && res.error === "missing fields") {
+          toast.error("本文を入力してください。", {
             duration: 3000,
             position: "bottom-right",
           });
