@@ -1,16 +1,10 @@
 import { TextField, MenuItem } from "@mui/material";
 import { ChangeEvent } from "react";
 import React from "react";
-
-type CLMember = {
-  userId: string;
-  User: {
-    name: string;
-  };
-};
+import { CLRes } from "@/types/apiResponse";
 
 type CLSelectProps = {
-  clMembers: CLMember[];
+  clMembers: CLRes[];
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -24,12 +18,8 @@ const CLSelect = ({ clMembers, handleChange }: CLSelectProps) => {
       defaultValue=""
     >
       {clMembers.map((option) => (
-        <MenuItem
-          // id={option.userId}
-          key={option.userId}
-          value={`${option.userId}|${option.User.name}`}
-        >
-          {option.User.name}
+        <MenuItem key={option.id} value={`${option.id}|${option.name}`}>
+          {option.name}
         </MenuItem>
       ))}
     </TextField>

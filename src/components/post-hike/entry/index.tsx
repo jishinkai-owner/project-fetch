@@ -28,7 +28,6 @@ const PostHikeForm = () => {
 
   if (isLoading || isLoadingCL) return <Loading />;
   if (isError || isErrorCL) return <ErrorMessage />;
-  console.log("contextVlaue!! ", contextValue);
 
   return (
     <>

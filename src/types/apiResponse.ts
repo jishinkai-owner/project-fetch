@@ -212,9 +212,4 @@ export type PostHikeOverviewRes = {
 //   activityType: string | null;
 // };
 
-export type CLRes = {
-  userId: string;
-  User: {
-    name: string;
-  };
-};
+export type CLRes = Pick<UserRes, "id" | "name" | "grade" | "roles">;
