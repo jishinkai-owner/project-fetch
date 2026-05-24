@@ -17,10 +17,6 @@ export const ENTRY_TYPE_OPTIONS = [
   { value: "equipment", label: "装備係の反省" },
   { value: "weather", label: "天気図係の反省" },
   { value: "sl", label: "SLの反省" },
-  { value: "commentMeal", label: "コメント - 食事係" },
-  { value: "commentEquipment", label: "コメント - 装備係" },
-  { value: "commentWeather", label: "コメント - 天気図係" },
-  { value: "commentSL", label: "コメント - SL" },
   { value: "impression", label: "感想" },
 ] as const;
 
@@ -39,14 +35,6 @@ export const getEntryValue = (
       return entries.weatherPerson ?? "";
     case "sl":
       return entries.sl ?? "";
-    case "commentMeal":
-      return entries.mealComment ?? "";
-    case "commentEquipment":
-      return entries.equipmentComment ?? "";
-    case "commentWeather":
-      return entries.weatherComment ?? "";
-    case "commentSL":
-      return entries.slComment ?? "";
     case "impression":
       return entries.impression ?? "";
   }
@@ -66,14 +54,6 @@ export const setEntryValue = (
       return { ...entries, weatherPerson: value };
     case "sl":
       return { ...entries, sl: value };
-    case "commentMeal":
-      return { ...entries, mealComment: value };
-    case "commentEquipment":
-      return { ...entries, equipmentComment: value };
-    case "commentWeather":
-      return { ...entries, weatherComment: value };
-    case "commentSL":
-      return { ...entries, slComment: value };
     case "impression":
       return { ...entries, impression: value };
   }
@@ -100,18 +80,6 @@ export const buildSubmitPayload = (
       break;
     case "sl":
       payload.reflectionSL = trimmed;
-      break;
-    case "commentMeal":
-      payload.commentMeal = trimmed;
-      break;
-    case "commentEquipment":
-      payload.commentEquipment = trimmed;
-      break;
-    case "commentWeather":
-      payload.commentWeather = trimmed;
-      break;
-    case "commentSL":
-      payload.commentSL = trimmed;
       break;
     case "impression":
       payload.impression = trimmed;
