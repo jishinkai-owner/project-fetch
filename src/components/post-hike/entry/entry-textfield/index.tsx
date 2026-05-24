@@ -8,6 +8,7 @@ type EntryTextFieldProps = {
   name?: string;
   value: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 };
 
 const EntryTextField = ({
@@ -15,6 +16,7 @@ const EntryTextField = ({
   value,
   label,
   handleChange,
+  disabled = false,
 }: EntryTextFieldProps) => {
   return (
     <TextField
@@ -24,6 +26,8 @@ const EntryTextField = ({
       value={value}
       rows={4}
       onChange={handleChange}
+      disabled={disabled}
+      fullWidth
     />
   );
 };

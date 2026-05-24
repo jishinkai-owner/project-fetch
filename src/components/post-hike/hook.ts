@@ -9,6 +9,14 @@ import {
   PostHikeContentBaseRes,
 } from "@/types/apiResponse";
 import toast from "react-hot-toast";
+import {
+  buildSubmitPayload,
+  EntryType,
+  PostHikeContentProps,
+  setEntryValue,
+} from "./entry/entry-types";
+
+export type { PostHikeContentProps } from "./entry/entry-types";
 
 export const usePostHikes = () => {
   const { data, isLoading, isError } = useData<RecordRes[]>("/api/records");
@@ -58,20 +66,6 @@ export const useTabs = () => {
 //   };
 // };
 //
-export type PostHikeContentProps = {
-  clId: string | null;
-  recordId: number | null;
-  equipmentPerson: string | null;
-  weatherPerson: string | null;
-  mealPerson: string | null;
-  sl: string | null;
-  equipmentComment: string | null;
-  weatherComment: string | null;
-  mealComment: string | null;
-  slComment: string | null;
-  impression: string | null;
-};
-
 export const usePostPostHikesWithRecordId = (recordId: number) => {
   // const { data, isLoading, isError } = useData<PostHikeContentResWithRecord>(
   //   `/api/postHikes?recordId=${recordId}`,
@@ -142,6 +136,9 @@ export const useEntriesState = (
         weatherComment: postHikeEntry.clComments.weather,
         equipmentComment: postHikeEntry.clComments.equipment,
         slComment: postHikeEntry.clComments.sl,
+        impression: Array.isArray(postHikeEntry.impression)
+          ? postHikeEntry.impression.join("\n")
+          : (postHikeEntry.impression ?? null),
         // clId: postHikeEntry.clId || clId,
         // recordId: postHikeEntry.recordId || recordId,
         // clName: postHikeEntry.clName,
@@ -160,20 +157,13 @@ export const useEntriesState = (
   return { entries, setEntries };
 };
 
-export const handleSubmit = async (entries: PostHikeContentProps) => {
-  const data = {
-    clId: entries.clId,
-    recordId: entries.recordId,
-    reflectionMeal: entries.mealPerson,
-    reflectionWeather: entries.weatherPerson,
-    reflectionEquipment: entries.equipmentPerson,
-    reflectionSL: entries.sl,
-    commentMeal: entries.mealComment,
-    commentWeather: entries.weatherComment,
-    commentEquipment: entries.equipmentComment,
-    commentSL: entries.slComment,
-    impression: entries.impression,
-  };
+export const handleSubmit = async (
+  clId: string,
+  recordId: number,
+  entryType: EntryType,
+  value: string,
+) => {
+  const data = buildSubmitPayload(clId, recordId, entryType, value);
 
   try {
     const res = await axios.put("/api/postHike", data, {
@@ -195,26 +185,29 @@ export const handleSubmit = async (entries: PostHikeContentProps) => {
 type UseFormSubmitProps = {
   entries: PostHikeContentProps;
   setEntries: React.Dispatch<React.SetStateAction<PostHikeContentProps>>;
+  entryType: EntryType | "";
+  draft: string;
+  setDraft: React.Dispatch<React.SetStateAction<string>>;
+  setEntryType: React.Dispatch<React.SetStateAction<EntryType | "">>;
 };
-export const useFormSubmit = ({ entries, setEntries }: UseFormSubmitProps) => {
+export const useFormSubmit = ({
+  entries,
+  setEntries,
+  entryType,
+  draft,
+  setDraft,
+  setEntryType,
+}: UseFormSubmitProps) => {
   const submitSuccess = () => {
     toast.success("反省を登録しました!", {
       duration: 3000,
       position: "bottom-right",
     });
-    setEntries({
-      clId: null,
-      recordId: null,
-      mealPerson: null,
-      weatherPerson: null,
-      equipmentPerson: null,
-      sl: null,
-      mealComment: null,
-      weatherComment: null,
-      equipmentComment: null,
-      slComment: null,
-      impression: null,
-    });
+    if (entryType) {
+      setEntries((prev) => setEntryValue(entryType, draft.trim(), prev));
+    }
+    setDraft("");
+    setEntryType("");
   };
   const submitError = () => {
     toast.error("反省の登録に失敗しました。", {
@@ -224,8 +217,15 @@ export const useFormSubmit = ({ entries, setEntries }: UseFormSubmitProps) => {
   };
 
   const submitForm = async () => {
+    if (!entries.clId || !entries.recordId || !entryType) return;
+
     try {
-      const res = await handleSubmit(entries);
+      const res = await handleSubmit(
+        entries.clId,
+        entries.recordId,
+        entryType,
+        draft,
+      );
       if (res.success) {
         submitSuccess();
       } else {

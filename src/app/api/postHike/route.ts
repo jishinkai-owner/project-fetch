@@ -265,6 +265,7 @@ export async function PUT(req: NextRequest) {
     commentWeather,
     commentEquipment,
     commentSL,
+    impression,
   } = body;
 
   let data = {};
@@ -291,7 +292,13 @@ export async function PUT(req: NextRequest) {
     data = { ...data, weatherComment: commentWeather };
   }
   if (commentSL !== undefined && commentSL !== null) {
-    data = { ...data, slComemnt: commentSL };
+    data = { ...data, slComment: commentSL };
+  }
+  if (impression !== undefined && impression !== null) {
+    data = {
+      ...data,
+      impression: Array.isArray(impression) ? impression : [String(impression)],
+    };
   }
 
   try {
