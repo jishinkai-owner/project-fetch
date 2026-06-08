@@ -2,6 +2,10 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import {
+  findDiscordIdentity,
+  getDiscordUserId,
+} from "@/utils/discord/identity";
 
 async function withRetry<T>(fn: () => Promise<T>, retries = 3, delay = 2000) {
   try {
@@ -93,11 +97,14 @@ export async function logout() {
 //link discord account to get role data
 export async function linkDiscord() {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const nextUrl = "/club-members";
   const supabase = await createClient();
   const { data, error } = await supabase.auth.linkIdentity({
     provider: "discord",
     options: {
-      redirectTo: `${baseUrl}/club-members`,
+      redirectTo: `${baseUrl}/api/auth/callback?next=${encodeURIComponent(
+        nextUrl,
+      )}`,
     },
   });
   if (error) {
@@ -122,22 +129,24 @@ export async function getUser() {
 }
 
 export async function getDiscordInfo() {
-  const user = await getUserfromSession();
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUserIdentities();
 
-  if (!user) {
-    console.error("User not found");
+  if (error || !data?.identities) {
+    console.error("Error getting user identities: ", error);
     return null;
   }
 
-  const discordIdentity = user.identities?.find(
-    (identity) => identity.provider === "discord",
-  );
+  const userIdentity = findDiscordIdentity(data.identities);
 
-  const userIdentity = discordIdentity;
+  if (!userIdentity) {
+    return null;
+  }
 
-  console.log("userIdentity: ", userIdentity);
+  const discordUserId = getDiscordUserId(userIdentity);
 
   return {
     userIdentity,
+    discordUserId,
   };
 }

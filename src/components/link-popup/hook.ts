@@ -36,7 +36,7 @@ export const useLinked = (
   useEffect(() => {
     const fetchDiscordId = async () => {
       const discordInfo = await getDiscordInfo();
-      const id = discordInfo?.userIdentity?.id || null;
+      const id = discordInfo?.discordUserId || null;
 
       if (id) {
         setDiscordId(id);
